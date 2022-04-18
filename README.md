@@ -1,6 +1,9 @@
 # PB138 - TrackYourTime
 
 
+## Design and Analysis
+[ScreenModel](https://miro.com/app/board/o9J_lP_jhDs=/?share_link_id=309861064621)
+
 
 ## Getting started
 
