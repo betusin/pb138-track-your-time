@@ -31,6 +31,7 @@ entity Session {
     ' maybe just fromDate and duration?
     '
     * isInvoiced
+    hourly_rate
     note
 }
 
