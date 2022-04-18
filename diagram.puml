@@ -1,0 +1,51 @@
+@startuml track-your-time-data
+
+entity User {
+    * id
+    --
+    * mail
+    * password
+    name
+    surname
+    company
+    logo
+}
+
+entity Project {
+    * user_id
+    * name
+    --
+    * hourly_rate
+    * isActive
+    customer
+    ' customer just as a name/description,
+    ' for now not a separate entity
+}
+
+entity Session {
+    * id
+    * project_id
+    --
+    * fromDate
+    * toDate
+    ' maybe just fromDate and duration?
+    '
+    * isInvoiced
+    note
+}
+
+entity SessionPhoto {
+    * session_id
+    --
+    * source
+    description
+}
+
+
+'Relations
+
+User ||..o{ Project
+Project ||..o{ Session
+Session ||..o{ SessionPhoto
+
+@enduml
