@@ -29,3 +29,17 @@ a {
   color: var(--primary_light-color);
   text-decoration: dotted;
 }
+
+.m1 {
+  margin: 1rem;
+}
+
+.p1 {
+  padding: 1rem;
+}
+
+.icon {
+  width: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
