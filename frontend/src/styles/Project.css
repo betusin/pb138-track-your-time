@@ -36,6 +36,17 @@
   align-items: center;
 }
 
+.project-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.session-item {
+  color: var(--primary_light-color);
+}
+
 /* For desktop */
 @media only screen and (min-width: 800px) {
   .project-list {
