@@ -5,3 +5,13 @@ export interface IProjectType {
   isActive: boolean,
   customer: string,
 }
+
+export interface ISessionType {
+  id: string,
+  project_id: string,
+  fromDate: Date,
+  toDate: Date,
+  isInvoiced: boolean,
+  hourly_rate: number,
+  note: string,
+}
