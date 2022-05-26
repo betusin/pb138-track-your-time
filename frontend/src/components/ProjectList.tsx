@@ -3,7 +3,7 @@ import { ProjectItem } from "./ProjectItem";
 
 export const ProjectList = () => {
   const projects = [{
-      name: "This is a project name",
+      name: "This is maybe a too long project name",
       hourly_rate: 120,
       isActive: true,
       customer: "Customer name",

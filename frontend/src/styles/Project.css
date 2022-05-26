@@ -5,12 +5,18 @@
 .project-item {
   background-color: var(--primary-color);
   color: var(--bg-color);
+  cursor: pointer;
 }
 
 .project-item--not-active {
   border-style: dotted;
   color: var(--primary-color);
   background-color: var(--bg-color);
+}
+
+.project-item__name {
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
 }
 
 .btn-add-project {
@@ -21,4 +27,19 @@
   width: 4rem;
   font-size: 3rem;
   border-radius: 50%;
+}
+
+.btn-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* For desktop */
+@media only screen and (min-width: 800px) {
+  .project-list {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+  }
 }
