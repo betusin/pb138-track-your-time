@@ -27,9 +27,9 @@ export const Project = () => {
             <SessionItem key={session.id} {...session}/>
           ))}
         </div>
-      </div>
-      <div className="m1">
-        TODO Nejaka pekna prehladova tabulka
+        <div className="m1">
+          TODO Nejaka pekna prehladova tabulka
+        </div>
       </div>
     </div>
   );
