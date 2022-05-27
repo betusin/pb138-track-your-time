@@ -7,12 +7,14 @@ import { AuthService } from './auth.service';
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
     super({
-      // the strategy takes a parameter called "username" by default
-      // if I want to pass a differently named parameter, I have to specify it in the options
+      /* The strategy takes a parameter called "username" by default.
+      If I want to pass a differently named parameter, I have to specify it in the options */
       usernameField: 'email',
     });
   }
 
+  /* Passport creates a user object based on the return of this validate function
+  (it will always be called 'user') */
   async validate(email: string, password: string): Promise<any> {
     const user = await this.authService.validateUser(email, password);
     if (!user) {
