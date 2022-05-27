@@ -6,7 +6,11 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
-    super();
+    super({
+      // the strategy takes a parameter called "username" by default
+      // if I want to pass a differently named parameter, I have to specify it in the options
+      usernameField: 'email',
+    });
   }
 
   async validate(email: string, password: string): Promise<any> {
