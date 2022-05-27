@@ -6,7 +6,7 @@
 
 ## Running the application
 
-Once the application is started using either of the two available methods, use http://localhost/ to access the
+Once the application is started using either of the two available methods, use http://localhost:8080/ to access the
 frontend; the backend is accessible on http://localhost:3000/.
 
 ### Using Docker Compose
