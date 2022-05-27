@@ -12,4 +12,4 @@ RUN chmod +x ./wait-for
 EXPOSE 3000
 
 # https://docs.docker.com/compose/startup-order/
-CMD ./wait-for database:5432 && npx prisma db push && npm run start:prod
+CMD ./wait-for database:5432 && npx prisma db push --skip-generate && npm run start:prod
