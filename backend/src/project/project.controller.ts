@@ -7,13 +7,17 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('Projects')
+@ApiBearerAuth('access-token')
+@UseGuards(JwtAuthGuard)
 @Controller({ path: 'projects', version: '1' })
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}

@@ -7,13 +7,17 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { SessionService } from './session.service';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('Sessions')
+@ApiBearerAuth('access-token')
+@UseGuards(JwtAuthGuard)
 @Controller({ path: 'projects/:projectId/sessions', version: '1' })
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
