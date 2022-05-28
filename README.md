@@ -90,3 +90,8 @@ export DATABASE_URL="postgresql://<user>:<password>@localhost:5432/<dbname>?sche
 cd backend/
 npm run start:prod
 ```
+
+## API Documentation
+
+Once the backend is started, the API documentation in the form of Swagger UI is available at http://localhost:3000/api.
+A definition of the API in JSON format can be downloaded at http://localhost:3000/api-json.
