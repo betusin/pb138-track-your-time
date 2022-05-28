@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
@@ -11,6 +11,12 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+
+  // Endpoint prefix and versioning
+  app.setGlobalPrefix('/api');
+  app.enableVersioning({ type: VersioningType.URI });
+
   await app.listen(3000);
 }
+
 bootstrap();
