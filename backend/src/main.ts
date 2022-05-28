@@ -20,7 +20,7 @@ async function bootstrap() {
   // Swagger UI
   const config = new DocumentBuilder().setTitle('TrackYourTime').build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/api/swagger', app, document);
+  SwaggerModule.setup('/api', app, document);
 
   await app.listen(3000);
 }
