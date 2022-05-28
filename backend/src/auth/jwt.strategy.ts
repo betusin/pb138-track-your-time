@@ -18,6 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   /* since a 'user' object will be inserted into the request based on the return of this function,
   it is possible to return any data needed */
   async validate(payload: any) {
-    return { userId: payload.sub, username: payload.username };
+    return { userId: payload.userId };
   }
 }
