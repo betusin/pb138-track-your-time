@@ -18,7 +18,13 @@ async function bootstrap() {
   app.enableVersioning({ type: VersioningType.URI });
 
   // Swagger UI
-  const config = new DocumentBuilder().setTitle('TrackYourTime').build();
+  const config = new DocumentBuilder()
+    .setTitle('TrackYourTime')
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'access-token',
+    )
+    .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/api', app, document);
 
