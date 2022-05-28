@@ -15,7 +15,6 @@ import { LocalStrategy } from './local.strategy';
     JwtModule.register({
       /* https://github.com/auth0/node-jsonwebtoken#usage */
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

@@ -9,7 +9,7 @@ interface User {
 
 @Injectable()
 export class UsersService {
-  async findUser(username: string): Promise<User | undefined> {
+  async findUser(email: string): Promise<User | undefined> {
     return {
       id: '0',
       email: 'jano@email.com',
