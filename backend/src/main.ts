@@ -2,6 +2,7 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { RestModule } from './rest.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AppExceptionFilter } from './app-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(RestModule);
@@ -16,6 +17,9 @@ async function bootstrap() {
   // Endpoint prefix and versioning
   app.setGlobalPrefix('/api');
   app.enableVersioning({ type: VersioningType.URI });
+
+  // Exception handling
+  app.useGlobalFilters(new AppExceptionFilter());
 
   // Swagger UI
   const config = new DocumentBuilder()
