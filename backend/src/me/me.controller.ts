@@ -48,8 +48,8 @@ export class MeController {
   @ApiTags('Projects')
   @ApiOkResponse({ type: GetProjectDto, isArray: true })
   @Get('/projects')
-  async findAll(): Promise<GetProjectDto[]> {
-    return this.projectService.findAll();
+  async findAll(@Request() req): Promise<GetProjectDto[]> {
+    return this.projectService.findAllForUser(req.user.userId);
   }
 
   @ApiTags('Users')

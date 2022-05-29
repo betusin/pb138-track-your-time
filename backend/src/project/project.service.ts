@@ -23,8 +23,12 @@ export class ProjectService {
     });
   }
 
-  async findAll(): Promise<Project[]> {
-    return this.prisma.project.findMany();
+  async findAllForUser(userId: string): Promise<Project[]> {
+    return this.prisma.project.findMany({
+      where: {
+        userId: userId,
+      },
+    });
   }
 
   async findOne(id: string): Promise<Project | null> {
