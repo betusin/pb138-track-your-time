@@ -8,8 +8,11 @@ import { UpdateSessionDto } from './dto/update-session.dto';
 export class SessionService {
   constructor(private prisma: PrismaService) {}
 
-  async create(projectId: string, createSessionDto: CreateSessionDto) {
-    return this.prisma.session.create({
+  async create(
+    projectId: string,
+    createSessionDto: CreateSessionDto,
+  ): Promise<void> {
+    await this.prisma.session.create({
       data: {
         project: {
           connect: {
@@ -37,8 +40,8 @@ export class SessionService {
     });
   }
 
-  async update(id: string, updateSessionDto: UpdateSessionDto) {
-    return this.prisma.session.update({
+  async update(id: string, updateSessionDto: UpdateSessionDto): Promise<void> {
+    await this.prisma.session.update({
       where: {
         id: id,
       },

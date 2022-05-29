@@ -14,7 +14,7 @@ export class UserService {
     const passwordHash = await hashPassword(createUserDto.password);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...things } = createUserDto;
-    this.prisma.user.create({
+    await this.prisma.user.create({
       data: {
         ...things,
         passwordHash: passwordHash,

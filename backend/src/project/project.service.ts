@@ -8,10 +8,13 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 export class ProjectService {
   constructor(private prisma: PrismaService) {}
 
-  async create(userId: string, createProjectDto: CreateProjectDto) {
+  async create(
+    userId: string,
+    createProjectDto: CreateProjectDto,
+  ): Promise<void> {
     const { ...rest } = createProjectDto;
 
-    return this.prisma.project.create({
+    await this.prisma.project.create({
       data: {
         user: {
           connect: {
@@ -39,8 +42,8 @@ export class ProjectService {
     });
   }
 
-  async update(id: string, updateProjectDto: UpdateProjectDto) {
-    return this.prisma.project.update({
+  async update(id: string, updateProjectDto: UpdateProjectDto): Promise<void> {
+    await this.prisma.project.update({
       where: {
         id: id,
       },
