@@ -29,33 +29,15 @@ export class SessionService {
     });
   }
 
-  async findOne(id: string, projectId: string): Promise<Session | null> {
-    const session = await this.prisma.session.findUnique({
+  async findOne(id: string): Promise<Session | null> {
+    return await this.prisma.session.findUnique({
       where: {
         id: id,
       },
     });
-
-    if (session.projectId != projectId) {
-      return null;
-    }
   }
 
-  async update(
-    id: string,
-    projectId: string,
-    updateSessionDto: UpdateSessionDto,
-  ) {
-    const session = await this.prisma.session.findUnique({
-      where: {
-        id: id,
-      },
-    });
-
-    if (session.projectId != projectId) {
-      return;
-    }
-
+  async update(id: string, updateSessionDto: UpdateSessionDto) {
     return this.prisma.session.update({
       where: {
         id: id,
@@ -66,7 +48,8 @@ export class SessionService {
     });
   }
 
-  async remove(id: number) {
-    return `This action removes a #${id} session`;
+  async remove(id: string): Promise<void> {
+    // `This action removes a #${id} session` TODO
+    console.log('Deleting session ' + id);
   }
 }

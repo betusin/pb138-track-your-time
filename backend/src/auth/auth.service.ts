@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { User } from '@prisma/client';
 import { checkPassword } from './password-hashing';
+import { LoginResponseDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +22,7 @@ export class AuthService {
     return null;
   }
 
-  async login(user: User) {
+  async login(user: User): Promise<LoginResponseDto> {
     const payload = { userId: user.id };
     return {
       access_token: this.jwtService.sign(payload),

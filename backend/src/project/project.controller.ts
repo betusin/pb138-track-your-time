@@ -7,46 +7,81 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiNoContentResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { GetProjectDto } from './dto/get-project.dto';
+import { GetSessionDto } from '../session/dto/get-session.dto';
+import { SessionService } from '../session/session.service';
 
 @ApiTags('Projects')
 @ApiBearerAuth('access-token')
 @UseGuards(JwtAuthGuard)
 @Controller({ path: 'projects', version: '1' })
 export class ProjectController {
-  constructor(private readonly projectService: ProjectService) {}
+  constructor(
+    private readonly projectService: ProjectService,
+    private readonly sessionService: SessionService,
+  ) {}
 
+  @ApiCreatedResponse({ description: 'The project was created' })
+  @ApiBadRequestResponse({ description: 'Field validation failed' })
   @Post()
-  create(@Body() createProjectDto: CreateProjectDto) {
-    return this.projectService.create(createProjectDto);
+  async create(
+    @Request() req,
+    @Body() createProjectDto: CreateProjectDto,
+  ): Promise<void> {
+    await this.projectService.create(req.user.userId, createProjectDto);
   }
 
-  @Get()
-  findAll() {
-    return this.projectService.findAll();
-  }
-
+  @ApiOkResponse({ type: GetProjectDto })
+  @ApiNotFoundResponse({ description: 'The project was not found' })
   @Get(':id')
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
+  async findOne(
+    @Param('id', ParseUUIDPipe) id: string,
+  ): Promise<GetProjectDto | null> {
     return this.projectService.findOne(id);
   }
 
+  @ApiNoContentResponse({ description: 'The project was updated' })
+  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiNotFoundResponse({ description: 'The project was not found' })
   @Patch('/:id')
-  update(
+  async update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateProjectDto: UpdateProjectDto,
-  ) {
-    return this.projectService.update(id, updateProjectDto);
+  ): Promise<void> {
+    await this.projectService.update(id, updateProjectDto);
   }
 
+  @ApiOkResponse({ description: 'The project was deleted' })
+  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiNotFoundResponse({ description: 'The project was not found' })
   @Delete(':id')
-  remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.projectService.remove(id);
+  async remove(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
+    await this.projectService.remove(id);
+  }
+
+  @ApiTags('Sessions')
+  @ApiOkResponse({ type: GetSessionDto, isArray: true })
+  @ApiNotFoundResponse({ description: 'The project was not found' })
+  @Get('/:projectId/sessions')
+  async findAllSessions(
+    @Param('projectId', ParseUUIDPipe) projectId: string,
+  ): Promise<GetSessionDto[]> {
+    return this.sessionService.findAll(projectId);
   }
 }

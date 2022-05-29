@@ -1,29 +1,10 @@
-import {
-  IsString,
-  IsInt,
-  Min,
-  IsOptional,
-  IsDateString,
-  IsBoolean,
-} from 'class-validator';
+import { IsBoolean, IsOptional } from 'class-validator';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { CreateSessionDto } from './create-session.dto';
 
-export class UpdateSessionDto {
-  @IsDateString()
-  fromDate: Date;
-
-  @IsDateString()
-  toDate: Date;
-
-  @IsOptional()
-  @IsInt()
-  @Min(0)
-  hourlyRate: number;
-
-  @IsOptional()
-  @IsString()
-  note: string;
-
+export class UpdateSessionDto extends PartialType(CreateSessionDto) {
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsBoolean()
-  isInvoiced: boolean;
+  isInvoiced?: boolean;
 }

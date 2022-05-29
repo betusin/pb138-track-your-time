@@ -1,17 +1,18 @@
-import { IsString, IsInt, Min, IsOptional, IsUUID } from 'class-validator';
+import { IsInt, IsOptional, IsString, Min } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProjectDto {
-  @IsUUID()
-  userId: string;
-
+  @ApiProperty()
   @IsString()
   name: string;
 
+  @ApiProperty()
   @IsInt()
   @Min(0)
   hourlyRate: number;
 
+  @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
-  customer: string;
+  customer?: string;
 }

@@ -12,48 +12,59 @@ import {
 import { SessionService } from './session.service';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { GetSessionDto } from './dto/get-session.dto';
 
 @ApiTags('Sessions')
 @ApiBearerAuth('access-token')
 @UseGuards(JwtAuthGuard)
-@Controller({ path: 'projects/:projectId/sessions', version: '1' })
+@Controller({ path: '/sessions', version: '1' })
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
+  @ApiCreatedResponse({ description: 'The session was created' })
+  @ApiBadRequestResponse({ description: 'Field validation failed' })
   @Post()
-  create(
+  async create(
     @Param('projectId', ParseUUIDPipe) projectId: string,
     @Body() createSessionDto: CreateSessionDto,
-  ) {
-    return this.sessionService.create(projectId, createSessionDto);
+  ): Promise<void> {
+    await this.sessionService.create(projectId, createSessionDto);
   }
 
-  @Get()
-  findAll(@Param('projectId', ParseUUIDPipe) projectId: string) {
-    return this.sessionService.findAll(projectId);
-  }
-
+  @ApiOkResponse({ type: GetSessionDto })
+  @ApiNotFoundResponse({ description: 'The session was not found' })
   @Get(':id')
-  findOne(
+  async findOne(
     @Param('id', ParseUUIDPipe) id: string,
-    @Param('projectId', ParseUUIDPipe) projectId: string,
-  ) {
-    return this.sessionService.findOne(id, projectId);
+  ): Promise<GetSessionDto | null> {
+    return this.sessionService.findOne(id);
   }
 
+  @ApiOkResponse({ type: UpdateSessionDto })
+  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiNotFoundResponse({ description: 'The session was not found' })
   @Patch(':id')
-  update(
+  async update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Param('projectId', ParseUUIDPipe) projectId: string,
     @Body() updateSessionDto: UpdateSessionDto,
-  ) {
-    return this.sessionService.update(id, projectId, updateSessionDto);
+  ): Promise<void> {
+    await this.sessionService.update(id, updateSessionDto);
   }
 
+  @ApiOkResponse({ description: 'The session was deleted' })
+  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiNotFoundResponse({ description: 'The session was not found' })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.sessionService.remove(+id);
+  async remove(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
+    await this.sessionService.remove(id);
   }
 }

@@ -8,8 +8,8 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 export class ProjectService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createProjectDto: CreateProjectDto) {
-    const { userId, ...rest } = createProjectDto;
+  async create(userId: string, createProjectDto: CreateProjectDto) {
+    const { ...rest } = createProjectDto;
 
     return this.prisma.project.create({
       data: {
@@ -46,7 +46,8 @@ export class ProjectService {
     });
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} project`;
+  async remove(id: string): Promise<void> {
+    // `This action removes a #${id} project` TODO
+    console.log('Deleting project ' + id);
   }
 }
