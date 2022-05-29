@@ -18,6 +18,7 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -30,6 +31,7 @@ import { GetSessionDto } from './dto/get-session.dto';
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
+  @ApiOperation({ summary: 'Creates a new session for the provided project' })
   @ApiCreatedResponse({ description: 'The session was created' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @Post()
@@ -40,6 +42,7 @@ export class SessionController {
     await this.sessionService.create(projectId, createSessionDto);
   }
 
+  @ApiOperation({ summary: 'Retrieves a session' })
   @ApiOkResponse({ type: GetSessionDto })
   @ApiNotFoundResponse({ description: 'The session was not found' })
   @Get(':id')
@@ -49,6 +52,7 @@ export class SessionController {
     return this.sessionService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Updates a session' })
   @ApiOkResponse({ type: UpdateSessionDto })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The session was not found' })
@@ -60,6 +64,7 @@ export class SessionController {
     await this.sessionService.update(id, updateSessionDto);
   }
 
+  @ApiOperation({ summary: 'Deletes a session' })
   @ApiOkResponse({ description: 'The session was deleted' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The session was not found' })

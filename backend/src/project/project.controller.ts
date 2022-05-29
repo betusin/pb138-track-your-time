@@ -20,6 +20,7 @@ import {
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -37,6 +38,7 @@ export class ProjectController {
     private readonly sessionService: SessionService,
   ) {}
 
+  @ApiOperation({ summary: 'Creates a new project' })
   @ApiCreatedResponse({ description: 'The project was created' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @Post()
@@ -47,6 +49,7 @@ export class ProjectController {
     await this.projectService.create(req.user.userId, createProjectDto);
   }
 
+  @ApiOperation({ summary: 'Retrieves a project' })
   @ApiOkResponse({ type: GetProjectDto })
   @ApiNotFoundResponse({ description: 'The project was not found' })
   @Get(':id')
@@ -56,6 +59,7 @@ export class ProjectController {
     return this.projectService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Updates a project' })
   @ApiNoContentResponse({ description: 'The project was updated' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The project was not found' })
@@ -67,6 +71,7 @@ export class ProjectController {
     await this.projectService.update(id, updateProjectDto);
   }
 
+  @ApiOperation({ summary: 'Deletes a project' })
   @ApiOkResponse({ description: 'The project was deleted' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The project was not found' })
@@ -75,6 +80,7 @@ export class ProjectController {
     await this.projectService.remove(id);
   }
 
+  @ApiOperation({ summary: 'Returns all sessions of a project' })
   @ApiTags('Sessions')
   @ApiOkResponse({ type: GetSessionDto, isArray: true })
   @ApiNotFoundResponse({ description: 'The project was not found' })

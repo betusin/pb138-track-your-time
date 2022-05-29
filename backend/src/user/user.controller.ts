@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 
@@ -12,6 +13,7 @@ import {
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiOperation({ summary: 'Creates a new user account' })
   @ApiCreatedResponse({ description: 'The user was created' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @Post()

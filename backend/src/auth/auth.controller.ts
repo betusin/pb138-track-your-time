@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import {
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
@@ -14,6 +15,7 @@ import { LoginResponseDto } from './dto/login.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @ApiOperation({ summary: 'Generates an access token for the provided user' })
   @ApiImplicitQuery({ name: 'email', type: String })
   @ApiImplicitQuery({ name: 'password', type: String })
   @ApiOkResponse({ type: LoginResponseDto })

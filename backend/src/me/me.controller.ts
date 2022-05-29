@@ -14,6 +14,7 @@ import {
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -33,6 +34,7 @@ export class MeController {
     private readonly projectService: ProjectService,
   ) {}
 
+  @ApiOperation({ summary: 'Returns the profile of the current user' })
   @ApiOkResponse({ type: GetUserDto })
   @Get('/profile')
   async profile(@Request() req): Promise<GetUserDto> {
@@ -46,6 +48,7 @@ export class MeController {
   }
 
   @ApiTags('Projects')
+  @ApiOperation({ summary: 'Returns all projects of the current user' })
   @ApiOkResponse({ type: GetProjectDto, isArray: true })
   @Get('/projects')
   async findAll(@Request() req): Promise<GetProjectDto[]> {
@@ -53,6 +56,7 @@ export class MeController {
   }
 
   @ApiTags('Users')
+  @ApiOperation({ summary: 'Updates the profile of the current user' })
   @ApiNoContentResponse({ description: 'The user was updated' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The user was not found' })
@@ -67,6 +71,7 @@ export class MeController {
   }
 
   @ApiTags('Users')
+  @ApiOperation({ summary: 'Deletes the profile of the current user' })
   @ApiOkResponse({ description: 'The user was deleted' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The user was not found' })
