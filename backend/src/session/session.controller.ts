@@ -6,16 +6,13 @@ import {
   Param,
   ParseUUIDPipe,
   Patch,
-  Post,
   UseGuards,
 } from '@nestjs/common';
 import { SessionService } from './session.service';
-import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
-  ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
@@ -30,17 +27,6 @@ import { GetSessionDto } from './dto/get-session.dto';
 @Controller({ path: '/sessions', version: '1' })
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
-
-  @ApiOperation({ summary: 'Creates a new session for the provided project' })
-  @ApiCreatedResponse({ description: 'The session was created' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
-  @Post()
-  async create(
-    @Param('projectId', ParseUUIDPipe) projectId: string,
-    @Body() createSessionDto: CreateSessionDto,
-  ): Promise<void> {
-    await this.sessionService.create(projectId, createSessionDto);
-  }
 
   @ApiOperation({ summary: 'Retrieves a session' })
   @ApiOkResponse({ type: GetSessionDto })

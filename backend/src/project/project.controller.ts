@@ -27,6 +27,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { GetProjectDto } from './dto/get-project.dto';
 import { GetSessionDto } from '../session/dto/get-session.dto';
 import { SessionService } from '../session/session.service';
+import { CreateSessionDto } from '../session/dto/create-session.dto';
 
 @ApiTags('Projects')
 @ApiBearerAuth('access-token')
@@ -78,6 +79,18 @@ export class ProjectController {
   @Delete(':id')
   async remove(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
     await this.projectService.remove(id);
+  }
+
+  @ApiOperation({ summary: 'Creates a new session for the provided project' })
+  @ApiTags('Sessions')
+  @ApiCreatedResponse({ description: 'The session was created' })
+  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @Post('/:projectId/sessions')
+  async createSession(
+    @Param('projectId', ParseUUIDPipe) projectId: string,
+    @Body() createSessionDto: CreateSessionDto,
+  ): Promise<void> {
+    await this.sessionService.create(projectId, createSessionDto);
   }
 
   @ApiOperation({ summary: 'Returns all sessions of a project' })
