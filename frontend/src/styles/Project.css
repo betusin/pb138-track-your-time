@@ -46,6 +46,28 @@
 
 .session-item {
   color: var(--primary_light-color);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+}
+
+.session-item__settings {
+  display: flex;
+  flex-direction: row;
+}
+
+.project-summary {
+  color: var(--primary_light-color);
+}
+
+.project-summary__th {
+  border-bottom: 0.2rem dotted var(--primary-color);
+}
+
+.project-summary__td {
+  border-bottom: 0.1rem dotted var(--primary-color);
 }
 
 /* For desktop */

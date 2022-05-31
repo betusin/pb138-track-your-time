@@ -28,7 +28,28 @@ export const Project = () => {
           ))}
         </div>
         <div className="m1">
-          TODO Nejaka pekna prehladova tabulka
+          <table className='project-summary'>
+            <tr>
+              <th className='project-summary__th'>{hourly_rate} $/hour</th>
+              <th className='project-summary__th'>Hours</th>
+              <th className='project-summary__th'>Amount</th>
+            </tr>
+            <tr>
+              <td className='project-summary__td'>Nevyfakturované</td>
+              <td className='project-summary__td'>0</td>
+              <td className='project-summary__td'>0 $</td>
+            </tr>
+            <tr>
+              <td className='project-summary__td'>Vyfakturované</td>
+              <td className='project-summary__td'>0</td>
+              <td className='project-summary__td'>0 $</td>
+            </tr>
+            <tr>
+              <td className='project-summary__td'>Total</td>
+              <td className='project-summary__td'>0</td>
+              <td className='project-summary__td'>0 $</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
