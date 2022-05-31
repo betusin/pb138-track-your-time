@@ -35,12 +35,12 @@ export const Project = () => {
               <th className='project-summary__th'>Amount</th>
             </tr>
             <tr>
-              <td className='project-summary__td'>Nevyfakturované</td>
+              <td className='project-summary__td'>Not invoiced yet</td>
               <td className='project-summary__td'>0</td>
               <td className='project-summary__td'>0 $</td>
             </tr>
             <tr>
-              <td className='project-summary__td'>Vyfakturované</td>
+              <td className='project-summary__td'>Invoiced</td>
               <td className='project-summary__td'>0</td>
               <td className='project-summary__td'>0 $</td>
             </tr>
