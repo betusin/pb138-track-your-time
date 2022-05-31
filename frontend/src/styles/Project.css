@@ -5,7 +5,6 @@
 .project-item {
   background-color: var(--primary-color);
   color: var(--bg-color);
-  cursor: pointer;
 }
 
 .project-item--not-active {
@@ -17,6 +16,8 @@
 .project-item__name {
   font-size: 1.3rem;
   margin-bottom: 0.2rem;
+  cursor: pointer;
+  color: var(--bg-color);
 }
 
 .btn-add-project {
