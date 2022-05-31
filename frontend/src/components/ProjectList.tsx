@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { projectsData } from '../static/projects';
 import '../styles/Project.css'
 import { IProjectType } from '../types';
@@ -12,7 +13,7 @@ export const ProjectList = () => {
         <ProjectItem key={project.id} {...project} />
       ))}
       <div className="btn-wrapper">
-        <button className="btn-add-circle">+</button>
+        <Link to="/project/add" className="btn-add-circle">+</Link>
       </div>
     </div>
   );
