@@ -44,3 +44,27 @@ a {
 .icon--small {
   width: 1rem;
 }
+
+.btn-add-circle {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+  height: 4rem;
+  width: 4rem;
+  font-size: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btn-add-circle--small {
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.5rem;
+}
+
+.btn-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
