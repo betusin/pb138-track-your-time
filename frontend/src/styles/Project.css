@@ -20,6 +20,15 @@
   color: var(--bg-color);
 }
 
+
+.project-item--not-active .project-item__name {
+  color: var(--primary-color);
+}
+
+.project-item__settings {
+  padding-top: 0.5rem;
+}
+
 .btn-add-project {
   background-color: var(--primary-color);
   color: var(--bg-color);
