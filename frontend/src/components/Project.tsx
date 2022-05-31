@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { Link } from 'react-router-dom';
 import { projectsData } from "../static/projects";
 import { sessionData } from "../static/sessions";
 import { IProjectType } from "../types";
@@ -26,6 +27,9 @@ export const Project = () => {
           {sessions.map((session) => (
             <SessionItem key={session.id} {...session}/>
           ))}
+        </div>
+        <div className="btn-wrapper">
+          <Link to="/session/add" className="btn-add-circle btn-add-circle--small" title="Add session">+</Link>
         </div>
         <div className="m1">
           <table className='project-summary'>
