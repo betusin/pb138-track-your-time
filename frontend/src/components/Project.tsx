@@ -13,6 +13,10 @@ export const Project = () => {
 
   const sessions = sessionData;
 
+  const removeSession = (sessionID: string) => {
+    window.alert("session will be deleted " + sessionID);
+  }
+
   return (
     <div className="App">
       <Navbar />
@@ -25,7 +29,7 @@ export const Project = () => {
         </div>
         <div className="session-list">
           {sessions.map((session) => (
-            <SessionItem key={session.id} {...session}/>
+            <SessionItem key={session.id} session={session} onRemove={removeSession} />
           ))}
         </div>
         <div className="btn-wrapper">
