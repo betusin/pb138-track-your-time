@@ -19,7 +19,7 @@ const blankProject = {
 }
 
 export const CreateProject = () => {
-  const [ submitted, setSubmitted ] = useState(false);
+  const [ resetedForm, setResetedForm ] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -31,24 +31,22 @@ export const CreateProject = () => {
 
   const onSubmit: SubmitHandler<IFormProjectInput> = (data: IFormProjectInput) => {
     console.log(data)
-    setSubmitted(true);
     window.alert("new project would be created with data: ");
 
     navigate("/");
   };
 
-  if (!submitted) {
+  if (!resetedForm) {
     reset(blankProject)
+    setResetedForm(true);
   };
 
   return (
     <div className="App">
       <Navbar />
-      {!submitted &&
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <ProjectFormElems formState={formState} register={register} buttonText="Create project" />
-        </form>
-      }
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ProjectFormElems formState={formState} register={register} buttonText="Create project" />
+      </form>
     </div>
   );
 }
