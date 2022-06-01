@@ -46,7 +46,8 @@ export class ProjectController {
     @Request() req,
     @Body() createProjectDto: CreateProjectDto,
   ): Promise<void> {
-    await this.projectService.create(req.user.userId, createProjectDto);
+    console.log(req);
+    await this.projectService.create(createProjectDto);
   }
 
   @ApiOperation({ summary: 'Retrieves a project' })
