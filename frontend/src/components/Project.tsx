@@ -29,7 +29,7 @@ export const Project = () => {
           ))}
         </div>
         <div className="btn-wrapper">
-          <Link to="/session/add" className="btn-add-circle btn-add-circle--small" title="Add session">+</Link>
+          <Link to="/session/add" className="btn btn-add-circle btn-add-circle--small" title="Add session">+</Link>
         </div>
         <div className="m1">
           <table className='project-summary'>

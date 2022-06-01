@@ -54,15 +54,17 @@ a {
   background-color: var(--bg-color);
 }
 
-.btn-add-circle {
+.btn {
   background-color: var(--primary-color);
   color: var(--bg-color);
   border: none;
+  cursor: pointer;
+}
+
+.btn-add-circle {
   height: 4rem;
   width: 4rem;
-  font-size: 3rem;
   border-radius: 50%;
-  cursor: pointer;
 }
 
 .btn-add-circle--small {

@@ -13,7 +13,7 @@ export const ProjectList = () => {
         <ProjectItem key={project.id} {...project} />
       ))}
       <div className="btn-wrapper">
-        <Link to="/project/add" className="btn-add-circle">+</Link>
+        <Link to="/project/add" className="btn btn-add-circle">+</Link>
       </div>
     </div>
   );
