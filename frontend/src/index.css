@@ -106,3 +106,7 @@ input {
 .number-field--error, .text-field--error {
   border: 0.15rem solid #d13737;
 }
+
+.number-field--error:focus, .text-field--error:focus {
+  border: 0.15rem solid #d13737;
+}

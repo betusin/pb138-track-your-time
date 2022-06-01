@@ -19,14 +19,14 @@ export const ProjectFormElems = ({formState, register, buttonText}: IProjectForm
 
       <div><label>Customer</label></div>
       <input
-        className={`text-field ${formState.errors.name && "text-field--error"}`}
+        className={`text-field`}
         type="text"
         {...register('customer')}
       />
 
       <div>
         <input
-          className={`number-field ${formState.errors.name && "number-field--error"}`}
+          className={`checkbox-field`}
           type="checkbox"
           {...register('isActive')}
         />
@@ -35,7 +35,7 @@ export const ProjectFormElems = ({formState, register, buttonText}: IProjectForm
 
       <div><label>Hourly rate</label></div>
       <input
-        className={`text-field ${formState.errors.name && "text-field--error"}`}
+        className={`number-field`}
         type="number"
         step={10}
         min={0}
