@@ -52,15 +52,17 @@ export class SessionService {
   }
 
   async remove(id: string): Promise<void> {
-    await this.prisma.$transaction(async (prisma) => {
+    const result = await this.prisma.$transaction(async (prisma) => {
       // Delete session
-      await this.prisma.session.delete({
+      const result = await this.prisma.session.delete({
         where: { id: id },
       });
       // Delete session photos
       await prisma.sessionPhoto.deleteMany({
         where: { sessionId: id },
       });
+      return result;
     });
+    // TODO Throw 404 on result.count == 0
   }
 }

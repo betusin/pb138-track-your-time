@@ -54,9 +54,9 @@ export class ProjectService {
   }
 
   async remove(id: string): Promise<void> {
-    await this.prisma.$transaction(async (prisma) => {
+    const result = await this.prisma.$transaction(async (prisma) => {
       // Delete project
-      await prisma.project.delete({
+      const result = await prisma.project.delete({
         where: { id: id },
       });
       // Delete sessions
@@ -71,6 +71,8 @@ export class ProjectService {
       await prisma.sessionPhoto.deleteMany({
         where: { sessionId: { in: sessionIds.map((a) => a.id) } },
       });
+      return result;
     });
+    // TODO Throw 404 on result.count == 0
   }
 }
