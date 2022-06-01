@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Navbar } from './Navbar';
+import { ProjectFormElems } from './ProjectFormElems';
 
 export interface IFormProjectInput {
   name: string,
@@ -8,61 +11,44 @@ export interface IFormProjectInput {
   hourly_rate: number,
 }
 
+const blankProject = {
+  name: "",
+  customer: "",
+  isActive: true,
+  hourly_rate: 0,
+}
+
 export const CreateProject = () => {
+  const [ submitted, setSubmitted ] = useState(false);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState,
+    reset
   } = useForm<IFormProjectInput>();
 
   const onSubmit: SubmitHandler<IFormProjectInput> = (data: IFormProjectInput) => {
-    window.alert("new project would be created with data: " + data);
     console.log(data)
+    setSubmitted(true);
+    window.alert("new project would be created with data: ");
+
+    navigate("/");
+  };
+
+  if (!submitted) {
+    reset(blankProject)
   };
 
   return (
     <div className="App">
       <Navbar />
-      <div>
+      {!submitted &&
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div><label>Project Name*</label></div>
-          <input
-            className={`text-field ${errors.name && "text-field--error"}`}
-            type="text"
-            {...register('name', { required: true })}
-          />
-
-          <div><label>Customer</label></div>
-          <input
-            className={`text-field ${errors.name && "text-field--error"}`}
-            type="text"
-            {...register('customer')}
-          />
-
-          <div>
-            <input
-              className={`number-field ${errors.name && "number-field--error"}`}
-              type="checkbox"
-              {...register('isActive')}
-            />
-            <label>is active?</label>
-          </div>
-
-          <div><label>Hourly rate</label></div>
-          <input
-            className={`text-field ${errors.name && "text-field--error"}`}
-            type="number"
-            step={10}
-            min={0}
-            {...register('hourly_rate', {valueAsNumber: true})}
-          />
-
-          <div className="btn-wrapper">
-            <input className="btn btn--primary" type="submit" value="Create a project" />
-          </div>
-
+          <ProjectFormElems formState={formState} register={register} buttonText="Create project" />
         </form>
-      </div>
+      }
     </div>
   );
 }
