@@ -38,11 +38,20 @@ a {
 .icon {
   width: 1.5rem;
   cursor: pointer;
-  padding: 0 0.5rem;
+  padding: 0.5rem;
 }
 
 .icon--small {
   width: 1rem;
+}
+
+.icon--inverse {
+  background-color: var(--primary-color);
+  border-radius: 25%;
+}
+
+.icon--active_inverse {
+  background-color: var(--bg-color);
 }
 
 .btn-add-circle {
