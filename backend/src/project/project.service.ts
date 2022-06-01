@@ -54,7 +54,23 @@ export class ProjectService {
   }
 
   async remove(id: string): Promise<void> {
-    // `This action removes a #${id} project` TODO
-    console.log('Deleting project ' + id);
+    await this.prisma.$transaction(async (prisma) => {
+      // Delete project
+      await prisma.project.delete({
+        where: { id: id },
+      });
+      // Delete sessions
+      const sessionIds = await prisma.session.findMany({
+        where: { projectId: id },
+        select: { id: true },
+      });
+      await prisma.session.deleteMany({
+        where: { projectId: id },
+      });
+      // Delete session photos
+      await prisma.sessionPhoto.deleteMany({
+        where: { sessionId: { in: sessionIds.map((a) => a.id) } },
+      });
+    });
   }
 }

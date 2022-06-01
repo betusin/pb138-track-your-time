@@ -50,7 +50,31 @@ export class UserService {
   }
 
   async remove(id: string): Promise<void> {
-    // `This action removes a #${id} user` TODO
-    console.log('Deleting user ' + id);
+    await this.prisma.$transaction(async (prisma) => {
+      // Delete user
+      await prisma.user.delete({
+        where: { id: id },
+      });
+      // Delete projects
+      const projectIds = await prisma.project.findMany({
+        where: { userId: id },
+        select: { id: true },
+      });
+      await prisma.project.deleteMany({
+        where: { id: { in: projectIds.map((a) => a.id) } },
+      });
+      // Delete sessions
+      const sessionIds = await prisma.session.findMany({
+        where: { projectId: { in: projectIds.map((a) => a.id) } },
+        select: { id: true },
+      });
+      await prisma.session.deleteMany({
+        where: { projectId: { in: projectIds.map((a) => a.id) } },
+      });
+      // Delete session photos
+      await prisma.sessionPhoto.deleteMany({
+        where: { sessionId: { in: sessionIds.map((a) => a.id) } },
+      });
+    });
   }
 }

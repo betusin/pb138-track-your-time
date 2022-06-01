@@ -52,7 +52,15 @@ export class SessionService {
   }
 
   async remove(id: string): Promise<void> {
-    // `This action removes a #${id} session` TODO
-    console.log('Deleting session ' + id);
+    await this.prisma.$transaction(async (prisma) => {
+      // Delete session
+      await this.prisma.session.delete({
+        where: { id: id },
+      });
+      // Delete session photos
+      await prisma.sessionPhoto.deleteMany({
+        where: { sessionId: id },
+      });
+    });
   }
 }
