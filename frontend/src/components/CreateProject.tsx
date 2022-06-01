@@ -44,7 +44,7 @@ export const CreateProject = () => {
   return (
     <div className="App">
       <Navbar />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className='m1' onSubmit={handleSubmit(onSubmit)}>
         <ProjectFormElems formState={formState} register={register} buttonText="Create project" />
       </form>
     </div>
