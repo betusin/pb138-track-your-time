@@ -11,7 +11,6 @@ import {
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
-  ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
@@ -57,7 +56,7 @@ export class MeController {
 
   @ApiTags('Users')
   @ApiOperation({ summary: 'Updates the profile of the current user' })
-  @ApiNoContentResponse({ description: 'The user was updated' })
+  @ApiOkResponse({ description: 'The user was updated' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')

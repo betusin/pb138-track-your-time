@@ -17,7 +17,6 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
@@ -61,7 +60,7 @@ export class ProjectController {
   }
 
   @ApiOperation({ summary: 'Updates a project' })
-  @ApiNoContentResponse({ description: 'The project was updated' })
+  @ApiOkResponse({ description: 'The project was updated' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The project was not found' })
   @Patch('/:id')
