@@ -5,6 +5,7 @@ import { ProjectModule } from './project/project.module';
 import { SessionModule } from './session/session.module';
 import { AuthModule } from './auth/auth.module';
 import { MeModule } from './me/me.module';
+import { SessionPhotoModule } from './session_photo/session_photo.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { MeModule } from './me/me.module';
     UserModule,
     ProjectModule,
     SessionModule,
+    SessionPhotoModule,
     MeModule,
   ],
 })
