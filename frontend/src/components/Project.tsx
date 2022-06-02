@@ -37,26 +37,30 @@ export const Project = () => {
         </div>
         <div className="m1">
           <table className='project-summary'>
-            <tr>
-              <th className='project-summary__th'>{hourly_rate} $/hour</th>
-              <th className='project-summary__th'>Hours</th>
-              <th className='project-summary__th'>Amount</th>
-            </tr>
-            <tr>
-              <td className='project-summary__td'>Not invoiced yet</td>
-              <td className='project-summary__td'>0</td>
-              <td className='project-summary__td'>0 $</td>
-            </tr>
-            <tr>
-              <td className='project-summary__td'>Invoiced</td>
-              <td className='project-summary__td'>0</td>
-              <td className='project-summary__td'>0 $</td>
-            </tr>
-            <tr>
-              <td className='project-summary__td'>Total</td>
-              <td className='project-summary__td'>0</td>
-              <td className='project-summary__td'>0 $</td>
-            </tr>
+            <thead>
+              <tr>
+                <th className='project-summary__th'>{hourly_rate} $/hour</th>
+                <th className='project-summary__th'>Hours</th>
+                <th className='project-summary__th'>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className='project-summary__td'>Not invoiced yet</td>
+                <td className='project-summary__td'>0</td>
+                <td className='project-summary__td'>0 $</td>
+              </tr>
+              <tr>
+                <td className='project-summary__td'>Invoiced</td>
+                <td className='project-summary__td'>0</td>
+                <td className='project-summary__td'>0 $</td>
+              </tr>
+              <tr>
+                <td className='project-summary__td'>Total</td>
+                <td className='project-summary__td'>0</td>
+                <td className='project-summary__td'>0 $</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
