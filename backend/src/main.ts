@@ -2,8 +2,9 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { RestModule } from './rest.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppExceptionFilter } from './app-exception.filter';
 import { PrismaService } from './prisma/prisma.service';
+import { PrismaExceptionFilter } from './exception/prisma-exception.filter';
+import { ServiceExceptionFilter } from './exception/service-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(RestModule);
@@ -30,7 +31,8 @@ async function bootstrap() {
   });
 
   // Exception handling
-  app.useGlobalFilters(new AppExceptionFilter());
+  app.useGlobalFilters(new PrismaExceptionFilter());
+  app.useGlobalFilters(new ServiceExceptionFilter());
 
   // Swagger UI
   const config = new DocumentBuilder()

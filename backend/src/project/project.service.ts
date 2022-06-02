@@ -1,20 +1,42 @@
 import { Injectable } from '@nestjs/common';
 import { Project } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CurrentUserProvider } from 'src/current-user.provider';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import {
+  ForbiddenException,
+  NotFoundException,
+} from 'src/exception/service-exception';
+import { CurrentUserProvider } from 'src/current-user/current-user.provider';
 
 @Injectable()
 export class ProjectService {
-  private get userId(): string {
-    return this.currentUserProvider.user.userId;
-  }
-
   constructor(
     private prisma: PrismaService,
     private currentUserProvider: CurrentUserProvider,
   ) {}
+
+  private get userId(): string {
+    return this.currentUserProvider.user.userId;
+  }
+
+  private async authorize(id: string): Promise<Project> {
+    const project = await this.prisma.project.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!project) {
+      throw new NotFoundException('Project not found');
+    }
+
+    if (project.userId != this.userId) {
+      throw new ForbiddenException('');
+    }
+
+    return project;
+  }
 
   async create(createProjectDto: CreateProjectDto): Promise<void> {
     const { ...rest } = createProjectDto;
@@ -31,23 +53,21 @@ export class ProjectService {
     });
   }
 
-  async findAllForUser(): Promise<Project[]> {
+  async findAllForUser(id: string): Promise<Project[]> {
     return this.prisma.project.findMany({
       where: {
-        userId: this.userId,
+        userId: id,
       },
     });
   }
 
-  async findOne(id: string): Promise<Project | null> {
-    return this.prisma.project.findUnique({
-      where: {
-        id: id,
-      },
-    });
+  async findOne(id: string): Promise<Project> {
+    return this.authorize(id);
   }
 
   async update(id: string, updateProjectDto: UpdateProjectDto): Promise<void> {
+    await this.authorize(id);
+
     await this.prisma.project.update({
       where: {
         id: id,

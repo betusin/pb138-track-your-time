@@ -8,6 +8,7 @@ import { UserModule } from '../user/user.module';
 import { UserService } from '../user/user.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { AuthController } from './auth.controller';
+import { CurrentUserProvider } from 'src/current-user/current-user.provider';
 
 @Module({
   imports: [
@@ -20,7 +21,13 @@ import { AuthController } from './auth.controller';
       secret: process.env.JWT_SECRET,
     }),
   ],
-  providers: [AuthService, UserService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthService,
+    UserService,
+    LocalStrategy,
+    JwtStrategy,
+    CurrentUserProvider,
+  ],
   exports: [AuthService],
   controllers: [AuthController],
 })
