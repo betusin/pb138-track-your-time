@@ -62,10 +62,34 @@
   border-bottom: 0.1rem dotted var(--primary-color);
 }
 
+.form-dates {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.form-dates__picker {
+  margin: 0.5rem 0;
+}
+
+/* For Tablets */
+
+@media (min-width:600px) {
+  .form-dates {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
 /* For desktop */
 @media only screen and (min-width: 800px) {
   .project-list {
     display: grid;
     grid-template-columns: 33% 33% 33%;
+  }
+
+  .form-dates {
+    flex-direction: row;
+    justify-content: space-around;
   }
 }
