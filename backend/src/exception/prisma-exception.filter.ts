@@ -3,12 +3,12 @@ import { Request, Response } from 'express';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 @Catch(PrismaClientKnownRequestError)
-export class AppExceptionFilter implements ExceptionFilter {
+export class PrismaExceptionFilter implements ExceptionFilter {
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    let apiFacingResult;
+    let apiFacingResult: HandledError;
     if (exception instanceof PrismaClientKnownRequestError) {
       apiFacingResult = prismaErrorToApi(exception.code);
     } else {

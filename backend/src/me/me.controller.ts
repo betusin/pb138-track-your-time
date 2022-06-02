@@ -5,7 +5,6 @@ import {
   Get,
   InternalServerErrorException,
   Patch,
-  Request,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -22,6 +21,7 @@ import { GetProjectDto } from '../project/dto/get-project.dto';
 import { ProjectService } from '../project/project.service';
 import { GetUserDto } from '../user/dto/get-user-dto.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
+import { CurrentUser } from 'src/current-user/current-user.decorator';
 
 @ApiTags('Me')
 @ApiBearerAuth('access-token')
@@ -36,8 +36,8 @@ export class MeController {
   @ApiOperation({ summary: 'Returns the profile of the current user' })
   @ApiOkResponse({ type: GetUserDto })
   @Get('/profile')
-  async profile(@Request() req): Promise<GetUserDto> {
-    const profile = this.userService.findOne(req.user.userId);
+  async profile(@CurrentUser() userId: string): Promise<GetUserDto> {
+    const profile = this.userService.findOne(userId);
     if (!profile) {
       throw new InternalServerErrorException(
         'The profile of the current user was not found',
@@ -50,8 +50,8 @@ export class MeController {
   @ApiOperation({ summary: 'Returns all projects of the current user' })
   @ApiOkResponse({ type: GetProjectDto, isArray: true })
   @Get('/projects')
-  async findAll(@Request() req): Promise<GetProjectDto[]> {
-    return this.projectService.findAllForUser(req.user.userId);
+  async findAll(@CurrentUser() userId: string): Promise<GetProjectDto[]> {
+    return this.projectService.findAllForUser(userId);
   }
 
   @ApiTags('Users')
@@ -63,10 +63,10 @@ export class MeController {
   @UseGuards(JwtAuthGuard)
   @Patch()
   async update(
-    @Request() req,
+    @CurrentUser() userId: string,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<void> {
-    await this.userService.update(req.user.userId, updateUserDto);
+    await this.userService.update(userId, updateUserDto);
   }
 
   @ApiTags('Users')
@@ -77,7 +77,7 @@ export class MeController {
   @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard)
   @Delete()
-  async remove(@Request() req): Promise<void> {
-    await this.userService.remove(req.user.userId);
+  async remove(@CurrentUser() userId: string): Promise<void> {
+    await this.userService.remove(userId);
   }
 }

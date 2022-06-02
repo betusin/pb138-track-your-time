@@ -5,11 +5,13 @@ import { ProjectModule } from './project/project.module';
 import { SessionModule } from './session/session.module';
 import { AuthModule } from './auth/auth.module';
 import { MeModule } from './me/me.module';
+import { CurrentUserModule } from './current-user/current-user.module';
 
 @Module({
   imports: [
     PrismaModule,
     AuthModule,
+    CurrentUserModule,
     UserModule,
     ProjectModule,
     SessionModule,

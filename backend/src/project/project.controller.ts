@@ -7,7 +7,6 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
-  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ProjectService } from './project.service';
@@ -42,11 +41,7 @@ export class ProjectController {
   @ApiCreatedResponse({ description: 'The project was created' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @Post()
-  async create(
-    @Request() req,
-    @Body() createProjectDto: CreateProjectDto,
-  ): Promise<void> {
-    console.log(req);
+  async create(@Body() createProjectDto: CreateProjectDto): Promise<void> {
     await this.projectService.create(createProjectDto);
   }
 
