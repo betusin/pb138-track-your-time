@@ -14,6 +14,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
+  color: var(--primary-color);
 }
 
 code {
@@ -21,11 +22,91 @@ code {
     monospace;
 }
 
-.App {
-  color: var(--primary-color);
-}
-
 a {
   color: var(--primary_light-color);
   text-decoration: dotted;
+}
+
+.m1 {
+  margin: 1rem;
+}
+
+.p1 {
+  padding: 1rem;
+}
+
+.icon {
+  width: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.icon--small {
+  width: 1rem;
+}
+
+.icon--inverse {
+  background-color: var(--primary-color);
+  border-radius: 25%;
+}
+
+.icon--active_inverse {
+  background-color: var(--bg-color);
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-add-circle {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  font-size: 3rem;
+}
+
+.btn-add-circle--small {
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.5rem;
+}
+
+.btn--primary {
+  padding: 0.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+}
+
+.btn-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input, textarea {
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+}
+
+.number-field, .text-field {
+  border: none;
+  margin: 0.25rem;
+}
+
+.number-field:focus, .text-field:focus {
+  outline: none;
+  border: 0.15rem solid var(--primary-color);
+}
+
+.number-field--error, .text-field--error {
+  border: 0.15rem solid #d13737;
+}
+
+.number-field--error:focus, .text-field--error:focus {
+  border: 0.15rem solid #d13737;
 }

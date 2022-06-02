@@ -1,0 +1,95 @@
+.project-list {
+  display: grid;
+}
+
+.project-item {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+.project-item--not-active {
+  border-style: dotted;
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+}
+
+.project-item__name {
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+  color: var(--bg-color);
+}
+
+
+.project-item--not-active .project-item__name {
+  color: var(--primary-color);
+}
+
+.project-item__settings {
+  padding-top: 0.5rem;
+}
+
+.project-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.session-item {
+  color: var(--primary_light-color);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+}
+
+.session-item__settings {
+  display: flex;
+  flex-direction: row;
+}
+
+.project-summary {
+  color: var(--primary_light-color);
+}
+
+.project-summary__th {
+  border-bottom: 0.2rem dotted var(--primary-color);
+}
+
+.project-summary__td {
+  border-bottom: 0.1rem dotted var(--primary-color);
+}
+
+.form-dates {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.form-dates__picker {
+  margin: 0.5rem 0;
+}
+
+/* For Tablets */
+
+@media (min-width:600px) {
+  .form-dates {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+/* For desktop */
+@media only screen and (min-width: 800px) {
+  .project-list {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+  }
+
+  .form-dates {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
