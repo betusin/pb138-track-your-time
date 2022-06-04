@@ -1,5 +1,5 @@
 import { SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { accessTokenAtom } from '../../state/atom';
 import { AuthForm, IFormAuthInput } from './AuthForm';
@@ -23,6 +23,7 @@ export const Login = () => {
     <div className="App">
       <h1>TrackYourTime</h1>
       <AuthForm onSubmit={onSubmit} buttonText="Login" />
+      Don't have an account yet? Register <Link to="/register">here</Link>.
     </div>
   );
 }
