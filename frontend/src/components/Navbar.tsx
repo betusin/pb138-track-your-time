@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   return (
@@ -7,4 +7,4 @@ export const Navbar = () => {
       <Link to="/">Home</Link>
     </div>
   );
-}
+};

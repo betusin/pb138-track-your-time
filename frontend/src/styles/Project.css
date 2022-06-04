@@ -20,7 +20,6 @@
   color: var(--bg-color);
 }
 
-
 .project-item--not-active .project-item__name {
   color: var(--primary-color);
 }
@@ -74,7 +73,7 @@
 
 /* For Tablets */
 
-@media (min-width:600px) {
+@media (min-width: 600px) {
   .form-dates {
     flex-direction: row;
     justify-content: space-around;

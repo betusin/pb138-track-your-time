@@ -8,8 +8,8 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,7 +18,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -88,25 +88,30 @@ a {
   align-items: center;
 }
 
-input, textarea {
+input,
+textarea {
   border-radius: 0.5rem;
   padding: 0.4rem;
 }
 
-.number-field, .text-field {
+.number-field,
+.text-field {
   border: none;
   margin: 0.25rem;
 }
 
-.number-field:focus, .text-field:focus {
+.number-field:focus,
+.text-field:focus {
   outline: none;
   border: 0.15rem solid var(--primary-color);
 }
 
-.number-field--error, .text-field--error {
+.number-field--error,
+.text-field--error {
   border: 0.15rem solid #d13737;
 }
 
-.number-field--error:focus, .text-field--error:focus {
+.number-field--error:focus,
+.text-field--error:focus {
   border: 0.15rem solid #d13737;
 }
