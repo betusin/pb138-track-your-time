@@ -32,7 +32,10 @@ import { SessionPhotoService } from '../session_photo/session_photo.service';
 import { CreateSessionPhotoDto } from '../session_photo/dto/create-session_photo.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { pngFileFilter } from './image_file_filter';
-import { api_desc_auth_invalid } from '../common-api-messages';
+import {
+  api_desc_auth_invalid,
+  api_desc_field_invalid,
+} from '../common-api-messages';
 
 @ApiTags('Sessions')
 @ApiBearerAuth('access-token')
@@ -57,7 +60,7 @@ export class SessionController {
 
   @ApiOperation({ summary: 'Updates a session' })
   @ApiOkResponse({ type: UpdateSessionDto })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session was not found' })
   @Patch(':id')
@@ -70,7 +73,7 @@ export class SessionController {
 
   @ApiOperation({ summary: 'Deletes a session' })
   @ApiOkResponse({ description: 'The session was deleted' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session was not found' })
   @Delete(':id')
@@ -97,7 +100,7 @@ export class SessionController {
     },
   })
   @ApiCreatedResponse({ description: 'The session was created' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @UseInterceptors(
     FileInterceptor('file', {

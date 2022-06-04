@@ -23,7 +23,10 @@ import { GetProjectDto } from '../project/dto/get-project.dto';
 import { ProjectService } from '../project/project.service';
 import { GetUserDto } from '../user/dto/get-user-dto.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
-import { api_desc_auth_invalid } from '../common-api-messages';
+import {
+  api_desc_auth_invalid,
+  api_desc_field_invalid,
+} from '../common-api-messages';
 
 @ApiTags('Me')
 @ApiBearerAuth('access-token')
@@ -61,7 +64,7 @@ export class MeController {
   @ApiTags('Users')
   @ApiOperation({ summary: 'Updates the profile of the current user' })
   @ApiOkResponse({ description: 'The user was updated' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')
@@ -77,7 +80,7 @@ export class MeController {
   @ApiTags('Users')
   @ApiOperation({ summary: 'Deletes the profile of the current user' })
   @ApiOkResponse({ description: 'The user was deleted' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')

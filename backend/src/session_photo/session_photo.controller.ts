@@ -21,7 +21,10 @@ import {
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { GetSessionPhotoDto } from './dto/get-session_photo.dto';
 import { SessionPhotoService } from './session_photo.service';
-import { api_desc_auth_invalid } from '../common-api-messages';
+import {
+  api_desc_auth_invalid,
+  api_desc_field_invalid,
+} from '../common-api-messages';
 
 @ApiTags('Session Photos')
 @ApiBearerAuth('access-token')
@@ -43,7 +46,7 @@ export class SessionPhotoController {
 
   @ApiOperation({ summary: 'Updates a session photo' })
   @ApiOkResponse({ type: UpdateSessionPhotoDto })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session photo was not found' })
   @Patch(':id')
@@ -56,7 +59,7 @@ export class SessionPhotoController {
 
   @ApiOperation({ summary: 'Deletes a session photo' })
   @ApiOkResponse({ description: 'The session photo was deleted' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session photo was not found' })
   @Delete(':id')

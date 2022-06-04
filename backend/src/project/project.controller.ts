@@ -28,7 +28,10 @@ import { GetProjectDto } from './dto/get-project.dto';
 import { GetSessionDto } from '../session/dto/get-session.dto';
 import { SessionService } from '../session/session.service';
 import { CreateSessionDto } from '../session/dto/create-session.dto';
-import { api_desc_auth_invalid } from '../common-api-messages';
+import {
+  api_desc_auth_invalid,
+  api_desc_field_invalid,
+} from '../common-api-messages';
 
 @ApiTags('Projects')
 @ApiBearerAuth('access-token')
@@ -42,7 +45,7 @@ export class ProjectController {
 
   @ApiOperation({ summary: 'Creates a new project' })
   @ApiCreatedResponse({ description: 'The project was created' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Post()
   async create(
@@ -65,7 +68,7 @@ export class ProjectController {
 
   @ApiOperation({ summary: 'Updates a project' })
   @ApiOkResponse({ description: 'The project was updated' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The project was not found' })
   @Patch('/:id')
@@ -78,7 +81,7 @@ export class ProjectController {
 
   @ApiOperation({ summary: 'Deletes a project' })
   @ApiOkResponse({ description: 'The project was deleted' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The project was not found' })
   @Delete(':id')
@@ -89,7 +92,7 @@ export class ProjectController {
   @ApiOperation({ summary: 'Creates a new session for the provided project' })
   @ApiTags('Sessions')
   @ApiCreatedResponse({ description: 'The session was created' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Post('/:projectId/sessions')
   async createSession(
