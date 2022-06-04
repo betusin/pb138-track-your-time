@@ -15,6 +15,7 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UserService } from '../user/user.service';
@@ -22,6 +23,7 @@ import { GetProjectDto } from '../project/dto/get-project.dto';
 import { ProjectService } from '../project/project.service';
 import { GetUserDto } from '../user/dto/get-user-dto.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
+import { api_desc_auth_invalid } from '../common-api-messages';
 
 @ApiTags('Me')
 @ApiBearerAuth('access-token')
@@ -35,6 +37,7 @@ export class MeController {
 
   @ApiOperation({ summary: 'Returns the profile of the current user' })
   @ApiOkResponse({ type: GetUserDto })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Get('/profile')
   async profile(@Request() req): Promise<GetUserDto> {
     const profile = this.userService.findOne(req.user.userId);
@@ -49,6 +52,7 @@ export class MeController {
   @ApiTags('Projects')
   @ApiOperation({ summary: 'Returns all projects of the current user' })
   @ApiOkResponse({ type: GetProjectDto, isArray: true })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Get('/projects')
   async findAll(@Request() req): Promise<GetProjectDto[]> {
     return this.projectService.findAllForUser(req.user.userId);
@@ -58,6 +62,7 @@ export class MeController {
   @ApiOperation({ summary: 'Updates the profile of the current user' })
   @ApiOkResponse({ description: 'The user was updated' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard)
@@ -73,6 +78,7 @@ export class MeController {
   @ApiOperation({ summary: 'Deletes the profile of the current user' })
   @ApiOkResponse({ description: 'The user was deleted' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard)

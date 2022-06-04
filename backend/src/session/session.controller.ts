@@ -24,6 +24,7 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { GetSessionDto } from './dto/get-session.dto';
@@ -31,6 +32,7 @@ import { SessionPhotoService } from '../session_photo/session_photo.service';
 import { CreateSessionPhotoDto } from '../session_photo/dto/create-session_photo.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { pngFileFilter } from './image_file_filter';
+import { api_desc_auth_invalid } from '../common-api-messages';
 
 @ApiTags('Sessions')
 @ApiBearerAuth('access-token')
@@ -44,6 +46,7 @@ export class SessionController {
 
   @ApiOperation({ summary: 'Retrieves a session' })
   @ApiOkResponse({ type: GetSessionDto })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session was not found' })
   @Get(':id')
   async findOne(
@@ -55,6 +58,7 @@ export class SessionController {
   @ApiOperation({ summary: 'Updates a session' })
   @ApiOkResponse({ type: UpdateSessionDto })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session was not found' })
   @Patch(':id')
   async update(
@@ -67,6 +71,7 @@ export class SessionController {
   @ApiOperation({ summary: 'Deletes a session' })
   @ApiOkResponse({ description: 'The session was deleted' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session was not found' })
   @Delete(':id')
   async remove(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
@@ -93,6 +98,7 @@ export class SessionController {
   })
   @ApiCreatedResponse({ description: 'The session was created' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @UseInterceptors(
     FileInterceptor('file', {
       limits: { fieldSize: 8 * 1024 * 1024 },

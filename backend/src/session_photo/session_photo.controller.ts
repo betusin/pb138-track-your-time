@@ -16,10 +16,12 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { GetSessionPhotoDto } from './dto/get-session_photo.dto';
 import { SessionPhotoService } from './session_photo.service';
+import { api_desc_auth_invalid } from '../common-api-messages';
 
 @ApiTags('Session Photos')
 @ApiBearerAuth('access-token')
@@ -30,6 +32,7 @@ export class SessionPhotoController {
 
   @ApiOperation({ summary: 'Retrieves a session photo' })
   @ApiOkResponse({ type: GetSessionPhotoDto })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session photo was not found' })
   @Get(':id')
   async findOne(
@@ -41,6 +44,7 @@ export class SessionPhotoController {
   @ApiOperation({ summary: 'Updates a session photo' })
   @ApiOkResponse({ type: UpdateSessionPhotoDto })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session photo was not found' })
   @Patch(':id')
   async update(
@@ -53,6 +57,7 @@ export class SessionPhotoController {
   @ApiOperation({ summary: 'Deletes a session photo' })
   @ApiOkResponse({ description: 'The session photo was deleted' })
   @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session photo was not found' })
   @Delete(':id')
   async remove(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
