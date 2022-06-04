@@ -1,16 +1,16 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from "react-hook-form";
 
 export interface IFormAuthInput {
-  email: string,
-  password: string,
+  email: string;
+  password: string;
 }
 
 interface IAuthFormProps {
-  buttonText: string,
-  onSubmit: SubmitHandler<IFormAuthInput>,
+  buttonText: string;
+  onSubmit: SubmitHandler<IFormAuthInput>;
 }
 
-export const AuthForm = ({buttonText, onSubmit}: IAuthFormProps) => {
+export const AuthForm = ({ buttonText, onSubmit }: IAuthFormProps) => {
   const { register, handleSubmit, formState } = useForm<IFormAuthInput>();
 
   return (
@@ -19,7 +19,9 @@ export const AuthForm = ({buttonText, onSubmit}: IAuthFormProps) => {
         <label>E-mail address</label>
       </div>
       <input
-        className={`text-field ${formState.errors.email && "text-field--error"}`}
+        className={`text-field ${
+          formState.errors.email && "text-field--error"
+        }`}
         type="text"
         {...register("email", { required: true })}
       />
@@ -27,7 +29,9 @@ export const AuthForm = ({buttonText, onSubmit}: IAuthFormProps) => {
         <label>Password</label>
       </div>
       <input
-        className={`text-field ${formState.errors.password && "text-field--error"}`}
+        className={`text-field ${
+          formState.errors.password && "text-field--error"
+        }`}
         type="password"
         {...register("password", { required: true })}
       />
@@ -37,4 +41,4 @@ export const AuthForm = ({buttonText, onSubmit}: IAuthFormProps) => {
       </div>
     </form>
   );
-}
+};
