@@ -1,4 +1,4 @@
-import { FormState, UseFormRegister, UseFormReset } from "react-hook-form";
+import { FormState, UseFormRegister } from "react-hook-form";
 import { IFormProjectInput } from "./CreateProject";
 
 export interface IProjectFormElemsProps {
