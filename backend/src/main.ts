@@ -24,6 +24,11 @@ async function bootstrap() {
   app.setGlobalPrefix('/api');
   app.enableVersioning({ type: VersioningType.URI });
 
+  // Ignore CORS for the time being
+  app.enableCors({
+    origin: '*',
+  });
+
   // Exception handling
   app.useGlobalFilters(new AppExceptionFilter());
 
