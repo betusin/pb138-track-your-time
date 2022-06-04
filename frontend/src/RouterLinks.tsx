@@ -1,6 +1,8 @@
 import { ThemeProvider } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
+import { Login } from './components/auth/Login';
+import { Register } from './components/auth/Register';
 import { CreateProject } from "./components/CreateProject";
 import { CreateSession } from "./components/CreateSession";
 import { EditProject } from "./components/EditProject";
@@ -13,6 +15,8 @@ export const RouterLinks = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<App />} />
           <Route path="/project/add" element={<CreateProject />} />
           <Route path="/project/edit/:id" element={<EditProject />} />
