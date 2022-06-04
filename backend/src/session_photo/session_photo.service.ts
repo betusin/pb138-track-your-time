@@ -49,7 +49,7 @@ export class SessionPhotoService {
   }
 
   async remove(id: string): Promise<void> {
-    const result = await this.prisma.sessionPhoto.delete({
+    await this.prisma.sessionPhoto.delete({
       where: { id: id },
     });
   }

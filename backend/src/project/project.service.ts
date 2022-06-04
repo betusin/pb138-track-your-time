@@ -54,7 +54,8 @@ export class ProjectService {
   }
 
   async remove(id: string): Promise<void> {
-    // `This action removes a #${id} project` TODO
-    console.log('Deleting project ' + id);
+    await this.prisma.project.delete({
+      where: { id: id },
+    });
   }
 }

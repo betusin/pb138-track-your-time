@@ -23,7 +23,7 @@ model User {
 model Project {
   id String @id @default(uuid())
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   sessions Session[]
@@ -37,7 +37,7 @@ model Project {
 model Session {
   id String @id @default(uuid())
 
-  project Project @relation(fields: [projectId], references: [id])
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String
   photos SessionPhoto[]
 
@@ -51,7 +51,7 @@ model Session {
 model SessionPhoto {
   id String @id @default(uuid())
 
-  session Session @relation(fields: [sessionId], references: [id])
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   sessionId String
 
   description String?
