@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { JwtRefreshStrategy } from './jwt.strategy';
+import { JwtRefreshStrategy } from './jwt.refresh-strategy';
 
 @Module({
   imports: [
