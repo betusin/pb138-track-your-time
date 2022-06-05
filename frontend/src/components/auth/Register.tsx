@@ -2,15 +2,15 @@ import { SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { accessTokenAtom } from "../../state/atom";
-import { AuthForm, IFormAuthInput } from "./AuthForm";
+import { IFormRegisterInput, RegisterForm } from "./AuthForm";
 
 export const Register = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<IFormAuthInput> = (data: IFormAuthInput) => {
-    console.log(data);
-    window.alert("you would be registered in");
+  const onSubmit: SubmitHandler<IFormRegisterInput> = async (
+    data: IFormRegisterInput
+  ) => {
 
     setToken("tokenTODO");
 
@@ -20,7 +20,7 @@ export const Register = () => {
   return (
     <div className="App">
       <h1>TrackYourTime</h1>
-      <AuthForm onSubmit={onSubmit} buttonText="Register" />
+      <RegisterForm onSubmit={onSubmit} />
       Already have an account? Login <Link to="/login">here</Link>.
     </div>
   );
