@@ -1,5 +1,6 @@
 stages:
   - style
+  - build
 
 prettier-frontend:
   stage: style
@@ -14,3 +15,39 @@ prettier-backend:
   tags:
     - shared-fi
   script: npx prettier backend/src/ --check
+
+build-frontend:
+  stage: build
+  image: node:18.2.0-alpine3.15
+  tags:
+    - shared-fi
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - frontend/node_modules/
+  script:
+    - cd frontend/
+    - npm ci
+    - npm run build
+  artifacts:
+    name: frontend
+    paths:
+      - frontend/dist/
+
+build-backend:
+  stage: build
+  image: node:18.2.0-alpine3.15
+  tags:
+    - shared-fi
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - backend/node_modules/
+  script:
+    - cd backend/
+    - npm ci
+    - npm run build
+  artifacts:
+    name: backend
+    paths:
+      - backend/dist/
