@@ -54,7 +54,7 @@ export class SessionController {
   @Get(':id')
   async findOne(
     @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<GetSessionDto | null> {
+  ): Promise<GetSessionDto> {
     return this.sessionService.findOne(id);
   }
 

@@ -58,7 +58,7 @@ export class ProjectController {
   @Get(':id')
   async findOne(
     @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<GetProjectDto | null> {
+  ): Promise<GetProjectDto> {
     return this.projectService.findOne(id);
   }
 
