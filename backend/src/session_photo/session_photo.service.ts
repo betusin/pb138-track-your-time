@@ -66,7 +66,7 @@ export class SessionPhotoService {
     });
   }
 
-  async findOne(id: string): Promise<GetSessionPhotoDto | null> {
+  async findOne(id: string): Promise<GetSessionPhotoDto> {
     return this.authorize(id);
   }
 
@@ -74,7 +74,7 @@ export class SessionPhotoService {
     id: string,
     updateSessionPhotoDto: UpdateSessionPhotoDto,
   ): Promise<void> {
-    this.authorize(id);
+    await this.authorize(id);
 
     await this.prisma.user.update({
       where: {
@@ -87,7 +87,7 @@ export class SessionPhotoService {
   }
 
   async remove(id: string): Promise<void> {
-    this.authorize(id);
+    await this.authorize(id);
 
     await this.prisma.sessionPhoto.delete({
       where: { id: id },

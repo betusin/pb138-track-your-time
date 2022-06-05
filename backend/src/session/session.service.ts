@@ -88,6 +88,8 @@ export class SessionService {
   }
 
   async remove(id: string): Promise<void> {
+    await this.authorize(id);
+
     await this.prisma.session.delete({
       where: { id: id },
     });

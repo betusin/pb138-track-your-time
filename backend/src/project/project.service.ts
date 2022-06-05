@@ -79,6 +79,8 @@ export class ProjectService {
   }
 
   async remove(id: string): Promise<void> {
+    this.authorize(id);
+
     await this.prisma.project.delete({
       where: { id: id },
     });
