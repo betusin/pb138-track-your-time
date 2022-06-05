@@ -87,7 +87,6 @@ export class SessionController {
   @ApiTags('Session Photos')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
-    type: 'multipart/form-data',
     required: true,
     schema: {
       type: 'object',
