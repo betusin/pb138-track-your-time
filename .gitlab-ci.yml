@@ -1,0 +1,16 @@
+stages:
+  - style
+
+prettier-frontend:
+  stage: style
+  image: node:18.2.0-alpine3.15
+  tags:
+    - shared-fi
+  script: npx prettier frontend/src/ --check
+
+prettier-backend:
+  stage: style
+  image: node:18.2.0-alpine3.15
+  tags:
+    - shared-fi
+  script: npx prettier backend/src/ --check
