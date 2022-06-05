@@ -31,6 +31,7 @@ build-frontend:
     - npm run build
   artifacts:
     name: frontend
+    expire_in: 10 minutes
     paths:
       - frontend/dist/
 
@@ -49,5 +50,6 @@ build-backend:
     - npm run build
   artifacts:
     name: backend
+    expire_in: 10 minutes
     paths:
       - backend/dist/
