@@ -2,7 +2,8 @@
   --bg-color: #2f2e2e;
   --primary-color: #ccd921;
   --primary_light-color: #f7f9d2;
-  --zelena: #45af5e;
+  --error-color: #d32f2f;
+  --success-color: #2e7d32;
   --secondary: #9edf36;
 }
 
@@ -108,10 +109,33 @@ textarea {
 
 .number-field--error,
 .text-field--error {
-  border: 0.15rem solid #d13737;
+  border: 0.15rem solid var(--error-color);
 }
 
 .number-field--error:focus,
 .text-field--error:focus {
-  border: 0.15rem solid #d13737;
+  border: 0.15rem solid var(--error-color);
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  font-size: 1.5rem;
+  width: fit-content;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
+}
+
+.message--error {
+  color: var(--error-color);
+  border: var(--error-color) 2px solid;
+}
+
+.message--success {
+  color: var(--success-color);
+  border: var(--success-color) 2px solid;
 }
