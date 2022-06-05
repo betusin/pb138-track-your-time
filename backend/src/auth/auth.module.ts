@@ -18,17 +18,9 @@ import { CurrentUserProvider } from 'src/current-user/current-user.provider';
     /* https://github.com/nestjs/jwt/blob/master/README.md */
     JwtModule.register({
       /* https://github.com/auth0/node-jsonwebtoken#usage */
-      secret: process.env.JWT_SECRET,
     }),
   ],
-  providers: [
-    AuthService,
-    UserService,
-    LocalStrategy,
-    JwtAccessStrategy,
-    JwtRefreshStrategy,
-    CurrentUserProvider,
-  ],
+  providers: [AuthService, UserService, LocalStrategy, CurrentUserProvider],
   exports: [AuthService],
   controllers: [AuthController],
 })
