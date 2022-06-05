@@ -27,7 +27,7 @@ export const Login = () => {
     <div className="App">
       <h1>TrackYourTime</h1>
       <LoginForm onSubmit={onSubmit} />
-      Don't have an account yet? Register <Link to="/register">here</Link>.
+      Don&apos;t have an account yet? Register <Link to="/register">here</Link>.
     </div>
   );
 };

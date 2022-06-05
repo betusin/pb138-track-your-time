@@ -12,11 +12,15 @@ export interface IFormRegisterInput extends IFormLoginInput {
   logo: string;
 }
 
-interface IAuthFormProps {
-  onSubmit: SubmitHandler<IFormLoginInput | IFormRegisterInput>;
+export interface ILoginFormProps {
+  onSubmit: SubmitHandler<IFormLoginInput>;
 }
 
-export const LoginForm = ({ onSubmit }: IAuthFormProps) => {
+export interface IRegisterProps {
+  onSubmit: SubmitHandler<IFormRegisterInput>;
+}
+
+export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
   const { register, handleSubmit, formState } = useForm<IFormLoginInput>();
 
   return (
@@ -49,7 +53,7 @@ export const LoginForm = ({ onSubmit }: IAuthFormProps) => {
   );
 };
 
-export const RegisterForm = ({ onSubmit }: IAuthFormProps) => {
+export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
   const { register, handleSubmit, formState } = useForm<IFormRegisterInput>();
 
   return (
