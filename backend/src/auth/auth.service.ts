@@ -5,6 +5,7 @@ import { checkPassword } from './password-hashing';
 import { LoginResponseDto } from './dto/login.dto';
 import { JwtAccessService } from './jwt-access.service';
 import { JwtRefreshService } from './jwt-refresh.service';
+import { RefreshResponseDto } from './dto/refresh.dto';
 
 @Injectable()
 export class AuthService {
@@ -29,6 +30,13 @@ export class AuthService {
     return {
       access_token: this.jwtAccessService.sign(payload),
       refresh_token: this.jwtRefreshService.sign(payload),
+    };
+  }
+
+  async refresh(user: User): Promise<RefreshResponseDto> {
+    const payload = { userId: user.id };
+    return {
+      access_token: this.jwtAccessService.sign(payload),
     };
   }
 }
