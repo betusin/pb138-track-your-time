@@ -3,10 +3,7 @@ import { Project } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import {
-  ForbiddenException,
-  NotFoundException,
-} from 'src/exception/service-exception';
+import { ForbiddenException } from 'src/exception/service-exception';
 import { CurrentUserProvider } from 'src/current-user/current-user.provider';
 
 @Injectable()
@@ -20,22 +17,8 @@ export class ProjectService {
     return this.currentUserProvider.user.userId;
   }
 
-  private async authorize(id: string): Promise<Project> {
-    const project = await this.prisma.project.findUnique({
-      where: {
-        id: id,
-      },
-    });
-
-    if (!project) {
-      throw new NotFoundException('Project not found');
-    }
-
-    if (project.userId != this.userId) {
-      throw new ForbiddenException('');
-    }
-
-    return project;
+  private async authorize(id: string): Promise<void> {
+    this.findOne(id);
   }
 
   async create(createProjectDto: CreateProjectDto): Promise<void> {
@@ -62,7 +45,17 @@ export class ProjectService {
   }
 
   async findOne(id: string): Promise<Project> {
-    return this.authorize(id);
+    const project = await this.prisma.project.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (project.userId != this.userId) {
+      throw new ForbiddenException();
+    }
+
+    return project;
   }
 
   async update(id: string, updateProjectDto: UpdateProjectDto): Promise<void> {
@@ -79,7 +72,7 @@ export class ProjectService {
   }
 
   async remove(id: string): Promise<void> {
-    this.authorize(id);
+    await this.authorize(id);
 
     await this.prisma.project.delete({
       where: { id: id },

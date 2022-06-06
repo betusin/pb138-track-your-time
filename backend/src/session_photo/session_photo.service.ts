@@ -4,11 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateSessionPhotoDto } from './dto/create-session_photo.dto';
 import { UpdateSessionPhotoDto } from './dto/update-session.dto';
 import { CurrentUserProvider } from 'src/current-user/current-user.provider';
-import {
-  ForbiddenException,
-  NotFoundException,
-} from 'src/exception/service-exception';
-import { SessionPhoto } from '@prisma/client';
+import { ForbiddenException } from 'src/exception/service-exception';
 
 @Injectable()
 export class SessionPhotoService {
@@ -21,31 +17,8 @@ export class SessionPhotoService {
     return this.currentUserProvider.user.userId;
   }
 
-  private async authorize(id: string): Promise<SessionPhoto> {
-    const sessionPhotoWithProject = await this.prisma.sessionPhoto.findUnique({
-      where: {
-        id: id,
-      },
-      include: {
-        session: {
-          include: {
-            project: true,
-          },
-        },
-      },
-    });
-
-    if (!sessionPhotoWithProject) {
-      throw new NotFoundException('Project not found');
-    }
-
-    if (sessionPhotoWithProject.session.project.userId != this.userId) {
-      throw new ForbiddenException('');
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { session, ...sessionPhoto } = sessionPhotoWithProject;
-    return sessionPhoto;
+  private async authorize(id: string): Promise<void> {
+    this.findOne(id);
   }
 
   async create(
@@ -67,7 +40,26 @@ export class SessionPhotoService {
   }
 
   async findOne(id: string): Promise<GetSessionPhotoDto> {
-    return this.authorize(id);
+    const sessionPhotoWithProject = await this.prisma.sessionPhoto.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        session: {
+          include: {
+            project: true,
+          },
+        },
+      },
+    });
+
+    if (sessionPhotoWithProject.session.project.userId != this.userId) {
+      throw new ForbiddenException();
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { session, ...sessionPhoto } = sessionPhotoWithProject;
+    return sessionPhoto;
   }
 
   async update(

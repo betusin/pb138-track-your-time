@@ -6,12 +6,12 @@ export class ServiceException extends Error {
 }
 
 export class ForbiddenException extends ServiceException {
-  constructor(message: string) {
+  constructor(message = 'Access denied') {
     super(message);
   }
 }
 
-export class NotFoundException extends Error {
+export class NotFoundException extends ServiceException {
   constructor(message: string) {
     super(message);
   }
