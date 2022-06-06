@@ -6,7 +6,7 @@ import { JwtRefreshService } from './jwt-refresh.service';
   imports: [
     JwtModule.register({
       secret: process.env.JWT_REFRESH_SECRET,
-      signOptions: { expiresIn: '15m' },
+      signOptions: { expiresIn: '1 week' },
     }),
   ],
   providers: [

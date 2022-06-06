@@ -6,7 +6,7 @@ import { JwtAccessService } from './jwt-access.service';
   imports: [
     JwtModule.register({
       secret: process.env.JWT_ACCESS_SECRET,
-      signOptions: { expiresIn: '15m' },
+      signOptions: { expiresIn: '15 minutes' },
     }),
   ],
   providers: [
