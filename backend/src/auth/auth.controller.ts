@@ -2,6 +2,7 @@ import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import {
+  ApiBearerAuth,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -36,6 +37,7 @@ export class AuthController {
     summary: 'Generates a new access token based on refresh token',
   })
   @ApiOkResponse({ type: RefreshResponseDto })
+  @ApiBearerAuth('refresh-token')
   @UseGuards(JwtRefreshAuthGuard)
   @Get('refresh')
   async refresh(@Request() req): Promise<RefreshResponseDto> {
