@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { JwtAccessService } from './jwt-access.service';
+import { JwtAccessStrategy } from './jwt.access-strategy';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { JwtAccessService } from './jwt-access.service';
       provide: JwtAccessService,
       useExisting: JwtService,
     },
+    JwtAccessStrategy,
   ],
   exports: [JwtAccessService],
 })

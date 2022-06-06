@@ -21,7 +21,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtAccessAuthGuard } from '../auth/jwt-access-auth.guard';
 import { GetProjectDto } from './dto/get-project.dto';
 import { GetSessionDto } from '../session/dto/get-session.dto';
 import { SessionService } from '../session/session.service';
@@ -29,7 +29,7 @@ import { CreateSessionDto } from '../session/dto/create-session.dto';
 
 @ApiTags('Projects')
 @ApiBearerAuth('access-token')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAccessAuthGuard)
 @Controller({ path: 'projects', version: '1' })
 export class ProjectController {
   constructor(

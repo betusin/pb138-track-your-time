@@ -4,7 +4,10 @@ import { Injectable } from '@nestjs/common';
 import { CurrentUser } from 'src/current-user/current-user.interface';
 
 @Injectable()
-export class JwtAccessStrategy extends PassportStrategy(Strategy) {
+export class JwtAccessStrategy extends PassportStrategy(
+  Strategy,
+  'jwt-access',
+) {
   constructor() {
     /* https://github.com/mikenicholson/passport-jwt#configure-strategy */
     super({

@@ -15,7 +15,9 @@ import { LoginResponseDto } from './dto/login.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @ApiOperation({ summary: 'Generates an access token for the provided user' })
+  @ApiOperation({
+    summary: 'Generates an access and refresh token for the provided user',
+  })
   @ApiImplicitQuery({ name: 'email', type: String })
   @ApiImplicitQuery({ name: 'password', type: String })
   @ApiOkResponse({ type: LoginResponseDto })

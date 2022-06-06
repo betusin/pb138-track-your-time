@@ -15,7 +15,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtAccessAuthGuard } from '../auth/jwt-access-auth.guard';
 import { UserService } from '../user/user.service';
 import { GetProjectDto } from '../project/dto/get-project.dto';
 import { ProjectService } from '../project/project.service';
@@ -25,7 +25,7 @@ import { CurrentUser } from 'src/current-user/current-user.decorator';
 
 @ApiTags('Me')
 @ApiBearerAuth('access-token')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAccessAuthGuard)
 @Controller({ path: 'me', version: '1' })
 export class MeController {
   constructor(
@@ -60,7 +60,7 @@ export class MeController {
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAccessAuthGuard)
   @Patch()
   async update(
     @CurrentUser() userId: string,
@@ -75,7 +75,7 @@ export class MeController {
   @ApiBadRequestResponse({ description: 'Field validation failed' })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAccessAuthGuard)
   @Delete()
   async remove(@CurrentUser() userId: string): Promise<void> {
     await this.userService.remove(userId);
