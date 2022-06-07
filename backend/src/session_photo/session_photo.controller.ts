@@ -18,17 +18,17 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { GetSessionPhotoDto } from './dto/get-session_photo.dto';
 import { SessionPhotoService } from './session_photo.service';
 import {
   api_desc_auth_invalid,
   api_desc_field_invalid,
 } from '../common-api-messages';
+import { JwtAccessAuthGuard } from 'src/auth/jwt-access-auth.guard';
 
 @ApiTags('Session Photos')
 @ApiBearerAuth('access-token')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAccessAuthGuard)
 @Controller({ path: '/session_photos', version: '1' })
 export class SessionPhotoController {
   constructor(private readonly sessionService: SessionPhotoService) {}
