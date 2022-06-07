@@ -6,7 +6,7 @@ import { GetProjectDto } from '../api/model';
 import { projectControllerRemove } from '../api/projects/projects';
 import { accessTokenAtom } from '../state/atom';
 import "../styles/Project.css";
-import { MessageFailBlock, MessageSuccessBlock, MessageUnauthorized } from './Messages';
+import { failedValidationText, MessageSuccessBlock, unauthorizedText } from './Messages';
 import { ProjectItem } from "./ProjectItem";
 
 export const ProjectList = () => {
@@ -26,7 +26,7 @@ export const ProjectList = () => {
       if (result.status == 200) {
         setProjects(result.data);
       } else if (result.status == 401) {
-        return <MessageUnauthorized />
+        setErrorMessage(unauthorizedText);
       }
     }
     getProjects();
@@ -39,9 +39,9 @@ export const ProjectList = () => {
       setProjects(() => [...newProjects]);
       setSuccessMessage("Project deleted successfully.");
     } else if (result.status == 400) {
-      setErrorMessage("Field validation failed!");
+      setErrorMessage(failedValidationText);
     } else if (result.status == 401) {
-      setErrorMessage("Unauthorized operation!");
+      setErrorMessage(unauthorizedText);
     } else if (result.status == 404) {
       setErrorMessage("The project was not found!");
     }

@@ -6,11 +6,12 @@ import { GetProjectDto } from '../api/model';
 import { projectControllerFindOne } from '../api/projects/projects';
 import { accessTokenAtom } from '../state/atom';
 import { sessionData } from '../static/sessions';
-import { MessageFailBlock, MessageUnauthorized } from './Messages';
+import { MessageFailBlock, unauthorizedText } from './Messages';
 import { Navbar } from "./Navbar";
 import { SessionItem } from "./SessionItem";
 
 export const Project = () => {
+  const [errorMessage, setErrorMessage] = useState<string>();
   const [project, setProject] = useState<GetProjectDto>();
   const token = useRecoilValue(accessTokenAtom);
   const header = {
@@ -23,16 +24,16 @@ export const Project = () => {
   useEffect(() => {
     async function getProject() {
       if (!projectID) {
-        return <MessageFailBlock text="No project id, cannot retrieve the data!" />
+        setErrorMessage("No project id, cannot retrieve the data!");
       }
 
       const result = await projectControllerFindOne(projectID, header);
       if (result.status == 200) {
         setProject(result.data);
       } else if (result.status == 401) {
-        return <MessageUnauthorized />
+        setErrorMessage(unauthorizedText);
       } else if (result.status == 404) {
-        return <MessageFailBlock text="Project was not found!" />
+        setErrorMessage("Project was not found!");
       }
     }
     getProject();
@@ -48,6 +49,7 @@ export const Project = () => {
     <div className="App">
       <Navbar />
       <div className="project-container">
+        { errorMessage && <MessageFailBlock text={errorMessage} /> }
         <div>
           <h2>{project?.name}</h2>
         </div>
