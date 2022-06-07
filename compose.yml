@@ -8,7 +8,8 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: "postgresql://postgres:postgres@database:5432/TrackYourTime?schema=public"
-      JWT_SECRET: exampleSecret123456789ThisIsTotallySecureTrustMeBro
+      JWT_ACCESS_SECRET: exampleSecret123456789ThisIsTotallySecureTrustMeBroAccess
+      JWT_REFRESH_SECRET: exampleSecret123456789ThisIsTotallySecureTrustMeBroRefresh
 
   frontend:
     build:

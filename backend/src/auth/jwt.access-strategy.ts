@@ -4,14 +4,17 @@ import { Injectable } from '@nestjs/common';
 import { CurrentUser } from 'src/current-user/current-user.interface';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtAccessStrategy extends PassportStrategy(
+  Strategy,
+  'jwt-access',
+) {
   constructor() {
     /* https://github.com/mikenicholson/passport-jwt#configure-strategy */
     super({
       /* https://github.com/mikenicholson/passport-jwt#extracting-the-jwt-from-the-request */
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: process.env.JWT_SECRET,
+      secretOrKey: process.env.JWT_ACCESS_SECRET,
     });
   }
 

@@ -26,7 +26,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtAccessAuthGuard } from '../auth/jwt-access-auth.guard';
 import { GetSessionDto } from './dto/get-session.dto';
 import { SessionPhotoService } from '../session_photo/session_photo.service';
 import { CreateSessionPhotoDto } from '../session_photo/dto/create-session_photo.dto';
@@ -39,7 +39,7 @@ import {
 
 @ApiTags('Sessions')
 @ApiBearerAuth('access-token')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAccessAuthGuard)
 @Controller({ path: '/sessions', version: '1' })
 export class SessionController {
   constructor(
