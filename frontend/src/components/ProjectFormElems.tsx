@@ -45,7 +45,7 @@ export const ProjectFormElems = ({
         type="number"
         step={10}
         min={0}
-        {...register("hourly_rate", { valueAsNumber: true })}
+        {...register("hourlyRate", { valueAsNumber: true })}
       />
 
       <div className="btn-wrapper">

@@ -1,16 +1,42 @@
+import { useEffect, useState } from 'react';
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { projectsData } from "../static/projects";
-import { sessionData } from "../static/sessions";
-import { IProjectType } from "../types";
+import { useRecoilValue } from 'recoil';
+import { GetProjectDto } from '../api/model';
+import { projectControllerFindOne } from '../api/projects/projects';
+import { accessTokenAtom } from '../state/atom';
+import { sessionData } from '../static/sessions';
+import { MessageFailBlock, MessageUnauthorized } from './Messages';
 import { Navbar } from "./Navbar";
 import { SessionItem } from "./SessionItem";
 
 export const Project = () => {
-  const { id, name, hourly_rate, isActive, customer }: IProjectType =
-    projectsData[0];
-
+  const [project, setProject] = useState<GetProjectDto>();
+  const token = useRecoilValue(accessTokenAtom);
+  const header = {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    }
+  };
   const { id: projectID } = useParams();
+
+  useEffect(() => {
+    async function getProject() {
+      if (!projectID) {
+        return <MessageFailBlock text="No project id, cannot retrieve the data!" />
+      }
+
+      const result = await projectControllerFindOne(projectID, header);
+      if (result.status == 200) {
+        setProject(result.data);
+      } else if (result.status == 401) {
+        return <MessageUnauthorized />
+      } else if (result.status == 404) {
+        return <MessageFailBlock text="Project was not found!" />
+      }
+    }
+    getProject();
+  }, [])
 
   const sessions = sessionData;
 
@@ -23,10 +49,10 @@ export const Project = () => {
       <Navbar />
       <div className="project-container">
         <div>
-          <h2>{name}</h2>
+          <h2>{project?.name}</h2>
         </div>
         <div>
-          <h3>{customer}</h3>
+          <h3>{project?.customer}</h3>
         </div>
         <div className="session-list">
           {sessions.map((session) => (
@@ -50,7 +76,7 @@ export const Project = () => {
           <table className="project-summary">
             <thead>
               <tr>
-                <th className="project-summary__th">{hourly_rate} $/hour</th>
+                <th className="project-summary__th">{project?.hourlyRate} $/hour</th>
                 <th className="project-summary__th">Hours</th>
                 <th className="project-summary__th">Amount</th>
               </tr>
