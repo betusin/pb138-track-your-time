@@ -1,8 +1,9 @@
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { RestModule } from './rest.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerModule } from '@nestjs/swagger';
 import { PrismaService } from './prisma/prisma.service';
+import { createOpenApiDocument } from './app-common';
 import { PrismaExceptionFilter } from './exception/prisma-exception.filter';
 import { ServiceExceptionFilter } from './exception/service-exception.filter';
 
@@ -35,18 +36,7 @@ async function bootstrap() {
   app.useGlobalFilters(new ServiceExceptionFilter());
 
   // Swagger UI
-  const config = new DocumentBuilder()
-    .setTitle('TrackYourTime')
-    .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      'access-token',
-    )
-    .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      'refresh-token',
-    )
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document = await createOpenApiDocument(app);
   SwaggerModule.setup('/api', app, document, {
     swaggerOptions: {
       persistAuthorization: true,
