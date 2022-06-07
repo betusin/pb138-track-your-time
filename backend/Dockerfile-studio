@@ -1,0 +1,11 @@
+FROM node:18.2.0-alpine3.15
+
+WORKDIR /usr/src/app
+RUN npm i prisma@3.15.0 @prisma/studio@0.462.0
+
+COPY ./prisma ./prisma
+COPY ./wait-for ./wait-for
+RUN chmod +x ./wait-for
+
+# https://docs.docker.com/compose/startup-order/
+CMD ./wait-for database:5432 && npx prisma studio
