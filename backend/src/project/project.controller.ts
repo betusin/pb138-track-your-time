@@ -7,7 +7,6 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
-  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ProjectService } from './project.service';
@@ -48,11 +47,8 @@ export class ProjectController {
   @ApiBadRequestResponse({ description: api_desc_field_invalid })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Post()
-  async create(
-    @Request() req,
-    @Body() createProjectDto: CreateProjectDto,
-  ): Promise<void> {
-    await this.projectService.create(req.user.userId, createProjectDto);
+  async create(@Body() createProjectDto: CreateProjectDto): Promise<void> {
+    await this.projectService.create(createProjectDto);
   }
 
   @ApiOperation({ summary: 'Retrieves a project' })
@@ -62,7 +58,7 @@ export class ProjectController {
   @Get(':id')
   async findOne(
     @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<GetProjectDto | null> {
+  ): Promise<GetProjectDto> {
     return this.projectService.findOne(id);
   }
 

@@ -40,7 +40,7 @@ export class SessionPhotoController {
   @Get(':id')
   async findOne(
     @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<GetSessionPhotoDto | null> {
+  ): Promise<GetSessionPhotoDto> {
     return this.sessionService.findOne(id);
   }
 

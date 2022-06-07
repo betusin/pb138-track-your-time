@@ -6,11 +6,13 @@ import { SessionModule } from './session/session.module';
 import { AuthModule } from './auth/auth.module';
 import { MeModule } from './me/me.module';
 import { SessionPhotoModule } from './session_photo/session_photo.module';
+import { CurrentUserModule } from './current-user/current-user.module';
 
 @Module({
   imports: [
     PrismaModule,
     AuthModule,
+    CurrentUserModule,
     UserModule,
     ProjectModule,
     SessionModule,
