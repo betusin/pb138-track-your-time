@@ -14,6 +14,7 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { JwtAccessAuthGuard } from '../auth/jwt-access-auth.guard';
 import { UserService } from '../user/user.service';
@@ -21,6 +22,10 @@ import { GetProjectDto } from '../project/dto/get-project.dto';
 import { ProjectService } from '../project/project.service';
 import { GetUserDto } from '../user/dto/get-user-dto.dto';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
+import {
+  api_desc_auth_invalid,
+  api_desc_field_invalid,
+} from '../common-api-messages';
 import { CurrentUser } from 'src/current-user/current-user.decorator';
 
 @ApiTags('Me')
@@ -35,6 +40,7 @@ export class MeController {
 
   @ApiOperation({ summary: 'Returns the profile of the current user' })
   @ApiOkResponse({ type: GetUserDto })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Get('/profile')
   async profile(@CurrentUser() userId: string): Promise<GetUserDto> {
     const profile = this.userService.findOne(userId);
@@ -49,6 +55,7 @@ export class MeController {
   @ApiTags('Projects')
   @ApiOperation({ summary: 'Returns all projects of the current user' })
   @ApiOkResponse({ type: GetProjectDto, isArray: true })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Get('/projects')
   async findAll(@CurrentUser() userId: string): Promise<GetProjectDto[]> {
     return this.projectService.findAllForUser(userId);
@@ -57,7 +64,8 @@ export class MeController {
   @ApiTags('Users')
   @ApiOperation({ summary: 'Updates the profile of the current user' })
   @ApiOkResponse({ description: 'The user was updated' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')
   @UseGuards(JwtAccessAuthGuard)
@@ -72,7 +80,8 @@ export class MeController {
   @ApiTags('Users')
   @ApiOperation({ summary: 'Deletes the profile of the current user' })
   @ApiOkResponse({ description: 'The user was deleted' })
-  @ApiBadRequestResponse({ description: 'Field validation failed' })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The user was not found' })
   @ApiBearerAuth('access-token')
   @UseGuards(JwtAccessAuthGuard)

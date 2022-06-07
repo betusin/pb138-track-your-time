@@ -5,6 +5,7 @@ import { ProjectModule } from './project/project.module';
 import { SessionModule } from './session/session.module';
 import { AuthModule } from './auth/auth.module';
 import { MeModule } from './me/me.module';
+import { SessionPhotoModule } from './session_photo/session_photo.module';
 import { CurrentUserModule } from './current-user/current-user.module';
 
 @Module({
@@ -15,6 +16,7 @@ import { CurrentUserModule } from './current-user/current-user.module';
     UserModule,
     ProjectModule,
     SessionModule,
+    SessionPhotoModule,
     MeModule,
   ],
 })

@@ -78,7 +78,8 @@ export class UserService {
   }
 
   async remove(id: string): Promise<void> {
-    // `This action removes a #${id} user` TODO
-    console.log('Deleting user ' + id);
+    await this.prisma.user.delete({
+      where: { id: id },
+    });
   }
 }
