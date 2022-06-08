@@ -6,7 +6,7 @@ import { GetProjectDto } from '../api/model';
 import { projectControllerRemove } from '../api/projects/projects';
 import { accessTokenAtom } from '../state/atom';
 import "../styles/Project.css";
-import { failedValidationText, MessageSuccessBlock, unauthorizedText } from './Messages';
+import { failedValidationText, MessageFailBlock, MessageSuccessBlock, unauthorizedText } from './Messages';
 import { ProjectItem } from "./ProjectItem";
 
 export const ProjectList = () => {
