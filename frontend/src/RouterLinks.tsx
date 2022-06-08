@@ -21,8 +21,8 @@ export const RouterLinks = () => {
         <Routes>
           {token === "" ? (
             <>
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<Register />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="*" element={<Login />} />
             </>
           ) : (
             <>
