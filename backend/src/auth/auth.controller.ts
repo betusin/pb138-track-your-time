@@ -12,6 +12,7 @@ import { ApiImplicitQuery } from '@nestjs/swagger/dist/decorators/api-implicit-q
 import { LoginResponseDto } from './dto/login.dto';
 import { JwtRefreshAuthGuard } from './jwt-refresh-auth.guard';
 import { RefreshResponseDto } from './dto/refresh.dto';
+import { CurrentUser } from 'src/current-user/current-user.decorator';
 
 @ApiTags('Authentication')
 @Controller({ path: 'auth', version: '1' })
@@ -40,7 +41,7 @@ export class AuthController {
   @ApiBearerAuth('refresh-token')
   @UseGuards(JwtRefreshAuthGuard)
   @Get('refresh')
-  async refresh(@Request() req): Promise<RefreshResponseDto> {
-    return this.authService.refresh(req.user);
+  async refresh(@CurrentUser() userId: string): Promise<RefreshResponseDto> {
+    return this.authService.refresh(userId);
   }
 }

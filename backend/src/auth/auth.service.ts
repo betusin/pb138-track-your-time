@@ -33,8 +33,8 @@ export class AuthService {
     };
   }
 
-  async refresh(user: User): Promise<RefreshResponseDto> {
-    const payload = { userId: user.id };
+  async refresh(userId: string): Promise<RefreshResponseDto> {
+    const payload = { userId: userId };
     return {
       access_token: this.jwtAccessService.sign(payload),
     };
