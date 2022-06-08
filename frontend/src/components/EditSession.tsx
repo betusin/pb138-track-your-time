@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from 'recoil';
-import { GetSessionDto, UpdateSessionDto } from '../api/model';
+import { UpdateSessionDto } from '../api/model';
 import { sessionControllerFindOne, sessionControllerUpdate } from '../api/sessions/sessions';
 import { accessTokenAtom } from '../state/atom';
 import { failedValidationText, MessageFailBlock, MessageSuccessBlock, unauthorizedText } from './Messages';
@@ -14,7 +14,6 @@ import { failedValidationText, MessageFailBlock, MessageSuccessBlock, unauthoriz
 export const EditSession = () => {
   const navigate = useNavigate();
   const { projectId, sessionId } = useParams();
-  const [session, setSession] = useState<GetSessionDto>();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [successMessage, setSuccessMessage] = useState<string>();
   const [toDate, setToDate] = useState(new Date());
@@ -25,15 +24,17 @@ export const EditSession = () => {
       Authorization: 'Bearer ' + token,
     }
   };
-  const { register, handleSubmit, formState } = useForm<UpdateSessionDto>();
+  const { register, handleSubmit, formState, setValue } = useForm<UpdateSessionDto>();
 
   useEffect(() => {
     async function getSession() {
       const result = await sessionControllerFindOne(sessionId!, header);
       if (result.status == 200) {
-        setSession(result.data);
-        setFromDate(new Date(result.data.fromDate));
-        setToDate(new Date(result.data.toDate));
+        setValue('hourlyRate', result.data.hourlyRate);
+        setValue('isInvoiced', result.data.isInvoiced);
+        setValue('note', result.data.note);
+        setFromDate(new Date(result.data.fromDate.slice(0, -1)));
+        setToDate(new Date(result.data.toDate.slice(0, -1)));
       } else if (result.status == 401) {
         setErrorMessage(unauthorizedText);
       } else if (result.status == 404) {
@@ -103,7 +104,6 @@ export const EditSession = () => {
           control={
             <Checkbox
               {...register("isInvoiced")}
-              defaultChecked={session?.isInvoiced}
             />
           }
           label="is invoiced"
@@ -117,7 +117,6 @@ export const EditSession = () => {
           type="number"
           step={10}
           min={0}
-          defaultValue={session?.hourlyRate ? session?.hourlyRate : 0}
           {...register("hourlyRate", { valueAsNumber: true })}
         />
 
@@ -126,7 +125,6 @@ export const EditSession = () => {
         </div>
         <textarea
           className={`text-field ${formState.errors.note && "text-field--error"}`}
-          defaultValue={session?.note}
           {...register("note")}
         />
 

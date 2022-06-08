@@ -15,7 +15,6 @@ import { projectControllerFindOne } from '../api/projects/projects';
 export const CreateSession = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const [ hourlyRate, setHourlyRate] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [successMessage, setSuccessMessage] = useState<string>();
   const [toDate, setToDate] = useState(new Date());
@@ -26,14 +25,14 @@ export const CreateSession = () => {
       Authorization: 'Bearer ' + token,
     }
   };
-  const { register, handleSubmit, formState } = useForm<CreateSessionDto>();
+  const { register, handleSubmit, formState, setValue } = useForm<CreateSessionDto>();
 
   useEffect(() => {
     async function getProjectHourlyRate() {
       if (projectId != null) {
         const result = await projectControllerFindOne(projectId, header);
         if (result.status == 200) {
-          setHourlyRate(result.data.hourlyRate);
+          setValue('hourlyRate', result.data.hourlyRate);
         } else if (result.status == 401) {
           setErrorMessage(unauthorizedText);
         } else if (result.status == 404) {
@@ -106,7 +105,7 @@ export const CreateSession = () => {
           type="number"
           step={10}
           min={0}
-          defaultValue={hourlyRate}
+          defaultValue={0}
           {...register("hourlyRate", { valueAsNumber: true })}
         />
 
