@@ -8,6 +8,7 @@ import { CreateProject } from "./components/CreateProject";
 import { CreateSession } from "./components/CreateSession";
 import { EditProject } from "./components/EditProject";
 import { EditSession } from "./components/EditSession";
+import { NoPath } from "./components/NoPath";
 import { Project } from "./components/Project";
 import { accessTokenAtom } from "./state/atom";
 import { theme } from "./styles/theme";
@@ -34,6 +35,7 @@ export const RouterLinks = () => {
               <Route path="/project/:id" element={<Project />} />
               <Route path="/session/edit/:id" element={<EditSession />} />
               <Route path="/session/add" element={<CreateSession />} />
+              <Route path="*" element={<NoPath />} />
             </>
           )}
         </Routes>
