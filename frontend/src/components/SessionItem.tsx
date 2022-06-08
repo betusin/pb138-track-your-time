@@ -30,7 +30,7 @@ export const SessionItem = ({ session, onRemove, projectId, onInvoice }: ISessio
         )} - ${session.note}`}
       </div>
       <div className="session-item__settings">
-        <Link to={`/project/${projectId}/session/edit/${session.id}`}>
+        <Link to={`/project/${projectId}/session/${session.id}/edit`}>
           <img
             className="icon icon--small"
             src={`/assets/edit-${session.isInvoiced ? "antracit" : "lime"}.svg`}
