@@ -6,6 +6,7 @@ import { FormState, UseFormRegister } from "react-hook-form";
 import { IFormSessionInput } from "./CreateSession";
 import { DateTimePicker } from "@mui/lab";
 import { StyledTextField } from "./StyledTextField";
+import { theme } from "../styles/theme";
 
 export interface ISessiontFormElemsProps {
   formState: FormState<IFormSessionInput>;
@@ -60,6 +61,7 @@ export const SessionFormElems = ({
         control={
           <Checkbox
             {...register("isInvoiced")}
+            style={{ color: theme.palette.primary.light }}
             defaultChecked={sessionData.isInvoiced}
           />
         }
