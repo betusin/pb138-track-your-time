@@ -25,6 +25,7 @@ export const Project = () => {
     async function getProject() {
       if (!projectID) {
         setErrorMessage("No project id, cannot retrieve the data!");
+        return;
       }
 
       const result = await projectControllerFindOne(projectID, header);
