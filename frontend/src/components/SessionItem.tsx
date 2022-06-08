@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { format } from "date-fns";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -5,12 +7,12 @@ import { GetSessionDto } from '../api/model';
 
 interface ISessionItemProps {
   session: GetSessionDto;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   onRemove: Function;
+  onInvoice: Function;
   projectId: string;
 }
 
-export const SessionItem = ({ session, onRemove, projectId }: ISessionItemProps) => {
+export const SessionItem = ({ session, onRemove, projectId, onInvoice }: ISessionItemProps) => {
   const [wantToRemove, setWantToRemove] = useState(false);
   const fromDateParsed = Date.parse(session.fromDate.slice(0, -1));
   const toDateParsed = Date.parse(session.toDate.slice(0, -1));
@@ -18,7 +20,10 @@ export const SessionItem = ({ session, onRemove, projectId }: ISessionItemProps)
   return (
     <div className="session-item">
       <div className="session-item__data">
-        <input type="checkbox" name="invoice-session" id="" />
+        <Checkbox
+          defaultChecked={session.isInvoiced}
+          onChange={() => onInvoice(session)}
+        />
         {`${format(fromDateParsed, "HH:mm")} - ${format(
           toDateParsed,
           "HH:mm dd. MM. yyyy"

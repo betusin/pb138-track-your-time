@@ -4,14 +4,16 @@ import { Link } from "react-router-dom";
 import { useRecoilValue } from 'recoil';
 import { GetProjectDto, GetSessionDto } from '../api/model';
 import { projectControllerFindAllSessions, projectControllerFindOne } from '../api/projects/projects';
+import { sessionControllerRemove, sessionControllerUpdate } from '../api/sessions/sessions';
 import { accessTokenAtom } from '../state/atom';
-import { MessageFailBlock, unauthorizedText } from './Messages';
+import { failedValidationText, MessageFailBlock, MessageSuccessBlock, unauthorizedText } from './Messages';
 import { SessionItem } from "./SessionItem";
 
 export const Project = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
+  const [successMessage, setSuccessMessage] = useState<string>();
   const [project, setProject] = useState<GetProjectDto>();
-  const [sessions, setSessions] = useState<GetSessionDto[]>();
+  const [sessions, setSessions] = useState<GetSessionDto[]>([]);
   const token = useRecoilValue(accessTokenAtom);
   const header = {
     headers: {
@@ -48,13 +50,39 @@ export const Project = () => {
     getProject();
   }, [])
 
-  const removeSession = (sessionID: string) => {
-    window.alert("session will be deleted " + sessionID);
+  const removeSession = async (sessionID: string) => {
+    const result = await sessionControllerRemove(sessionID, header);
+    if (result.status == 200) {
+      const newSessions = sessions.filter((session) => session.id !== sessionID);
+      setSessions(() => [...newSessions]);
+      setSuccessMessage("Session was deleted successfully.");
+    } else if (result.status == 400) {
+      setErrorMessage(failedValidationText);
+    } else if (result.status == 401) {
+      setErrorMessage(unauthorizedText);
+    } else if (result.status == 404) {
+      setErrorMessage("The session was not found!");
+    }
   };
+
+  const invoiceSession = async (session: GetSessionDto) => {
+    session.isInvoiced = !session.isInvoiced;
+    const result = await sessionControllerUpdate(session.id, { isInvoiced: session.isInvoiced }, header);
+    if (result.status == 200) {
+      setSuccessMessage("Session was updated successfully.");
+    } else if (result.status == 400) {
+      setErrorMessage(failedValidationText);
+    } else if (result.status == 401) {
+      setErrorMessage(unauthorizedText);
+    } else if (result.status == 404) {
+      setErrorMessage("The session was not found!");
+    }
+  }
 
   return (
     <>
       <div className="project-container">
+        { successMessage && <MessageSuccessBlock text={successMessage} /> }
         { errorMessage ? <MessageFailBlock text={errorMessage} />
         :
         <><div>
@@ -67,6 +95,7 @@ export const Project = () => {
                   key={session.id}
                   session={session}
                   projectId={projectID!}
+                  onInvoice={invoiceSession}
                   onRemove={removeSession} />
               ))}
             </div><div className="btn-wrapper">
