@@ -5,14 +5,15 @@ import { GetSessionDto } from '../api/model';
 
 interface ISessionItemProps {
   session: GetSessionDto;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   onRemove: Function;
   projectId: string;
 }
 
 export const SessionItem = ({ session, onRemove, projectId }: ISessionItemProps) => {
   const [wantToRemove, setWantToRemove] = useState(false);
-  const fromDateParsed = Date.parse(session.fromDate);
-  const toDateParsed = Date.parse(session.toDate);
+  const fromDateParsed = Date.parse(session.fromDate.slice(0, -1));
+  const toDateParsed = Date.parse(session.toDate.slice(0, -1));
 
   return (
     <div className="session-item">
