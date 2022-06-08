@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { User } from '@prisma/client';
 import { checkPassword } from './password-hashing';
-import { LoginResponseDto } from './dto/login.dto';
 import { JwtAccessService } from './jwt-access.service';
 import { JwtRefreshService } from './jwt-refresh.service';
-import { RefreshResponseDto } from './dto/refresh.dto';
+import { TokensDto } from './dto/tokens.dto';
+import { AccessTokenDto } from './dto/access-token.dto';
 
 @Injectable()
 export class AuthService {
@@ -25,18 +25,18 @@ export class AuthService {
     return null;
   }
 
-  async login(user: User): Promise<LoginResponseDto> {
+  async login(user: User): Promise<TokensDto> {
     const payload = { userId: user.id };
     return {
-      access_token: this.jwtAccessService.sign(payload),
-      refresh_token: this.jwtRefreshService.sign(payload),
+      accessToken: this.jwtAccessService.sign(payload),
+      refreshToken: this.jwtRefreshService.sign(payload),
     };
   }
 
-  async refresh(userId: string): Promise<RefreshResponseDto> {
+  async refresh(userId: string): Promise<AccessTokenDto> {
     const payload = { userId: userId };
     return {
-      access_token: this.jwtAccessService.sign(payload),
+      accessToken: this.jwtAccessService.sign(payload),
     };
   }
 }

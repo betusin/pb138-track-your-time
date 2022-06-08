@@ -6,9 +6,13 @@ import { PrismaService } from './prisma/prisma.service';
 import { createOpenApiDocument } from './app-common';
 import { PrismaExceptionFilter } from './exception/prisma-exception.filter';
 import { ServiceExceptionFilter } from './exception/service-exception.filter';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(RestModule);
+
+  // To read cookies from request
+  app.use(cookieParser());
 
   // Add Prisma shutdown hooks
   const prismaService = app.get(PrismaService);
