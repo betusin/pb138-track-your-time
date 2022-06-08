@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { UpdateProjectDto } from "../api/model";
 import {
   projectControllerFindOne,
   projectControllerUpdate,
@@ -32,12 +33,13 @@ export const EditProject = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const { id: projectID } = useParams();
-  if (!projectID) {
-    setErrorMessage("No project id, cannot retrieve the data!");
-  }
 
   useEffect(() => {
     async function getProject() {
+      if (!projectID) {
+        setErrorMessage("No project id, cannot retrieve the data!");
+        return;
+      }
       const result = await projectControllerFindOne(projectID, header);
       if (result.status == 200) {
         if (!resetedForm) {
@@ -56,9 +58,23 @@ export const EditProject = () => {
   const onSubmit: SubmitHandler<IFormProjectInput> = async (
     data: IFormProjectInput
   ) => {
-    delete data.userId;
-    delete data.id;
-    const result = await projectControllerUpdate(projectID, data, header);
+    if (projectID == null) {
+      setErrorMessage("No project id, cannot retrieve the data!");
+      return;
+    }
+
+    const dataForUpdate: UpdateProjectDto = {
+      name: data.name,
+      hourlyRate: data.hourlyRate,
+      customer: data.customer,
+      isActive: data.isActive,
+    };
+
+    const result = await projectControllerUpdate(
+      projectID,
+      dataForUpdate,
+      header
+    );
     if (result.status == 200) {
       setUpdated(true);
       setTimeout(() => {
