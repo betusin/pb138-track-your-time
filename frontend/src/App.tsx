@@ -13,6 +13,7 @@ import { Project } from "./components/Project";
 import { ProjectList } from './components/ProjectList';
 import { accessTokenAtom } from "./state/atom";
 import { theme } from "./styles/theme";
+import { NoPath } from './components/NoPath';
 
 export const App = () => {
   const token = useRecoilValue(accessTokenAtom);
@@ -38,6 +39,7 @@ export const App = () => {
                 <Route path="/project/:id" element={<Project />} />
                 <Route path="/session/edit/:id" element={<EditSession />} />
                 <Route path="/session/add" element={<CreateSession />} />
+                <Route path="*" element={<NoPath />} />
               </>
             )}
           </Routes>
