@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { CreateProjectDto } from "../api/model";
 import { projectControllerCreate } from "../api/projects/projects";
 import { accessTokenAtom } from "../state/atom";
 import {
@@ -45,9 +46,14 @@ export const CreateProject = () => {
         Authorization: "Bearer " + token,
       },
     };
-    delete data.isActive;
 
-    const result = await projectControllerCreate(data, header);
+    const dataForCreate: CreateProjectDto = {
+      name: data.name,
+      hourlyRate: data.hourlyRate,
+      customer: data.customer,
+    };
+
+    const result = await projectControllerCreate(dataForCreate, header);
     if (result.status == 201) {
       setSubmitted(true);
       setTimeout(() => {
