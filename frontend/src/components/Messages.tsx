@@ -17,13 +17,9 @@ export const MessageFailBlock = ({ text }: IMessagesProps) => {
   );
 };
 
-export const MessageUnauthorized = () => {
-  return <MessageFailBlock text="Unauthorized operation!" />;
-};
+export const unauthorizedText = "Unauthorized operation!";
 
-export const MessageFailedValidation = () => {
-  return <MessageFailBlock text="Field validation failed!" />;
-};
+export const failedValidationText = "Field validation failed!";
 
 export const MessageSuccessBlock = ({ text }: IMessagesProps) => {
   return (

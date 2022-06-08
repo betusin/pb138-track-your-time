@@ -5,9 +5,10 @@ import { useRecoilValue } from "recoil";
 import { projectControllerCreate } from "../api/projects/projects";
 import { accessTokenAtom } from "../state/atom";
 import {
-  MessageFailedValidation,
+  failedValidationText,
+  MessageFailBlock,
   MessageSuccessBlock,
-  MessageUnauthorized,
+  unauthorizedText,
 } from "./Messages";
 import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
@@ -31,6 +32,7 @@ export const CreateProject = () => {
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
   const token = useRecoilValue(accessTokenAtom);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const { register, handleSubmit, formState, reset } =
     useForm<IFormProjectInput>();
@@ -52,9 +54,9 @@ export const CreateProject = () => {
         navigate("/");
       }, 1500);
     } else if (result.status == 400) {
-      return <MessageFailedValidation />;
+      setErrorMessage(failedValidationText);
     } else if (result.status == 401) {
-      return <MessageUnauthorized />;
+      setErrorMessage(unauthorizedText);
     }
   };
 
@@ -66,6 +68,7 @@ export const CreateProject = () => {
   return (
     <div className="App">
       <Navbar />
+      {errorMessage && <MessageFailBlock text={errorMessage} />}
       {submitted ? (
         <MessageSuccessBlock text="Project was successfully created." />
       ) : (
