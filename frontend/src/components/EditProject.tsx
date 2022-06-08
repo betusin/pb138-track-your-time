@@ -20,10 +20,9 @@ import { ProjectFormElems } from "./ProjectFormElems";
 
 export const EditProject = () => {
   const [updated, setUpdated] = useState(false);
-  const [resetedForm, setResetedForm] = useState(false);
   const navigate = useNavigate();
   const token = useRecoilValue(accessTokenAtom);
-  const { register, handleSubmit, formState, reset } =
+  const { register, handleSubmit, formState, setValue } =
     useForm<IFormProjectInput>();
   const header = {
     headers: {
@@ -42,10 +41,12 @@ export const EditProject = () => {
       }
       const result = await projectControllerFindOne(projectID, header);
       if (result.status == 200) {
-        if (!resetedForm) {
-          reset(result.data);
-          setResetedForm(true);
-        }
+        console.log(result.data);
+        if (result.data.customer != null)
+          setValue("customer", result.data.customer);
+        setValue("hourlyRate", result.data.hourlyRate);
+        setValue("isActive", result.data.isActive);
+        setValue("name", result.data.name);
       } else if (result.status == 401) {
         setErrorMessage(unauthorizedText);
       } else if (result.status == 404) {

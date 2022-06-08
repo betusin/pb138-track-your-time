@@ -21,22 +21,13 @@ export interface IFormProjectInput {
   hourlyRate: number;
 }
 
-const blankProject = {
-  name: "",
-  customer: "",
-  isActive: true,
-  hourlyRate: 0,
-};
-
 export const CreateProject = () => {
-  const [resetedForm, setResetedForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
   const token = useRecoilValue(accessTokenAtom);
   const [errorMessage, setErrorMessage] = useState<string>();
 
-  const { register, handleSubmit, formState, reset } =
-    useForm<IFormProjectInput>();
+  const { register, handleSubmit, formState } = useForm<IFormProjectInput>();
 
   const onSubmit: SubmitHandler<IFormProjectInput> = async (
     data: IFormProjectInput
@@ -65,11 +56,6 @@ export const CreateProject = () => {
       setErrorMessage(unauthorizedText);
     }
   };
-
-  if (!resetedForm) {
-    reset(blankProject);
-    setResetedForm(true);
-  }
 
   return (
     <div className="App">

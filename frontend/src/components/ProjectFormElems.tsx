@@ -32,6 +32,7 @@ export const ProjectFormElems = ({
         <input
           className={`checkbox-field`}
           type="checkbox"
+          defaultChecked={true}
           {...register("isActive")}
         />
         <label>is active?</label>
