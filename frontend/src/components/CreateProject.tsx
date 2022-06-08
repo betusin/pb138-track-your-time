@@ -5,7 +5,6 @@ import { useRecoilValue } from 'recoil';
 import { projectControllerCreate } from '../api/projects/projects';
 import { accessTokenAtom } from '../state/atom';
 import { failedValidationText, MessageFailBlock, MessageSuccessBlock, unauthorizedText } from './Messages';
-import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
 
 export interface IFormProjectInput {
@@ -61,8 +60,7 @@ export const CreateProject = () => {
   }
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       { errorMessage && <MessageFailBlock text={errorMessage} /> }
       {submitted ?
         <MessageSuccessBlock text="Project was successfully created." />
@@ -75,6 +73,6 @@ export const CreateProject = () => {
           />
         </form>
       }
-    </div>
+    </>
   );
 };

@@ -7,7 +7,6 @@ import { projectControllerFindOne } from '../api/projects/projects';
 import { accessTokenAtom } from '../state/atom';
 import { sessionData } from '../static/sessions';
 import { MessageFailBlock, unauthorizedText } from './Messages';
-import { Navbar } from "./Navbar";
 import { SessionItem } from "./SessionItem";
 
 export const Project = () => {
@@ -46,8 +45,7 @@ export const Project = () => {
   };
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       <div className="project-container">
         { errorMessage && <MessageFailBlock text={errorMessage} /> }
         <div>
@@ -103,6 +101,6 @@ export const Project = () => {
           </table>
         </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -6,7 +6,6 @@ import { projectControllerFindOne, projectControllerUpdate } from '../api/projec
 import { accessTokenAtom } from '../state/atom';
 import { IFormProjectInput } from "./CreateProject";
 import { failedValidationText, MessageFailBlock, MessageSuccessBlock, unauthorizedText } from './Messages';
-import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
 
 export const EditProject = () => {
@@ -65,8 +64,7 @@ export const EditProject = () => {
   };
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       { errorMessage && <MessageFailBlock text={errorMessage} /> }
       { updated ?
         <MessageSuccessBlock text="Project was successfully edited." />
@@ -79,6 +77,6 @@ export const EditProject = () => {
           />
         </form>
       }
-    </div>
+  </>
   );
 };
