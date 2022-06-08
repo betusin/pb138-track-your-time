@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from 'recoil';
+import { UpdateProjectDto } from '../api/model';
 import { projectControllerFindOne, projectControllerUpdate } from '../api/projects/projects';
 import { accessTokenAtom } from '../state/atom';
 import { IFormProjectInput } from "./CreateProject";
@@ -52,10 +53,14 @@ export const EditProject = () => {
       return;
     }
 
-    delete data.userId;
-    delete data.id;
+    const dataForUpdate: UpdateProjectDto = {
+      name: data.name,
+      hourlyRate: data.hourlyRate,
+      customer: data.customer,
+      isActive: data.isActive,
+    }
 
-    const result = await projectControllerUpdate(projectID, data, header);
+    const result = await projectControllerUpdate(projectID, dataForUpdate, header);
     if (result.status == 200) {
       setUpdated(true);
       setTimeout(() => {
