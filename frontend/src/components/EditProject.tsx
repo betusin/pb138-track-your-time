@@ -20,14 +20,15 @@ export const EditProject = () => {
     }
   };
   const [errorMessage, setErrorMessage] = useState<string>();
-
   const { id: projectID } = useParams();
-  if (!projectID) {
-    setErrorMessage("No project id, cannot retrieve the data!");
-  }
 
   useEffect(() => {
     async function getProject() {
+      if (projectID == null) {
+        setErrorMessage("No project id, cannot retrieve the data!");
+        return;
+      }
+
       const result = await projectControllerFindOne(projectID, header);
       if (result.status == 200) {
         if (!resetedForm) {
@@ -46,8 +47,14 @@ export const EditProject = () => {
   const onSubmit: SubmitHandler<IFormProjectInput> = async (
     data: IFormProjectInput
   ) => {
+    if (projectID == null) {
+      setErrorMessage("No project id, cannot retrieve the data!");
+      return;
+    }
+
     delete data.userId;
     delete data.id;
+
     const result = await projectControllerUpdate(projectID, data, header);
     if (result.status == 200) {
       setUpdated(true);
@@ -65,8 +72,8 @@ export const EditProject = () => {
 
   return (
     <>
-      { errorMessage && <MessageFailBlock text={errorMessage} /> }
-      { updated ?
+      { errorMessage ? <MessageFailBlock text={errorMessage} />
+      : updated ?
         <MessageSuccessBlock text="Project was successfully edited." />
         :
         <form className="m1" onSubmit={handleSubmit(onSubmit)}>

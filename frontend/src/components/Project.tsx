@@ -22,8 +22,9 @@ export const Project = () => {
 
   useEffect(() => {
     async function getProject() {
-      if (!projectID) {
+      if (projectID == null) {
         setErrorMessage("No project id, cannot retrieve the data!");
+        return;
       }
 
       const result = await projectControllerFindOne(projectID, header);

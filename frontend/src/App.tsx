@@ -36,6 +36,7 @@ export const App = () => {
                 <Route path="/" element={<ProjectList />} />
                 <Route path="/project/add" element={<CreateProject />} />
                 <Route path="/project/edit/:id" element={<EditProject />} />
+                <Route path="/project/edit/" element={<EditProject />} />
                 <Route path="/project/:id" element={<Project />} />
                 <Route path="/session/edit/:id" element={<EditSession />} />
                 <Route path="/session/add" element={<CreateSession />} />
