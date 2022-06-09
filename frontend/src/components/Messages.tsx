@@ -1,4 +1,4 @@
-import { ErrorOutline, CheckCircleOutlined } from "@mui/icons-material";
+import { CheckCircleOutlined, ErrorOutline } from "@mui/icons-material";
 
 interface IMessagesProps {
   text: string;
@@ -25,11 +25,19 @@ export const unexpectedErrorText = "Unexpected error occurred!";
 
 export const noProjectFoundText = "Project was not found!";
 
+export const sessionNotFoundText = "The session was not found!";
+
 export const noProjectIdText = "No project id, cannot retrieve the data!";
 
 export const dataRefreshFailedText = "Failed to refresh data!";
 
 export const projectDeletedText = "Project deleted successfully.";
+
+export const sessionDeletedText = "Session deleted successfully.";
+
+export const sessionCreatedText = "Session was successfully created.";
+
+export const sessionUpdatedText = "Session was successfully updated.";
 
 export const MessageSuccessBlock = ({ text }: IMessagesProps) => {
   return (
