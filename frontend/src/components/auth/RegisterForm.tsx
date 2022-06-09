@@ -1,60 +1,20 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-export interface IFormLoginInput {
+export interface RegisterFormData {
   email: string;
   password: string;
-}
-
-export interface IFormRegisterInput extends IFormLoginInput {
   name: string;
   surname: string;
   company: string;
   logo: string;
 }
 
-export interface ILoginFormProps {
-  onSubmit: SubmitHandler<IFormLoginInput>;
+export interface RegisterFormProps {
+  onSubmit: (data: RegisterFormData) => void;
 }
 
-export interface IRegisterProps {
-  onSubmit: SubmitHandler<IFormRegisterInput>;
-}
-
-export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
-  const { register, handleSubmit, formState } = useForm<IFormLoginInput>();
-
-  return (
-    <form className="m1" onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>E-mail address</label>
-      </div>
-      <input
-        className={`text-field ${
-          formState.errors.email && "text-field--error"
-        }`}
-        type="text"
-        {...register("email", { required: true })}
-      />
-      <div>
-        <label>Password</label>
-      </div>
-      <input
-        className={`text-field ${
-          formState.errors.password && "text-field--error"
-        }`}
-        type="password"
-        {...register("password", { required: true })}
-      />
-
-      <div className="btn-wrapper">
-        <input className="btn btn--primary" type="submit" value="Login" />
-      </div>
-    </form>
-  );
-};
-
-export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
-  const { register, handleSubmit, formState } = useForm<IFormRegisterInput>();
+export const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
+  const { register, handleSubmit, formState } = useForm<RegisterFormData>();
 
   return (
     <form className="m1" onSubmit={handleSubmit(onSubmit)}>

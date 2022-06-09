@@ -3,17 +3,17 @@ import { useSetRecoilState } from "recoil";
 import { authControllerLogin } from "../../api/authentication/authentication";
 import { userControllerCreate } from "../../api/users/users";
 import { accessTokenAtom } from "../../state/atom";
-import { IFormRegisterInput, RegisterForm } from "./AuthForm";
 import { useApiCall } from "../../util/api-caller";
 import { AccessTokenDto } from "../../api/model";
 import toast from "react-hot-toast";
+import { RegisterForm, RegisterFormData } from "./RegisterForm";
 
 export const Register = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
   const navigate = useNavigate();
   const doApiCall = useApiCall();
 
-  function register(data: IFormRegisterInput) {
+  function register(data: RegisterFormData) {
     if (!data.logo) data.logo = "/assets/company-logo.svg";
     doApiCall(
       userControllerCreate,
@@ -23,7 +23,7 @@ export const Register = () => {
     );
   }
 
-  function onRegisterSuccess(data: IFormRegisterInput) {
+  function onRegisterSuccess(data: RegisterFormData) {
     doApiCall(authControllerLogin, data, onLoginSuccess);
   }
 

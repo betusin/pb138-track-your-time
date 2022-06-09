@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { accessTokenAtom } from "../../state/atom";
-import { IFormLoginInput, LoginForm } from "./AuthForm";
 import { authControllerLogin } from "../../api/authentication/authentication";
 import toast from "react-hot-toast";
 import { AccessTokenDto } from "../../api/model";
 import { useApiCall } from "../../util/api-caller";
+import { LoginForm, LoginFormData } from "./LoginForm";
 
 export const Login = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
@@ -30,7 +30,7 @@ export const Login = () => {
     }
   }
 
-  function login(data: IFormLoginInput) {
+  function login(data: LoginFormData) {
     doApiCall(authControllerLogin, data, onLoginSuccess, onLoginFailure, {
       withCredentials: true,
     });
