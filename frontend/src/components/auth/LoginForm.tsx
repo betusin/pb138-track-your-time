@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Trans } from "react-i18next";
 
 export interface LoginFormData {
   email: string;
@@ -15,7 +16,9 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
   return (
     <form className="m1" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>E-mail address</label>
+        <label>
+          <Trans i18nKey="auth.email_address" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -25,7 +28,9 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
         {...register("email", { required: true })}
       />
       <div>
-        <label>Password</label>
+        <label>
+          <Trans i18nKey="auth.password" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -36,7 +41,9 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
       />
 
       <div className="btn-wrapper">
-        <input className="btn btn--primary" type="submit" value="Login" />
+        <button className="btn btn--primary" type="submit">
+          <Trans i18nKey="auth.login.log_in" />
+        </button>
       </div>
     </form>
   );

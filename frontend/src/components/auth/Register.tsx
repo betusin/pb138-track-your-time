@@ -7,6 +7,8 @@ import { useApiCall } from "../../util/api-caller";
 import { AccessTokenDto } from "../../api/model";
 import toast from "react-hot-toast";
 import { RegisterForm, RegisterFormData } from "./RegisterForm";
+import { Trans } from "react-i18next";
+import i18n from "i18next";
 
 export const Register = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
@@ -29,10 +31,10 @@ export const Register = () => {
 
   function onRegisterFailure(code: number) {
     if (code == 400) {
-      toast("Field validation failed.");
+      toast(i18n.t("error.validation_failed"));
       return true;
     } else if (code == 409) {
-      toast("A user with this email already exists.");
+      toast(i18n.t("error.already_exists"));
       return true;
     }
     return false;
@@ -45,9 +47,15 @@ export const Register = () => {
 
   return (
     <>
-      <h1>TrackYourTime</h1>
+      <h1>
+        <Trans i18nKey="app.name" />
+      </h1>
       <RegisterForm onSubmit={register} />
-      Already have an account? Login <Link to="/login">here</Link>.
+      <Trans i18nKey="auth.login.hint.existing_account" />
+      <Link to="/login">
+        <Trans i18nKey="auth.login.hint.here" />
+      </Link>
+      .
     </>
   );
 };

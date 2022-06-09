@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Trans } from "react-i18next";
 
 export interface RegisterFormData {
   email: string;
@@ -19,7 +20,9 @@ export const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
   return (
     <form className="m1" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>Name</label>
+        <label>
+          <Trans i18nKey="auth.register.name" />
+        </label>
       </div>
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
@@ -27,7 +30,9 @@ export const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
         {...register("name", { required: true })}
       />
       <div>
-        <label>Surname</label>
+        <label>
+          <Trans i18nKey="auth.register.surname" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -37,7 +42,9 @@ export const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
         {...register("surname", { required: true })}
       />
       <div>
-        <label>E-mail address</label>
+        <label>
+          <Trans i18nKey="auth.register.email" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -47,7 +54,9 @@ export const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
         {...register("email", { required: true })}
       />
       <div>
-        <label>Password</label>
+        <label>
+          <Trans i18nKey="auth.register.password" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -57,7 +66,9 @@ export const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
         {...register("password", { required: true })}
       />
       <div>
-        <label>Company</label>
+        <label>
+          <Trans i18nKey="auth.register.company" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -67,7 +78,9 @@ export const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
         {...register("company", { required: true })}
       />
       <div>
-        <label>Logo of company (URL source)</label>
+        <label>
+          <Trans i18nKey="auth.register.company_logo" />
+        </label>
       </div>
       <input
         className={`text-field ${formState.errors.logo && "text-field--error"}`}

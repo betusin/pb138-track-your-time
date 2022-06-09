@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { SessionFormElems } from "./SessionFormElems";
 import { useApiCall } from "../../util/api-caller";
 import toast from "react-hot-toast";
-import { failedValidationText, sessionCreatedText } from "../../strings";
 import { sessionControllerCreateWrap } from "../../util/api-call-wrappers";
 import { GetProjectDto } from "../../api/model";
 import { useLoadProject } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import { useParamOrEmpty } from "../../util/params";
+import i18n from "../../i18n/i18n";
 
 export interface IFormSessionInput {
   fromDate: Date;
@@ -52,13 +52,13 @@ export const CreateSession = () => {
   }
 
   function onSuccess() {
-    toast.success(sessionCreatedText);
+    toast.success(i18n.t("session.created"));
     navigate(`/project/${project.id}`);
   }
 
   function onError(code: number) {
     if (code == 400) {
-      toast.error(failedValidationText);
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     }
     return false;
@@ -72,7 +72,7 @@ export const CreateSession = () => {
           register={register}
           control={control}
           sessionData={createInitialSession(project.hourlyRate)}
-          buttonText="Create session"
+          buttonText={i18n.t("session.create")}
         />
       </form>
     </>

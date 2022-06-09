@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { GetProjectDto } from "../../api/model";
+import { Trans } from "react-i18next";
 
 export interface IProjectItemProps {
   project: GetProjectDto;
@@ -21,7 +22,10 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
         <strong>{name}</strong>
       </Link>
       <div className="project-item__customer">{customer}</div>
-      <div className="project-item__hourly-rate">{hourlyRate}$/hour</div>
+      <div className="project-item__hourly-rate">
+        {hourlyRate}$/
+        <Trans i18nKey="project.hour" />{" "}
+      </div>
       <div className="project-item__settings">
         <Link to={`/project/${id}/edit`}>
           <img

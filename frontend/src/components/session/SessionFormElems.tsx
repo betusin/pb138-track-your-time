@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import {
@@ -11,6 +11,7 @@ import { IFormSessionInput } from "./CreateSession";
 import { DateTimePicker } from "@mui/lab";
 import { StyledTextField } from "../common/StyledTextField";
 import { theme } from "../../styles/theme";
+import { Trans } from "react-i18next";
 
 export interface ISessiontFormElemsProps {
   formState: FormState<IFormSessionInput>;
@@ -39,7 +40,7 @@ export const SessionFormElems = ({
               render={({ field: { onChange, value } }) => (
                 <DateTimePicker
                   renderInput={StyledTextField}
-                  label="DateTimePicker"
+                  label={<Trans i18nKey="session.date_from" />}
                   value={value}
                   onChange={(value) => {
                     onChange(value);
@@ -58,7 +59,7 @@ export const SessionFormElems = ({
               render={({ field: { onChange, value } }) => (
                 <DateTimePicker
                   renderInput={StyledTextField}
-                  label="DateTimePicker"
+                  label={<Trans i18nKey="session.date_to" />}
                   value={value}
                   onChange={(value) => {
                     onChange(value);
@@ -70,19 +71,20 @@ export const SessionFormElems = ({
         </div>
       </div>
 
-      <FormControlLabel
-        control={
-          <Checkbox
-            {...register("isInvoiced")}
-            style={{ color: theme.palette.secondary.light }}
-            defaultChecked={sessionData.isInvoiced}
-          />
-        }
-        label="is invoiced"
+      <Checkbox
+        id="isInvoiced"
+        {...register("isInvoiced")}
+        style={{ color: theme.palette.secondary.light }}
+        defaultChecked={sessionData.isInvoiced}
       />
+      <label htmlFor="isInvoiced">
+        <Trans i18nKey="session.is_invoiced" />
+      </label>
 
       <div>
-        <label>Hourly rate</label>
+        <label>
+          <Trans i18nKey="session.hourly_rate" />
+        </label>
       </div>
       <input
         className={`number-field`}
@@ -94,7 +96,9 @@ export const SessionFormElems = ({
       />
 
       <div>
-        <label>Note</label>
+        <label>
+          <Trans i18nKey="session.note" />
+        </label>
       </div>
       <textarea
         className={`text-field ${formState.errors.note && "text-field--error"}`}

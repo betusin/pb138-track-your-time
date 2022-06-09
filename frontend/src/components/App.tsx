@@ -15,9 +15,11 @@ import { accessTokenAtom } from "../state/atom";
 import { theme } from "../styles/theme";
 import { Toaster } from "react-hot-toast";
 import { AxiosInterceptorsSetup } from "./AxiosInterceptorsSetup";
+import { useTranslation } from "react-i18next";
 
 export const App = () => {
   const token = useRecoilValue(accessTokenAtom);
+  useTranslation();
 
   return (
     <ThemeProvider theme={theme}>

@@ -6,16 +6,12 @@ import { useLoadSession } from "../../util/load-entity-wrappers";
 import { GetSessionDto } from "../../api/model";
 import { sessionControllerUpdateWrap } from "../../util/api-call-wrappers";
 import toast from "react-hot-toast";
-import {
-  dataRefreshFailedText,
-  failedValidationText,
-  sessionUpdatedText,
-} from "../../strings";
 import { useApiCall } from "../../util/api-caller";
 import { useSWRConfig } from "swr";
 import { getSessionControllerFindOneKey } from "../../api/sessions/sessions";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
+import i18n from "../../i18n/i18n";
 
 export const EditSession = () => {
   const navigate = useNavigate();
@@ -44,16 +40,16 @@ export const EditSession = () => {
   }
 
   function onSuccess() {
-    toast.success(sessionUpdatedText);
+    toast.success(i18n.t("session.updated"));
     mutate(getSessionControllerFindOneKey(id)).catch(() =>
-      toast.error(dataRefreshFailedText)
+      toast.error(i18n.t("error.refresh_failed"))
     );
     navigate("/");
   }
 
   function onError(code: number) {
     if (code == 400) {
-      toast.error(failedValidationText);
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     }
     return false;
