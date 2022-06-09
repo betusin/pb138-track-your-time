@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { meControllerFindAll } from "../api/me/me";
@@ -65,7 +65,6 @@ export const ProjectList = () => {
 
   return (
     <>
-      <Toaster />
       <div className="project-list m1">
         {projects.map((project) => (
           <ProjectItem

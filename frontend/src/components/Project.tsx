@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -14,7 +14,6 @@ import {
   unauthorizedText,
   unexpectedErrorText,
 } from "./Messages";
-import { Navbar } from "./Navbar";
 import { SessionItem } from "./SessionItem";
 
 function onProjectReceived(
@@ -60,10 +59,8 @@ export const Project = () => {
   };
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       <div className="project-container">
-        <Toaster />
         <div>
           <h2>{project?.name}</h2>
         </div>
@@ -119,6 +116,6 @@ export const Project = () => {
           </table>
         </div>
       </div>
-    </div>
+    </>
   );
 };

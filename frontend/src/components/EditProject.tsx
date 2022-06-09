@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { useEffect } from "react";
 import { SubmitHandler, useForm, UseFormSetValue } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { GetProjectDto, UpdateProjectDto } from "../api/model";
@@ -18,7 +18,6 @@ import {
   unauthorizedText,
   unexpectedErrorText,
 } from "./Messages";
-import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
 
 function onProjectReceived(
@@ -98,9 +97,7 @@ export const EditProject = () => {
   };
 
   return (
-    <div className="App">
-      <Navbar />
-      <Toaster />
+    <>
       <form className="m1" onSubmit={handleSubmit(onSubmit)}>
         <ProjectFormElems
           formState={formState}
@@ -108,6 +105,6 @@ export const EditProject = () => {
           buttonText="Edit project"
         />
       </form>
-    </div>
+    </>
   );
 };

@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { CreateProjectDto } from "../api/model";
@@ -10,7 +10,6 @@ import {
   unauthorizedText,
   unexpectedErrorText,
 } from "./Messages";
-import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
 
 export interface IFormProjectInput {
@@ -55,9 +54,7 @@ export const CreateProject = () => {
   };
 
   return (
-    <div className="App">
-      <Navbar />
-      <Toaster />
+    <>
       <form className="m1" onSubmit={handleSubmit(onSubmit)}>
         <ProjectFormElems
           formState={formState}
@@ -65,6 +62,6 @@ export const CreateProject = () => {
           buttonText="Create project"
         />
       </form>
-    </div>
+    </>
   );
 };

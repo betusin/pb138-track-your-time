@@ -24,10 +24,10 @@ export const Login = () => {
   };
 
   return (
-    <div className="App">
+    <>
       <h1>TrackYourTime</h1>
       <LoginForm onSubmit={onSubmit} />
       Don&apos;t have an account yet? Register <Link to="/register">here</Link>.
-    </div>
+    </>
   );
 };
