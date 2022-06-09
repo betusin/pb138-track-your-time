@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Navbar } from "./Navbar";
 import { SessionFormElems } from "./SessionFormElems";
 
 export interface IFormSessionInput {
@@ -33,8 +32,7 @@ export const CreateSession = () => {
   };
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       <form className="m1" onSubmit={handleSubmit(onSubmit)}>
         <SessionFormElems
           formState={formState}
@@ -43,6 +41,6 @@ export const CreateSession = () => {
           buttonText="Create session"
         />
       </form>
-    </div>
+    </>
   );
 };

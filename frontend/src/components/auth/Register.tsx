@@ -36,10 +36,10 @@ export const Register = () => {
   };
 
   return (
-    <div className="App">
+    <>
       <h1>TrackYourTime</h1>
       <RegisterForm onSubmit={onSubmit} />
       Already have an account? Login <Link to="/login">here</Link>.
-    </div>
+    </>
   );
 };
