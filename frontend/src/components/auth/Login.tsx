@@ -1,32 +1,43 @@
-import { SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { accessTokenAtom } from "../../state/atom";
 import { IFormLoginInput, LoginForm } from "./AuthForm";
 import { authControllerLogin } from "../../api/authentication/authentication";
+import toast from "react-hot-toast";
+import { LoginResponseDto } from "../../api/model";
+import { useApiCall } from "../../util/api-caller";
 
 export const Login = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
   const navigate = useNavigate();
+  const doApiCall = useApiCall();
 
-  const onSubmit: SubmitHandler<IFormLoginInput> = async (
-    data: IFormLoginInput
-  ) => {
-    const result = await authControllerLogin({ ...data });
-    if (result.status == 201) {
-      setToken(result.data.access_token);
-      navigate("/");
-    } else if (result.status == 401) {
-      alert("Incorrect email or password!");
-    } else {
-      alert("Unknown error: " + result.statusText);
+  function onLoginSuccess(result: LoginResponseDto): void {
+    setToken(result.access_token);
+    navigate("/");
+  }
+
+  function onLoginFailure(code: number): boolean {
+    switch (code) {
+      case 401:
+        toast("Incorrect password.");
+        return true;
+      case 404:
+        toast("No such user found.");
+        return true;
+      default:
+        return false;
     }
-  };
+  }
+
+  function login(data: IFormLoginInput) {
+    doApiCall(authControllerLogin, data, onLoginSuccess, onLoginFailure);
+  }
 
   return (
     <>
       <h1>TrackYourTime</h1>
-      <LoginForm onSubmit={onSubmit} />
+      <LoginForm onSubmit={login} />
       Don&apos;t have an account yet? Register <Link to="/register">here</Link>.
     </>
   );

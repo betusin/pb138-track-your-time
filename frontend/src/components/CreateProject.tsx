@@ -1,16 +1,10 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { CreateProjectDto } from "../api/model";
 import { projectControllerCreate } from "../api/projects/projects";
-import { accessTokenAtom } from "../state/atom";
-import {
-  failedValidationText,
-  unauthorizedText,
-  unexpectedErrorText,
-} from "./Messages";
+import { failedValidationText } from "./Messages";
 import { ProjectFormElems } from "./ProjectFormElems";
+import { useApiCall } from "../util/api-caller";
 
 export interface IFormProjectInput {
   name: string;
@@ -21,41 +15,36 @@ export interface IFormProjectInput {
 
 export const CreateProject = () => {
   const navigate = useNavigate();
-  const token = useRecoilValue(accessTokenAtom);
+  const doApiCall = useApiCall();
 
   const { register, handleSubmit, formState } = useForm<IFormProjectInput>();
 
-  const onSubmit: SubmitHandler<IFormProjectInput> = async (
-    data: IFormProjectInput
-  ) => {
-    const header = {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    };
-
-    const dataForCreate: CreateProjectDto = {
+  function createProject(data: IFormProjectInput) {
+    const body = {
       name: data.name,
       hourlyRate: data.hourlyRate,
       customer: data.customer,
     };
 
-    const result = await projectControllerCreate(dataForCreate, header);
-    if (result.status == 201) {
-      toast.success("Project was successfully created.");
-      navigate("/");
-    } else if (result.status == 400) {
+    doApiCall(projectControllerCreate, body, onSuccess, onError);
+  }
+
+  function onSuccess() {
+    toast.success("Project was successfully created.");
+    navigate("/");
+  }
+
+  function onError(code: number) {
+    if (code == 400) {
       toast.error(failedValidationText);
-    } else if (result.status == 401) {
-      toast.error(unauthorizedText);
-    } else {
-      toast.error(unexpectedErrorText);
+      return true;
     }
-  };
+    return false;
+  }
 
   return (
     <>
-      <form className="m1" onSubmit={handleSubmit(onSubmit)}>
+      <form className="m1" onSubmit={handleSubmit(createProject)}>
         <ProjectFormElems
           formState={formState}
           register={register}

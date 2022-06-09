@@ -1,44 +1,52 @@
-import { SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { authControllerLogin } from "../../api/authentication/authentication";
 import { userControllerCreate } from "../../api/users/users";
 import { accessTokenAtom } from "../../state/atom";
 import { IFormRegisterInput, RegisterForm } from "./AuthForm";
+import { useApiCall } from "../../util/api-caller";
+import { LoginResponseDto } from "../../api/model";
+import toast from "react-hot-toast";
 
 export const Register = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
   const navigate = useNavigate();
+  const doApiCall = useApiCall();
 
-  const onSubmit: SubmitHandler<IFormRegisterInput> = async (
-    data: IFormRegisterInput
-  ) => {
+  function register(data: IFormRegisterInput) {
     if (!data.logo) data.logo = "/assets/company-logo.svg";
+    doApiCall(
+      userControllerCreate,
+      data,
+      () => onRegisterSuccess(data),
+      onRegisterFailure
+    );
+  }
 
-    const result = await userControllerCreate({ ...data });
-    if (result.status == 201) {
-      const resultLogin = await authControllerLogin({ ...data });
-      if (resultLogin.status == 201) {
-        setToken(resultLogin.data.access_token);
-        navigate("/");
-      } else if (resultLogin.status == 401) {
-        alert("Incorrect email or password!");
-      } else {
-        alert("Unknown error: " + resultLogin.statusText);
-      }
-    } else if (result.status == 400) {
-      alert("Field validation failed");
-    } else if (result.status == 409) {
-      alert("A user with this email already exists");
-    } else {
-      alert("Unknown error: " + result.statusText);
+  function onRegisterSuccess(data: IFormRegisterInput) {
+    doApiCall(authControllerLogin, data, onLoginSuccess);
+  }
+
+  function onRegisterFailure(code: number) {
+    if (code == 400) {
+      toast("Field validation failed.");
+      return true;
+    } else if (code == 409) {
+      toast("A user with this email already exists.");
+      return true;
     }
-  };
+    return false;
+  }
+
+  function onLoginSuccess(data: LoginResponseDto) {
+    setToken(data.access_token);
+    navigate("/");
+  }
 
   return (
     <>
       <h1>TrackYourTime</h1>
-      <RegisterForm onSubmit={onSubmit} />
+      <RegisterForm onSubmit={register} />
       Already have an account? Login <Link to="/login">here</Link>.
     </>
   );
