@@ -46,9 +46,10 @@ export function useApiCall(): ApiCaller {
     a: ApiCall<I, O>,
     b: I,
     c: (x: O) => void,
-    d?: (x: number) => boolean
+    d?: (x: number) => boolean,
+    axiosOptions?: AxiosRequestConfig
   ) => {
-    return doNetworkCall(a, b, c, d, token);
+    return doNetworkCall(a, b, c, d, token, axiosOptions);
   };
 }
 
@@ -75,7 +76,8 @@ export type ApiCaller = <I, O>(
   apiCall: ApiCall<I, O>,
   requestBody: I,
   onSuccess: (result: O) => void,
-  onBadResponse?: (code: number) => boolean
+  onBadResponse?: (code: number) => boolean,
+  axiosOptions?: AxiosRequestConfig
 ) => void;
 
 function doNetworkCall<I, A>(
@@ -83,15 +85,16 @@ function doNetworkCall<I, A>(
   inputData: I,
   onSuccess: (result: A) => void,
   onBadResponse?: (code: number) => boolean,
-  token?: string
+  token?: string,
+  axiosOptions?: AxiosRequestConfig
 ) {
-  let axiosOptions = undefined;
   if (token) {
-    axiosOptions = {
+    const tokenOptions = {
       headers: {
         Authorization: "Bearer " + token,
       },
     };
+    axiosOptions = { ...tokenOptions, ...axiosOptions };
   }
   const call = func(inputData, axiosOptions);
   call
