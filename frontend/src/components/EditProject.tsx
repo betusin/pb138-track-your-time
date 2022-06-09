@@ -1,33 +1,100 @@
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { projectsData } from "../static/projects";
+import { AxiosResponse } from "axios";
+import { useEffect } from "react";
+import { SubmitHandler, useForm, UseFormSetValue } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { GetProjectDto, UpdateProjectDto } from "../api/model";
+import {
+  projectControllerFindOne,
+  projectControllerUpdate,
+} from "../api/projects/projects";
+import { accessTokenAtom } from "../state/atom";
 import { IFormProjectInput } from "./CreateProject";
+import {
+  failedValidationText,
+  noProjectFoundText,
+  noProjectIdText,
+  unauthorizedText,
+  unexpectedErrorText,
+} from "./Messages";
 import { ProjectFormElems } from "./ProjectFormElems";
 
+function onProjectReceived(
+  result: AxiosResponse<GetProjectDto>,
+  setValue: UseFormSetValue<IFormProjectInput>
+) {
+  if (result.status == 200) {
+    if (result.data.customer != null)
+      setValue("customer", result.data.customer);
+    setValue("hourlyRate", result.data.hourlyRate);
+    setValue("isActive", result.data.isActive);
+    setValue("name", result.data.name);
+  } else if (result.status == 401) {
+    toast.error(unauthorizedText);
+  } else if (result.status == 404) {
+    toast.error(noProjectFoundText);
+  } else {
+    toast.error(unexpectedErrorText);
+  }
+}
+
 export const EditProject = () => {
-  const projectData = projectsData[3]; // TODO fetch the real data
-
-  const [resetedForm, setResetedForm] = useState(false);
   const navigate = useNavigate();
-
-  const { register, handleSubmit, formState, reset } =
+  const token = useRecoilValue(accessTokenAtom);
+  const { register, handleSubmit, formState, setValue } =
     useForm<IFormProjectInput>();
-
-  const onSubmit: SubmitHandler<IFormProjectInput> = (
-    data: IFormProjectInput
-  ) => {
-    console.log(data);
-    window.alert("data would be overwritten");
-
-    navigate("/");
+  const header = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
   };
 
-  if (!resetedForm) {
-    console.log(projectData);
-    reset(projectData);
-    setResetedForm(true);
-  }
+  const { id: projectID } = useParams();
+
+  useEffect(() => {
+    if (!projectID) {
+      toast.error(noProjectIdText);
+      return;
+    }
+    projectControllerFindOne(projectID, header)
+      .then((result) => onProjectReceived(result, setValue))
+      .catch(() => toast.error(unexpectedErrorText));
+  }, []);
+
+  const onSubmit: SubmitHandler<IFormProjectInput> = async (
+    data: IFormProjectInput
+  ) => {
+    if (projectID == null) {
+      toast.error(noProjectIdText);
+      return;
+    }
+
+    const dataForUpdate: UpdateProjectDto = {
+      name: data.name,
+      hourlyRate: data.hourlyRate,
+      customer: data.customer,
+      isActive: data.isActive,
+    };
+
+    const result = await projectControllerUpdate(
+      projectID,
+      dataForUpdate,
+      header
+    );
+    if (result.status == 200) {
+      toast.success("Project was successfully updated.");
+      navigate("/");
+    } else if (result.status == 400) {
+      toast.error(failedValidationText);
+    } else if (result.status == 401) {
+      toast.error(unauthorizedText);
+    } else if (result.status == 404) {
+      toast.error(noProjectFoundText);
+    } else {
+      toast.error(unexpectedErrorText);
+    }
+  };
 
   return (
     <>

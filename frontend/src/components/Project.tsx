@@ -1,16 +1,56 @@
+import { AxiosResponse } from "axios";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { projectsData } from "../static/projects";
+import { useRecoilValue } from "recoil";
+import { GetProjectDto } from "../api/model";
+import { projectControllerFindOne } from "../api/projects/projects";
+import { accessTokenAtom } from "../state/atom";
 import { sessionData } from "../static/sessions";
-import { IProjectType } from "../types";
-import { Navbar } from "./Navbar";
+import {
+  noProjectFoundText,
+  noProjectIdText,
+  unauthorizedText,
+  unexpectedErrorText,
+} from "./Messages";
 import { SessionItem } from "./SessionItem";
 
-export const Project = () => {
-  const { id, name, hourly_rate, isActive, customer }: IProjectType =
-    projectsData[0];
+function onProjectReceived(
+  result: AxiosResponse<GetProjectDto>,
+  setProject: Dispatch<SetStateAction<GetProjectDto | undefined>>
+) {
+  if (result.status == 200) {
+    setProject(result.data);
+  } else if (result.status == 401) {
+    toast.error(unauthorizedText);
+  } else if (result.status == 404) {
+    toast.error(noProjectFoundText);
+  } else {
+    toast.error(unexpectedErrorText);
+  }
+}
 
+export const Project = () => {
+  const [project, setProject] = useState<GetProjectDto>();
+  const token = useRecoilValue(accessTokenAtom);
+  const header = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
   const { id: projectID } = useParams();
+
+  useEffect(() => {
+    if (!projectID) {
+      toast.error(noProjectIdText);
+      return;
+    }
+
+    projectControllerFindOne(projectID, header)
+      .then((result) => onProjectReceived(result, setProject))
+      .catch(() => toast.error(unexpectedErrorText));
+  }, []);
 
   const sessions = sessionData;
 
@@ -22,10 +62,10 @@ export const Project = () => {
     <>
       <div className="project-container">
         <div>
-          <h2>{name}</h2>
+          <h2>{project?.name}</h2>
         </div>
         <div>
-          <h3>{customer}</h3>
+          <h3>{project?.customer}</h3>
         </div>
         <div className="session-list">
           {sessions.map((session) => (
@@ -49,7 +89,9 @@ export const Project = () => {
           <table className="project-summary">
             <thead>
               <tr>
-                <th className="project-summary__th">{hourly_rate} $/hour</th>
+                <th className="project-summary__th">
+                  {project?.hourlyRate} $/hour
+                </th>
                 <th className="project-summary__th">Hours</th>
                 <th className="project-summary__th">Amount</th>
               </tr>

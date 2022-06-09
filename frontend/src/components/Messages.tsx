@@ -17,6 +17,16 @@ export const MessageFailBlock = ({ text }: IMessagesProps) => {
   );
 };
 
+export const unauthorizedText = "Unauthorized operation!";
+
+export const failedValidationText = "Field validation failed!";
+
+export const unexpectedErrorText = "Unexpected error occurred!";
+
+export const noProjectFoundText = "Project was not found!";
+
+export const noProjectIdText = "No project id, cannot retrieve the data!";
+
 export const MessageSuccessBlock = ({ text }: IMessagesProps) => {
   return (
     <div className="m1">
