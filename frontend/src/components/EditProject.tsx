@@ -14,7 +14,6 @@ import { IFormProjectInput } from "./CreateProject";
 import {
   failedValidationText,
   noProjectFoundText,
-  noProjectIdText,
   unauthorizedText,
   unexpectedErrorText,
 } from "./Messages";
@@ -50,13 +49,10 @@ export const EditProject = () => {
     },
   };
 
-  const { id: projectID } = useParams();
+  const { id: projectIDParam } = useParams();
+  const projectID = projectIDParam ?? "";
 
   useEffect(() => {
-    if (!projectID) {
-      toast.error(noProjectIdText);
-      return;
-    }
     projectControllerFindOne(projectID, header)
       .then((result) => onProjectReceived(result, setValue))
       .catch(() => toast.error(unexpectedErrorText));
@@ -65,11 +61,6 @@ export const EditProject = () => {
   const onSubmit: SubmitHandler<IFormProjectInput> = async (
     data: IFormProjectInput
   ) => {
-    if (projectID == null) {
-      toast.error(noProjectIdText);
-      return;
-    }
-
     const dataForUpdate: UpdateProjectDto = {
       name: data.name,
       hourlyRate: data.hourlyRate,
