@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import App from "./App";
 import { Login } from "./components/auth/Login";
@@ -22,8 +22,9 @@ export const RouterLinks = () => {
         <Routes>
           {token === "" ? (
             <>
+              <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="*" element={<Register />} />
+              <Route path="*" element={<Navigate to="/login" replace />} />
             </>
           ) : (
             <>
