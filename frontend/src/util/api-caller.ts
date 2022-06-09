@@ -1,8 +1,40 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import toast from "react-hot-toast";
 import { unauthorizedText, unexpectedErrorText } from "../components/Messages";
 import { useRecoilValue } from "recoil";
 import { accessTokenAtom } from "../state/atom";
+import { SWRResponse } from "swr";
+import { useEffect } from "react";
+
+/**
+ * A custom hook to perform an SWR call, where the Bearer
+ * token is automatically included in the request.
+ * @param callGenerator Creates the API call with the provided options
+ */
+export function useApiSwrCall<
+  T extends SWRResponse<AxiosResponse, AxiosError<void>>
+>(callGenerator: (options: SwrCallOptions) => T): T {
+  const token = useRecoilValue(accessTokenAtom);
+  const options = {
+    axios: {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    },
+  };
+  const result = callGenerator(options);
+  const { error, data } = result;
+  useEffect(() => {
+    if (error?.isAxiosError) {
+      toast.error(unexpectedErrorText);
+    } else if (data?.status) {
+      if (!isSuccessfulStatus(data.status)) {
+        onUnhandledNetworkCode(data.status);
+      }
+    }
+  }, [error, data]);
+  return result;
+}
 
 /**
  * A custom hook for app API calls. Includes automatic token
@@ -18,6 +50,13 @@ export function useApiCall(): ApiCaller {
   ) => {
     return doNetworkCall(a, b, c, d, token);
   };
+}
+
+/**
+ * Options provided to the SWR api call generator.
+ */
+export interface SwrCallOptions {
+  axios?: AxiosRequestConfig;
 }
 
 /**
@@ -65,27 +104,28 @@ function onNetworkCallResult<A>(
   onSuccess: (result: A) => void,
   onBadResponse: ((code: number) => boolean) | undefined
 ) {
-  if (result.status == 200 || result.status == 201) {
+  const status = result.status;
+  if (isSuccessfulStatus(status)) {
     // Everything is fine
     onSuccess(result.data);
     return;
   }
-  if (onBadResponse !== undefined && onBadResponse(result.status)) {
+  if (onBadResponse !== undefined && onBadResponse(status)) {
     // Error, but it was handled
     return;
   }
   // Error, not handled
-  onUnhandledNetworkCode(result);
+  console.error(result);
+  onUnhandledNetworkCode(status);
 }
 
-function onUnhandledNetworkCode(result: AxiosResponse) {
-  switch (result.status) {
+function onUnhandledNetworkCode(code: number) {
+  switch (code) {
     case 401:
       toast.error(unauthorizedText);
       break;
     default:
       toast.error(unexpectedErrorText);
-      console.error(result);
       break;
   }
 }
@@ -93,4 +133,8 @@ function onUnhandledNetworkCode(result: AxiosResponse) {
 function onUnhandledNetworkException(e: Error) {
   toast.error(unexpectedErrorText);
   console.error(e);
+}
+
+function isSuccessfulStatus(status: number) {
+  return status == 200 || status == 201;
 }
