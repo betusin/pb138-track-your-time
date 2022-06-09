@@ -3,45 +3,52 @@
 }
 
 .project-item {
-  background-color: var(--primary-color);
-  color: var(--bg-color);
-  flex-direction: column;
+  border: solid 2px var(--primary-color);
 }
 
 .project-item--not-active {
   border-style: dotted;
-  color: var(--primary-color);
+}
+
+.project-item__info-wrapper {
+  background-color: var(--primary-color);
+}
+
+.project-item__info-wrapper--not-active {
   background-color: var(--bg-color);
 }
 
-.project-item__info {
-  color: var(--bg-color);
+.project-info {
+  display: flex;
+  flex-direction: column;
 }
 
-.project-item__info--not-active {
-  color: var(--primary-color);
-}
-
-.info__name {
-  font-size: 1.3rem;
+.project-info__name {
+  font-size: 1.7rem;
   margin-bottom: 0.2rem;
   cursor: pointer;
 }
 
-.project-item--not-active .info__name {
+.project-info__name,
+.project-info__customer,
+.project-info__hourlyRate {
+  padding: 0.1rem;
+  color: var(--bg-color);
+}
+
+.project-item--not-active .project-info__name,
+.project-item--not-active .project-info__hourlyRate,
+.project-item--not-active .project-info__customer {
   color: var(--primary-color);
 }
 
-.project-item__settings-wrapper {
-  margin-top: 0.5rem;
-}
-
-.project-settings {
-  padding: 0.35rem 0.5rem 0.25rem 0.5rem;
+.project-item__settings {
+  padding: 0.75rem;
   background-color: var(--bg-color);
-  width: fit-content;
   align-items: baseline;
-  border-radius: 0.3rem;
+  display: flex;
+  justify-content: center;
+  border-top: solid 1px var(--primary-color);
 }
 
 .btn-delete-project {

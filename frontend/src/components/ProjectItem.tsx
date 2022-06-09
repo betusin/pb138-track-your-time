@@ -17,36 +17,33 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
 
   return (
     <div
-      className={`project-item ${
-        !isActive && "project-item--not-active"
-      } p1 m1`}
+      className={`project-item ${!isActive && "project-item--not-active"}  m1`}
     >
-      <Link
-        to={`/project/${id}`}
-        className={`project-item__info ${
-          !isActive && "project-item__info--not-active"
+      <div
+        className={`project-item__info-wrapper p1 ${
+          !isActive && "project-item__info-wrapper--not-active"
         }`}
       >
-        <div className="info__name">
-          <strong>{name}</strong>
-        </div>
-        <div className="info__customer">{customer}</div>
-        <div className="info__hourly-rate">{hourlyRate}$/hour</div>
-      </Link>
-      <div className="project-item__settings-wrapper flex-center">
-        <div className="project-settings flex-center">
-          <Link to={`/project/edit/${id}`}>
-            <Edit style={styleLargeIcon} color="primary" />
-          </Link>
-          {wantToRemove ? (
-            <DeleteForeverButton onDelete={onDelete} id={id} />
-          ) : (
-            <DeleteButton
-              wantToRemove={wantToRemove}
-              setWantToRemove={setWantToRemove}
-            />
-          )}
-        </div>
+        <Link to={`/project/${id}`} className="project-info">
+          <div className="project-info__name">
+            <strong>{name}</strong>
+          </div>
+          <div className="project-info__customer">{customer}</div>
+          <div className="project-info__hourlyRate">{hourlyRate}$/hour</div>
+        </Link>
+      </div>
+      <div className="project-item__settings">
+        <Link to={`/project/edit/${id}`}>
+          <Edit style={styleLargeIcon} color="primary" />
+        </Link>
+        {wantToRemove ? (
+          <DeleteForeverButton onDelete={onDelete} id={id} />
+        ) : (
+          <DeleteButton
+            wantToRemove={wantToRemove}
+            setWantToRemove={setWantToRemove}
+          />
+        )}
       </div>
     </div>
   );
