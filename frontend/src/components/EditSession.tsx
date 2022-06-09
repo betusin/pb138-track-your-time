@@ -1,31 +1,79 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { sessionData } from "../static/sessions";
 import { IFormSessionInput } from "./CreateSession";
 import { SessionFormElems } from "./SessionFormElems";
+import { useLoadSession } from "../util/load-entity-wrappers";
+import { GetSessionDto } from "../api/model";
+import { sessionControllerUpdateWrap } from "../util/api-call-wrappers";
+import toast from "react-hot-toast";
+import {
+  dataRefreshFailedText,
+  failedValidationText,
+  sessionUpdatedText,
+} from "./Messages";
+import { useApiCall } from "../util/api-caller";
+import { useSWRConfig } from "swr";
+import { getSessionControllerFindOneKey } from "../api/sessions/sessions";
+import { useParamOrEmpty } from "../util/params";
 
 export const EditSession = () => {
   const navigate = useNavigate();
-  const projectID = "randomID";
+  const apiCall = useApiCall();
+  const { mutate } = useSWRConfig();
 
-  const session = sessionData[0];
+  const id = useParamOrEmpty("id");
+  const maybeSession = useLoadSession(id);
 
-  const { register, handleSubmit, formState } = useForm<IFormSessionInput>();
+  const { register, handleSubmit, formState, control } =
+    useForm<IFormSessionInput>();
 
-  const onSubmit = (data: IFormSessionInput) => {
-    console.log(data);
-    window.alert("new session would be created with data: ");
+  if (!maybeSession) {
+    return <></>;
+  }
 
-    navigate("/project/" + projectID);
+  function updateSession(data: IFormSessionInput) {
+    const body = {
+      fromDate: data.fromDate.toISOString(),
+      toDate: data.toDate.toISOString(),
+      hourlyRate: data.hourlyRate,
+      note: data.note,
+    };
+    const call = sessionControllerUpdateWrap(id);
+    apiCall(call, body, onSuccess, onError);
+  }
+
+  function onSuccess() {
+    toast.success(sessionUpdatedText);
+    mutate(getSessionControllerFindOneKey(id)).catch(() =>
+      toast.error(dataRefreshFailedText)
+    );
+    navigate("/");
+  }
+
+  function onError(code: number) {
+    if (code == 400) {
+      toast.error(failedValidationText);
+      return true;
+    }
+    return false;
+  }
+
+  const session: GetSessionDto = maybeSession;
+  const prefill: IFormSessionInput = {
+    fromDate: new Date(session.fromDate),
+    toDate: new Date(session.toDate),
+    isInvoiced: session.isInvoiced,
+    hourlyRate: session.hourlyRate ?? 0,
+    note: session.note ?? "",
   };
-
   return (
     <>
-      <form className="m1" onSubmit={handleSubmit(onSubmit)}>
+      <form className="m1" onSubmit={handleSubmit(updateSession)}>
         <SessionFormElems
           formState={formState}
           register={register}
-          sessionData={session}
+          sessionData={prefill}
+          control={control}
           buttonText="Edit session"
         />
       </form>

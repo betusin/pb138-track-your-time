@@ -1,43 +1,77 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { SessionFormElems } from "./SessionFormElems";
+import { useApiCall } from "../util/api-caller";
+import toast from "react-hot-toast";
+import { failedValidationText, sessionCreatedText } from "./Messages";
+import { sessionControllerCreateWrap } from "../util/api-call-wrappers";
+import { GetProjectDto } from "../api/model";
+import { useLoadProject } from "../util/load-entity-wrappers";
+import { useParamOrEmpty } from "../util/params";
 
 export interface IFormSessionInput {
   fromDate: Date;
   toDate: Date;
   isInvoiced: boolean;
-  hourly_rate: number;
+  hourlyRate: number;
   note: string;
 }
 
-const blankSession = {
-  fromDate: new Date(),
-  toDate: new Date(),
-  isInvoiced: false,
-  hourly_rate: 0, // TODO hourly_rate from poject
-  note: "",
-};
+function createInitialSession(hourlyRate: number): IFormSessionInput {
+  return {
+    fromDate: new Date(),
+    toDate: new Date(),
+    isInvoiced: false,
+    hourlyRate: hourlyRate,
+    note: "",
+  };
+}
 
 export const CreateSession = () => {
   const navigate = useNavigate();
-  const projectID = "randomID";
+  const doApiCall = useApiCall();
+  const id = useParamOrEmpty("id");
+  const data = useLoadProject(id);
+  const { register, handleSubmit, formState, control } =
+    useForm<IFormSessionInput>();
 
-  const { register, handleSubmit, formState } = useForm<IFormSessionInput>();
+  if (!data) {
+    return <></>;
+  }
+  const project: GetProjectDto = data;
 
-  const onSubmit = (data: IFormSessionInput) => {
-    console.log(data);
-    window.alert("new session would be created with data: ");
+  function createSession(data: IFormSessionInput) {
+    const body = {
+      fromDate: data.fromDate.toISOString(),
+      toDate: data.toDate.toISOString(),
+      hourlyRate: data.hourlyRate,
+      note: data.note,
+    };
+    const call = sessionControllerCreateWrap(project.id);
+    doApiCall(call, body, onSuccess, onError);
+  }
 
-    navigate("/project/" + projectID);
-  };
+  function onSuccess() {
+    toast.success(sessionCreatedText);
+    navigate(`/project/${project.id}`);
+  }
+
+  function onError(code: number) {
+    if (code == 400) {
+      toast.error(failedValidationText);
+      return true;
+    }
+    return false;
+  }
 
   return (
     <>
-      <form className="m1" onSubmit={handleSubmit(onSubmit)}>
+      <form className="m1" onSubmit={handleSubmit(createSession)}>
         <SessionFormElems
           formState={formState}
           register={register}
-          sessionData={blankSession}
+          control={control}
+          sessionData={createInitialSession(project.hourlyRate)}
           buttonText="Create session"
         />
       </form>
