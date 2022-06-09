@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { UpdateProjectDto } from "../api/model";
@@ -11,15 +12,15 @@ import { accessTokenAtom } from "../state/atom";
 import { IFormProjectInput } from "./CreateProject";
 import {
   failedValidationText,
-  MessageFailBlock,
-  MessageSuccessBlock,
+  noProjectFoundText,
+  noProjectIdText,
   unauthorizedText,
+  unexpectedErrorText,
 } from "./Messages";
 import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
 
 export const EditProject = () => {
-  const [updated, setUpdated] = useState(false);
   const navigate = useNavigate();
   const token = useRecoilValue(accessTokenAtom);
   const { register, handleSubmit, formState, setValue } =
@@ -29,14 +30,13 @@ export const EditProject = () => {
       Authorization: "Bearer " + token,
     },
   };
-  const [errorMessage, setErrorMessage] = useState<string>();
 
   const { id: projectID } = useParams();
 
   useEffect(() => {
     async function getProject() {
       if (!projectID) {
-        setErrorMessage("No project id, cannot retrieve the data!");
+        toast.error(noProjectIdText);
         return;
       }
       const result = await projectControllerFindOne(projectID, header);
@@ -48,9 +48,11 @@ export const EditProject = () => {
         setValue("isActive", result.data.isActive);
         setValue("name", result.data.name);
       } else if (result.status == 401) {
-        setErrorMessage(unauthorizedText);
+        toast.error(unauthorizedText);
       } else if (result.status == 404) {
-        setErrorMessage("Project was not found!");
+        toast.error(noProjectFoundText);
+      } else {
+        toast.error(unexpectedErrorText);
       }
     }
     getProject();
@@ -60,7 +62,7 @@ export const EditProject = () => {
     data: IFormProjectInput
   ) => {
     if (projectID == null) {
-      setErrorMessage("No project id, cannot retrieve the data!");
+      toast.error(noProjectIdText);
       return;
     }
 
@@ -77,34 +79,30 @@ export const EditProject = () => {
       header
     );
     if (result.status == 200) {
-      setUpdated(true);
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
+      toast.success("Project was successfully updated.");
+      navigate("/");
     } else if (result.status == 400) {
-      setErrorMessage(failedValidationText);
+      toast.error(failedValidationText);
     } else if (result.status == 401) {
-      setErrorMessage(unauthorizedText);
+      toast.error(unauthorizedText);
     } else if (result.status == 404) {
-      setErrorMessage("Project was not found!");
+      toast.error(noProjectFoundText);
+    } else {
+      toast.error(unexpectedErrorText);
     }
   };
 
   return (
     <div className="App">
       <Navbar />
-      {errorMessage && <MessageFailBlock text={errorMessage} />}
-      {updated ? (
-        <MessageSuccessBlock text="Project was successfully edited." />
-      ) : (
-        <form className="m1" onSubmit={handleSubmit(onSubmit)}>
-          <ProjectFormElems
-            formState={formState}
-            register={register}
-            buttonText="Edit project"
-          />
-        </form>
-      )}
+      <Toaster />
+      <form className="m1" onSubmit={handleSubmit(onSubmit)}>
+        <ProjectFormElems
+          formState={formState}
+          register={register}
+          buttonText="Edit project"
+        />
+      </form>
     </div>
   );
 };

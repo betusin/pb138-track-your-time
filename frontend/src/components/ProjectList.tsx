@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { meControllerFindAll } from "../api/me/me";
@@ -8,17 +9,15 @@ import { accessTokenAtom } from "../state/atom";
 import "../styles/Project.css";
 import {
   failedValidationText,
-  MessageFailBlock,
-  MessageSuccessBlock,
+  noProjectFoundText,
   unauthorizedText,
+  unexpectedErrorText,
 } from "./Messages";
 import { ProjectItem } from "./ProjectItem";
 
 export const ProjectList = () => {
   const token = useRecoilValue(accessTokenAtom);
   const [projects, setProjects] = useState<GetProjectDto[]>([]);
-  const [successMessage, setSuccessMessage] = useState<string>();
-  const [errorMessage, setErrorMessage] = useState<string>();
   const header = {
     headers: {
       Authorization: "Bearer " + token,
@@ -31,7 +30,9 @@ export const ProjectList = () => {
       if (result.status == 200) {
         setProjects(result.data);
       } else if (result.status == 401) {
-        setErrorMessage(unauthorizedText);
+        toast.error(unauthorizedText);
+      } else {
+        toast.error(unexpectedErrorText);
       }
     }
     getProjects();
@@ -44,20 +45,21 @@ export const ProjectList = () => {
         (project) => project.id !== projectID
       );
       setProjects(() => [...newProjects]);
-      setSuccessMessage("Project deleted successfully.");
+      toast.success("Project deleted successfully.");
     } else if (result.status == 400) {
-      setErrorMessage(failedValidationText);
+      toast.error(failedValidationText);
     } else if (result.status == 401) {
-      setErrorMessage(unauthorizedText);
+      toast.error(unauthorizedText);
     } else if (result.status == 404) {
-      setErrorMessage("The project was not found!");
+      toast.error(noProjectFoundText);
+    } else {
+      toast.error(unexpectedErrorText);
     }
   };
 
   return (
     <>
-      {successMessage && <MessageSuccessBlock text={successMessage} />}
-      {errorMessage && <MessageFailBlock text={errorMessage} />}
+      <Toaster />
       <div className="project-list m1">
         {projects.map((project) => (
           <ProjectItem

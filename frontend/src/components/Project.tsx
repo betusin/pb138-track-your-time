@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -6,12 +7,16 @@ import { GetProjectDto } from "../api/model";
 import { projectControllerFindOne } from "../api/projects/projects";
 import { accessTokenAtom } from "../state/atom";
 import { sessionData } from "../static/sessions";
-import { MessageFailBlock, unauthorizedText } from "./Messages";
+import {
+  noProjectFoundText,
+  noProjectIdText,
+  unauthorizedText,
+  unexpectedErrorText,
+} from "./Messages";
 import { Navbar } from "./Navbar";
 import { SessionItem } from "./SessionItem";
 
 export const Project = () => {
-  const [errorMessage, setErrorMessage] = useState<string>();
   const [project, setProject] = useState<GetProjectDto>();
   const token = useRecoilValue(accessTokenAtom);
   const header = {
@@ -24,7 +29,7 @@ export const Project = () => {
   useEffect(() => {
     async function getProject() {
       if (!projectID) {
-        setErrorMessage("No project id, cannot retrieve the data!");
+        toast.error(noProjectIdText);
         return;
       }
 
@@ -32,9 +37,11 @@ export const Project = () => {
       if (result.status == 200) {
         setProject(result.data);
       } else if (result.status == 401) {
-        setErrorMessage(unauthorizedText);
+        toast.error(unauthorizedText);
       } else if (result.status == 404) {
-        setErrorMessage("Project was not found!");
+        toast.error(noProjectFoundText);
+      } else {
+        toast.error(unexpectedErrorText);
       }
     }
     getProject();
@@ -50,7 +57,7 @@ export const Project = () => {
     <div className="App">
       <Navbar />
       <div className="project-container">
-        {errorMessage && <MessageFailBlock text={errorMessage} />}
+        <Toaster />
         <div>
           <h2>{project?.name}</h2>
         </div>
