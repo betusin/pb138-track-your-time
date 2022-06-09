@@ -13,7 +13,6 @@ import { Project } from "./components/Project";
 import { ProjectList } from "./components/ProjectList";
 import { accessTokenAtom } from "./state/atom";
 import { theme } from "./styles/theme";
-import { Toaster } from "react-hot-toast";
 
 export const App = () => {
   const token = useRecoilValue(accessTokenAtom);
