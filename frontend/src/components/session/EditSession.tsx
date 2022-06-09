@@ -2,20 +2,20 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { IFormSessionInput } from "./CreateSession";
 import { SessionFormElems } from "./SessionFormElems";
-import { useLoadSession } from "../util/load-entity-wrappers";
-import { GetSessionDto } from "../api/model";
-import { sessionControllerUpdateWrap } from "../util/api-call-wrappers";
+import { useLoadSession } from "../../util/load-entity-wrappers";
+import { GetSessionDto } from "../../api/model";
+import { sessionControllerUpdateWrap } from "../../util/api-call-wrappers";
 import toast from "react-hot-toast";
 import {
   dataRefreshFailedText,
   failedValidationText,
   sessionUpdatedText,
-} from "./Messages";
-import { useApiCall } from "../util/api-caller";
+} from "../../strings";
+import { useApiCall } from "../../util/api-caller";
 import { useSWRConfig } from "swr";
-import { getSessionControllerFindOneKey } from "../api/sessions/sessions";
-import { useParamOrEmpty } from "../util/params";
-import { LoadingPlaceholder } from "./LoadingPlaceholder";
+import { getSessionControllerFindOneKey } from "../../api/sessions/sessions";
+import { useParamOrEmpty } from "../../util/params";
+import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 
 export const EditSession = () => {
   const navigate = useNavigate();

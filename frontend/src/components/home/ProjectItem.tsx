@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { GetProjectDto } from "../api/model";
+import { GetProjectDto } from "../../api/model";
 
 export interface IProjectItemProps {
   project: GetProjectDto;

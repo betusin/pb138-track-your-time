@@ -1,18 +1,18 @@
 import { format } from "date-fns";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { GetSessionDto } from "../api/model";
+import { GetSessionDto } from "../../api/model";
 import toast from "react-hot-toast";
-import { sessionControllerRemoveWrap } from "../util/api-call-wrappers";
+import { sessionControllerRemoveWrap } from "../../util/api-call-wrappers";
 import {
   dataRefreshFailedText,
   failedValidationText,
   sessionDeletedText,
   sessionNotFoundText,
-} from "./Messages";
+} from "../../strings";
 import { useSWRConfig } from "swr";
-import { useApiCall } from "../util/api-caller";
-import { getProjectControllerFindAllSessionsKey } from "../api/projects/projects";
+import { useApiCall } from "../../util/api-caller";
+import { getProjectControllerFindAllSessionsKey } from "../../api/projects/projects";
 
 interface SessionItemProps {
   session: GetSessionDto;

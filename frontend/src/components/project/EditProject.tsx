@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { IFormProjectInput } from "./CreateProject";
-import { failedValidationText } from "./Messages";
+import { failedValidationText } from "../../strings";
 import { ProjectFormElems } from "./ProjectFormElems";
-import { useApiCall } from "../util/api-caller";
-import { projectControllerUpdateWrap } from "../util/api-call-wrappers";
-import { useLoadProject } from "../util/load-entity-wrappers";
-import { useParamOrEmpty } from "../util/params";
-import { LoadingPlaceholder } from "./LoadingPlaceholder";
+import { useApiCall } from "../../util/api-caller";
+import { projectControllerUpdateWrap } from "../../util/api-call-wrappers";
+import { useLoadProject } from "../../util/load-entity-wrappers";
+import { useParamOrEmpty } from "../../util/params";
+import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 
 export const EditProject = () => {
   const apiCall = useApiCall();

@@ -3,8 +3,8 @@ import createAuthRefreshInterceptor from "axios-auth-refresh";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { axiosForRefresh } from "./main";
-import { accessTokenAtom } from "./state/atom";
+import { axiosForRefresh } from "../main";
+import { accessTokenAtom } from "../state/atom";
 
 export const AxiosInterceptorsSetup = () => {
   const setAccessToken = useSetRecoilState(accessTokenAtom);

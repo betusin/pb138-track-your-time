@@ -3,10 +3,7 @@ import {
   useProjectControllerFindAllSessions,
   useProjectControllerFindOne,
 } from "../api/projects/projects";
-import {
-  noProjectFoundText,
-  sessionNotFoundText,
-} from "../components/Messages";
+import { noProjectFoundText, sessionNotFoundText } from "../strings";
 import { loadEntity, loadEntityById } from "./load-entity";
 import { useSessionControllerFindOne } from "../api/sessions/sessions";
 import { useMeControllerFindAll } from "../api/me/me";
