@@ -5,7 +5,7 @@ import { userControllerCreate } from "../../api/users/users";
 import { accessTokenAtom } from "../../state/atom";
 import { IFormRegisterInput, RegisterForm } from "./AuthForm";
 import { useApiCall } from "../../util/api-caller";
-import { LoginResponseDto } from "../../api/model";
+import { AccessTokenDto } from "../../api/model";
 import toast from "react-hot-toast";
 
 export const Register = () => {
@@ -38,8 +38,8 @@ export const Register = () => {
     return false;
   }
 
-  function onLoginSuccess(data: LoginResponseDto) {
-    setToken(data.access_token);
+  function onLoginSuccess(data: AccessTokenDto) {
+    setToken(data.accessToken);
     navigate("/");
   }
 
