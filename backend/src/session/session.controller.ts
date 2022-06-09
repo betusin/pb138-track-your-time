@@ -36,6 +36,7 @@ import {
   api_desc_auth_invalid,
   api_desc_field_invalid,
 } from '../common-api-messages';
+import { GetSessionWithPhotosDto } from './dto/get-session-with-photos.dto';
 
 @ApiTags('Sessions')
 @ApiBearerAuth('access-token')
@@ -54,7 +55,7 @@ export class SessionController {
   @Get(':id')
   async findOne(
     @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<GetSessionDto> {
+  ): Promise<GetSessionWithPhotosDto> {
     return this.sessionService.findOne(id);
   }
 

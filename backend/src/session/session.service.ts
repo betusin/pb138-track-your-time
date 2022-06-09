@@ -4,6 +4,7 @@ import { CurrentUserProvider } from 'src/current-user/current-user.provider';
 import { ForbiddenException } from 'src/exception/service-exception';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateSessionDto } from './dto/create-session.dto';
+import { GetSessionWithPhotosDto } from './dto/get-session-with-photos.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 
 @Injectable()
@@ -48,22 +49,23 @@ export class SessionService {
     });
   }
 
-  async findOne(id: string): Promise<Session> {
-    const sessionWithProject = await this.prisma.session.findUnique({
+  async findOne(id: string): Promise<GetSessionWithPhotosDto> {
+    const sessionWithPhotosAndProject = await this.prisma.session.findUnique({
       where: {
         id: id,
       },
       include: {
         project: true,
+        photos: true,
       },
     });
 
-    if (sessionWithProject.project.userId != this.userId) {
+    if (sessionWithPhotosAndProject.project.userId != this.userId) {
       throw new ForbiddenException();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { project, ...session } = sessionWithProject;
+    const { project, ...session } = sessionWithPhotosAndProject;
     return session;
   }
 
