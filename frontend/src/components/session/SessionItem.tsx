@@ -4,15 +4,10 @@ import { Link } from "react-router-dom";
 import { GetSessionDto } from "../../api/model";
 import toast from "react-hot-toast";
 import { sessionControllerRemoveWrap } from "../../util/api-call-wrappers";
-import {
-  dataRefreshFailedText,
-  failedValidationText,
-  sessionDeletedText,
-  sessionNotFoundText,
-} from "../../strings";
 import { useSWRConfig } from "swr";
 import { useApiCall } from "../../util/api-caller";
 import { getProjectControllerFindAllSessionsKey } from "../../api/projects/projects";
+import i18n from "../../i18n/i18n";
 
 interface SessionItemProps {
   session: GetSessionDto;
@@ -30,18 +25,18 @@ export const SessionItem = ({ session, projectId }: SessionItemProps) => {
   }
 
   function onSuccess() {
-    toast.success(sessionDeletedText);
+    toast.success(i18n.t("session.deleted"));
     mutate(getProjectControllerFindAllSessionsKey(projectId)).catch(() =>
-      toast.error(dataRefreshFailedText)
+      toast.error(i18n.t("error.refresh_failed"))
     );
   }
 
   function onError(code: number) {
     if (code == 400) {
-      toast.error(failedValidationText);
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     } else if (code == 404) {
-      toast.error(sessionNotFoundText);
+      toast.error(i18n.t("session.not_found"));
       return true;
     }
     return false;

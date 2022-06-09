@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { IFormProjectInput } from "./CreateProject";
-import { failedValidationText } from "../../strings";
 import { ProjectFormElems } from "./ProjectFormElems";
 import { useApiCall } from "../../util/api-caller";
 import { projectControllerUpdateWrap } from "../../util/api-call-wrappers";
 import { useLoadProject } from "../../util/load-entity-wrappers";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
+import i18n from "../../i18n/i18n";
 
 export const EditProject = () => {
   const apiCall = useApiCall();
@@ -42,13 +42,13 @@ export const EditProject = () => {
   }
 
   function onSuccess() {
-    toast.success("Project was successfully updated.");
+    toast.success(i18n.t("project.updated"));
     navigate("/");
   }
 
   function onError(code: number) {
     if (code == 400) {
-      toast.error(failedValidationText);
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     }
     return false;
@@ -60,7 +60,7 @@ export const EditProject = () => {
         <ProjectFormElems
           formState={formState}
           register={register}
-          buttonText="Edit project"
+          buttonText={i18n.t("project.edit")}
         />
       </form>
     </>

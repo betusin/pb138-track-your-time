@@ -4,6 +4,7 @@ import "./index.css";
 import { RecoilRoot } from "recoil";
 import axios from "axios";
 import { App } from "./components/App";
+import "./i18n/i18n";
 
 axios.defaults.baseURL = "http://localhost:3000/api/v1/";
 axios.defaults.validateStatus = (status) => status !== 401;

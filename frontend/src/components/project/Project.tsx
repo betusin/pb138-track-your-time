@@ -4,6 +4,7 @@ import { GetProjectDto } from "../../api/model";
 import { useLoadProject } from "../../util/load-entity-wrappers";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
+import { Trans } from "react-i18next";
 
 export const Project = () => {
   const id = useParamOrEmpty("id");
@@ -38,23 +39,33 @@ export const Project = () => {
                 <th className="project-summary__th">
                   {project?.hourlyRate} $/hour
                 </th>
-                <th className="project-summary__th">Hours</th>
-                <th className="project-summary__th">Amount</th>
+                <th className="project-summary__th">
+                  <Trans i18nKey="project.summary.hours" />
+                </th>
+                <th className="project-summary__th">
+                  <Trans i18nKey="project.summary.amount" />
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="project-summary__td">Not invoiced yet</td>
+                <td className="project-summary__td">
+                  <Trans i18nKey="project.summary.not_yet_invoiced" />
+                </td>
                 <td className="project-summary__td">0</td>
                 <td className="project-summary__td">0 $</td>
               </tr>
               <tr>
-                <td className="project-summary__td">Invoiced</td>
+                <td className="project-summary__td">
+                  <Trans i18nKey="project.summary.already_invoiced" />
+                </td>
                 <td className="project-summary__td">0</td>
                 <td className="project-summary__td">0 $</td>
               </tr>
               <tr>
-                <td className="project-summary__td">Total</td>
+                <td className="project-summary__td">
+                  <Trans i18nKey="project.summary.total" />
+                </td>
                 <td className="project-summary__td">0</td>
                 <td className="project-summary__td">0 $</td>
               </tr>

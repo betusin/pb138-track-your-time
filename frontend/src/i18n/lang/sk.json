@@ -1,0 +1,79 @@
+{
+  "app": {
+    "name": "TrackYourTime",
+    "home": "Domov",
+    "language": "Jazyk"
+  },
+  "error": {
+    "unauthorized": "Neoprávnená operácia!",
+    "unexpected": "Nastala nečakaná chyba!",
+    "validation_failed": "Niektoré z polí je neplatné.",
+    "refresh_failed": "Nepodarilo sa obnoviť údaje! Si pripojený k internetu?",
+    "not_found": "Snažíš sa niečo nájsť? Skús odkazy na navigačnej lište."
+  },
+  "operation": {
+    "delete": "Odstrániť",
+    "delete_confirm": "Potvrdiť odstránenie"
+  },
+  "confirm": {
+    "delete": "Stlač znova pre potvrdenie zmazania."
+  },
+  "auth": {
+    "register": {
+      "hint": {
+        "no_account": "Ešte nemáš konto? Zaregistruj sa ",
+        "here": "tu"
+      },
+      "already_exists": "Tento email sa už požíva.",
+      "name": "Meno",
+      "surname": "Priezvisko",
+      "email": "Emailová adresa",
+      "password": "Heslo",
+      "company": "Názov firmy",
+      "company_logo": "Logo firmy (URL)"
+    },
+    "login": {
+      "hint": {
+        "existing_account": "Už máš vytvorené konto? Prihlás sa ",
+        "here": "tu"
+      },
+      "log_in": "Prihlásiť sa",
+      "password_incorrect": "Zadané heslo je nesprávne.",
+      "user_not_found": "Takýto používateľ neexistuje."
+    },
+    "email_address": "E-mailová adresa",
+    "password": "Heslo"
+  },
+  "project": {
+    "name": "Názov projektu",
+    "customer": "Zákazník",
+    "hourly_rate": "Hodinová sadzba",
+    "is_active": "Je aktívny?",
+    "create": "Vytvoriť projekt",
+    "edit": "Uložiť zmeny projektu",
+    "created": "Projekt bol vytvorený.",
+    "deleted": "Projekt bol odstránený.",
+    "updated": "Projekt bol upravený.",
+    "not_found": "Projekt neexistuje.",
+    "hour": "hodina",
+    "summary": {
+      "hours": "Počet hodín",
+      "amount": "Čiastka",
+      "not_yet_invoiced": "Ešte nevyfaktúrované",
+      "already_invoiced": "Už vyfaktúrované",
+      "total": "Spolu"
+    }
+  },
+  "session": {
+    "hourly_rate": "Hodinová sadzba",
+    "note": "Poznámka",
+    "is_invoiced": "Je vyfaktúrovaný?",
+    "create": "Vytvoriť záznam",
+    "created": "Záznam bol vytvorený.",
+    "deleted": "Záznam bol odstránený.",
+    "updated": "Záznam bol upravený.",
+    "date_from": "Začiatok",
+    "date_to": "Koniec",
+    "not_found": "Záznam neexistuje."
+  }
+}

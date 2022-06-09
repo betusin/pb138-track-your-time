@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Trans } from "react-i18next";
 
 export interface IFormLoginInput {
   email: string;
@@ -26,7 +27,9 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
   return (
     <form className="m1" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>E-mail address</label>
+        <label>
+          <Trans i18nKey="auth.email_address" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -36,7 +39,9 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
         {...register("email", { required: true })}
       />
       <div>
-        <label>Password</label>
+        <label>
+          <Trans i18nKey="auth.password" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -47,7 +52,9 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
       />
 
       <div className="btn-wrapper">
-        <input className="btn btn--primary" type="submit" value="Login" />
+        <button className="btn btn--primary" type="submit">
+          <Trans i18nKey="auth.login.log_in" />
+        </button>
       </div>
     </form>
   );
@@ -59,7 +66,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
   return (
     <form className="m1" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>Name</label>
+        <label>
+          <Trans i18nKey="auth.register.name" />
+        </label>
       </div>
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
@@ -67,7 +76,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
         {...register("name", { required: true })}
       />
       <div>
-        <label>Surname</label>
+        <label>
+          <Trans i18nKey="auth.register.surname" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -77,7 +88,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
         {...register("surname", { required: true })}
       />
       <div>
-        <label>E-mail address</label>
+        <label>
+          <Trans i18nKey="auth.register.email" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -87,7 +100,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
         {...register("email", { required: true })}
       />
       <div>
-        <label>Password</label>
+        <label>
+          <Trans i18nKey="auth.register.password" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -97,7 +112,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
         {...register("password", { required: true })}
       />
       <div>
-        <label>Company</label>
+        <label>
+          <Trans i18nKey="auth.register.company" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -107,7 +124,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
         {...register("company", { required: true })}
       />
       <div>
-        <label>Logo of company (URL source)</label>
+        <label>
+          <Trans i18nKey="auth.register.company_logo" />
+        </label>
       </div>
       <input
         className={`text-field ${formState.errors.logo && "text-field--error"}`}
