@@ -6,9 +6,18 @@ import { PrismaService } from './prisma/prisma.service';
 import { createOpenApiDocument } from './app-common';
 import { PrismaExceptionFilter } from './exception/prisma-exception.filter';
 import { ServiceExceptionFilter } from './exception/service-exception.filter';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
-  const app = await NestFactory.create(RestModule);
+  const app = await NestFactory.create(RestModule, {
+    cors: {
+      origin: ['http://localhost:8080', 'http://localhost:4000'],
+      credentials: true,
+    },
+  });
+
+  // To read cookies from request
+  app.use(cookieParser());
 
   // Add Prisma shutdown hooks
   const prismaService = app.get(PrismaService);
@@ -25,11 +34,6 @@ async function bootstrap() {
   // Endpoint prefix and versioning
   app.setGlobalPrefix('/api');
   app.enableVersioning({ type: VersioningType.URI });
-
-  // Ignore CORS for the time being
-  app.enableCors({
-    origin: '*',
-  });
 
   // Exception handling
   app.useGlobalFilters(new PrismaExceptionFilter());

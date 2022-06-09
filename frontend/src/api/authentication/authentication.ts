@@ -5,21 +5,30 @@
  * OpenAPI spec version: 1.0.0
  */
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { LoginResponseDto, AuthControllerLoginParams } from ".././model";
+import type { AccessTokenDto, AuthControllerLoginParams } from ".././model";
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
 type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
 
 /**
- * @summary Generates an access token for the provided user
+ * @summary Generates an access and refresh token for the provided user
  */
 export const authControllerLogin = (
   params?: AuthControllerLoginParams,
   options?: AxiosRequestConfig
-): Promise<AxiosResponse<LoginResponseDto>> => {
+): Promise<AxiosResponse<AccessTokenDto>> => {
   return axios.post(`/auth/login`, undefined, {
     params,
     ...options,
   });
+};
+
+/**
+ * @summary Generates a new access token based on refresh token
+ */
+export const authControllerRefresh = (
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<AccessTokenDto>> => {
+  return axios.post(`/auth/refresh`, undefined, options);
 };

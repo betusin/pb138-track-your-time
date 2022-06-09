@@ -4,7 +4,7 @@ import { accessTokenAtom } from "../../state/atom";
 import { IFormLoginInput, LoginForm } from "./AuthForm";
 import { authControllerLogin } from "../../api/authentication/authentication";
 import toast from "react-hot-toast";
-import { LoginResponseDto } from "../../api/model";
+import { AccessTokenDto } from "../../api/model";
 import { useApiCall } from "../../util/api-caller";
 
 export const Login = () => {
@@ -12,8 +12,8 @@ export const Login = () => {
   const navigate = useNavigate();
   const doApiCall = useApiCall();
 
-  function onLoginSuccess(result: LoginResponseDto): void {
-    setToken(result.access_token);
+  function onLoginSuccess(result: AccessTokenDto): void {
+    setToken(result.accessToken);
     navigate("/");
   }
 
@@ -31,7 +31,9 @@ export const Login = () => {
   }
 
   function login(data: IFormLoginInput) {
-    doApiCall(authControllerLogin, data, onLoginSuccess, onLoginFailure);
+    doApiCall(authControllerLogin, data, onLoginSuccess, onLoginFailure, {
+      withCredentials: true,
+    });
   }
 
   return (
