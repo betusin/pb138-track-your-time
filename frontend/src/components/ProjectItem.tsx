@@ -23,7 +23,7 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
       <div className="project-item__customer">{customer}</div>
       <div className="project-item__hourly-rate">{hourlyRate}$/hour</div>
       <div className="project-item__settings">
-        <Link to={`/project/edit/${id}`}>
+        <Link to={`/project/${id}/edit`}>
           <img
             className="icon"
             alt="edit"

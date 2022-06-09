@@ -21,7 +21,7 @@ export const SessionItem = ({ session, onRemove }: ISessionItemProps) => {
         )} - ${session.note}`}
       </div>
       <div className="session-item__settings">
-        <Link to={`/session/edit/${session.id}`}>
+        <Link to={`/session/${session.id}/edit`}>
           <img
             className="icon icon--small"
             src={`/assets/edit-${session.isInvoiced ? "antracit" : "lime"}.svg`}
