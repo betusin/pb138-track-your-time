@@ -31,7 +31,9 @@ export const Login = () => {
   }
 
   function login(data: IFormLoginInput) {
-    doApiCall(authControllerLogin, data, onLoginSuccess, onLoginFailure, { withCredentials: true });
+    doApiCall(authControllerLogin, data, onLoginSuccess, onLoginFailure, {
+      withCredentials: true,
+    });
   }
 
   return (

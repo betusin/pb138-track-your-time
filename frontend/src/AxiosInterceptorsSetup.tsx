@@ -12,7 +12,8 @@ export const AxiosInterceptorsSetup = () => {
 
   // Intercept a 401 and try to get new jwt using refresh token
   const refreshAuthLogic = (failedRequest: any) =>
-  axiosForRefresh.post('auth/refresh', { skipAuthRefresh: true })
+    axiosForRefresh
+      .post("auth/refresh", { skipAuthRefresh: true })
       .then(({ data }) => {
         const { accessToken } = data;
         setAccessToken(accessToken);
@@ -20,7 +21,7 @@ export const AxiosInterceptorsSetup = () => {
       })
       // Redirect to login
       .catch(() => {
-        navigate('/login');
+        navigate("/login");
       });
 
   useEffect(() => {
@@ -28,15 +29,16 @@ export const AxiosInterceptorsSetup = () => {
     createAuthRefreshInterceptor(axios, refreshAuthLogic);
 
     // Get jwt on page reload
-    axiosForRefresh.post('auth/refresh', { skipAuthRefresh: true })
+    axiosForRefresh
+      .post("auth/refresh", { skipAuthRefresh: true })
       .then(({ data }) => {
         const { accessToken } = data;
         setAccessToken(accessToken);
-    })
-    .catch(() => {
-      navigate('/login');
-    }); 
+      })
+      .catch(() => {
+        navigate("/login");
+      });
   }, []);
 
   return <></>;
-}
+};

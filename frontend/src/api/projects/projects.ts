@@ -4,189 +4,201 @@
  * TrackYourTime
  * OpenAPI spec version: 1.0.0
  */
-import axios,{
-  AxiosRequestConfig,
-  AxiosResponse,
-  AxiosError
-} from 'axios'
-import useSwr,{
-  SWRConfiguration,
-  Key
-} from 'swr'
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import useSwr, { SWRConfiguration, Key } from "swr";
 import type {
   CreateProjectDto,
   GetProjectDto,
   UpdateProjectDto,
   CreateSessionDto,
-  GetSessionDto
-} from '.././model'
+  GetSessionDto,
+} from ".././model";
 
+type AwaitedInput<T> = PromiseLike<T> | T;
 
-  type AwaitedInput<T> = PromiseLike<T> | T;
+type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
 
-      type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
-
-
-  /**
+/**
  * @summary Creates a new project
  */
 export const projectControllerCreate = (
-    createProjectDto: CreateProjectDto, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<void>> => {
-    return axios.post(
-      `/projects`,
-      createProjectDto,options
-    );
-  }
-
+  createProjectDto: CreateProjectDto,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.post(`/projects`, createProjectDto, options);
+};
 
 /**
  * @summary Retrieves a project
  */
 export const projectControllerFindOne = (
-    id: string, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<GetProjectDto>> => {
-    return axios.get(
-      `/projects/${id}`,options
-    );
-  }
+  id: string,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<GetProjectDto>> => {
+  return axios.get(`/projects/${id}`, options);
+};
 
+export const getProjectControllerFindOneKey = (id: string) => [
+  `/projects/${id}`,
+];
 
-export const getProjectControllerFindOneKey = (id: string,) => [`/projects/${id}`];
-
-    
-export type ProjectControllerFindOneQueryResult = NonNullable<Awaited<ReturnType<typeof projectControllerFindOne>>>
-export type ProjectControllerFindOneQueryError = AxiosError<void>
+export type ProjectControllerFindOneQueryResult = NonNullable<
+  Awaited<ReturnType<typeof projectControllerFindOne>>
+>;
+export type ProjectControllerFindOneQueryError = AxiosError<void>;
 
 export const useProjectControllerFindOne = <TError = AxiosError<void>>(
- id: string, options?: { swr?:SWRConfiguration<Awaited<ReturnType<typeof projectControllerFindOne>>, TError> & {swrKey: Key}, axios?: AxiosRequestConfig }
+  id: string,
+  options?: {
+    swr?: SWRConfiguration<
+      Awaited<ReturnType<typeof projectControllerFindOne>>,
+      TError
+    > & { swrKey: Key };
+    axios?: AxiosRequestConfig;
+  }
+) => {
+  const { swr: swrOptions, axios: axiosOptions } = options ?? {};
 
-  ) => {
-
-  const {swr: swrOptions, axios: axiosOptions} = options ?? {}
-
-  const isEnable = !!(id)
-  const swrKey = swrOptions?.swrKey ?? (() => isEnable ? getProjectControllerFindOneKey(id) : null);
+  const isEnable = !!id;
+  const swrKey =
+    swrOptions?.swrKey ??
+    (() => (isEnable ? getProjectControllerFindOneKey(id) : null));
   const swrFn = () => projectControllerFindOne(id, axiosOptions);
 
-  const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(swrKey, swrFn, swrOptions)
+  const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(
+    swrKey,
+    swrFn,
+    swrOptions
+  );
 
   return {
     swrKey,
-    ...query
-  }
-}
+    ...query,
+  };
+};
 
 /**
  * @summary Updates a project
  */
 export const projectControllerUpdate = (
-    id: string,
-    updateProjectDto: UpdateProjectDto, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<void>> => {
-    return axios.patch(
-      `/projects/${id}`,
-      updateProjectDto,options
-    );
-  }
-
+  id: string,
+  updateProjectDto: UpdateProjectDto,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.patch(`/projects/${id}`, updateProjectDto, options);
+};
 
 /**
  * @summary Deletes a project
  */
 export const projectControllerRemove = (
-    id: string, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<void>> => {
-    return axios.delete(
-      `/projects/${id}`,options
-    );
-  }
-
+  id: string,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.delete(`/projects/${id}`, options);
+};
 
 /**
  * @summary Creates a new session for the provided project
  */
 export const projectControllerCreateSession = (
-    projectId: string,
-    createSessionDto: CreateSessionDto, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<void>> => {
-    return axios.post(
-      `/projects/${projectId}/sessions`,
-      createSessionDto,options
-    );
-  }
-
+  projectId: string,
+  createSessionDto: CreateSessionDto,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.post(
+    `/projects/${projectId}/sessions`,
+    createSessionDto,
+    options
+  );
+};
 
 /**
  * @summary Returns all sessions of a project
  */
 export const projectControllerFindAllSessions = (
-    projectId: string, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<GetSessionDto[]>> => {
-    return axios.get(
-      `/projects/${projectId}/sessions`,options
-    );
-  }
+  projectId: string,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<GetSessionDto[]>> => {
+  return axios.get(`/projects/${projectId}/sessions`, options);
+};
 
+export const getProjectControllerFindAllSessionsKey = (projectId: string) => [
+  `/projects/${projectId}/sessions`,
+];
 
-export const getProjectControllerFindAllSessionsKey = (projectId: string,) => [`/projects/${projectId}/sessions`];
-
-    
-export type ProjectControllerFindAllSessionsQueryResult = NonNullable<Awaited<ReturnType<typeof projectControllerFindAllSessions>>>
-export type ProjectControllerFindAllSessionsQueryError = AxiosError<void>
+export type ProjectControllerFindAllSessionsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof projectControllerFindAllSessions>>
+>;
+export type ProjectControllerFindAllSessionsQueryError = AxiosError<void>;
 
 export const useProjectControllerFindAllSessions = <TError = AxiosError<void>>(
- projectId: string, options?: { swr?:SWRConfiguration<Awaited<ReturnType<typeof projectControllerFindAllSessions>>, TError> & {swrKey: Key}, axios?: AxiosRequestConfig }
+  projectId: string,
+  options?: {
+    swr?: SWRConfiguration<
+      Awaited<ReturnType<typeof projectControllerFindAllSessions>>,
+      TError
+    > & { swrKey: Key };
+    axios?: AxiosRequestConfig;
+  }
+) => {
+  const { swr: swrOptions, axios: axiosOptions } = options ?? {};
 
-  ) => {
-
-  const {swr: swrOptions, axios: axiosOptions} = options ?? {}
-
-  const isEnable = !!(projectId)
-  const swrKey = swrOptions?.swrKey ?? (() => isEnable ? getProjectControllerFindAllSessionsKey(projectId) : null);
+  const isEnable = !!projectId;
+  const swrKey =
+    swrOptions?.swrKey ??
+    (() =>
+      isEnable ? getProjectControllerFindAllSessionsKey(projectId) : null);
   const swrFn = () => projectControllerFindAllSessions(projectId, axiosOptions);
 
-  const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(swrKey, swrFn, swrOptions)
+  const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(
+    swrKey,
+    swrFn,
+    swrOptions
+  );
 
   return {
     swrKey,
-    ...query
-  }
-}
+    ...query,
+  };
+};
 
 /**
  * @summary Returns all projects of the current user
  */
 export const meControllerFindAll = (
-     options?: AxiosRequestConfig
- ): Promise<AxiosResponse<GetProjectDto[]>> => {
-    return axios.get(
-      `/me/projects`,options
-    );
-  }
-
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<GetProjectDto[]>> => {
+  return axios.get(`/me/projects`, options);
+};
 
 export const getMeControllerFindAllKey = () => [`/me/projects`];
 
-    
-export type MeControllerFindAllQueryResult = NonNullable<Awaited<ReturnType<typeof meControllerFindAll>>>
-export type MeControllerFindAllQueryError = AxiosError<void>
+export type MeControllerFindAllQueryResult = NonNullable<
+  Awaited<ReturnType<typeof meControllerFindAll>>
+>;
+export type MeControllerFindAllQueryError = AxiosError<void>;
 
-export const useMeControllerFindAll = <TError = AxiosError<void>>(
-  options?: { swr?:SWRConfiguration<Awaited<ReturnType<typeof meControllerFindAll>>, TError> & {swrKey: Key}, axios?: AxiosRequestConfig }
+export const useMeControllerFindAll = <TError = AxiosError<void>>(options?: {
+  swr?: SWRConfiguration<
+    Awaited<ReturnType<typeof meControllerFindAll>>,
+    TError
+  > & { swrKey: Key };
+  axios?: AxiosRequestConfig;
+}) => {
+  const { swr: swrOptions, axios: axiosOptions } = options ?? {};
 
-  ) => {
-
-  const {swr: swrOptions, axios: axiosOptions} = options ?? {}
-
-  const swrKey = swrOptions?.swrKey ?? (() => getMeControllerFindAllKey())
+  const swrKey = swrOptions?.swrKey ?? (() => getMeControllerFindAllKey());
   const swrFn = () => meControllerFindAll(axiosOptions);
 
-  const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(swrKey, swrFn, swrOptions)
+  const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(
+    swrKey,
+    swrFn,
+    swrOptions
+  );
 
   return {
     swrKey,
-    ...query
-  }
-}
-
+    ...query,
+  };
+};
