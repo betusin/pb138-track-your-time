@@ -10,7 +10,6 @@ import { accessTokenAtom } from "../state/atom";
 import { sessionData } from "../static/sessions";
 import {
   noProjectFoundText,
-  noProjectIdText,
   unauthorizedText,
   unexpectedErrorText,
 } from "./Messages";
@@ -39,14 +38,10 @@ export const Project = () => {
       Authorization: "Bearer " + token,
     },
   };
-  const { id: projectID } = useParams();
+  const { id: projectIDParam } = useParams();
+  const projectID = projectIDParam ?? "";
 
   useEffect(() => {
-    if (!projectID) {
-      toast.error(noProjectIdText);
-      return;
-    }
-
     projectControllerFindOne(projectID, header)
       .then((result) => onProjectReceived(result, setProject))
       .catch(() => toast.error(unexpectedErrorText));
