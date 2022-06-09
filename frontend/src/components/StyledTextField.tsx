@@ -2,7 +2,8 @@ import { TextField, TextFieldProps } from "@mui/material";
 import { theme } from "../styles/theme";
 
 export function StyledTextField(props: TextFieldProps) {
-  const color = theme.palette.primary.light;
+  const color = theme.palette.secondary.light;
+
   return (
     <TextField
       {...props}
