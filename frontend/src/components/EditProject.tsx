@@ -1,33 +1,35 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
-import { useProjectControllerFindOne } from "../api/projects/projects";
+import { useNavigate } from "react-router-dom";
 import { IFormProjectInput } from "./CreateProject";
-import { failedValidationText, noProjectFoundText } from "./Messages";
+import { failedValidationText } from "./Messages";
 import { ProjectFormElems } from "./ProjectFormElems";
-import { useApiCall, useApiSwrCall } from "../util/api-caller";
+import { useApiCall } from "../util/api-caller";
 import { projectControllerUpdateWrap } from "../util/api-call-wrappers";
+import { useLoadProject } from "../util/load-entity-wrappers";
+import { useParamOrEmpty } from "../util/params";
+import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
 export const EditProject = () => {
   const apiCall = useApiCall();
   const navigate = useNavigate();
   const { register, handleSubmit, formState, setValue } =
     useForm<IFormProjectInput>();
-  const { id: projectIDParam } = useParams();
-  const projectID = projectIDParam ?? "";
-  const { data } = useApiSwrCall((o) => {
-    return useProjectControllerFindOne(projectID, o);
-  });
+  const projectID = useParamOrEmpty("id");
+  const project = useLoadProject(projectID);
   useEffect(() => {
-    if (data?.status == 404) toast.error(noProjectFoundText);
-    if (data?.data.customer) {
-      setValue("customer", data.data.customer);
-      setValue("hourlyRate", data.data.hourlyRate);
-      setValue("isActive", data.data.isActive);
-      setValue("name", data.data.name);
+    if (project?.customer) {
+      setValue("customer", project.customer);
+      setValue("hourlyRate", project.hourlyRate);
+      setValue("isActive", project.isActive);
+      setValue("name", project.name);
     }
-  }, [data]);
+  }, [project]);
+
+  if (project === undefined) {
+    return <LoadingPlaceholder />;
+  }
 
   function updateProject(data: IFormProjectInput) {
     const body = {
