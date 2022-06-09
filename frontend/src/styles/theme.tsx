@@ -13,3 +13,7 @@ export const theme = createTheme({
     },
   },
 });
+
+export const styleLargeIcon = {
+  fontSize: 30,
+};

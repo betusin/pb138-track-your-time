@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { GetProjectDto } from "../api/model";
-import { DeleteForever, Delete, Edit } from "@mui/icons-material";
-import toast from "react-hot-toast";
+import { Edit } from "@mui/icons-material";
 import { DeleteButton } from "./DeleteButton";
 import { DeleteForeverButton } from "./DeleteForeverButton";
+import { styleLargeIcon } from "../styles/theme";
 
 export interface IProjectItemProps {
   project: GetProjectDto;
@@ -36,7 +36,7 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
       <div className="project-item__settings-wrapper flex-center">
         <div className="project-settings flex-center">
           <Link to={`/project/edit/${id}`}>
-            <Edit color="primary" />
+            <Edit style={styleLargeIcon} color="primary" />
           </Link>
           {wantToRemove ? (
             <DeleteForeverButton onDelete={onDelete} id={id} />

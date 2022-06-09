@@ -1,4 +1,5 @@
 import { DeleteForever } from "@mui/icons-material";
+import { styleLargeIcon } from "../styles/theme";
 
 export interface IDeleteForeverButtonProps {
   onDelete: Function;
@@ -15,7 +16,7 @@ export const DeleteForeverButton = ({
       className="btn-delete-project"
       title="Yes, I want to delete the project"
     >
-      <DeleteForever color="primary" />
+      <DeleteForever style={styleLargeIcon} color="primary" />
     </button>
   );
 };
