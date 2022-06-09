@@ -1,34 +1,19 @@
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { UpdateProjectDto } from "../api/model";
-import {
-  projectControllerUpdate,
-  useProjectControllerFindOne,
-} from "../api/projects/projects";
-import { accessTokenAtom } from "../state/atom";
+import { useProjectControllerFindOne } from "../api/projects/projects";
 import { IFormProjectInput } from "./CreateProject";
-import {
-  failedValidationText,
-  noProjectFoundText,
-  unauthorizedText,
-  unexpectedErrorText,
-} from "./Messages";
+import { failedValidationText, noProjectFoundText } from "./Messages";
 import { ProjectFormElems } from "./ProjectFormElems";
-import { useApiSwrCall } from "../util/api-caller";
+import { useApiCall, useApiSwrCall } from "../util/api-caller";
+import { projectControllerUpdateWrap } from "../util/api-call-wrappers";
 
 export const EditProject = () => {
+  const apiCall = useApiCall();
   const navigate = useNavigate();
-  const token = useRecoilValue(accessTokenAtom);
   const { register, handleSubmit, formState, setValue } =
     useForm<IFormProjectInput>();
-  const header = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
   const { id: projectIDParam } = useParams();
   const projectID = projectIDParam ?? "";
   const { data } = useApiSwrCall((o) => {
@@ -44,38 +29,32 @@ export const EditProject = () => {
     }
   }, [data]);
 
-  const onSubmit: SubmitHandler<IFormProjectInput> = async (
-    data: IFormProjectInput
-  ) => {
-    const dataForUpdate: UpdateProjectDto = {
+  function updateProject(data: IFormProjectInput) {
+    const body = {
       name: data.name,
       hourlyRate: data.hourlyRate,
       customer: data.customer,
       isActive: data.isActive,
     };
+    apiCall(projectControllerUpdateWrap(projectID), body, onSuccess, onError);
+  }
 
-    const result = await projectControllerUpdate(
-      projectID,
-      dataForUpdate,
-      header
-    );
-    if (result.status == 200) {
-      toast.success("Project was successfully updated.");
-      navigate("/");
-    } else if (result.status == 400) {
+  function onSuccess() {
+    toast.success("Project was successfully updated.");
+    navigate("/");
+  }
+
+  function onError(code: number) {
+    if (code == 400) {
       toast.error(failedValidationText);
-    } else if (result.status == 401) {
-      toast.error(unauthorizedText);
-    } else if (result.status == 404) {
-      toast.error(noProjectFoundText);
-    } else {
-      toast.error(unexpectedErrorText);
+      return true;
     }
-  };
+    return false;
+  }
 
   return (
     <>
-      <form className="m1" onSubmit={handleSubmit(onSubmit)}>
+      <form className="m1" onSubmit={handleSubmit(updateProject)}>
         <ProjectFormElems
           formState={formState}
           register={register}
