@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
 
 export interface IFormProjectInput {
@@ -40,8 +39,7 @@ export const CreateProject = () => {
   }
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       <form className="m1" onSubmit={handleSubmit(onSubmit)}>
         <ProjectFormElems
           formState={formState}
@@ -49,6 +47,6 @@ export const CreateProject = () => {
           buttonText="Create project"
         />
       </form>
-    </div>
+    </>
   );
 };

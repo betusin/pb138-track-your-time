@@ -3,7 +3,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { projectsData } from "../static/projects";
 import { IFormProjectInput } from "./CreateProject";
-import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
 
 export const EditProject = () => {
@@ -31,8 +30,7 @@ export const EditProject = () => {
   }
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       <form className="m1" onSubmit={handleSubmit(onSubmit)}>
         <ProjectFormElems
           formState={formState}
@@ -40,6 +38,6 @@ export const EditProject = () => {
           buttonText="Edit project"
         />
       </form>
-    </div>
+    </>
   );
 };

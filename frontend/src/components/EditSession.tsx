@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { sessionData } from "../static/sessions";
 import { IFormSessionInput } from "./CreateSession";
-import { Navbar } from "./Navbar";
 import { SessionFormElems } from "./SessionFormElems";
 
 export const EditSession = () => {
@@ -21,8 +20,7 @@ export const EditSession = () => {
   };
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       <form className="m1" onSubmit={handleSubmit(onSubmit)}>
         <SessionFormElems
           formState={formState}
@@ -31,6 +29,6 @@ export const EditSession = () => {
           buttonText="Edit session"
         />
       </form>
-    </div>
+    </>
   );
 };

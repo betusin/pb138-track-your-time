@@ -19,8 +19,7 @@ export const Project = () => {
   };
 
   return (
-    <div className="App">
-      <Navbar />
+    <>
       <div className="project-container">
         <div>
           <h2>{name}</h2>
@@ -75,6 +74,6 @@ export const Project = () => {
           </table>
         </div>
       </div>
-    </div>
+    </>
   );
 };
