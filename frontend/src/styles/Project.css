@@ -13,24 +13,40 @@
   background-color: var(--bg-color);
 }
 
-.project-item__name {
-  font-size: 1.3rem;
-  margin-bottom: 0.2rem;
-  cursor: pointer;
+.project-item__info {
   color: var(--bg-color);
 }
 
-.project-item--not-active .project-item__name {
+.project-item__info--not-active {
   color: var(--primary-color);
 }
 
-.project-item__settings {
-  padding-top: 0.5rem;
+.info__name {
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+}
+
+.project-item--not-active .info__name {
+  color: var(--primary-color);
+}
+
+.project-item__settings-wrapper {
+  margin-top: 0.5rem;
+}
+
+.project-settings {
+  padding: 0.35rem 0.5rem 0.25rem 0.5rem;
+  background-color: var(--bg-color);
+  width: fit-content;
+  align-items: baseline;
+  border-radius: 0.3rem;
 }
 
 .btn-delete-project {
   border: none;
   background-color: inherit;
+  align-items: center;
 }
 
 .project-container {
