@@ -18,7 +18,7 @@ export class ProjectService {
   }
 
   private async authorize(id: string): Promise<void> {
-    this.findOne(id);
+    await this.findOne(id);
   }
 
   async create(createProjectDto: CreateProjectDto): Promise<void> {
