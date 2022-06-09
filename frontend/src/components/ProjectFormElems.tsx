@@ -1,4 +1,6 @@
+import { Checkbox, FormControlLabel } from "@mui/material";
 import { FormState, UseFormRegister } from "react-hook-form";
+import { theme } from "../styles/theme";
 import { IFormProjectInput } from "./CreateProject";
 
 export interface IProjectFormElemsProps {
@@ -29,13 +31,16 @@ export const ProjectFormElems = ({
       <input className={`text-field`} type="text" {...register("customer")} />
 
       <div>
-        <input
-          className={`checkbox-field`}
-          type="checkbox"
-          defaultChecked={true}
-          {...register("isActive")}
+        <FormControlLabel
+          control={
+            <Checkbox
+              {...register("isActive")}
+              style={{ color: theme.palette.secondary.light }}
+              defaultChecked={true}
+            />
+          }
+          label="is active"
         />
-        <label>is active?</label>
       </div>
 
       <div>

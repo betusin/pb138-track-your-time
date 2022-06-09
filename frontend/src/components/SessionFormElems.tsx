@@ -1,10 +1,12 @@
-import { Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { Checkbox, FormControlLabel } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { useState } from "react";
 import { FormState, UseFormRegister } from "react-hook-form";
 import { IFormSessionInput } from "./CreateSession";
 import { DateTimePicker } from "@mui/lab";
+import { StyledTextField } from "./StyledTextField";
+import { theme } from "../styles/theme";
 
 export interface ISessiontFormElemsProps {
   formState: FormState<IFormSessionInput>;
@@ -28,7 +30,7 @@ export const SessionFormElems = ({
         <div className="form-dates__picker">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateTimePicker
-              renderInput={(props) => <TextField {...props} />}
+              renderInput={StyledTextField}
               label="DateTimePicker"
               value={fromDate}
               onChange={(newValue) => {
@@ -42,7 +44,7 @@ export const SessionFormElems = ({
         <div className="form-dates__picker">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateTimePicker
-              renderInput={(props) => <TextField {...props} />}
+              renderInput={StyledTextField}
               label="DateTimePicker"
               value={toDate}
               onChange={(newValue) => {
@@ -59,6 +61,7 @@ export const SessionFormElems = ({
         control={
           <Checkbox
             {...register("isInvoiced")}
+            style={{ color: theme.palette.secondary.light }}
             defaultChecked={sessionData.isInvoiced}
           />
         }
