@@ -14,6 +14,7 @@ import { ProjectList } from "./components/ProjectList";
 import { accessTokenAtom } from "./state/atom";
 import { theme } from "./styles/theme";
 import { Toaster } from "react-hot-toast";
+import { AxiosInterceptorsSetup } from "./AxiosInterceptorsSetup";
 
 export const App = () => {
   const token = useRecoilValue(accessTokenAtom);
@@ -23,6 +24,7 @@ export const App = () => {
       <div className="App">
         <Toaster position="bottom-center" />
         <BrowserRouter>
+          <AxiosInterceptorsSetup />
           {token && <Navbar />}
           <Routes>
             {token === "" ? (

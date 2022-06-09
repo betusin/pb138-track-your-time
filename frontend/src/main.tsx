@@ -6,7 +6,12 @@ import axios from "axios";
 import { App } from "./App";
 
 axios.defaults.baseURL = "http://localhost:3000/api/v1/";
-axios.defaults.validateStatus = () => true;
+axios.defaults.validateStatus = (status) => status !== 401;
+
+export const axiosForRefresh = axios.create({
+  baseURL: 'http://localhost:3000/api/v1/',
+  withCredentials: true,
+})
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
