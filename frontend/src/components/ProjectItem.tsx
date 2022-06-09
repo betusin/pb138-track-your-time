@@ -26,25 +26,33 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
         <Link to={`/project/edit/${id}`}>
           <img
             className="icon"
+            alt="edit"
             src={`/assets/edit-${isActive ? "antracit" : "lime"}.svg`}
           />
         </Link>
         {wantToRemove ? (
-          <img
-            className={`icon icon--inverse ${
-              isActive && "icon--active_inverse"
-            }`}
-            title="Yes, I want to delete the project"
-            onClick={() => onDelete(id)}
-            src={`/assets/delete-${isActive ? "lime" : "antracit"}.svg`}
-          />
+          <button onClick={() => onDelete(id)} className="btn-delete-project">
+            <img
+              className={`icon icon--inverse ${
+                isActive && "icon--active_inverse"
+              }`}
+              alt="real delete"
+              title="Yes, I want to delete the project"
+              src={`/assets/delete-${isActive ? "lime" : "antracit"}.svg`}
+            />
+          </button>
         ) : (
-          <img
-            className="icon"
-            title="Delete the project"
+          <button
             onClick={() => setWantToRemove(!wantToRemove)}
-            src={`/assets/delete-${isActive ? "antracit" : "lime"}.svg`}
-          />
+            className="btn-delete-project"
+          >
+            <img
+              className="icon"
+              alt="delete"
+              title="Delete the project"
+              src={`/assets/delete-${isActive ? "antracit" : "lime"}.svg`}
+            />
+          </button>
         )}
       </div>
     </div>
