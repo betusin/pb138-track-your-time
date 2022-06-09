@@ -1,26 +1,17 @@
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { useProjectControllerFindOne } from "../api/projects/projects";
-import { noProjectFoundText } from "./Messages";
-import { useApiSwrCall } from "../util/api-caller";
 import { ProjectSessionList } from "./ProjectSessionList";
+import { GetProjectDto } from "../api/model";
+import { useLoadProject } from "../util/load-entity-wrappers";
+import { useParamOrEmpty } from "../util/params";
+import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
 export const Project = () => {
-  const { id: projectIDParam } = useParams();
-  const projectID = projectIDParam ?? "";
-  const { data } = useApiSwrCall((o) => {
-    return useProjectControllerFindOne(projectID, o);
-  });
-  useEffect(() => {
-    if (data?.status == 404) toast.error(noProjectFoundText);
-  }, [data]);
-
-  if (!data?.data) {
-    return <></>;
+  const id = useParamOrEmpty("id");
+  const maybeProject = useLoadProject(id);
+  if (maybeProject === undefined) {
+    return <LoadingPlaceholder />;
   }
-  const project = data?.data;
+  const project: GetProjectDto = maybeProject;
   return (
     <>
       <div className="project-container">

@@ -7,6 +7,7 @@ import { failedValidationText, sessionCreatedText } from "./Messages";
 import { sessionControllerCreateWrap } from "../util/api-call-wrappers";
 import { GetProjectDto } from "../api/model";
 import { useLoadProject } from "../util/load-entity-wrappers";
+import { LoadingPlaceholder } from "./LoadingPlaceholder";
 import { useParamOrEmpty } from "../util/params";
 
 export interface IFormSessionInput {
@@ -30,15 +31,14 @@ function createInitialSession(hourlyRate: number): IFormSessionInput {
 export const CreateSession = () => {
   const navigate = useNavigate();
   const doApiCall = useApiCall();
-  const id = useParamOrEmpty("id");
-  const data = useLoadProject(id);
   const { register, handleSubmit, formState, control } =
     useForm<IFormSessionInput>();
-
-  if (!data) {
-    return <></>;
+  const id = useParamOrEmpty("id");
+  const maybeProject = useLoadProject(id);
+  if (maybeProject === undefined) {
+    return <LoadingPlaceholder />;
   }
-  const project: GetProjectDto = data;
+  const project: GetProjectDto = maybeProject;
 
   function createSession(data: IFormSessionInput) {
     const body = {

@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useMeControllerFindAll } from "../api/me/me";
 import "../styles/Project.css";
 import {
   dataRefreshFailedText,
@@ -10,18 +8,18 @@ import {
   projectDeletedText,
 } from "./Messages";
 import { ProjectItem } from "./ProjectItem";
-import { useApiCall, useApiSwrCall } from "../util/api-caller";
+import { useApiCall } from "../util/api-caller";
 import { projectControllerRemoveWrap } from "../util/api-call-wrappers";
+import { useLoadProjects } from "../util/load-entity-wrappers";
+import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
 export const ProjectList = () => {
   const doApiCall = useApiCall();
-  const { data, mutate } = useApiSwrCall((o) => {
-    return useMeControllerFindAll(o);
-  });
-  useEffect(() => {
-    if (data?.status == 404) toast.error(noProjectFoundText);
-  }, [data]);
-  const projects = data?.data ?? [];
+  const [projects, mutate] = useLoadProjects();
+
+  if (projects === undefined) {
+    return <LoadingPlaceholder />;
+  }
 
   function deleteProject(projectID: string) {
     const call = projectControllerRemoveWrap(projectID);

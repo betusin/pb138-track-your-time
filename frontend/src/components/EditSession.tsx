@@ -15,6 +15,7 @@ import { useApiCall } from "../util/api-caller";
 import { useSWRConfig } from "swr";
 import { getSessionControllerFindOneKey } from "../api/sessions/sessions";
 import { useParamOrEmpty } from "../util/params";
+import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
 export const EditSession = () => {
   const navigate = useNavigate();
@@ -27,8 +28,8 @@ export const EditSession = () => {
   const { register, handleSubmit, formState, control } =
     useForm<IFormSessionInput>();
 
-  if (!maybeSession) {
-    return <></>;
+  if (maybeSession === undefined) {
+    return <LoadingPlaceholder />;
   }
   const session: GetSessionDto = maybeSession;
 
