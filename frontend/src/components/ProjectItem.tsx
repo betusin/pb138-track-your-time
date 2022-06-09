@@ -3,6 +3,8 @@ import { useState } from "react";
 import { GetProjectDto } from "../api/model";
 import { DeleteForever, Delete, Edit } from "@mui/icons-material";
 import toast from "react-hot-toast";
+import { DeleteButton } from "./DeleteButton";
+import { DeleteForeverButton } from "./DeleteForeverButton";
 
 export interface IProjectItemProps {
   project: GetProjectDto;
@@ -37,27 +39,12 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
             <Edit color="primary" />
           </Link>
           {wantToRemove ? (
-            <button
-              onClick={() => onDelete(id)}
-              className="btn-delete-project"
-              title="Yes, I want to delete the project"
-            >
-              <DeleteForever color="primary" />
-            </button>
+            <DeleteForeverButton onDelete={onDelete} id={id} />
           ) : (
-            <button
-              onClick={() => {
-                toast("Click one more time to really remove.");
-                setTimeout(() => {
-                  setWantToRemove(false);
-                }, 4000);
-                setWantToRemove(!wantToRemove);
-              }}
-              className="btn-delete-project"
-              title="Delete the project"
-            >
-              <Delete color="primary" />
-            </button>
+            <DeleteButton
+              wantToRemove={wantToRemove}
+              setWantToRemove={setWantToRemove}
+            />
           )}
         </div>
       </div>
