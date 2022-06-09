@@ -47,7 +47,7 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
           ) : (
             <button
               onClick={() => {
-                toast("Click another time to really remove.");
+                toast("Click one more time to really remove.");
                 setTimeout(() => {
                   setWantToRemove(false);
                 }, 4000);
