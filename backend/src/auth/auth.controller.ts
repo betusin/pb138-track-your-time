@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Request,
-  UseGuards,
-  Response,
-} from '@nestjs/common';
+import { Controller, Post, Request, UseGuards, Response } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import {
@@ -55,7 +48,7 @@ export class AuthController {
   })
   @ApiOkResponse({ type: AccessTokenDto })
   @UseGuards(JwtRefreshAuthGuard)
-  @Get('refresh')
+  @Post('refresh')
   async refresh(@CurrentUser() userId: string): Promise<AccessTokenDto> {
     return this.authService.refresh(userId);
   }
