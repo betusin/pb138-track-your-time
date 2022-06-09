@@ -5,6 +5,7 @@
 .project-item {
   background-color: var(--primary-color);
   color: var(--bg-color);
+  flex-direction: column;
 }
 
 .project-item--not-active {
@@ -47,6 +48,7 @@
   border: none;
   background-color: inherit;
   align-items: center;
+  cursor: pointer;
 }
 
 .project-container {
