@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -16,6 +17,21 @@ import {
 import { Navbar } from "./Navbar";
 import { SessionItem } from "./SessionItem";
 
+function onProjectReceived(
+  result: AxiosResponse<GetProjectDto>,
+  setProject: Dispatch<SetStateAction<GetProjectDto | undefined>>
+) {
+  if (result.status == 200) {
+    setProject(result.data);
+  } else if (result.status == 401) {
+    toast.error(unauthorizedText);
+  } else if (result.status == 404) {
+    toast.error(noProjectFoundText);
+  } else {
+    toast.error(unexpectedErrorText);
+  }
+}
+
 export const Project = () => {
   const [project, setProject] = useState<GetProjectDto>();
   const token = useRecoilValue(accessTokenAtom);
@@ -27,24 +43,14 @@ export const Project = () => {
   const { id: projectID } = useParams();
 
   useEffect(() => {
-    async function getProject() {
-      if (!projectID) {
-        toast.error(noProjectIdText);
-        return;
-      }
-
-      const result = await projectControllerFindOne(projectID, header);
-      if (result.status == 200) {
-        setProject(result.data);
-      } else if (result.status == 401) {
-        toast.error(unauthorizedText);
-      } else if (result.status == 404) {
-        toast.error(noProjectFoundText);
-      } else {
-        toast.error(unexpectedErrorText);
-      }
+    if (!projectID) {
+      toast.error(noProjectIdText);
+      return;
     }
-    getProject();
+
+    projectControllerFindOne(projectID, header)
+      .then((result) => onProjectReceived(result, setProject))
+      .catch(() => toast.error(unexpectedErrorText));
   }, []);
 
   const sessions = sessionData;

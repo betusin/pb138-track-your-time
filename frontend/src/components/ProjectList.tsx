@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -15,6 +16,19 @@ import {
 } from "./Messages";
 import { ProjectItem } from "./ProjectItem";
 
+function onProjectsReceived(
+  result: AxiosResponse<GetProjectDto[]>,
+  setProjects: Dispatch<SetStateAction<GetProjectDto[]>>
+) {
+  if (result.status == 200) {
+    setProjects(result.data);
+  } else if (result.status == 401) {
+    toast.error(unauthorizedText);
+  } else {
+    toast.error(unexpectedErrorText);
+  }
+}
+
 export const ProjectList = () => {
   const token = useRecoilValue(accessTokenAtom);
   const [projects, setProjects] = useState<GetProjectDto[]>([]);
@@ -25,17 +39,9 @@ export const ProjectList = () => {
   };
 
   useEffect(() => {
-    async function getProjects() {
-      const result = await meControllerFindAll(header);
-      if (result.status == 200) {
-        setProjects(result.data);
-      } else if (result.status == 401) {
-        toast.error(unauthorizedText);
-      } else {
-        toast.error(unexpectedErrorText);
-      }
-    }
-    getProjects();
+    meControllerFindAll(header)
+      .then((result) => onProjectsReceived(result, setProjects))
+      .catch(() => toast.error(unexpectedErrorText));
   }, []);
 
   const deleteProject = async (projectID: string) => {

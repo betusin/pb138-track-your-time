@@ -1,9 +1,10 @@
+import { AxiosResponse } from "axios";
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, UseFormSetValue } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { UpdateProjectDto } from "../api/model";
+import { GetProjectDto, UpdateProjectDto } from "../api/model";
 import {
   projectControllerFindOne,
   projectControllerUpdate,
@@ -20,6 +21,25 @@ import {
 import { Navbar } from "./Navbar";
 import { ProjectFormElems } from "./ProjectFormElems";
 
+function onProjectReceived(
+  result: AxiosResponse<GetProjectDto>,
+  setValue: UseFormSetValue<IFormProjectInput>
+) {
+  if (result.status == 200) {
+    if (result.data.customer != null)
+      setValue("customer", result.data.customer);
+    setValue("hourlyRate", result.data.hourlyRate);
+    setValue("isActive", result.data.isActive);
+    setValue("name", result.data.name);
+  } else if (result.status == 401) {
+    toast.error(unauthorizedText);
+  } else if (result.status == 404) {
+    toast.error(noProjectFoundText);
+  } else {
+    toast.error(unexpectedErrorText);
+  }
+}
+
 export const EditProject = () => {
   const navigate = useNavigate();
   const token = useRecoilValue(accessTokenAtom);
@@ -34,28 +54,13 @@ export const EditProject = () => {
   const { id: projectID } = useParams();
 
   useEffect(() => {
-    async function getProject() {
-      if (!projectID) {
-        toast.error(noProjectIdText);
-        return;
-      }
-      const result = await projectControllerFindOne(projectID, header);
-      if (result.status == 200) {
-        console.log(result.data);
-        if (result.data.customer != null)
-          setValue("customer", result.data.customer);
-        setValue("hourlyRate", result.data.hourlyRate);
-        setValue("isActive", result.data.isActive);
-        setValue("name", result.data.name);
-      } else if (result.status == 401) {
-        toast.error(unauthorizedText);
-      } else if (result.status == 404) {
-        toast.error(noProjectFoundText);
-      } else {
-        toast.error(unexpectedErrorText);
-      }
+    if (!projectID) {
+      toast.error(noProjectIdText);
+      return;
     }
-    getProject();
+    projectControllerFindOne(projectID, header)
+      .then((result) => onProjectReceived(result, setValue))
+      .catch(() => toast.error(unexpectedErrorText));
   }, []);
 
   const onSubmit: SubmitHandler<IFormProjectInput> = async (
