@@ -1,67 +1,48 @@
-import { AxiosResponse } from "axios";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { meControllerFindAll } from "../api/me/me";
-import { GetProjectDto } from "../api/model";
-import { projectControllerRemove } from "../api/projects/projects";
-import { accessTokenAtom } from "../state/atom";
+import { useMeControllerFindAll } from "../api/me/me";
 import "../styles/Project.css";
 import {
+  dataRefreshFailedText,
   failedValidationText,
   noProjectFoundText,
-  unauthorizedText,
-  unexpectedErrorText,
+  projectDeletedText,
 } from "./Messages";
 import { ProjectItem } from "./ProjectItem";
-
-function onProjectsReceived(
-  result: AxiosResponse<GetProjectDto[]>,
-  setProjects: Dispatch<SetStateAction<GetProjectDto[]>>
-) {
-  if (result.status == 200) {
-    setProjects(result.data);
-  } else if (result.status == 401) {
-    toast.error(unauthorizedText);
-  } else {
-    toast.error(unexpectedErrorText);
-  }
-}
+import { useApiCall, useApiSwrCall } from "../util/api-caller";
+import { projectControllerRemoveWrap } from "../util/api-call-wrappers";
 
 export const ProjectList = () => {
-  const token = useRecoilValue(accessTokenAtom);
-  const [projects, setProjects] = useState<GetProjectDto[]>([]);
-  const header = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
-
+  const doApiCall = useApiCall();
+  const { data, mutate } = useApiSwrCall((o) => {
+    return useMeControllerFindAll(o);
+  });
   useEffect(() => {
-    meControllerFindAll(header)
-      .then((result) => onProjectsReceived(result, setProjects))
-      .catch(() => toast.error(unexpectedErrorText));
-  }, []);
+    if (data?.status == 404) toast.error(noProjectFoundText);
+  }, [data]);
+  const projects = data?.data ?? [];
 
-  const deleteProject = async (projectID: string) => {
-    const result = await projectControllerRemove(projectID, header);
-    if (result.status == 200) {
-      const newProjects = projects.filter(
-        (project) => project.id !== projectID
-      );
-      setProjects(() => [...newProjects]);
-      toast.success("Project deleted successfully.");
-    } else if (result.status == 400) {
+  function deleteProject(projectID: string) {
+    const call = projectControllerRemoveWrap(projectID);
+    doApiCall(call, undefined, onSuccess, onError);
+  }
+
+  function onSuccess() {
+    toast.success(projectDeletedText);
+    mutate().catch(() => toast.error(dataRefreshFailedText));
+  }
+
+  function onError(code: number) {
+    if (code == 400) {
       toast.error(failedValidationText);
-    } else if (result.status == 401) {
-      toast.error(unauthorizedText);
-    } else if (result.status == 404) {
+      return true;
+    } else if (code == 404) {
       toast.error(noProjectFoundText);
-    } else {
-      toast.error(unexpectedErrorText);
+      return true;
     }
-  };
+    return false;
+  }
 
   return (
     <>

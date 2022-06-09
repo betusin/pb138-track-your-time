@@ -1,51 +1,22 @@
-import { AxiosResponse } from "axios";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { GetProjectDto } from "../api/model";
-import { projectControllerFindOne } from "../api/projects/projects";
-import { accessTokenAtom } from "../state/atom";
+import { useProjectControllerFindOne } from "../api/projects/projects";
 import { sessionData } from "../static/sessions";
-import {
-  noProjectFoundText,
-  unauthorizedText,
-  unexpectedErrorText,
-} from "./Messages";
+import { noProjectFoundText } from "./Messages";
 import { SessionItem } from "./SessionItem";
-
-function onProjectReceived(
-  result: AxiosResponse<GetProjectDto>,
-  setProject: Dispatch<SetStateAction<GetProjectDto | undefined>>
-) {
-  if (result.status == 200) {
-    setProject(result.data);
-  } else if (result.status == 401) {
-    toast.error(unauthorizedText);
-  } else if (result.status == 404) {
-    toast.error(noProjectFoundText);
-  } else {
-    toast.error(unexpectedErrorText);
-  }
-}
+import { useApiSwrCall } from "../util/api-caller";
 
 export const Project = () => {
-  const [project, setProject] = useState<GetProjectDto>();
-  const token = useRecoilValue(accessTokenAtom);
-  const header = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
   const { id: projectIDParam } = useParams();
   const projectID = projectIDParam ?? "";
-
+  const { data } = useApiSwrCall((o) => {
+    return useProjectControllerFindOne(projectID, o);
+  });
   useEffect(() => {
-    projectControllerFindOne(projectID, header)
-      .then((result) => onProjectReceived(result, setProject))
-      .catch(() => toast.error(unexpectedErrorText));
-  }, []);
+    if (data?.status == 404) toast.error(noProjectFoundText);
+  }, [data]);
 
   const sessions = sessionData;
 
@@ -53,6 +24,10 @@ export const Project = () => {
     window.alert("session will be deleted " + sessionID);
   };
 
+  if (!data?.data) {
+    return <></>;
+  }
+  const project = data?.data;
   return (
     <>
       <div className="project-container">
