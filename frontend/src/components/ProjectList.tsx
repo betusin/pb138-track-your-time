@@ -1,27 +1,20 @@
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import { useMeControllerFindAll } from "../api/me/me";
-import { projectControllerRemove } from "../api/projects/projects";
-import { accessTokenAtom } from "../state/atom";
 import "../styles/Project.css";
 import {
+  dataRefreshFailedText,
   failedValidationText,
   noProjectFoundText,
-  unauthorizedText,
-  unexpectedErrorText,
+  projectDeletedText,
 } from "./Messages";
 import { ProjectItem } from "./ProjectItem";
-import { useApiSwrCall } from "../util/api-caller";
+import { useApiCall, useApiSwrCall } from "../util/api-caller";
+import { projectControllerRemoveWrap } from "../util/api-call-wrappers";
 
 export const ProjectList = () => {
-  const token = useRecoilValue(accessTokenAtom);
-  const header = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
+  const doApiCall = useApiCall();
   const { data, mutate } = useApiSwrCall((o) => {
     return useMeControllerFindAll(o);
   });
@@ -30,21 +23,26 @@ export const ProjectList = () => {
   }, [data]);
   const projects = data?.data ?? [];
 
-  const deleteProject = async (projectID: string) => {
-    const result = await projectControllerRemove(projectID, header);
-    if (result.status == 200) {
-      await mutate();
-      toast.success("Project deleted successfully.");
-    } else if (result.status == 400) {
+  function deleteProject(projectID: string) {
+    const call = projectControllerRemoveWrap(projectID);
+    doApiCall(call, undefined, onSuccess, onError);
+  }
+
+  function onSuccess() {
+    toast.success(projectDeletedText);
+    mutate().catch(() => toast.error(dataRefreshFailedText));
+  }
+
+  function onError(code: number) {
+    if (code == 400) {
       toast.error(failedValidationText);
-    } else if (result.status == 401) {
-      toast.error(unauthorizedText);
-    } else if (result.status == 404) {
+      return true;
+    } else if (code == 404) {
       toast.error(noProjectFoundText);
-    } else {
-      toast.error(unexpectedErrorText);
+      return true;
     }
-  };
+    return false;
+  }
 
   return (
     <>
