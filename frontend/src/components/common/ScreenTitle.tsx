@@ -13,7 +13,6 @@ export function ScreenTitle({ title, secondaryTitle }: ScreenTitleProps) {
       flexWrap="wrap"
       justifyContent="space-between"
       alignItems="center"
-      p={2}
       px={0.5}
     >
       <Typography variant="h6" p={2} px={3}>
