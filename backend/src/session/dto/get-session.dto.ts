@@ -10,4 +10,6 @@ export class GetSessionDto extends IntersectionType(
   @ApiProperty()
   @IsBoolean()
   isInvoiced: boolean;
+  @ApiProperty({ format: 'uuid' })
+  projectId: string;
 }

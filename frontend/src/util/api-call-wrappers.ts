@@ -3,7 +3,16 @@ import {
   projectControllerRemove,
   projectControllerUpdate,
 } from "../api/projects/projects";
-import { UpdateProjectDto } from "../api/model";
+import {
+  CreateSessionDto,
+  UpdateProjectDto,
+  UpdateSessionDto,
+} from "../api/model";
+import {
+  projectControllerCreateSession,
+  sessionControllerRemove,
+  sessionControllerUpdate,
+} from "../api/sessions/sessions";
 
 export function projectControllerRemoveWrap(
   projectID: string
@@ -18,5 +27,29 @@ export function projectControllerUpdateWrap(
 ): ApiCall<UpdateProjectDto, void> {
   return (body, cfg) => {
     return projectControllerUpdate(projectID, body, cfg);
+  };
+}
+
+export function sessionControllerRemoveWrap(
+  projectID: string
+): ApiCall<void, void> {
+  return (body, cfg) => {
+    return sessionControllerRemove(projectID, cfg);
+  };
+}
+
+export function sessionControllerCreateWrap(
+  projectID: string
+): ApiCall<CreateSessionDto, void> {
+  return (body, cfg) => {
+    return projectControllerCreateSession(projectID, body, cfg);
+  };
+}
+
+export function sessionControllerUpdateWrap(
+  sessionID: string
+): ApiCall<UpdateSessionDto, UpdateSessionDto> {
+  return (body, cfg) => {
+    return sessionControllerUpdate(sessionID, body, cfg);
   };
 }

@@ -1,18 +1,23 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { useState } from "react";
-import { FormState, UseFormRegister } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FormState,
+  UseFormRegister,
+} from "react-hook-form";
 import { IFormSessionInput } from "./CreateSession";
 import { DateTimePicker } from "@mui/lab";
 import { StyledTextField } from "./StyledTextField";
 import { theme } from "../styles/theme";
 
-export interface ISessiontFormElemsProps {
+export interface SessionFormElemsProps {
   formState: FormState<IFormSessionInput>;
   register: UseFormRegister<IFormSessionInput>;
   buttonText: string;
   sessionData: IFormSessionInput;
+  control: Control<IFormSessionInput>;
 }
 
 export const SessionFormElems = ({
@@ -20,38 +25,46 @@ export const SessionFormElems = ({
   register,
   buttonText,
   sessionData,
-}: ISessiontFormElemsProps) => {
-  const [fromDate, setFromDate] = useState(sessionData.fromDate);
-  const [toDate, setToDate] = useState(sessionData.toDate);
-
+  control,
+}: SessionFormElemsProps) => {
   return (
     <div>
       <div className="form-dates">
         <div className="form-dates__picker">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DateTimePicker
-              renderInput={StyledTextField}
-              label="DateTimePicker"
-              value={fromDate}
-              onChange={(newValue) => {
-                if (newValue != null) {
-                  setFromDate(newValue);
-                }
-              }}
+            <Controller
+              name="fromDate"
+              control={control}
+              defaultValue={new Date()}
+              render={({ field: { onChange, value } }) => (
+                <DateTimePicker
+                  renderInput={StyledTextField}
+                  label="DateTimePicker"
+                  value={value}
+                  onChange={(value) => {
+                    onChange(value);
+                  }}
+                />
+              )}
             />
           </LocalizationProvider>
         </div>
         <div className="form-dates__picker">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DateTimePicker
-              renderInput={StyledTextField}
-              label="DateTimePicker"
-              value={toDate}
-              onChange={(newValue) => {
-                if (newValue != null) {
-                  setToDate(newValue);
-                }
-              }}
+            <Controller
+              name="toDate"
+              control={control}
+              defaultValue={new Date()}
+              render={({ field: { onChange, value } }) => (
+                <DateTimePicker
+                  renderInput={StyledTextField}
+                  label="DateTimePicker"
+                  value={value}
+                  onChange={(value) => {
+                    onChange(value);
+                  }}
+                />
+              )}
             />
           </LocalizationProvider>
         </div>
@@ -76,8 +89,8 @@ export const SessionFormElems = ({
         type="number"
         step={10}
         min={0}
-        defaultValue={sessionData.hourly_rate}
-        {...register("hourly_rate", { valueAsNumber: true })}
+        defaultValue={sessionData.hourlyRate}
+        {...register("hourlyRate", { valueAsNumber: true })}
       />
 
       <div>
@@ -85,7 +98,7 @@ export const SessionFormElems = ({
       </div>
       <textarea
         className={`text-field ${formState.errors.note && "text-field--error"}`}
-        value={sessionData.note}
+        defaultValue={sessionData.note}
         {...register("note")}
       />
 
