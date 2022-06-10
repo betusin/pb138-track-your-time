@@ -27,17 +27,6 @@ export const AxiosInterceptorsSetup = () => {
   useEffect(() => {
     // Instantiate the interceptor
     createAuthRefreshInterceptor(axios, refreshAuthLogic);
-
-    // Get jwt on page reload
-    axiosForRefresh
-      .post("auth/refresh", { skipAuthRefresh: true })
-      .then(({ data }) => {
-        const { accessToken } = data;
-        setAccessToken(accessToken);
-      })
-      .catch(() => {
-        navigate("/login");
-      });
   }, []);
 
   return <></>;

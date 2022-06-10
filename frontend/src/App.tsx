@@ -1,7 +1,7 @@
 import "./App.css";
 import { ThemeProvider } from "@mui/material";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
 import { CreateProject } from "./components/CreateProject";
@@ -16,9 +16,30 @@ import { Toaster } from "react-hot-toast";
 import { AxiosInterceptorsSetup } from "./AxiosInterceptorsSetup";
 import { NoPath } from "./components/NoPath";
 import { ProjectList } from "./components/ProjectList";
+import { useEffect, useState } from "react";
+import { axiosForRefresh } from "./main";
 
 export const App = () => {
-  const token = useRecoilValue(accessTokenAtom);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenAtom);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Get jwt on page reload
+    axiosForRefresh
+      .post("auth/refresh", { skipAuthRefresh: true })
+      .then(({ data }) => {
+        const { accessToken } = data;
+        setAccessToken(accessToken);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <></>;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -26,9 +47,9 @@ export const App = () => {
         <Toaster position="bottom-center" />
         <BrowserRouter>
           <AxiosInterceptorsSetup />
-          {token && <Navbar />}
+          {accessToken && <Navbar />}
           <Routes>
-            {token === "" ? (
+            {!accessToken ? (
               <>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
@@ -36,9 +57,9 @@ export const App = () => {
               </>
             ) : (
               <>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
                 <Route path="/" element={<ProjectList />} />
+                <Route path="/register" element={<Navigate to="/" replace />} />
+                <Route path="/login" element={<Navigate to="/" replace />} />
                 <Route path="/project/add" element={<CreateProject />} />
                 <Route path="/project/:id/edit" element={<EditProject />} />
                 <Route path="/project/:id" element={<Project />} />
