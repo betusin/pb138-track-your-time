@@ -55,7 +55,6 @@ export const ProjectFormElems = ({
       <input
         className={`number-field`}
         type="number"
-        step={10}
         min={0}
         {...register("hourlyRate", { valueAsNumber: true })}
       />
