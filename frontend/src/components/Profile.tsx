@@ -1,9 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { accessTokenAtom } from "../state/atom";
 
 export const Profile = () => {
   const navigate = useNavigate();
+  const setToken = useSetRecoilState(accessTokenAtom);
 
   const signOut = () => {
+    setToken("");
     navigate("/login");
   };
 
