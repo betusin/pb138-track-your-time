@@ -1,27 +1,18 @@
-import { useEffect } from "react";
-import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { useMeControllerProfile } from "../../api/me/me";
 import { accessTokenAtom } from "../../state/atom";
-import { noProfileFoundText } from "../../strings";
-import { useApiSwrCall } from "../../util/api-caller";
+import { useLoadProfile } from "../../util/load-entity-wrappers";
+import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 
 export const Profile = () => {
   // const doApiCall = useApiCall();
 
-  const { data } = useApiSwrCall((o) => {
-    return useMeControllerProfile(o);
-  });
-  useEffect(() => {
-    if (data?.status == 404) toast.error(noProfileFoundText);
-  }, [data]);
+  const [profile] = useLoadProfile();
 
-  if (!data?.data) {
-    return <></>;
+  if (profile === undefined) {
+    return <LoadingPlaceholder />;
   }
 
-  const profile = data?.data;
   const navigate = useNavigate();
   const setToken = useSetRecoilState(accessTokenAtom);
 
@@ -42,7 +33,7 @@ export const Profile = () => {
           />
         </Link>
       </div>
-      <img className="profile__logo" src={profile?.logo} alt="logo" />
+      <img className="profile__logo" src={profile.logo} alt="logo" />
       <div className="profile__name">
         `{profile.name} {profile.surname}`
       </div>
