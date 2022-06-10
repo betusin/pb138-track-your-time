@@ -1,7 +1,7 @@
-import { SessionItem } from "./SessionItem";
-import { LoadingPlaceholder } from "./LoadingPlaceholder";
-import { useLoadSessions } from "../util/load-entity-wrappers";
-import { useParamOrEmpty } from "../util/params";
+import { SessionItem } from "../session/SessionItem";
+import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
+import { useLoadSessions } from "../../util/load-entity-wrappers";
+import { useParamOrEmpty } from "../../util/params";
 
 export interface ProjectSessionListProps {
   projectId: string;
