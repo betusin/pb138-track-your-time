@@ -12,7 +12,7 @@ import { DateTimePicker } from "@mui/lab";
 import { StyledTextField } from "./StyledTextField";
 import { theme } from "../styles/theme";
 
-export interface ISessiontFormElemsProps {
+export interface SessionFormElemsProps {
   formState: FormState<IFormSessionInput>;
   register: UseFormRegister<IFormSessionInput>;
   buttonText: string;
@@ -26,7 +26,7 @@ export const SessionFormElems = ({
   buttonText,
   sessionData,
   control,
-}: ISessiontFormElemsProps) => {
+}: SessionFormElemsProps) => {
   return (
     <div>
       <div className="form-dates">
