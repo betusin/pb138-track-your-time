@@ -24,7 +24,11 @@ export const Profile = () => {
   };
 
   const signOut = () => {
-    doApiCall(authControllerLogout, undefined, onLougoutSuccess);
+    doApiCall(
+      authControllerLogout,
+      { withCredentials: true },
+      onLougoutSuccess
+    );
   };
 
   return (
