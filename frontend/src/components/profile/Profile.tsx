@@ -35,7 +35,7 @@ export const Profile = () => {
       </div>
       <img className="profile__logo" src={profile.logo} alt="logo" />
       <div className="profile__name">
-        `{profile.name} {profile.surname}`
+        {profile.name} {profile.surname}
       </div>
       <div className="profile__company">{profile.company}</div>
       <div className="profile__email">{profile.email}</div>
