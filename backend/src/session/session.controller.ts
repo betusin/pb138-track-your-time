@@ -27,7 +27,6 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { JwtAccessAuthGuard } from '../auth/jwt-access-auth.guard';
-import { GetSessionDto } from './dto/get-session.dto';
 import { SessionPhotoService } from '../session_photo/session_photo.service';
 import { CreateSessionPhotoDto } from '../session_photo/dto/create-session_photo.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -36,6 +35,7 @@ import {
   api_desc_auth_invalid,
   api_desc_field_invalid,
 } from '../common-api-messages';
+import { GetSessionWithPhotosDto } from './dto/get-session-with-photos.dto';
 
 @ApiTags('Sessions')
 @ApiBearerAuth('access-token')
@@ -48,13 +48,13 @@ export class SessionController {
   ) {}
 
   @ApiOperation({ summary: 'Retrieves a session' })
-  @ApiOkResponse({ type: GetSessionDto })
+  @ApiOkResponse({ type: GetSessionWithPhotosDto })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session was not found' })
   @Get(':id')
   async findOne(
     @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<GetSessionDto> {
+  ): Promise<GetSessionWithPhotosDto> {
     return this.sessionService.findOne(id);
   }
 
