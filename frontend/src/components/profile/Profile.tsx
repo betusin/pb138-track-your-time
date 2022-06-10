@@ -9,12 +9,12 @@ export const Profile = () => {
 
   const [profile] = useLoadProfile();
 
+  const navigate = useNavigate();
+  const setToken = useSetRecoilState(accessTokenAtom);
+
   if (profile === undefined) {
     return <LoadingPlaceholder />;
   }
-
-  const navigate = useNavigate();
-  const setToken = useSetRecoilState(accessTokenAtom);
 
   const signOut = () => {
     setToken("");
