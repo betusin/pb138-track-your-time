@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { useMeControllerProfile } from "../api/me/me";
-import { accessTokenAtom } from "../state/atom";
-import { noProfileFoundText } from "../strings";
-import { useApiSwrCall } from "../util/api-caller";
+import { useMeControllerProfile } from "../../api/me/me";
+import { accessTokenAtom } from "../../state/atom";
+import { noProfileFoundText } from "../../strings";
+import { useApiSwrCall } from "../../util/api-caller";
 
 export const Profile = () => {
   // const doApiCall = useApiCall();
