@@ -13,10 +13,14 @@
   },
   "operation": {
     "delete": "Delete",
-    "delete_confirm": "Confirm deletion"
+    "delete_confirm": "Confirm deletion",
+    "actions": "Actions"
   },
   "confirm": {
     "delete": "Click again to delete."
+  },
+  "status": {
+    "no_data": "Nothing to show"
   },
   "auth": {
     "register": {

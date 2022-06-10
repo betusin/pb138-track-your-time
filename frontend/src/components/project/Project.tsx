@@ -8,10 +8,12 @@ import { PageSection } from "../common/PageSection";
 import i18n from "i18next";
 import { PlusButton } from "../common/PlusButton";
 import { ProjectSummary } from "./ProjectSummary";
+import { useState } from "react";
 
 export const Project = () => {
   const id = useParamOrEmpty("id");
   const maybeProject = useLoadProject(id);
+  const [selection, setSelection] = useState<string[]>([]);
   if (maybeProject === undefined) {
     return <LoadingPlaceholder />;
   }
@@ -27,7 +29,10 @@ export const Project = () => {
           />
         }
       >
-        <ProjectSessionList projectId={project.id} />
+        <ProjectSessionList
+          projectId={project.id}
+          onSelectionChanged={setSelection}
+        />
       </PageSection>
 
       <PageSection title={i18n.t("project.summary_title")}>

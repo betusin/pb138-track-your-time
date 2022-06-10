@@ -13,10 +13,14 @@
   },
   "operation": {
     "delete": "Odstrániť",
-    "delete_confirm": "Potvrdiť odstránenie"
+    "delete_confirm": "Potvrdiť odstránenie",
+    "actions": "Akcie"
   },
   "confirm": {
     "delete": "Stlač znova pre potvrdenie zmazania."
+  },
+  "status": {
+    "no_data": "Žiadne dáta"
   },
   "auth": {
     "register": {
