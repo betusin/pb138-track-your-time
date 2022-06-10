@@ -1,5 +1,7 @@
 :root {
   --bg-color: #2f2e2e;
+  --bg-color-back: #383737;
+  --nav-color: #252424;
   --primary-color: #ccd921;
   --primary_light-color: #f7f9d2;
   --error-color: #d32f2f;
@@ -14,7 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-color);
+  background-color: var(--bg-color-back);
   color: var(--primary-color);
 }
 
@@ -138,4 +140,19 @@ textarea {
 .message--success {
   color: var(--success-color);
   border: var(--success-color) 2px solid;
+}
+
+.navbar {
+  background: var(--nav-color);
+}
+
+.navbar--title:visited {
+  color: inherit;
+  font-size: 15px;
+  font-weight: 800 !important;
+}
+
+.navbar--title {
+  font-size: 2rem;
+  font-weight: 700;
 }
