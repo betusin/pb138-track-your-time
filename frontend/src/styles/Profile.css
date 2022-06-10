@@ -1,0 +1,5 @@
+.profile-header {
+  display: flexbox;
+  flex-direction: row;
+  justify-content: flex-start;
+}
