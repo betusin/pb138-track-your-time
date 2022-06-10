@@ -8,8 +8,6 @@ export const noProjectFoundText = "Project was not found!";
 
 export const sessionNotFoundText = "The session was not found!";
 
-export const noProjectIdText = "No project id, cannot retrieve the data!";
-
 export const dataRefreshFailedText = "Failed to refresh data!";
 
 export const projectDeletedText = "Project deleted successfully.";
