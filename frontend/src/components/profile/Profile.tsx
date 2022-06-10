@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
+import { authControllerLogout } from "../../api/authentication/authentication";
 import { accessTokenAtom } from "../../state/atom";
+import { useApiCall } from "../../util/api-caller";
 import { useLoadProfile } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 
 export const Profile = () => {
-  // const doApiCall = useApiCall();
+  const doApiCall = useApiCall();
 
   const [profile] = useLoadProfile();
 
@@ -16,9 +18,15 @@ export const Profile = () => {
     return <LoadingPlaceholder />;
   }
 
-  const signOut = () => {
+  const onLougoutSuccess = () => {
     setToken("");
     navigate("/login");
+  };
+
+  const signOut = () => {
+    doApiCall(authControllerLogout, undefined, onLougoutSuccess, undefined, {
+      withCredentials: true,
+    });
   };
 
   return (
