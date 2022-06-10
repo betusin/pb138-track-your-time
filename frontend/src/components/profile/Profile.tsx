@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { useMeControllerProfile } from "../api/me/me";
 import { accessTokenAtom } from "../state/atom";
+import { noProfileFoundText } from "../strings";
 import { useApiSwrCall } from "../util/api-caller";
-import { noProfileFoundText } from "./src/strings";
 
 export const Profile = () => {
   // const doApiCall = useApiCall();
