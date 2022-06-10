@@ -10,6 +10,7 @@ import { useLoadProject } from "../../util/load-entity-wrappers";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
+import { ScreenTitle } from "../common/ScreenTitle";
 
 export const EditProject = () => {
   const apiCall = useApiCall();
@@ -56,6 +57,7 @@ export const EditProject = () => {
 
   return (
     <>
+      <ScreenTitle title={i18n.t("screen.project_edit")} />
       <form className="m1" onSubmit={handleSubmit(updateProject)}>
         <ProjectFormElems
           formState={formState}

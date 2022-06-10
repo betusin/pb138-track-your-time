@@ -9,6 +9,7 @@ import { useLoadProject } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import { useParamOrEmpty } from "../../util/params";
 import i18n from "../../i18n/i18n";
+import { ScreenTitle } from "../common/ScreenTitle";
 
 export interface IFormSessionInput {
   fromDate: Date;
@@ -66,6 +67,7 @@ export const CreateSession = () => {
 
   return (
     <>
+      <ScreenTitle title={i18n.t("screen.session_add")} />
       <form className="m1" onSubmit={handleSubmit(createSession)}>
         <SessionFormElems
           formState={formState}

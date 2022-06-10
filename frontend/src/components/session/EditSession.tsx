@@ -12,6 +12,7 @@ import { getSessionControllerFindOneKey } from "../../api/sessions/sessions";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
+import { ScreenTitle } from "../common/ScreenTitle";
 
 export const EditSession = () => {
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ export const EditSession = () => {
   };
   return (
     <>
+      <ScreenTitle title={i18n.t("screen.session_edit")} />
       <form className="m1" onSubmit={handleSubmit(updateSession)}>
         <SessionFormElems
           formState={formState}
