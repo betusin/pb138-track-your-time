@@ -27,7 +27,6 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { JwtAccessAuthGuard } from '../auth/jwt-access-auth.guard';
-import { GetSessionDto } from './dto/get-session.dto';
 import { SessionPhotoService } from '../session_photo/session_photo.service';
 import { CreateSessionPhotoDto } from '../session_photo/dto/create-session_photo.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -49,7 +48,7 @@ export class SessionController {
   ) {}
 
   @ApiOperation({ summary: 'Retrieves a session' })
-  @ApiOkResponse({ type: GetSessionDto })
+  @ApiOkResponse({ type: GetSessionWithPhotosDto })
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @ApiNotFoundResponse({ description: 'The session was not found' })
   @Get(':id')
