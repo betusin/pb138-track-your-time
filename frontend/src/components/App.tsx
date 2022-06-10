@@ -18,12 +18,9 @@ import { CreateSession } from "./session/CreateSession";
 import { EditSession } from "./session/EditSession";
 import { useEffect, useState } from "react";
 import { axiosForRefresh } from "../main";
-<<<<<<< HEAD
 import { useTranslation } from "react-i18next";
-=======
 import { Profile } from "./profile/Profile";
 import { EditProfile } from "./profile/EditProfile";
->>>>>>> 9214951 (refactor(profile): replace api call with load profile wrapper)
 
 export const App = () => {
   useTranslation();
