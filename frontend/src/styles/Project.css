@@ -3,34 +3,59 @@
 }
 
 .project-item {
-  background-color: var(--primary-color);
-  color: var(--bg-color);
+  border: solid 2px var(--primary-color);
 }
 
 .project-item--not-active {
   border-style: dotted;
-  color: var(--primary-color);
+}
+
+.project-item__info-wrapper {
+  background-color: var(--primary-color);
+}
+
+.project-item__info-wrapper--not-active {
   background-color: var(--bg-color);
 }
 
-.project-item__name {
-  font-size: 1.3rem;
+.project-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-info__name {
+  font-size: 1.7rem;
   margin-bottom: 0.2rem;
   cursor: pointer;
+}
+
+.project-info__name,
+.project-info__customer,
+.project-info__hourlyRate {
+  padding: 0.1rem;
   color: var(--bg-color);
 }
 
-.project-item--not-active .project-item__name {
+.project-item--not-active .project-info__name,
+.project-item--not-active .project-info__hourlyRate,
+.project-item--not-active .project-info__customer {
   color: var(--primary-color);
 }
 
 .project-item__settings {
-  padding-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: var(--bg-color);
+  align-items: baseline;
+  display: flex;
+  justify-content: center;
+  border-top: solid 1px var(--primary-color);
 }
 
 .btn-delete-project {
   border: none;
   background-color: inherit;
+  align-items: center;
+  cursor: pointer;
 }
 
 .project-container {

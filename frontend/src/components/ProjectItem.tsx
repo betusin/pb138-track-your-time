@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { GetProjectDto } from "../api/model";
+import { Edit } from "@mui/icons-material";
+import { DeleteButton } from "./DeleteButton";
+import { DeleteForeverButton } from "./DeleteForeverButton";
+import { styleLargeIcon } from "../styles/theme";
 
 export interface IProjectItemProps {
   project: GetProjectDto;
@@ -13,46 +17,32 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
 
   return (
     <div
-      className={`project-item ${
-        !isActive && "project-item--not-active"
-      } p1 m1`}
+      className={`project-item ${!isActive && "project-item--not-active"}  m1`}
     >
-      <Link to={`/project/${id}`} className="project-item__name">
-        <strong>{name}</strong>
-      </Link>
-      <div className="project-item__customer">{customer}</div>
-      <div className="project-item__hourly-rate">{hourlyRate}$/hour</div>
+      <div
+        className={`project-item__info-wrapper p1 ${
+          !isActive && "project-item__info-wrapper--not-active"
+        }`}
+      >
+        <Link to={`/project/${id}`} className="project-info">
+          <div className="project-info__name">
+            <strong>{name}</strong>
+          </div>
+          <div className="project-info__customer">{customer}</div>
+          <div className="project-info__hourlyRate">{hourlyRate}$/hour</div>
+        </Link>
+      </div>
       <div className="project-item__settings">
-        <Link to={`/project/${id}/edit`}>
-          <img
-            className="icon"
-            alt="edit"
-            src={`/assets/edit-${isActive ? "antracit" : "lime"}.svg`}
-          />
+        <Link to={`/project/edit/${id}`}>
+          <Edit style={styleLargeIcon} color="primary" />
         </Link>
         {wantToRemove ? (
-          <button onClick={() => onDelete(id)} className="btn-delete-project">
-            <img
-              className={`icon icon--inverse ${
-                isActive && "icon--active_inverse"
-              }`}
-              alt="real delete"
-              title="Yes, I want to delete the project"
-              src={`/assets/delete-${isActive ? "lime" : "antracit"}.svg`}
-            />
-          </button>
+          <DeleteForeverButton onDelete={onDelete} id={id} />
         ) : (
-          <button
-            onClick={() => setWantToRemove(!wantToRemove)}
-            className="btn-delete-project"
-          >
-            <img
-              className="icon"
-              alt="delete"
-              title="Delete the project"
-              src={`/assets/delete-${isActive ? "antracit" : "lime"}.svg`}
-            />
-          </button>
+          <DeleteButton
+            wantToRemove={wantToRemove}
+            setWantToRemove={setWantToRemove}
+          />
         )}
       </div>
     </div>
