@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ErrorFieldMessage } from "../Messages";
+import { ErrorFieldMessage } from "../ErrorFieldMessage";
 
 export interface IFormLoginInput {
   email: string;

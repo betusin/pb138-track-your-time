@@ -2,7 +2,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import { FormState, UseFormRegister } from "react-hook-form";
 import { theme } from "../styles/theme";
 import { IFormProjectInput } from "./CreateProject";
-import { ErrorFieldMessage } from "./Messages";
+import { ErrorFieldMessage } from "./ErrorFieldMessage";
 
 export interface IProjectFormElemsProps {
   formState: FormState<IFormProjectInput>;
