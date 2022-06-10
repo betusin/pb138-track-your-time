@@ -16,6 +16,9 @@ export function Navbar() {
       <Link className="navbar--title" to="/">
         <Trans i18nKey="app.name" />
       </Link>
+      <Link to="/me">
+        <Trans i18nKey="app.profile" />
+      </Link>
       <LanguageSwitcher />
     </Stack>
   );

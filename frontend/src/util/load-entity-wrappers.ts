@@ -52,7 +52,7 @@ export function useLoadProfile(): [
 ] {
   const [result, mutate] = loadEntity(
     useMeControllerProfile,
-    noProfileFoundText
+    i18n.t("profile.not_found")
   );
   return [result, mutate];
 }

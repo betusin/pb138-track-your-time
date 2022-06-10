@@ -2,6 +2,7 @@
   "app": {
     "name": "TrackYourTime",
     "home": "Home",
+    "profile": "Profile",
     "language": "Language"
   },
   "error": {
@@ -94,5 +95,8 @@
     "project_edit": "Edit a project",
     "session_add": "Add a new session",
     "session_edit": "Edit a session"
+  },
+  "profile": {
+    "not_found": "The profile was not found."
   }
 }
