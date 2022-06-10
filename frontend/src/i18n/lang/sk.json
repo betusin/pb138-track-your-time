@@ -30,7 +30,8 @@
       "email": "Emailová adresa",
       "password": "Heslo",
       "company": "Názov firmy",
-      "company_logo": "Logo firmy (URL)"
+      "company_logo": "Logo firmy (URL)",
+      "register": "Zaregistrovať sa"
     },
     "login": {
       "hint": {

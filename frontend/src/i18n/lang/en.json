@@ -30,7 +30,8 @@
       "email": "Email address",
       "password": "Password",
       "company": "Company name",
-      "company_logo": "Company logo (URL)"
+      "company_logo": "Company logo (URL)",
+      "register": "Register"
     },
     "login": {
       "hint": {
