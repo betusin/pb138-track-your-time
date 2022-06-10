@@ -1,30 +1,42 @@
-import { Delete } from "@mui/icons-material";
-import { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { Delete, DeleteForever } from "@mui/icons-material";
 import { styleLargeIcon } from "../../styles/theme";
 
-interface IDeleteButtonProps {
-  setWantToRemove: Dispatch<SetStateAction<boolean>>;
-  wantToRemove: boolean;
+export interface DeleteDoubleClickButtonProps {
+  onDelete: (id: string) => void;
+  id: string;
 }
 
-export const DeleteButton = ({
-  setWantToRemove,
-  wantToRemove,
-}: IDeleteButtonProps) => {
+export function DeleteButton({ onDelete, id }: DeleteDoubleClickButtonProps) {
+  const [wantToRemove, setWantToRemove] = useState(false);
+
+  function onPressed() {
+    if (wantToRemove) {
+      onDelete(id);
+    } else {
+      toast("Click one more time to really remove.");
+      setTimeout(() => {
+        setWantToRemove(false);
+      }, 4000);
+      setWantToRemove(!wantToRemove);
+    }
+  }
+
+  const title = wantToRemove
+    ? "Yes, I want to delete the project"
+    : "Delete the project";
   return (
     <button
-      onClick={() => {
-        toast("Click one more time to really remove.");
-        setTimeout(() => {
-          setWantToRemove(false);
-        }, 4000);
-        setWantToRemove(!wantToRemove);
-      }}
+      onClick={() => onPressed()}
       className="btn-delete-project"
-      title="Delete the project"
+      title={title}
     >
-      <Delete style={styleLargeIcon} color="primary" />
+      {wantToRemove ? (
+        <DeleteForever style={styleLargeIcon} color="primary" />
+      ) : (
+        <Delete style={styleLargeIcon} color="primary" />
+      )}
     </button>
   );
-};
+}

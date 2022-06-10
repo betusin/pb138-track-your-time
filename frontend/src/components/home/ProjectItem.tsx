@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { GetProjectDto } from "../../api/model";
 import { Edit } from "@mui/icons-material";
-import { DeleteForeverButton } from "../common/DeleteForeverButton";
 import { styleLargeIcon } from "../../styles/theme";
 import { DeleteButton } from "../common/DeleteButton";
 
 export interface IProjectItemProps {
   project: GetProjectDto;
-  onDelete: Function;
+  onDelete: (id: string) => void;
 }
 
 export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
-  const [wantToRemove, setWantToRemove] = useState(false);
   const { customer, hourlyRate, id, isActive, name } = { ...project };
 
   return (
@@ -36,14 +33,7 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
         <Link to={`/project/${id}/edit`}>
           <Edit style={styleLargeIcon} color="primary" />
         </Link>
-        {wantToRemove ? (
-          <DeleteForeverButton onDelete={onDelete} id={id} />
-        ) : (
-          <DeleteButton
-            wantToRemove={wantToRemove}
-            setWantToRemove={setWantToRemove}
-          />
-        )}
+        <DeleteButton onDelete={onDelete} id={id} />
       </div>
     </div>
   );
