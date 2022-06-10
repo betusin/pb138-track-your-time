@@ -1,17 +1,12 @@
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import "../../styles/Project.css";
-import {
-  dataRefreshFailedText,
-  failedValidationText,
-  noProjectFoundText,
-  projectDeletedText,
-} from "../../strings";
 import { ProjectItem } from "./ProjectItem";
 import { useApiCall } from "../../util/api-caller";
 import { projectControllerRemoveWrap } from "../../util/api-call-wrappers";
 import { useLoadProjects } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
+import i18n from "../../i18n/i18n";
 
 export const ProjectList = () => {
   const doApiCall = useApiCall();
@@ -27,16 +22,16 @@ export const ProjectList = () => {
   }
 
   function onSuccess() {
-    toast.success(projectDeletedText);
-    mutate().catch(() => toast.error(dataRefreshFailedText));
+    toast.success(i18n.t("project.deleted"));
+    mutate().catch(() => toast.error(i18n.t("error.refresh_failed")));
   }
 
   function onError(code: number) {
     if (code == 400) {
-      toast.error(failedValidationText);
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     } else if (code == 404) {
-      toast.error(noProjectFoundText);
+      toast.error(i18n.t("project.not_found"));
       return true;
     }
     return false;

@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { projectControllerCreate } from "../../api/projects/projects";
-import { failedValidationText } from "../../strings";
 import { ProjectFormElems } from "./ProjectFormElems";
 import { useApiCall } from "../../util/api-caller";
+import i18n from "../../i18n/i18n";
 
 export interface IFormProjectInput {
   name: string;
@@ -30,13 +30,13 @@ export const CreateProject = () => {
   }
 
   function onSuccess() {
-    toast.success("Project was successfully created.");
+    toast.success(i18n.t("project.created"));
     navigate("/");
   }
 
   function onError(code: number) {
     if (code == 400) {
-      toast.error(failedValidationText);
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     }
     return false;
@@ -48,7 +48,7 @@ export const CreateProject = () => {
         <ProjectFormElems
           formState={formState}
           register={register}
-          buttonText="Create project"
+          buttonText={i18n.t("project.create")}
         />
       </form>
     </>

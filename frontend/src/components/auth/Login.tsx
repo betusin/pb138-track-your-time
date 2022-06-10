@@ -6,6 +6,8 @@ import { authControllerLogin } from "../../api/authentication/authentication";
 import toast from "react-hot-toast";
 import { AccessTokenDto } from "../../api/model";
 import { useApiCall } from "../../util/api-caller";
+import { Trans } from "react-i18next";
+import i18n from "i18next";
 
 export const Login = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
@@ -20,10 +22,10 @@ export const Login = () => {
   function onLoginFailure(code: number): boolean {
     switch (code) {
       case 401:
-        toast("Incorrect password.");
+        toast(i18n.t("auth.login.password_incorrect"));
         return true;
       case 404:
-        toast("No such user found.");
+        toast(i18n.t("auth.login.user_not_found"));
         return true;
       default:
         return false;
@@ -38,9 +40,15 @@ export const Login = () => {
 
   return (
     <>
-      <h1>TrackYourTime</h1>
+      <h1>
+        <Trans i18nKey="app.name" />
+      </h1>
       <LoginForm onSubmit={login} />
-      Don&apos;t have an account yet? Register <Link to="/register">here</Link>.
+      <Trans i18nKey="auth.register.hint.no_account" />
+      <Link to="/register">
+        <Trans i18nKey="auth.register.hint.here" />
+      </Link>
+      .
     </>
   );
 };

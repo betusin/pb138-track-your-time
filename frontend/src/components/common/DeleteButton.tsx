@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Delete, DeleteForever } from "@mui/icons-material";
 import { styleLargeIcon } from "../../styles/theme";
+import i18n from "i18next";
 
 export interface DeleteDoubleClickButtonProps {
   onDelete: (id: string) => void;
@@ -15,7 +16,7 @@ export function DeleteButton({ onDelete, id }: DeleteDoubleClickButtonProps) {
     if (wantToRemove) {
       onDelete(id);
     } else {
-      toast("Click one more time to really remove.");
+      toast(i18n.t("confirm.delete"));
       setTimeout(() => {
         setWantToRemove(false);
       }, 4000);
@@ -24,8 +25,8 @@ export function DeleteButton({ onDelete, id }: DeleteDoubleClickButtonProps) {
   }
 
   const title = wantToRemove
-    ? "Yes, I want to delete the project"
-    : "Delete the project";
+    ? i18n.t("operation.delete_confirm")
+    : i18n.t("operation.delete");
   return (
     <button
       onClick={() => onPressed()}

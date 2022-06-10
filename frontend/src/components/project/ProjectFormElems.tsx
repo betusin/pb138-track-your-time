@@ -1,7 +1,8 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox } from "@mui/material";
 import { FormState, UseFormRegister } from "react-hook-form";
 import { theme } from "../../styles/theme";
 import { IFormProjectInput } from "./CreateProject";
+import { Trans } from "react-i18next";
 
 export interface IProjectFormElemsProps {
   formState: FormState<IFormProjectInput>;
@@ -17,7 +18,9 @@ export const ProjectFormElems = ({
   return (
     <div>
       <div>
-        <label>Project Name*</label>
+        <label>
+          <Trans i18nKey="project.name" />
+        </label>
       </div>
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
@@ -26,25 +29,28 @@ export const ProjectFormElems = ({
       />
 
       <div>
-        <label>Customer</label>
+        <label>
+          <Trans i18nKey="project.customer" />
+        </label>
       </div>
       <input className={`text-field`} type="text" {...register("customer")} />
 
       <div>
-        <FormControlLabel
-          control={
-            <Checkbox
-              {...register("isActive")}
-              style={{ color: theme.palette.secondary.light }}
-              defaultChecked={true}
-            />
-          }
-          label="is active"
+        <Checkbox
+          id="isActive"
+          {...register("isActive")}
+          style={{ color: theme.palette.secondary.light }}
+          defaultChecked={true}
         />
+        <label htmlFor="isActive">
+          <Trans i18nKey="project.is_active" />
+        </label>
       </div>
 
       <div>
-        <label>Hourly rate</label>
+        <label>
+          <Trans i18nKey="project.hourly_rate" />
+        </label>
       </div>
       <input
         className={`number-field`}

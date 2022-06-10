@@ -18,8 +18,11 @@ import { CreateSession } from "./session/CreateSession";
 import { EditSession } from "./session/EditSession";
 import { useEffect, useState } from "react";
 import { axiosForRefresh } from "../main";
+import { useTranslation } from "react-i18next";
 
 export const App = () => {
+  useTranslation();
+
   const [accessToken, setAccessToken] = useRecoilState(accessTokenAtom);
   const [loading, setLoading] = useState(true);
 
