@@ -1,4 +1,11 @@
-import { Controller, Post, Request, UseGuards, Response } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Request,
+  UseGuards,
+  Response,
+  HttpCode,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import {
@@ -51,5 +58,17 @@ export class AuthController {
   @Post('refresh')
   async refresh(@CurrentUser() userId: string): Promise<AccessTokenDto> {
     return this.authService.refresh(userId);
+  }
+
+  @ApiOperation({
+    summary: 'Logs out the user by invalidating the refresh token cookie',
+  })
+  @HttpCode(200)
+  @Post('logout')
+  async logout(@Response({ passthrough: true }) res: any): Promise<void> {
+    res.cookie('refreshToken', '', {
+      httpOnly: true,
+      maxAge: 0,
+    });
   }
 }
