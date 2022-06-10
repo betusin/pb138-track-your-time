@@ -1,15 +1,14 @@
 import { SessionItem } from "./SessionItem";
-import { useParams } from "react-router";
 import { useApiSwrCall } from "../util/api-caller";
 import { useProjectControllerFindAllSessions } from "../api/projects/projects";
+import { useParamOrEmpty } from "../util/params";
 
 export interface ProjectSessionListProps {
   projectId: string;
 }
 
 export function ProjectSessionList({ projectId }: ProjectSessionListProps) {
-  const { id: sessionIdParam } = useParams();
-  const sessionId = sessionIdParam ?? "";
+  const sessionId = useParamOrEmpty("id");
   const { data } = useApiSwrCall((o) => {
     return useProjectControllerFindAllSessions(sessionId, o);
   });
