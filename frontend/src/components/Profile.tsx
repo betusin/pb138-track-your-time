@@ -1,8 +1,27 @@
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
+import { useMeControllerProfile } from "../api/me/me";
 import { accessTokenAtom } from "../state/atom";
+import { useApiSwrCall } from "../util/api-caller";
+import { noProfileFoundText } from "./src/strings";
 
 export const Profile = () => {
+  // const doApiCall = useApiCall();
+
+  const { data } = useApiSwrCall((o) => {
+    return useMeControllerProfile(o);
+  });
+  useEffect(() => {
+    if (data?.status == 404) toast.error(noProfileFoundText);
+  }, [data]);
+
+  if (!data?.data) {
+    return <></>;
+  }
+
+  const profile = data?.data;
   const navigate = useNavigate();
   const setToken = useSetRecoilState(accessTokenAtom);
 
@@ -23,11 +42,13 @@ export const Profile = () => {
           />
         </Link>
       </div>
-      <img className="profile__logo" src="logo" alt="logo" />
-      <div className="profile__name">Name surname</div>
-      <div className="profile__company">Company name</div>
-      <div className="profile__email">email</div>
-      <button className="btn" onClick={signOut}>
+      <img className="profile__logo" src={profile?.logo} alt="logo" />
+      <div className="profile__name">
+        `{profile.name} {profile.surname}`
+      </div>
+      <div className="profile__company">{profile.company}</div>
+      <div className="profile__email">{profile.email}</div>
+      <button className="btn btn--primary" onClick={signOut}>
         Sign out
       </button>
     </>
