@@ -2,6 +2,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import { FormState, UseFormRegister } from "react-hook-form";
 import { theme } from "../styles/theme";
 import { IFormProjectInput } from "./CreateProject";
+import { ErrorFieldMessage } from "./Messages";
 
 export interface IProjectFormElemsProps {
   formState: FormState<IFormProjectInput>;
@@ -22,8 +23,9 @@ export const ProjectFormElems = ({
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
         type="text"
-        {...register("name", { required: true })}
+        {...register("name", { required: "Enter a project name" })}
       />
+      <ErrorFieldMessage formState={formState} name="name" />
 
       <div>
         <label>Customer</label>

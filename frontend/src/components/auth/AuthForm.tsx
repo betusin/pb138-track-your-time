@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { ErrorFieldMessage } from "../Messages";
 
 export interface IFormLoginInput {
   email: string;
@@ -32,9 +33,10 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
         className={`text-field ${
           formState.errors.email && "text-field--error"
         }`}
-        type="text"
-        {...register("email", { required: true })}
+        type="email"
+        {...register("email", { required: "Email required!" })}
       />
+      <ErrorFieldMessage formState={formState} name="email" />
       <div>
         <label>Password</label>
       </div>
@@ -43,8 +45,9 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
           formState.errors.password && "text-field--error"
         }`}
         type="password"
-        {...register("password", { required: true })}
+        {...register("password", { required: "Password required!" })}
       />
+      <ErrorFieldMessage formState={formState} name="password" />
 
       <div className="btn-wrapper">
         <input className="btn btn--primary" type="submit" value="Login" />
@@ -64,8 +67,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
         type="text"
-        {...register("name", { required: true })}
+        {...register("name", { required: "Name required!" })}
       />
+      <ErrorFieldMessage formState={formState} name="name" />
       <div>
         <label>Surname</label>
       </div>
@@ -74,8 +78,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.surname && "text-field--error"
         }`}
         type="text"
-        {...register("surname", { required: true })}
+        {...register("surname", { required: "Surname required!" })}
       />
+      <ErrorFieldMessage formState={formState} name="surname" />
       <div>
         <label>E-mail address</label>
       </div>
@@ -84,8 +89,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.email && "text-field--error"
         }`}
         type="email"
-        {...register("email", { required: true })}
+        {...register("email", { required: "Email required!" })}
       />
+      <ErrorFieldMessage formState={formState} name="email" />
       <div>
         <label>Password</label>
       </div>
@@ -94,8 +100,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.password && "text-field--error"
         }`}
         type="password"
-        {...register("password", { required: true })}
+        {...register("password", { required: "Password required!" })}
       />
+      <ErrorFieldMessage formState={formState} name="password" />
       <div>
         <label>Company</label>
       </div>
@@ -104,8 +111,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.company && "text-field--error"
         }`}
         type="text"
-        {...register("company", { required: true })}
+        {...register("company", { required: "Company required!" })}
       />
+      <ErrorFieldMessage formState={formState} name="company" />
       <div>
         <label>Logo of company (URL source)</label>
       </div>

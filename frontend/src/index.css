@@ -139,3 +139,8 @@ textarea {
   color: var(--success-color);
   border: var(--success-color) 2px solid;
 }
+
+.text-error {
+  color: var(--error-color);
+  margin-bottom: 0.5rem;
+}
