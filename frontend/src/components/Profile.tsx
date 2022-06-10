@@ -1,15 +1,31 @@
+import { Link, useNavigate } from "react-router-dom";
+
 export const Profile = () => {
+  const navigate = useNavigate();
+
+  const signOut = () => {
+    navigate("/login");
+  };
+
   return (
     <>
       <div className="profile-header">
-        <h1>Profile</h1>
-        <img src="/assets/edit-lime.svg" alt="edit" />
+        <h1 className="profile-header__title">Profile</h1>
+        <Link to="/me/edit">
+          <img
+            className="icon profile-header__icon"
+            src="/assets/edit-lime.svg"
+            alt="edit"
+          />
+        </Link>
       </div>
-      <img src="logo" alt="logo" />
-      <span>Name surname</span>
-      <span>Company name</span>
-      <span>email</span>
-      <button>Sign out</button>
+      <img className="profile__logo" src="logo" alt="logo" />
+      <div className="profile__name">Name surname</div>
+      <div className="profile__company">Company name</div>
+      <div className="profile__email">email</div>
+      <button className="btn" onClick={signOut}>
+        Sign out
+      </button>
     </>
   );
 };
