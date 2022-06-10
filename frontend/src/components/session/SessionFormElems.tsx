@@ -9,8 +9,8 @@ import {
 } from "react-hook-form";
 import { IFormSessionInput } from "./CreateSession";
 import { DateTimePicker } from "@mui/lab";
-import { StyledTextField } from "./StyledTextField";
-import { theme } from "../styles/theme";
+import { StyledTextField } from "../common/StyledTextField";
+import { theme } from "../../styles/theme";
 
 export interface SessionFormElemsProps {
   formState: FormState<IFormSessionInput>;

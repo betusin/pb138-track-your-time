@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { SessionFormElems } from "./SessionFormElems";
-import { useApiCall } from "../util/api-caller";
+import { useApiCall } from "../../util/api-caller";
 import toast from "react-hot-toast";
-import { failedValidationText, sessionCreatedText } from "./Messages";
-import { sessionControllerCreateWrap } from "../util/api-call-wrappers";
-import { GetProjectDto } from "../api/model";
-import { useLoadProject } from "../util/load-entity-wrappers";
-import { LoadingPlaceholder } from "./LoadingPlaceholder";
-import { useParamOrEmpty } from "../util/params";
+import { failedValidationText, sessionCreatedText } from "../../strings";
+import { sessionControllerCreateWrap } from "../../util/api-call-wrappers";
+import { GetProjectDto } from "../../api/model";
+import { useLoadProject } from "../../util/load-entity-wrappers";
+import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
+import { useParamOrEmpty } from "../../util/params";
 
 export interface IFormSessionInput {
   fromDate: Date;

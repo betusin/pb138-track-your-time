@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { GetProjectDto } from "../api/model";
+import { GetProjectDto } from "../../api/model";
 import { Edit } from "@mui/icons-material";
-import { DeleteButton } from "./DeleteButton";
-import { DeleteForeverButton } from "./DeleteForeverButton";
-import { styleLargeIcon } from "../styles/theme";
+import { DeleteForeverButton } from "../common/DeleteForeverButton";
+import { styleLargeIcon } from "../../styles/theme";
+import { DeleteButton } from "../common/DeleteButton";
 
 export interface IProjectItemProps {
   project: GetProjectDto;

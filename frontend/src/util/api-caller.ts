@@ -1,6 +1,6 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import toast from "react-hot-toast";
-import { unauthorizedText, unexpectedErrorText } from "../components/Messages";
+import { unauthorizedText, unexpectedErrorText } from "../strings";
 import { useRecoilValue } from "recoil";
 import { accessTokenAtom } from "../state/atom";
 import { SWRResponse } from "swr";

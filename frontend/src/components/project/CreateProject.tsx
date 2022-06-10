@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { projectControllerCreate } from "../api/projects/projects";
-import { failedValidationText } from "./Messages";
+import { projectControllerCreate } from "../../api/projects/projects";
+import { failedValidationText } from "../../strings";
 import { ProjectFormElems } from "./ProjectFormElems";
-import { useApiCall } from "../util/api-caller";
+import { useApiCall } from "../../util/api-caller";
 
 export interface IFormProjectInput {
   name: string;

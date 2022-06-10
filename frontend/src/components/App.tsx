@@ -1,23 +1,23 @@
-import "./App.css";
+import "../App.css";
 import { ThemeProvider } from "@mui/material";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { Login } from "./components/auth/Login";
-import { Register } from "./components/auth/Register";
-import { CreateProject } from "./components/CreateProject";
-import { CreateSession } from "./components/CreateSession";
-import { EditProject } from "./components/EditProject";
-import { EditSession } from "./components/EditSession";
-import { Navbar } from "./components/Navbar";
-import { Project } from "./components/Project";
-import { accessTokenAtom } from "./state/atom";
-import { theme } from "./styles/theme";
+import { Login } from "./auth/Login";
+import { Register } from "./auth/Register";
 import { Toaster } from "react-hot-toast";
 import { AxiosInterceptorsSetup } from "./AxiosInterceptorsSetup";
-import { NoPath } from "./components/NoPath";
-import { ProjectList } from "./components/ProjectList";
+import { NoPath } from "./NoPath";
+import { accessTokenAtom } from "../state/atom";
+import { theme } from "../styles/theme";
+import { Navbar } from "./Navbar";
+import { ProjectList } from "./home/ProjectList";
+import { CreateProject } from "./project/CreateProject";
+import { EditProject } from "./project/EditProject";
+import { Project } from "./project/Project";
+import { CreateSession } from "./session/CreateSession";
+import { EditSession } from "./session/EditSession";
 import { useEffect, useState } from "react";
-import { axiosForRefresh } from "./main";
+import { axiosForRefresh } from "../main";
 
 export const App = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenAtom);

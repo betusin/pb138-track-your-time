@@ -1,5 +1,5 @@
 import { DeleteForever } from "@mui/icons-material";
-import { styleLargeIcon } from "../styles/theme";
+import { styleLargeIcon } from "../../styles/theme";
 
 export interface IDeleteForeverButtonProps {
   onDelete: Function;

@@ -1,7 +1,7 @@
 import { Delete } from "@mui/icons-material";
 import { Dispatch, SetStateAction } from "react";
 import toast from "react-hot-toast";
-import { styleLargeIcon } from "../styles/theme";
+import { styleLargeIcon } from "../../styles/theme";
 
 interface IDeleteButtonProps {
   setWantToRemove: Dispatch<SetStateAction<boolean>>;

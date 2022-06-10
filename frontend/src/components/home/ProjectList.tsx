@@ -1,17 +1,17 @@
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import "../styles/Project.css";
+import "../../styles/Project.css";
 import {
   dataRefreshFailedText,
   failedValidationText,
   noProjectFoundText,
   projectDeletedText,
-} from "./Messages";
+} from "../../strings";
 import { ProjectItem } from "./ProjectItem";
-import { useApiCall } from "../util/api-caller";
-import { projectControllerRemoveWrap } from "../util/api-call-wrappers";
-import { useLoadProjects } from "../util/load-entity-wrappers";
-import { LoadingPlaceholder } from "./LoadingPlaceholder";
+import { useApiCall } from "../../util/api-caller";
+import { projectControllerRemoveWrap } from "../../util/api-call-wrappers";
+import { useLoadProjects } from "../../util/load-entity-wrappers";
+import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 
 export const ProjectList = () => {
   const doApiCall = useApiCall();

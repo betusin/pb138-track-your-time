@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { ProjectSessionList } from "./ProjectSessionList";
-import { GetProjectDto } from "../api/model";
-import { useLoadProject } from "../util/load-entity-wrappers";
-import { useParamOrEmpty } from "../util/params";
-import { LoadingPlaceholder } from "./LoadingPlaceholder";
+import { GetProjectDto } from "../../api/model";
+import { useLoadProject } from "../../util/load-entity-wrappers";
+import { useParamOrEmpty } from "../../util/params";
+import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 
 export const Project = () => {
   const id = useParamOrEmpty("id");
