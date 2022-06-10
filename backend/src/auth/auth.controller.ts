@@ -34,6 +34,7 @@ export class AuthController {
     description: 'Login information is incorrect or missing',
   })
   @UseGuards(LocalAuthGuard)
+  @HttpCode(200)
   @Post('login')
   async login(
     @Request() req: any,
@@ -55,6 +56,7 @@ export class AuthController {
   })
   @ApiOkResponse({ type: AccessTokenDto })
   @UseGuards(JwtRefreshAuthGuard)
+  @HttpCode(200)
   @Post('refresh')
   async refresh(@CurrentUser() userId: string): Promise<AccessTokenDto> {
     return this.authService.refresh(userId);
@@ -63,6 +65,7 @@ export class AuthController {
   @ApiOperation({
     summary: 'Logs out the user by invalidating the refresh token cookie',
   })
+  @ApiOkResponse({ description: 'User logged out' })
   @HttpCode(200)
   @Post('logout')
   async logout(@Response({ passthrough: true }) res: any): Promise<void> {
