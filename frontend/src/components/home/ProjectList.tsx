@@ -49,7 +49,7 @@ export const ProjectList = () => {
             onDelete={deleteProject}
           />
         ))}
-        <div className="btn-wrapper">
+        <div className="btn-wrapper project-button">
           <Link to="/project/add" className="btn btn-add-circle">
             +
           </Link>
