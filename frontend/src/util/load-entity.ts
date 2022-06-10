@@ -24,3 +24,19 @@ export function loadEntityById<
   }, [data]);
   return data?.data;
 }
+
+export function loadEntity<
+  T extends SWRResponse<AxiosResponse, AxiosError<void>>
+>(apiCall: (options: SwrCallOptions) => T, onNotFound: string) {
+  const navigate = useNavigate();
+  const { data, mutate } = useApiSwrCall((o) => {
+    return apiCall(o);
+  });
+  useEffect(() => {
+    if (data?.status == 404) {
+      toast.error(onNotFound);
+      navigate("/");
+    }
+  }, [data]);
+  return [data?.data, mutate];
+}
