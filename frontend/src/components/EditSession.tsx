@@ -30,6 +30,7 @@ export const EditSession = () => {
   if (!maybeSession) {
     return <></>;
   }
+  const session: GetSessionDto = maybeSession;
 
   function updateSession(data: IFormSessionInput) {
     const body = {
@@ -47,7 +48,7 @@ export const EditSession = () => {
     mutate(getSessionControllerFindOneKey(id)).catch(() =>
       toast.error(dataRefreshFailedText)
     );
-    navigate("/");
+    navigate(`/project/${session.projectId}`);
   }
 
   function onError(code: number) {
@@ -58,7 +59,6 @@ export const EditSession = () => {
     return false;
   }
 
-  const session: GetSessionDto = maybeSession;
   const prefill: IFormSessionInput = {
     fromDate: new Date(session.fromDate),
     toDate: new Date(session.toDate),
