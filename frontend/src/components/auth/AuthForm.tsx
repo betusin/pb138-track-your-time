@@ -52,7 +52,7 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
       />
 
       <div className="btn-wrapper">
-        <button className="btn btn--primary" type="submit">
+        <button className="auth-form--button btn btn--primary" type="submit">
           <Trans i18nKey="auth.login.log_in" />
         </button>
       </div>
@@ -135,7 +135,7 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       />
 
       <div className="btn-wrapper">
-        <button className="btn btn--primary" type="submit">
+        <button className="auth-form--button btn btn--primary" type="submit">
           <Trans i18nKey="auth.register.register" />
         </button>
       </div>

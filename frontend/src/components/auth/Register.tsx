@@ -47,15 +47,17 @@ export const Register = () => {
 
   return (
     <>
-      <h1>
-        <Trans i18nKey="app.name" />
-      </h1>
-      <RegisterForm onSubmit={register} />
-      <Trans i18nKey="auth.login.hint.existing_account" />
-      <Link to="/login">
-        <Trans i18nKey="auth.login.hint.here" />
-      </Link>
-      .
+      <div className="auth-form--container">
+        <h1>
+          <Trans i18nKey="app.name" />
+        </h1>
+        <RegisterForm onSubmit={register} />
+        <Trans i18nKey="auth.login.hint.existing_account" />
+        <Link to="/login">
+          <Trans i18nKey="auth.login.hint.here" />
+        </Link>
+        .
+      </div>
     </>
   );
 };

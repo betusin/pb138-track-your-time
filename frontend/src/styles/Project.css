@@ -105,6 +105,14 @@
   margin: 0.5rem 0;
 }
 
+.auth-form--container {
+  margin: 0 0 2rem 0;
+}
+
+.auth-form--button {
+  margin: 0 0 2rem 0;
+}
+
 /* For Tablets */
 
 @media (min-width: 600px) {
