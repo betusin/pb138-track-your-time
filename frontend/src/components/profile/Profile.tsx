@@ -6,6 +6,7 @@ import { accessTokenAtom } from "../../state/atom";
 import { useApiCall } from "../../util/api-caller";
 import { useLoadProfile } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
+import "../../styles/Profile.css";
 
 export const Profile = () => {
   const doApiCall = useApiCall();
@@ -33,7 +34,7 @@ export const Profile = () => {
   };
 
   return (
-    <>
+    <div className="profile">
       <div className="profile-header">
         <h1 className="profile-header__title">
           <Trans i18nKey="app.profile" />
@@ -47,18 +48,29 @@ export const Profile = () => {
         </Link>
       </div>
       <img className="profile__logo" src={profile.logo} alt="logo" />
-      <div className="profile__name">
-        <Trans i18nKey="profile.name" />:{profile.name} {profile.surname}
+      <div className="profile-field profile__name">
+        <p className="profile-field__label">
+          <Trans i18nKey="profile.name" />
+        </p>
+        <p className="profile-field__value">
+          {profile.name} {profile.surname}
+        </p>
       </div>
-      <div className="profile__company">
-        <Trans i18nKey="profile.company_name" />:{profile.company}
+      <div className="profile-field profile__company">
+        <p className="profile-field__label">
+          <Trans i18nKey="profile.company_name" />
+        </p>
+        <p className="profile-field__value">{profile.company}</p>
       </div>
-      <div className="profile__email">
-        <Trans i18nKey="profile.email" />:{profile.email}
+      <div className="profile-field profile__email">
+        <p className="profile-field__label">
+          <Trans i18nKey="profile.email" />
+        </p>
+        <p className="profile-field__value">{profile.email}</p>
       </div>
       <button className="btn btn--primary" onClick={signOut}>
         <Trans i18nKey="profile.sign_out" />
       </button>
-    </>
+    </div>
   );
 };
