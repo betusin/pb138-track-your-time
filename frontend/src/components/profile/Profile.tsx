@@ -1,3 +1,4 @@
+import { Trans } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { authControllerLogout } from "../../api/authentication/authentication";
@@ -34,7 +35,9 @@ export const Profile = () => {
   return (
     <>
       <div className="profile-header">
-        <h1 className="profile-header__title">Profile</h1>
+        <h1 className="profile-header__title">
+          <Trans i18nKey="app.profile" />
+        </h1>
         <Link to="/me/edit">
           <img
             className="icon profile-header__icon"
@@ -45,12 +48,16 @@ export const Profile = () => {
       </div>
       <img className="profile__logo" src={profile.logo} alt="logo" />
       <div className="profile__name">
-        {profile.name} {profile.surname}
+        <Trans i18nKey="profile.name" />:{profile.name} {profile.surname}
       </div>
-      <div className="profile__company">{profile.company}</div>
-      <div className="profile__email">{profile.email}</div>
+      <div className="profile__company">
+        <Trans i18nKey="profile.company_name" />:{profile.company}
+      </div>
+      <div className="profile__email">
+        <Trans i18nKey="profile.email" />:{profile.email}
+      </div>
       <button className="btn btn--primary" onClick={signOut}>
-        Sign out
+        <Trans i18nKey="profile.sign_out" />
       </button>
     </>
   );

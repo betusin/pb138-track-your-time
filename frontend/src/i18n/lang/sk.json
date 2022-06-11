@@ -97,6 +97,10 @@
     "session_edit": "Upraviť záznam"
   },
   "profile": {
+    "name": "Meno priezvisko",
+    "company_name": "Názov firmy",
+    "email": "E-mail",
+    "sign_out": "Odhlásiť sa",
     "not_found": "Profil nie je možné nájsť"
   }
 }

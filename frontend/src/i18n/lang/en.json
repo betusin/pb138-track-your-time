@@ -97,6 +97,10 @@
     "session_edit": "Edit a session"
   },
   "profile": {
+    "name": "Full name",
+    "company_name": "Company name",
+    "email": "Email",
+    "sign_out": "Sign out",
     "not_found": "The profile was not found."
   }
 }
