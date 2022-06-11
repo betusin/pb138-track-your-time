@@ -69,7 +69,9 @@
       "not_yet_invoiced": "Ešte nevyfaktúrované",
       "already_invoiced": "Už vyfaktúrované",
       "total": "Spolu",
-      "hour_per_month": "Hodiny za mesiac"
+      "hour_per_month": "Hodiny za mesiac",
+      "hour_per_day": "Hodiny za deň",
+      "hour_per_weekday": "Hodiny za deň týždňa"
     }
   },
   "session": {

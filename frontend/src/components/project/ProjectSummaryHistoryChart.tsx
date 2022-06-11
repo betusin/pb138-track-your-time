@@ -11,6 +11,7 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
+import { fontConfig } from "../../styles/chart-config";
 
 ChartJS.register(
   CategoryScale,
@@ -21,14 +22,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-const fontConfig = {
-  ticks: {
-    font: {
-      size: 18,
-    },
-  },
-};
 
 export interface ProjectSummaryHistoryChartProps {
   label: string;

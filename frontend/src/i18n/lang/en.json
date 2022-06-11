@@ -69,7 +69,9 @@
       "not_yet_invoiced": "Not yet invoiced",
       "already_invoiced": "Invoiced",
       "total": "Total",
-      "hour_per_month": "Work hours per month"
+      "hour_per_month": "Work hours per month",
+      "hour_per_day": "Work hours per day",
+      "hour_per_weekday": "Work hours per weekday"
     }
   },
   "session": {

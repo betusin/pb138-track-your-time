@@ -10,3 +10,9 @@ export function formatDateLabel(date: Date, language: string) {
     month: "numeric",
   });
 }
+
+export function formatDayLabel(date: Date, language: string) {
+  return date.toLocaleString(language, {
+    weekday: "short",
+  });
+}
