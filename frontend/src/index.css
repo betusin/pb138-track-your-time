@@ -158,6 +158,46 @@ textarea {
   font-weight: 700;
 }
 
-.screen-title {
+.page {
+}
+
+.page--title-container {
+  padding: 0 1.5rem 0 1.5rem;
   background-color: var(--screen-title-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.page--title-container__main {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.page--title-container__section {
+}
+
+.page--title-main {
+  margin: 0;
+}
+
+.page--title-section {
+  font-size: 1.5rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.page--section {
+  margin-top: 1rem;
+}
+
+.page--section-content {
+  padding: 0;
+  background-color: var(--screen-title-color);
+}
+
+@media (min-width: 900px) {
+  .page--section-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
 }
