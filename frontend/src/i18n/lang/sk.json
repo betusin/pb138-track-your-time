@@ -68,7 +68,8 @@
       "amount": "Čiastka",
       "not_yet_invoiced": "Ešte nevyfaktúrované",
       "already_invoiced": "Už vyfaktúrované",
-      "total": "Spolu"
+      "total": "Spolu",
+      "hour_per_month": "Hodiny za mesiac"
     }
   },
   "session": {

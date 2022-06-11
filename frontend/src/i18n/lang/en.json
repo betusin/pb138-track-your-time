@@ -68,7 +68,8 @@
       "amount": "Amount",
       "not_yet_invoiced": "Not yet invoiced",
       "already_invoiced": "Invoiced",
-      "total": "Total"
+      "total": "Total",
+      "hour_per_month": "Work hours per month"
     }
   },
   "session": {

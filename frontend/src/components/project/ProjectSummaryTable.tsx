@@ -1,11 +1,11 @@
 import { Trans } from "react-i18next";
 import { GetProjectDto } from "../../api/model";
 
-export interface ProjectSummary {
+export interface ProjectSummaryTableProps {
   project: GetProjectDto;
 }
 
-export function ProjectSummary({ project }: ProjectSummary) {
+export function ProjectSummaryTable({ project }: ProjectSummaryTableProps) {
   return (
     <table className="project-summary">
       <thead>
