@@ -14,6 +14,7 @@ import { ProjectSummaryTable } from "./ProjectSummaryTable";
 import { useState } from "react";
 import { ProjectSummaryMonthChart } from "./ProjectSummaryMonthChart";
 import { getHoursForSession } from "../../util/session-analysis";
+import { ProjectSummaryDateChart } from "./ProjectSummaryDateChart";
 
 export const Project = () => {
   const id = useParamOrEmpty("id");
@@ -33,6 +34,12 @@ export const Project = () => {
             sessions={sessions}
             label={i18n.t("project.summary.hour_per_month")}
             monthsBack={5}
+            stat={getHoursForSession}
+          />
+          <ProjectSummaryDateChart
+            sessions={sessions}
+            label={i18n.t("project.summary.hour_per_day")}
+            daysBack={7}
             stat={getHoursForSession}
           />
         </div>
