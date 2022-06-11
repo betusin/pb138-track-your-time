@@ -145,6 +145,7 @@ textarea {
 
 .navbar {
   background: var(--nav-color);
+  row-gap: 1rem;
 }
 
 .navbar--title:visited {
