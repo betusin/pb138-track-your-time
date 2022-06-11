@@ -8,6 +8,7 @@ import { StyledTextField } from "../common/StyledTextField";
 import { theme } from "../../styles/theme";
 import { Trans } from "react-i18next";
 import { GetSessionDto } from "../../api/model";
+import { dateTimeFormat, dateTimeMask } from "../../util/date-formatting";
 
 export interface SessionFormElemsProps {
   buttonText: string;
@@ -22,6 +23,12 @@ function parseOrNull(date?: string): Date | undefined {
   }
   return new Date(date);
 }
+
+const dateTimePickerOptions = {
+  inputFormat: dateTimeFormat,
+  mask: dateTimeMask,
+  ampm: false,
+};
 
 export const SessionForm = ({
   buttonText,
@@ -50,12 +57,11 @@ export const SessionForm = ({
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <DateTimePicker
+                    {...dateTimePickerOptions}
                     renderInput={StyledTextField}
                     label={<Trans i18nKey="session.date_from" />}
                     value={value}
-                    onChange={(value) => {
-                      onChange(value);
-                    }}
+                    onChange={onChange}
                   />
                 )}
               />
@@ -68,6 +74,7 @@ export const SessionForm = ({
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <DateTimePicker
+                    {...dateTimePickerOptions}
                     renderInput={StyledTextField}
                     label={<Trans i18nKey="session.date_to" />}
                     value={value}
