@@ -20,6 +20,9 @@ export const Project = () => {
   const project: GetProjectDto = maybeProject;
   return (
     <Page title={project.name} secondaryTitle={project.customer}>
+      <PageSection title={i18n.t("project.summary_title")}>
+        <ProjectSummary project={project} />
+      </PageSection>
       <PageSection
         title={i18n.t("project.sessions")}
         controls={
@@ -33,10 +36,6 @@ export const Project = () => {
           projectId={project.id}
           onSelectionChanged={setSelection}
         />
-      </PageSection>
-
-      <PageSection title={i18n.t("project.summary_title")}>
-        <ProjectSummary project={project} />
       </PageSection>
     </Page>
   );
