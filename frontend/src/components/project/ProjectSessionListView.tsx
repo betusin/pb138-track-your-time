@@ -72,7 +72,7 @@ function getGridColumns(onDelete: (id: string) => void): GridColDef[] {
       field: "isInvoiced",
       headerName: i18n.t("session.is_invoiced"),
       type: "boolean",
-      width: 150,
+      width: 120,
       editable: false,
     },
     {

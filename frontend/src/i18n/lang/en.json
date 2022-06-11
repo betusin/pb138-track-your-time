@@ -74,7 +74,7 @@
   "session": {
     "hourly_rate": "Hourly rate",
     "note": "Note",
-    "is_invoiced": "Is invoiced?",
+    "is_invoiced": "Invoiced?",
     "create": "Create session",
     "created": "Session created.",
     "deleted": "Session deleted.",

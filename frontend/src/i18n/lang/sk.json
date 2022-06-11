@@ -74,7 +74,7 @@
   "session": {
     "hourly_rate": "Hodinová sadzba",
     "note": "Poznámka",
-    "is_invoiced": "Je vyfaktúrovaný?",
+    "is_invoiced": "Vyfaktúrovaný?",
     "create": "Vytvoriť záznam",
     "created": "Záznam bol vytvorený.",
     "deleted": "Záznam bol odstránený.",
