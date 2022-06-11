@@ -89,7 +89,6 @@ export const SessionFormElems = ({
       <input
         className={`number-field`}
         type="number"
-        step={10}
         min={0}
         defaultValue={sessionData.hourlyRate}
         {...register("hourlyRate", { valueAsNumber: true })}
