@@ -30,7 +30,7 @@ export const Project = () => {
     <Page title={project.name} secondaryTitle={project.customer}>
       <PageSection title={i18n.t("project.summary_title")}>
         <div className="project-summary-container">
-          <ProjectSummaryTable project={project} />
+          <ProjectSummaryTable project={project} sessions={sessions} />
           <ProjectSummaryMonthChart
             sessions={sessions}
             label={i18n.t("project.summary.hour_per_month")}

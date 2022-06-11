@@ -1,11 +1,17 @@
 import { Trans } from "react-i18next";
-import { GetProjectDto } from "../../api/model";
+import { GetProjectDto, GetSessionDto } from "../../api/model";
+import { SummaryTableRow } from "./SummaryTableRow";
+import i18n from "i18next";
 
 export interface ProjectSummaryTableProps {
   project: GetProjectDto;
+  sessions: GetSessionDto[];
 }
 
-export function ProjectSummaryTable({ project }: ProjectSummaryTableProps) {
+export function ProjectSummaryTable({
+  project,
+  sessions,
+}: ProjectSummaryTableProps) {
   return (
     <table className="project-summary">
       <thead>
@@ -20,27 +26,21 @@ export function ProjectSummaryTable({ project }: ProjectSummaryTableProps) {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td className="project-summary__td">
-            <Trans i18nKey="project.summary.not_yet_invoiced" />
-          </td>
-          <td className="project-summary__td">0</td>
-          <td className="project-summary__td">0 $</td>
-        </tr>
-        <tr>
-          <td className="project-summary__td">
-            <Trans i18nKey="project.summary.already_invoiced" />
-          </td>
-          <td className="project-summary__td">0</td>
-          <td className="project-summary__td">0 $</td>
-        </tr>
-        <tr>
-          <td className="project-summary__td">
-            <Trans i18nKey="project.summary.total" />
-          </td>
-          <td className="project-summary__td">0</td>
-          <td className="project-summary__td">0 $</td>
-        </tr>
+        <SummaryTableRow
+          label={i18n.t("project.summary.not_yet_invoiced")}
+          items={sessions.filter((session) => !session.isInvoiced)}
+          fallbackHourlyRate={project.hourlyRate}
+        />
+        <SummaryTableRow
+          label={i18n.t("project.summary.already_invoiced")}
+          items={sessions.filter((session) => session.isInvoiced)}
+          fallbackHourlyRate={project.hourlyRate}
+        />
+        <SummaryTableRow
+          label={i18n.t("project.summary.total")}
+          items={sessions}
+          fallbackHourlyRate={project.hourlyRate}
+        />
       </tbody>
     </table>
   );
