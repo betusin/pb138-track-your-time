@@ -50,7 +50,7 @@ export function ProjectSessionListView({
 }
 
 function getGridColumns(onDelete: (id: string) => void): GridColDef[] {
-  const dateFormat = "dd.mm.yyyy HH:mm";
+  const dateFormat = "dd.MM.yyyy HH:mm";
   return [
     {
       field: "fromDate",
