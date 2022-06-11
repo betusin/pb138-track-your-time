@@ -5,6 +5,7 @@ import { projectControllerCreate } from "../../api/projects/projects";
 import { ProjectFormElems } from "./ProjectFormElems";
 import { useApiCall } from "../../util/api-caller";
 import i18n from "../../i18n/i18n";
+import { ScreenTitle } from "../common/ScreenTitle";
 
 export interface IFormProjectInput {
   name: string;
@@ -44,6 +45,7 @@ export const CreateProject = () => {
 
   return (
     <>
+      <ScreenTitle title={i18n.t("screen.project_add")} />
       <form className="m1" onSubmit={handleSubmit(createProject)}>
         <ProjectFormElems
           formState={formState}

@@ -30,7 +30,8 @@
       "email": "Email address",
       "password": "Password",
       "company": "Company name",
-      "company_logo": "Company logo (URL)"
+      "company_logo": "Company logo (URL)",
+      "register": "Register"
     },
     "login": {
       "hint": {
@@ -75,5 +76,12 @@
     "date_from": "Start",
     "date_to": "End",
     "not_found": "The session was not found."
+  },
+  "screen": {
+    "home": "My projects",
+    "project_add": "Add a new project",
+    "project_edit": "Edit a project",
+    "session_add": "Add a new session",
+    "session_edit": "Edit a session"
   }
 }

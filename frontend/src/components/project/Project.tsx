@@ -5,6 +5,7 @@ import { useLoadProject } from "../../util/load-entity-wrappers";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import { Trans } from "react-i18next";
+import { ScreenTitle } from "../common/ScreenTitle";
 
 export const Project = () => {
   const id = useParamOrEmpty("id");
@@ -15,13 +16,8 @@ export const Project = () => {
   const project: GetProjectDto = maybeProject;
   return (
     <>
+      <ScreenTitle title={project.name} secondaryTitle={project.customer} />
       <div className="project-container">
-        <div>
-          <h2>{project?.name}</h2>
-        </div>
-        <div>
-          <h3>{project?.customer}</h3>
-        </div>
         <ProjectSessionList projectId={project.id} />
         <div className="btn-wrapper">
           <Link

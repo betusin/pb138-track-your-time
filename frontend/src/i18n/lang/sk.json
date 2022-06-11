@@ -30,7 +30,8 @@
       "email": "Emailová adresa",
       "password": "Heslo",
       "company": "Názov firmy",
-      "company_logo": "Logo firmy (URL)"
+      "company_logo": "Logo firmy (URL)",
+      "register": "Zaregistrovať sa"
     },
     "login": {
       "hint": {
@@ -75,5 +76,12 @@
     "date_from": "Začiatok",
     "date_to": "Koniec",
     "not_found": "Záznam neexistuje."
+  },
+  "screen": {
+    "home": "Moje projekty",
+    "project_add": "Pridať projekt",
+    "project_edit": "Upraviť projekt",
+    "session_add": "Pridať záznam",
+    "session_edit": "Upraviť záznam"
   }
 }

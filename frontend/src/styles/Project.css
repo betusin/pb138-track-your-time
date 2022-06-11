@@ -18,6 +18,10 @@
   background-color: var(--bg-color);
 }
 
+.project-button {
+  padding: 4rem;
+}
+
 .project-info {
   display: flex;
   flex-direction: column;
@@ -99,6 +103,14 @@
 
 .form-dates__picker {
   margin: 0.5rem 0;
+}
+
+.auth-form--container {
+  margin: 0 0 2rem 0;
+}
+
+.auth-form--button {
+  margin: 0 0 2rem 0;
 }
 
 /* For Tablets */

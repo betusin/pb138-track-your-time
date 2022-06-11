@@ -7,6 +7,7 @@ import { projectControllerRemoveWrap } from "../../util/api-call-wrappers";
 import { useLoadProjects } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
+import { ScreenTitle } from "../common/ScreenTitle";
 
 export const ProjectList = () => {
   const doApiCall = useApiCall();
@@ -39,6 +40,7 @@ export const ProjectList = () => {
 
   return (
     <>
+      <ScreenTitle title={i18n.t("screen.home")} />
       <div className="project-list m1">
         {projects.map((project) => (
           <ProjectItem
@@ -47,7 +49,7 @@ export const ProjectList = () => {
             onDelete={deleteProject}
           />
         ))}
-        <div className="btn-wrapper">
+        <div className="btn-wrapper project-button">
           <Link to="/project/add" className="btn btn-add-circle">
             +
           </Link>
