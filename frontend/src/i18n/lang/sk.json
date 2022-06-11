@@ -9,7 +9,8 @@
     "unexpected": "Nastala nečakaná chyba!",
     "validation_failed": "Niektoré z polí je neplatné.",
     "refresh_failed": "Nepodarilo sa obnoviť údaje! Si pripojený k internetu?",
-    "not_found": "Snažíš sa niečo nájsť? Skús odkazy na navigačnej lište."
+    "not_found": "Snažíš sa niečo nájsť? Skús odkazy na navigačnej lište.",
+    "bad_date_range": "Dátum konca musí byť neskôr ako dátum začiatku."
   },
   "operation": {
     "delete": "Odstrániť",

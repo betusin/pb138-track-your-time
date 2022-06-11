@@ -9,6 +9,30 @@ import { theme } from "../../styles/theme";
 import { Trans } from "react-i18next";
 import { GetSessionDto } from "../../api/model";
 import { dateTimeFormat, dateTimeMask } from "../../util/date-formatting";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import i18n from "i18next";
+
+const schema = yup.object().shape({
+  fromDate: yup
+    .date()
+    .required()
+    .when("toDate", {
+      is: () => true,
+      then: yup.date().test((schema, caw) => {
+        // eslint-disable-next-line
+        const from = schema!;
+        const to = caw.parent.toDate;
+        return from < to;
+      }),
+    }),
+  toDate: yup.date().required(),
+  isInvoiced: yup.boolean().required(),
+  hourlyRate: yup.number().required().positive(),
+  note: yup.string().optional(),
+});
 
 export interface SessionFormElemsProps {
   buttonText: string;
@@ -45,7 +69,19 @@ export const SessionForm = ({
         hourlyRate: prefill?.hourlyRate ?? fallbackHourlyRate,
         note: prefill?.note ?? "",
       },
+      resolver: yupResolver(schema),
     });
+  function onFormStateChanged() {
+    for (const errorsKey in formState.errors) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const error = formState.errors[errorsKey];
+      if (error.ref["name"] == "fromDate") {
+        toast.error(i18n.t("error.bad_date_range"));
+      }
+    }
+  }
+  useEffect(onFormStateChanged, [formState]);
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <div className="form--inner-container">
