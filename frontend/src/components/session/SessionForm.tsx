@@ -30,7 +30,7 @@ const schema = yup.object().shape({
     }),
   toDate: yup.date().required(),
   isInvoiced: yup.boolean().required(),
-  hourlyRate: yup.number().required().positive(),
+  hourlyRate: yup.number().required().min(0),
   note: yup.string().optional(),
 });
 
