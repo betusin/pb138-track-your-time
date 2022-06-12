@@ -66,9 +66,15 @@ a {
 }
 
 .btn-add-circle {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add-circle--large {
   height: 4rem;
   width: 4rem;
-  border-radius: 50%;
   font-size: 3rem;
 }
 

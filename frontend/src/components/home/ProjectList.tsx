@@ -8,6 +8,7 @@ import { useLoadProjects } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
 import { ScreenTitle } from "../common/ScreenTitle";
+import { PlusButton } from "../common/PlusButton";
 
 export const ProjectList = () => {
   const doApiCall = useApiCall();
@@ -50,9 +51,11 @@ export const ProjectList = () => {
           />
         ))}
         <div className="btn-wrapper project-button">
-          <Link to="/project/add" className="btn btn-add-circle">
-            +
-          </Link>
+          <PlusButton
+            to="project/add"
+            title={i18n.t("project.add")}
+            size="large"
+          ></PlusButton>
         </div>
       </div>
     </>
