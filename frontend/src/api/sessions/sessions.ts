@@ -9,6 +9,7 @@ import useSwr, { SWRConfiguration, Key } from "swr";
 import type {
   CreateSessionDto,
   GetSessionDto,
+  GetSessionWithPhotosDto,
   UpdateSessionDto,
   SessionControllerCreateSessionBody,
 } from ".././model";
@@ -88,7 +89,7 @@ export const useProjectControllerFindAllSessions = <TError = AxiosError<void>>(
 export const sessionControllerFindOne = (
   id: string,
   options?: AxiosRequestConfig
-): Promise<AxiosResponse<GetSessionDto>> => {
+): Promise<AxiosResponse<GetSessionWithPhotosDto>> => {
   return axios.get(`/sessions/${id}`, options);
 };
 
