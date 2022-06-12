@@ -9,7 +9,8 @@
     "unexpected": "Unexpected error occurred!",
     "validation_failed": "One of the fields is invalid.",
     "refresh_failed": "Failed to refresh data! Are you connected to the internet?",
-    "not_found": "Trying to find something? Try links on the navigation bar."
+    "not_found": "Trying to find something? Try links on the navigation bar.",
+    "bad_date_range": "The start date must come before the end date."
   },
   "operation": {
     "delete": "Delete",

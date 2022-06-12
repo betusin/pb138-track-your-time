@@ -1,6 +1,5 @@
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { SessionFormElems } from "./SessionFormElems";
+import { SessionForm } from "./SessionForm";
 import { useApiCall } from "../../util/api-caller";
 import toast from "react-hot-toast";
 import { sessionControllerCreateWrap } from "../../util/api-call-wrappers";
@@ -9,7 +8,8 @@ import { useLoadProject } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import { useParamOrEmpty } from "../../util/params";
 import i18n from "../../i18n/i18n";
-import { ScreenTitle } from "../common/ScreenTitle";
+import { PageSection } from "../common/PageSection";
+import { Page } from "../common/PageContent";
 
 export interface IFormSessionInput {
   fromDate: Date;
@@ -19,21 +19,9 @@ export interface IFormSessionInput {
   note: string;
 }
 
-function createInitialSession(hourlyRate: number): IFormSessionInput {
-  return {
-    fromDate: new Date(),
-    toDate: new Date(),
-    isInvoiced: false,
-    hourlyRate: hourlyRate,
-    note: "",
-  };
-}
-
 export const CreateSession = () => {
   const navigate = useNavigate();
   const doApiCall = useApiCall();
-  const { register, handleSubmit, formState, control } =
-    useForm<IFormSessionInput>();
   const id = useParamOrEmpty("id");
   const maybeProject = useLoadProject(id);
   if (maybeProject === undefined) {
@@ -66,17 +54,14 @@ export const CreateSession = () => {
   }
 
   return (
-    <>
-      <ScreenTitle title={i18n.t("screen.session_add")} />
-      <form className="m1" onSubmit={handleSubmit(createSession)}>
-        <SessionFormElems
-          formState={formState}
-          register={register}
-          control={control}
-          sessionData={createInitialSession(project.hourlyRate)}
-          buttonText={i18n.t("session.create")}
+    <Page title={i18n.t("screen.session_add")} secondaryTitle={project.name}>
+      <PageSection title={""}>
+        <SessionForm
+          buttonText={i18n.t("screen.session_add")}
+          fallbackHourlyRate={project.hourlyRate}
+          onSubmit={createSession}
         />
-      </form>
-    </>
+      </PageSection>
+    </Page>
   );
 };
