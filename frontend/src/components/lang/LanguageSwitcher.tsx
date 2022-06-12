@@ -10,6 +10,7 @@ export function LanguageSwitcher() {
         <Trans i18nKey="app.language" />
       </InputLabel>
       <Select
+        className="navbar--item"
         labelId="lang-switcher"
         value={i18n.resolvedLanguage}
         label={<Trans i18nKey="app.language" />}
