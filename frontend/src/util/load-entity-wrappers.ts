@@ -1,4 +1,9 @@
-import { GetProjectDto, GetSessionDto, GetUserDto } from "../api/model";
+import {
+  GetProjectDto,
+  GetSessionDto,
+  GetSessionWithPhotosDto,
+  GetUserDto,
+} from "../api/model";
 import {
   useProjectControllerFindAllSessions,
   useProjectControllerFindOne,
@@ -29,7 +34,7 @@ export function useLoadProject(id: string): GetProjectDto | undefined {
   );
 }
 
-export function useLoadSession(id: string): GetSessionDto {
+export function useLoadSession(id: string): GetSessionWithPhotosDto {
   return loadEntityById(
     id,
     useSessionControllerFindOne,

@@ -16,7 +16,7 @@ export const Register = () => {
   const doApiCall = useApiCall();
 
   function register(data: IFormRegisterInput) {
-    if (!data.logo) data.logo = "/assets/company-logo.svg";
+    if (!data.logo) data.logo = "";
     doApiCall(
       userControllerCreate,
       data,
