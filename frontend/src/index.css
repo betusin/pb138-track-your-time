@@ -202,14 +202,11 @@ textarea {
 
 .page--section-content {
   padding: 0;
+  background-color: var(--screen-title-color);
 }
 
 .navbar--item {
   height: 3rem;
-}
-
-.screen-title {
-  background-color: var(--screen-title-color);
 }
 
 @media (min-width: 900px) {
