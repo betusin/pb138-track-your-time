@@ -57,6 +57,8 @@
     "updated": "Projekt bol upravený.",
     "not_found": "Projekt neexistuje.",
     "hour": "hodina",
+    "sessions": "Záznamy",
+    "summary_title": "Zhrnutie",
     "summary": {
       "hours": "Počet hodín",
       "amount": "Čiastka",
@@ -75,7 +77,8 @@
     "updated": "Záznam bol upravený.",
     "date_from": "Začiatok",
     "date_to": "Koniec",
-    "not_found": "Záznam neexistuje."
+    "not_found": "Záznam neexistuje.",
+    "add": "Pridať záznam"
   },
   "screen": {
     "home": "Moje projekty",
