@@ -16,7 +16,8 @@
   "operation": {
     "delete": "Odstrániť",
     "delete_confirm": "Potvrdiť odstránenie",
-    "actions": "Akcie"
+    "actions": "Akcie",
+    "upload": "Pridať"
   },
   "confirm": {
     "delete": "Stlač znova pre potvrdenie zmazania."
@@ -89,10 +90,13 @@
     "date_from": "Začiatok",
     "date_to": "Koniec",
     "not_found": "Záznam neexistuje.",
-    "add": "Pridať záznam"
+    "add": "Pridať záznam",
+    "details": "Detaily",
+    "photos": "Fotografie"
   },
   "screen": {
     "home": "Moje projekty",
+    "session": "Záznam",
     "project_add": "Pridať projekt",
     "project_edit": "Upraviť projekt",
     "session_add": "Pridať záznam",

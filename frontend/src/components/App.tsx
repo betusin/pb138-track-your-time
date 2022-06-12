@@ -21,6 +21,7 @@ import { axiosForRefresh } from "../main";
 import { useTranslation } from "react-i18next";
 import { Profile } from "./profile/Profile";
 import { EditProfile } from "./profile/EditProfile";
+import { Session } from "./session/Session";
 import { LoggedOutBar } from "./LoggedOutBar";
 import { LoadingPlaceholder } from "./common/LoadingPlaceholder";
 
@@ -74,6 +75,7 @@ export const App = () => {
                   path="/project/:id/session/add"
                   element={<CreateSession />}
                 />
+                <Route path="/session/:id" element={<Session />} />
                 <Route path="/session/:id/edit" element={<EditSession />} />
                 <Route path="/session/add" element={<CreateSession />} />
                 <Route path="/me" element={<Profile />} />
