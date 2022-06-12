@@ -28,6 +28,21 @@ export const Project = () => {
   const project: GetProjectDto = maybeProject;
   return (
     <Page title={project.name} secondaryTitle={project.customer}>
+      <PageSection
+        title={i18n.t("project.sessions")}
+        controls={
+          <PlusButton
+            to={`/project/${project.id}/session/add`}
+            title={i18n.t("session.add")}
+          />
+        }
+      >
+        <ProjectSessionList
+          sessions={sessions}
+          projectId={project.id}
+          onSelectionChanged={setSelection}
+        />
+      </PageSection>
       <PageSection title={i18n.t("project.summary_title")}>
         <div className="project-summary-container">
           <ProjectSummaryTable project={project} sessions={sessions} />
@@ -49,21 +64,6 @@ export const Project = () => {
             stat={getHoursForSession}
           />
         </div>
-      </PageSection>
-      <PageSection
-        title={i18n.t("project.sessions")}
-        controls={
-          <PlusButton
-            to={`/project/${project.id}/session/add`}
-            title={i18n.t("session.add")}
-          />
-        }
-      >
-        <ProjectSessionList
-          sessions={sessions}
-          projectId={project.id}
-          onSelectionChanged={setSelection}
-        />
       </PageSection>
     </Page>
   );

@@ -20,7 +20,7 @@ export function ProjectSessionListView({
   const columns = getGridColumns(remove);
   return (
     <>
-      <div style={{ height: 500, width: "100%" }}>
+      <div style={{ height: 350, width: "100%" }}>
         <DataGrid
           rows={sessions}
           columns={columns}
