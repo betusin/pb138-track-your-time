@@ -1,6 +1,8 @@
 import { GetSessionDto } from "../../api/model";
 import { Link } from "react-router-dom";
 import { DeleteButton } from "../common/DeleteButton";
+import { Edit } from "@mui/icons-material";
+import { styleLargeIcon } from "../../styles/theme";
 
 export interface EditCellContentsProps {
   session: GetSessionDto;
@@ -14,9 +16,9 @@ export function EditCellContents({
   return (
     <>
       <Link to={`/session/${session.id}/edit`}>
-        <img
-          className="icon icon--small"
-          src={`/assets/edit-${session.isInvoiced ? "antracit" : "lime"}.svg`}
+        <Edit
+          style={styleLargeIcon}
+          color={session.isInvoiced ? "disabled" : "primary"}
         />
       </Link>
       <DeleteButton onDelete={onDeleteClick} id={session.id} />
