@@ -48,7 +48,9 @@ export const Profile = () => {
               alt="edit"
             />
           </Link>
-          <img className="profile__logo" src={profile.logo} alt="logo" />
+          <div className="profile__logo-wrapper">
+            <img className="profile__logo-img" src={profile.logo} alt="logo" />
+          </div>
           <div className="profile-field profile__name">
             <p className="profile-field__label">
               <Trans i18nKey="profile.name" />
