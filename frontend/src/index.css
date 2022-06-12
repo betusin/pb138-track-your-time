@@ -8,6 +8,7 @@
   --error-color: #d32f2f;
   --success-color: #2e7d32;
   --secondary: #9edf36;
+  --secondary-color: #97a800;
 }
 
 body {
@@ -145,6 +146,12 @@ textarea {
 
 .navbar {
   background: var(--nav-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  flex-wrap: wrap;
   row-gap: 1rem;
 }
 
@@ -194,6 +201,13 @@ textarea {
 
 .page--section-content {
   padding: 0;
+}
+
+.navbar--item {
+  height: 3rem;
+}
+
+.screen-title {
   background-color: var(--screen-title-color);
 }
 

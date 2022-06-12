@@ -2,6 +2,7 @@
   "app": {
     "name": "TrackYourTime",
     "home": "Domov",
+    "profile": "Profil",
     "language": "Jazyk"
   },
   "error": {
@@ -94,5 +95,12 @@
     "project_edit": "Upraviť projekt",
     "session_add": "Pridať záznam",
     "session_edit": "Upraviť záznam"
+  },
+  "profile": {
+    "name": "Meno a priezvisko",
+    "company_name": "Názov firmy",
+    "email": "E-mail",
+    "sign_out": "Odhlásiť sa",
+    "not_found": "Profil nie je možné nájsť"
   }
 }

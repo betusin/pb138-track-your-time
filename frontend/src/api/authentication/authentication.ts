@@ -32,3 +32,12 @@ export const authControllerRefresh = (
 ): Promise<AxiosResponse<AccessTokenDto>> => {
   return axios.post(`/auth/refresh`, undefined, options);
 };
+
+/**
+ * @summary Logs out the user by invalidating the refresh token cookie
+ */
+export const authControllerLogout = (
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.post(`/auth/logout`, undefined, options);
+};

@@ -13,3 +13,4 @@ export * from "./getUserDto";
 export * from "./sessionControllerCreateSessionBody";
 export * from "./authControllerLoginParams";
 export * from "./accessTokenDto";
+export * from "./getSessionWithPhotosDto";
