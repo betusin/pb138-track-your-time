@@ -87,6 +87,30 @@
   color: var(--primary_light-color);
 }
 
+.project-summary-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+}
+
+.project-summary-chart {
+  width: 45vh;
+}
+
+@media (min-width: 600px) {
+  .project-summary-chart {
+    width: 50vh;
+  }
+}
+
+@media (min-width: 900px) {
+  .project-summary-chart {
+    width: 55vh;
+  }
+}
+
 .project-summary__th {
   border-bottom: 0.2rem dotted var(--primary-color);
 }
