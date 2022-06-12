@@ -28,7 +28,7 @@
 .profile-field__label {
   margin: 0;
   font-size: 0.8rem;
-  color: var(--secondary);
+  color: var(--secondary-color);
 }
 
 .profile-field__value {
