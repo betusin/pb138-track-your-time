@@ -1,8 +1,10 @@
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { IFormSessionInput } from "./CreateSession";
-import { SessionFormElems } from "./SessionFormElems";
-import { useLoadSession } from "../../util/load-entity-wrappers";
+import { SessionForm } from "./SessionForm";
+import {
+  useLoadProject,
+  useLoadSession,
+} from "../../util/load-entity-wrappers";
 import { GetSessionDto } from "../../api/model";
 import { sessionControllerUpdateWrap } from "../../util/api-call-wrappers";
 import toast from "react-hot-toast";
@@ -12,7 +14,8 @@ import { getSessionControllerFindOneKey } from "../../api/sessions/sessions";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
-import { ScreenTitle } from "../common/ScreenTitle";
+import { Page } from "../common/PageContent";
+import { PageSection } from "../common/PageSection";
 
 export const EditSession = () => {
   const navigate = useNavigate();
@@ -21,11 +24,8 @@ export const EditSession = () => {
 
   const id = useParamOrEmpty("id");
   const maybeSession = useLoadSession(id);
-
-  const { register, handleSubmit, formState, control } =
-    useForm<IFormSessionInput>();
-
-  if (maybeSession === undefined) {
+  const project = useLoadProject(maybeSession?.projectId ?? "");
+  if (maybeSession === undefined || project == undefined) {
     return <LoadingPlaceholder />;
   }
   const session: GetSessionDto = maybeSession;
@@ -57,25 +57,16 @@ export const EditSession = () => {
     return false;
   }
 
-  const prefill: IFormSessionInput = {
-    fromDate: new Date(session.fromDate),
-    toDate: new Date(session.toDate),
-    isInvoiced: session.isInvoiced,
-    hourlyRate: session.hourlyRate ?? 0,
-    note: session.note ?? "",
-  };
   return (
-    <>
-      <ScreenTitle title={i18n.t("screen.session_edit")} />
-      <form className="m1" onSubmit={handleSubmit(updateSession)}>
-        <SessionFormElems
-          formState={formState}
-          register={register}
-          sessionData={prefill}
-          control={control}
+    <Page title={i18n.t("screen.session_edit")} secondaryTitle={project.name}>
+      <PageSection title={""}>
+        <SessionForm
           buttonText="Edit session"
+          prefill={session}
+          fallbackHourlyRate={project.hourlyRate}
+          onSubmit={updateSession}
         />
-      </form>
-    </>
+      </PageSection>
+    </Page>
   );
 };
