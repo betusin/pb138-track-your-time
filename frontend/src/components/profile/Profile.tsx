@@ -38,16 +38,17 @@ export const Profile = () => {
 
   return (
     <>
-      <ScreenTitle title={i18n.t("app.profile")} />
+      <ScreenTitle title={i18n.t("app.profile")}>
+        <Link to="/me/edit">
+          <img
+            className="icon profile-header__icon"
+            src="/assets/edit-lime.svg"
+            alt="edit"
+          />
+        </Link>
+      </ScreenTitle>
       <div className="profile-wrapper">
         <Stack>
-          <Link className="icon-wrapper" to="/me/edit">
-            <img
-              className="icon profile-header__icon"
-              src="/assets/edit-lime.svg"
-              alt="edit"
-            />
-          </Link>
           <div className="profile__logo-wrapper">
             <img className="profile__logo-img" src={profile.logo} alt="logo" />
           </div>
