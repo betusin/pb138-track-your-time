@@ -28,11 +28,7 @@ export function DeleteButton({ onDelete, id }: DeleteDoubleClickButtonProps) {
     ? i18n.t("operation.delete_confirm")
     : i18n.t("operation.delete");
   return (
-    <button
-      onClick={() => onPressed()}
-      className="btn-delete-project"
-      title={title}
-    >
+    <button onClick={() => onPressed()} className="btn-delete" title={title}>
       {wantToRemove ? (
         <DeleteForever style={styleLargeIcon} color="primary" />
       ) : (

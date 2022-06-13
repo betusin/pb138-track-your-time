@@ -55,11 +55,15 @@
   border-top: solid 1px var(--primary-color);
 }
 
-.btn-delete-project {
+.btn-delete {
+  display: flex;
   border: none;
   background-color: inherit;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
+  width: 2.75rem;
+  height: 2.75rem;
 }
 
 .project-container {
