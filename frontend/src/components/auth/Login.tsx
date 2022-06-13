@@ -42,9 +42,6 @@ export const Login = () => {
   return (
     <>
       <div className="auth-form--container">
-        <h1>
-          <Trans i18nKey="app.name" />
-        </h1>
         <LoginForm onSubmit={login} />
         <Trans i18nKey="auth.register.hint.no_account" />
         <Link to="/register">

@@ -166,6 +166,16 @@ textarea {
   font-weight: 700;
 }
 
+.logged-out-bar {
+  background: var(--nav-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
 .page {
 }
 
@@ -210,6 +220,10 @@ textarea {
 }
 
 @media (min-width: 900px) {
+  .logged-out-bar {
+    flex-direction: row;
+  }
+
   .page--section-content {
     padding: 0 1.5rem 1.5rem 1.5rem;
   }
