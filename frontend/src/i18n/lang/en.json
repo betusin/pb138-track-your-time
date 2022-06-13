@@ -108,5 +108,19 @@
     "edit_profile": "Editing profile",
     "edit": "Update profile",
     "updated": "Profile updated."
+  },
+  "form": {
+    "validation": {
+      "project": {
+        "name": "Enter project name"
+      },
+      "auth": {
+        "email": "Enter an email address",
+        "password": "Enter password",
+        "name": "Enter your name",
+        "surname": "Enter your surname",
+        "company": "Enter company name"
+      }
+    }
   }
 }

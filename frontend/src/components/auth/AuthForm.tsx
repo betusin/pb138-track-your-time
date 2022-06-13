@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
+import i18n from "../../i18n/i18n";
 import { ErrorFieldMessage } from "../common/ErrorFieldMessage";
 
 export interface IFormLoginInput {
@@ -37,7 +38,12 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
           formState.errors.email && "text-field--error"
         }`}
         type="email"
-        {...register("email", { required: "Email required!" })}
+        {...register("email", {
+          required: {
+            message: i18n.t("form.validation.auth.email"),
+            value: true,
+          },
+        })}
       />
       <ErrorFieldMessage formState={formState} name="email" />
       <div>
@@ -50,7 +56,12 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
           formState.errors.password && "text-field--error"
         }`}
         type="password"
-        {...register("password", { required: "Password required!" })}
+        {...register("password", {
+          required: {
+            message: i18n.t("form.validation.auth.password"),
+            value: true,
+          },
+        })}
       />
       <ErrorFieldMessage formState={formState} name="password" />
 
@@ -76,7 +87,12 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
         type="text"
-        {...register("name", { required: "Name required!" })}
+        {...register("name", {
+          required: {
+            message: i18n.t("form.validation.auth.name"),
+            value: true,
+          },
+        })}
       />
       <ErrorFieldMessage formState={formState} name="name" />
       <div>
@@ -89,7 +105,12 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.surname && "text-field--error"
         }`}
         type="text"
-        {...register("surname", { required: "Surname required!" })}
+        {...register("surname", {
+          required: {
+            message: i18n.t("form.validation.auth.surname"),
+            value: true,
+          },
+        })}
       />
       <ErrorFieldMessage formState={formState} name="surname" />
       <div>
@@ -102,7 +123,12 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.email && "text-field--error"
         }`}
         type="email"
-        {...register("email", { required: "Email required!" })}
+        {...register("email", {
+          required: {
+            message: i18n.t("form.validation.auth.email"),
+            value: true,
+          },
+        })}
       />
       <ErrorFieldMessage formState={formState} name="email" />
       <div>
@@ -115,7 +141,12 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.password && "text-field--error"
         }`}
         type="password"
-        {...register("password", { required: "Password required!" })}
+        {...register("password", {
+          required: {
+            message: i18n.t("form.validation.auth.password"),
+            value: true,
+          },
+        })}
       />
       <ErrorFieldMessage formState={formState} name="password" />
       <div>
@@ -128,7 +159,12 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.company && "text-field--error"
         }`}
         type="text"
-        {...register("company", { required: "Company required!" })}
+        {...register("company", {
+          required: {
+            message: i18n.t("form.validation.auth.company"),
+            value: true,
+          },
+        })}
       />
       <ErrorFieldMessage formState={formState} name="company" />
       <div>

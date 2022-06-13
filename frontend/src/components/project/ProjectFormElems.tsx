@@ -4,6 +4,7 @@ import { theme } from "../../styles/theme";
 import { IFormProjectInput } from "./CreateProject";
 import { ErrorFieldMessage } from "../common/ErrorFieldMessage";
 import { Trans } from "react-i18next";
+import i18n from "../../i18n/i18n";
 
 export interface IProjectFormElemsProps {
   formState: FormState<IFormProjectInput>;
@@ -26,7 +27,12 @@ export const ProjectFormElems = ({
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
         type="text"
-        {...register("name", { required: "Enter a project name" })}
+        {...register("name", {
+          required: {
+            message: i18n.t("form.validation.project.name"),
+            value: true,
+          },
+        })}
       />
       <ErrorFieldMessage formState={formState} name="name" />
 
