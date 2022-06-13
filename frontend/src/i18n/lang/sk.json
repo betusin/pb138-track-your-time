@@ -92,7 +92,11 @@
     "not_found": "Záznam neexistuje.",
     "add": "Pridať záznam",
     "details": "Detaily",
-    "photos": "Fotografie"
+    "photos": "Fotografie",
+    "photo": {
+      "deleted": "Fotografia zo záznamu bola odstránená.",
+      "not_found": "Fotografia zo záznamu neexistuje."
+    }
   },
   "screen": {
     "home": "Moje projekty",

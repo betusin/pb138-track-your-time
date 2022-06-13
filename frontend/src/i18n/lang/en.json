@@ -92,7 +92,11 @@
     "not_found": "The session was not found.",
     "add": "Add session",
     "details": "Details",
-    "photos": "Photos"
+    "photos": "Photos",
+    "photo": {
+      "deleted": "Session photo deleted.",
+      "not_found": "The session photo was not found."
+    }
   },
   "screen": {
     "home": "My projects",
