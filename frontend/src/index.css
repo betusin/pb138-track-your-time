@@ -64,6 +64,7 @@ a {
   color: var(--bg-color);
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .btn-add-circle {
