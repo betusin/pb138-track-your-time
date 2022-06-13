@@ -14,6 +14,7 @@ import { accessTokenAtom } from "../../state/atom";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import moment from "moment";
+import { unexpectedErrorToast } from "../../util/common-toasts";
 
 export interface GenerateReportSectionProps {
   projectId: string;
@@ -59,14 +60,10 @@ export function GenerateReportSection({
         if (response.status == 200) {
           fileDownload(response.data, name);
         } else {
-          toast.error(i18n.t("error.unexpected"));
-          console.error(response);
+          unexpectedErrorToast();
         }
       })
-      .catch((e) => {
-        toast.error(i18n.t("error.unexpected"));
-        console.error(e);
-      });
+      .catch(unexpectedErrorToast);
   }
 
   return (
