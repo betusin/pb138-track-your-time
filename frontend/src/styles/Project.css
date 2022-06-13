@@ -55,15 +55,18 @@
   border-top: solid 1px var(--primary-color);
 }
 
-.btn-delete {
+.btn {
   display: flex;
   border: none;
-  background-color: inherit;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.btn__icon {
   width: 2.75rem;
   height: 2.75rem;
+  background-color: inherit;
 }
 
 .btn-delete__border {

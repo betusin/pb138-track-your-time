@@ -18,7 +18,7 @@ export function EditCellContents({
       <Link to={`/session/${session.id}/`}>
         <Image style={styleLargeIcon} color="primary" />
       </Link>
-      <Link to={`/session/${session.id}/edit`}>
+      <Link to={`/session/${session.id}/edit`} className="btn btn__icon">
         <Edit
           style={styleLargeIcon}
           color={session.isInvoiced ? "disabled" : "primary"}
