@@ -45,7 +45,7 @@ export const App = () => {
   }, []);
 
   if (loading) {
-    return <LoadingPlaceholder></LoadingPlaceholder>;
+    return <LoadingPlaceholder />;
   }
 
   return (
