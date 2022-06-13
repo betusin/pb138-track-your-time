@@ -1,8 +1,7 @@
-
 import { ErrorMessage } from "@hookform/error-message";
 import { FormState } from "react-hook-form";
 import { IFormLoginInput, IFormRegisterInput } from "../auth/AuthForm";
-import { IFormProjectInput } from '../project/CreateProject';
+import { IFormProjectInput } from "../project/CreateProject";
 
 interface IErrorFieldMessageProps<T> {
   name: string;
