@@ -35,7 +35,7 @@ export function DeleteButton({
   return (
     <button
       onClick={() => onPressed()}
-      className={"btn btn__icon" + (border ? " btn-delete__border" : "")}
+      className={"btn btn__icon" + (border ? " btn__border" : "")}
       title={title}
     >
       {wantToRemove ? (
