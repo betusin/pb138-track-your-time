@@ -22,7 +22,8 @@
     "delete": "Stlač znova pre potvrdenie zmazania."
   },
   "status": {
-    "no_data": "Žiadne dáta"
+    "no_data": "Žiadne dáta",
+    "loading": "Načítava sa..."
   },
   "auth": {
     "register": {
