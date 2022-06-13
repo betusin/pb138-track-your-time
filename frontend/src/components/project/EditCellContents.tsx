@@ -15,7 +15,7 @@ export function EditCellContents({
 }: EditCellContentsProps) {
   return (
     <>
-      <Link to={`/session/${session.id}/`}>
+      <Link to={`/session/${session.id}/`} className="btn btn__icon">
         <Image style={styleLargeIcon} color="primary" />
       </Link>
       <Link to={`/session/${session.id}/edit`} className="btn btn__icon">
