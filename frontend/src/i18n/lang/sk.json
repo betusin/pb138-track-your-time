@@ -101,6 +101,7 @@
     "company_name": "Názov firmy",
     "email": "E-mail",
     "sign_out": "Odhlásiť sa",
-    "not_found": "Profil nie je možné nájsť"
+    "not_found": "Profil nie je možné nájsť",
+    "signed_out": "Boli ste odhlásený."
   }
 }

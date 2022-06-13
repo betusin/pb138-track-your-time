@@ -12,6 +12,7 @@ import i18n from "../../i18n/i18n";
 import { Stack } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { styleLargeIcon } from "../../styles/theme";
+import { toast } from "react-hot-toast";
 
 export const Profile = () => {
   const doApiCall = useApiCall();
@@ -27,6 +28,7 @@ export const Profile = () => {
 
   const onLougoutSuccess = () => {
     setToken("");
+    toast.success(i18n.t("profile.signed_out"));
     navigate("/login");
   };
 
