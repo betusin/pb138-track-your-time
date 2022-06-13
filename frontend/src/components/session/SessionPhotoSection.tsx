@@ -34,9 +34,8 @@ export function SessionPhotoSection({ session }: SessionPhotoSectionProps) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return (
-          <img key={photo.id} className="session-photo" src={photo.contents} />
-        );
+        const contents = photo.contents;
+        return <img key={photo.id} className="session-photo" src={contents} />;
       })}
     </div>
   );
