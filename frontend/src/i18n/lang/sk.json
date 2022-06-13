@@ -17,7 +17,8 @@
     "delete": "Odstrániť",
     "delete_confirm": "Potvrdiť odstránenie",
     "actions": "Akcie",
-    "upload": "Pridať"
+    "upload": "Pridať",
+    "download": "Stiahnuť"
   },
   "confirm": {
     "delete": "Stlač znova pre potvrdenie zmazania."
@@ -68,6 +69,7 @@
     "hour": "hodina",
     "sessions": "Záznamy",
     "summary_title": "Zhrnutie",
+    "generate_report": "Vygenerovať report",
     "summary": {
       "hours": "Počet hodín",
       "amount": "Čiastka",

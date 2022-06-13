@@ -183,6 +183,10 @@ textarea {
   margin-bottom: 2rem;
 }
 
+.logged-out-bar--title {
+  margin: 0;
+}
+
 .page {
 }
 

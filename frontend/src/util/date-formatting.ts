@@ -3,6 +3,16 @@ import { useTranslation } from "react-i18next";
 export const dateTimeFormat = "HH:mm - dd. MM. yyyy";
 export const dateTimeMask = "__:__ - __. __. ____";
 
+export const dateFormat = "dd. MM. yyyy";
+export const dateMask = "__. __. ____";
+
+export const dateFormatReportFileName = "DD-MM-yyyy";
+
+export const datePickerOptions = {
+  inputFormat: dateFormat,
+  mask: dateMask,
+};
+
 export function formatMonthLabel(date: Date, language: string) {
   return `${date.toLocaleString(language, {
     month: "short",

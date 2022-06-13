@@ -20,6 +20,7 @@ export function DeleteButton({
   function onPressed() {
     if (wantToRemove) {
       onDelete(id);
+      setWantToRemove(false);
     } else {
       toast(i18n.t("confirm.delete"));
       setTimeout(() => {
