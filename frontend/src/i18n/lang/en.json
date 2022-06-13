@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "TrackYourTime",
+    "home": "Home",
+    "profile": "Profile",
+    "language": "Language"
+  },
+  "error": {
+    "unauthorized": "Unauthorized operation!",
+    "unexpected": "Unexpected error occurred!",
+    "validation_failed": "One of the fields is invalid.",
+    "refresh_failed": "Failed to refresh data! Are you connected to the internet?",
+    "not_found": "Trying to find something? Try links on the navigation bar.",
+    "bad_date_range": "The start date must come before the end date."
+  },
+  "operation": {
+    "delete": "Delete",
+    "delete_confirm": "Confirm deletion",
+    "actions": "Actions"
+  },
+  "confirm": {
+    "delete": "Click again to delete."
+  },
+  "status": {
+    "no_data": "Nothing to show",
+    "loading": "Loading..."
+  },
+  "auth": {
+    "register": {
+      "hint": {
+        "no_account": "Don't have an account yet? Register ",
+        "here": "here"
+      },
+      "already_exists": "A user with this email already exists.",
+      "name": "First name",
+      "surname": "Last name",
+      "email": "Email address",
+      "password": "Password",
+      "company": "Company name",
+      "company_logo": "Company logo (URL)",
+      "register": "Register"
+    },
+    "login": {
+      "hint": {
+        "existing_account": "Already have an account? Log in ",
+        "here": "here"
+      },
+      "log_in": "Log in",
+      "password_incorrect": "The provided password is incorrect.",
+      "user_not_found": "User not found."
+    },
+    "email_address": "E-mail address",
+    "password": "Password"
+  },
+  "project": {
+    "name": "Project name",
+    "customer": "Customer",
+    "hourly_rate": "Hourly rate",
+    "is_active": "Is active?",
+    "create": "Create project",
+    "edit": "Update project",
+    "add": "Add project",
+    "created": "Project created.",
+    "deleted": "Project deleted.",
+    "updated": "Project updated.",
+    "not_found": "The project was not found.",
+    "hour": "hour",
+    "sessions": "Sessions",
+    "summary_title": "Summary",
+    "summary": {
+      "hours": "Hours",
+      "amount": "Amount",
+      "not_yet_invoiced": "Not yet invoiced",
+      "already_invoiced": "Invoiced",
+      "total": "Total",
+      "hour_per_month": "Work hours per month",
+      "hour_per_day": "Work hours per day",
+      "hour_per_weekday": "Work hours per weekday"
+    }
+  },
+  "session": {
+    "hourly_rate": "Hourly rate",
+    "note": "Note",
+    "is_invoiced": "Invoiced?",
+    "create": "Create session",
+    "created": "Session created.",
+    "deleted": "Session deleted.",
+    "updated": "Session updated.",
+    "date_from": "Start",
+    "date_to": "End",
+    "not_found": "The session was not found.",
+    "add": "Add session"
+  },
+  "screen": {
+    "home": "My projects",
+    "project_add": "Add a new project",
+    "project_edit": "Edit a project",
+    "session_add": "Add a new session",
+    "session_edit": "Edit a session"
+  },
+  "profile": {
+    "name": "Full name",
+    "company_name": "Company name",
+    "email": "Email",
+    "sign_out": "Sign out",
+    "not_found": "The profile was not found.",
+    "signed_out": "You were signed out.",
+    "edit_profile": "Editing profile",
+    "edit": "Update profile",
+    "updated": "Profile updated."
+  }
+}

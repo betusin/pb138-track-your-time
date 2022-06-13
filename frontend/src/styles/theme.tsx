@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
       light: "#f7f9d2",
       main: "#ccd921",
@@ -13,3 +14,7 @@ export const theme = createTheme({
     },
   },
 });
+
+export const styleLargeIcon = {
+  fontSize: 30,
+};

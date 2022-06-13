@@ -1,4 +1,11 @@
-import { Controller, Post, Request, UseGuards, Response } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Request,
+  UseGuards,
+  Response,
+  HttpCode,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import {
@@ -27,6 +34,7 @@ export class AuthController {
     description: 'Login information is incorrect or missing',
   })
   @UseGuards(LocalAuthGuard)
+  @HttpCode(200)
   @Post('login')
   async login(
     @Request() req: any,
@@ -48,8 +56,22 @@ export class AuthController {
   })
   @ApiOkResponse({ type: AccessTokenDto })
   @UseGuards(JwtRefreshAuthGuard)
+  @HttpCode(200)
   @Post('refresh')
   async refresh(@CurrentUser() userId: string): Promise<AccessTokenDto> {
     return this.authService.refresh(userId);
+  }
+
+  @ApiOperation({
+    summary: 'Logs out the user by invalidating the refresh token cookie',
+  })
+  @ApiOkResponse({ description: 'User logged out' })
+  @HttpCode(200)
+  @Post('logout')
+  async logout(@Response({ passthrough: true }) res: any): Promise<void> {
+    res.cookie('refreshToken', '', {
+      httpOnly: true,
+      maxAge: 0,
+    });
   }
 }

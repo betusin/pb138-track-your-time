@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ErrorFieldMessage } from "../ErrorFieldMessage";
+import { Trans } from "react-i18next";
+import { ErrorFieldMessage } from '../common/ErrorFieldMessage';
 
 export interface IFormLoginInput {
   email: string;
@@ -27,7 +28,9 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
   return (
     <form className="m1" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>E-mail address</label>
+        <label>
+          <Trans i18nKey="auth.email_address" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -38,7 +41,9 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
       />
       <ErrorFieldMessage formState={formState} name="email" />
       <div>
-        <label>Password</label>
+        <label>
+          <Trans i18nKey="auth.password" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -50,7 +55,9 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
       <ErrorFieldMessage formState={formState} name="password" />
 
       <div className="btn-wrapper">
-        <input className="btn btn--primary" type="submit" value="Login" />
+        <button className="auth-form--button btn btn--primary" type="submit">
+          <Trans i18nKey="auth.login.log_in" />
+        </button>
       </div>
     </form>
   );
@@ -62,7 +69,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
   return (
     <form className="m1" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>Name</label>
+        <label>
+          <Trans i18nKey="auth.register.name" />
+        </label>
       </div>
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
@@ -71,7 +80,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       />
       <ErrorFieldMessage formState={formState} name="name" />
       <div>
-        <label>Surname</label>
+        <label>
+          <Trans i18nKey="auth.register.surname" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -82,7 +93,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       />
       <ErrorFieldMessage formState={formState} name="surname" />
       <div>
-        <label>E-mail address</label>
+        <label>
+          <Trans i18nKey="auth.register.email" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -93,7 +106,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       />
       <ErrorFieldMessage formState={formState} name="email" />
       <div>
-        <label>Password</label>
+        <label>
+          <Trans i18nKey="auth.register.password" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -104,7 +119,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       />
       <ErrorFieldMessage formState={formState} name="password" />
       <div>
-        <label>Company</label>
+        <label>
+          <Trans i18nKey="auth.register.company" />
+        </label>
       </div>
       <input
         className={`text-field ${
@@ -115,7 +132,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       />
       <ErrorFieldMessage formState={formState} name="company" />
       <div>
-        <label>Logo of company (URL source)</label>
+        <label>
+          <Trans i18nKey="auth.register.company_logo" />
+        </label>
       </div>
       <input
         className={`text-field ${formState.errors.logo && "text-field--error"}`}
@@ -124,7 +143,9 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       />
 
       <div className="btn-wrapper">
-        <input className="btn btn--primary" type="submit" value="Register" />
+        <button className="auth-form--button btn btn--primary" type="submit">
+          <Trans i18nKey="auth.register.register" />
+        </button>
       </div>
     </form>
   );

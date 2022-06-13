@@ -1,10 +1,14 @@
 :root {
   --bg-color: #2f2e2e;
+  --bg-color-back: #383737;
+  --nav-color: #252424;
+  --screen-title-color: #2b2a2a;
   --primary-color: #ccd921;
   --primary_light-color: #f7f9d2;
   --error-color: #d32f2f;
   --success-color: #2e7d32;
   --secondary: #9edf36;
+  --secondary-color: #97a800;
 }
 
 body {
@@ -14,7 +18,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-color);
+  background-color: var(--bg-color-back);
   color: var(--primary-color);
 }
 
@@ -63,9 +67,15 @@ a {
 }
 
 .btn-add-circle {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add-circle--large {
   height: 4rem;
   width: 4rem;
-  border-radius: 50%;
   font-size: 3rem;
 }
 
@@ -143,4 +153,93 @@ textarea {
 .text-error {
   color: var(--error-color);
   margin-bottom: 0.5rem;
+}
+
+.navbar {
+  background: var(--nav-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+}
+
+.navbar--title:visited {
+  color: inherit;
+  font-size: 15px;
+  font-weight: 800 !important;
+}
+
+.navbar--title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.logged-out-bar {
+  background: var(--nav-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.logged-out-bar--title {
+  margin: 0;
+}
+
+.page {
+}
+
+.page--title-container {
+  padding: 0 1.5rem 0 1.5rem;
+  background-color: var(--screen-title-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.page--title-container__main {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.page--title-container__section {
+}
+
+.page--title-main {
+  text-align: left;
+  margin: 0;
+}
+
+.page--title-section {
+  font-size: 1.5rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.page--section {
+  margin-top: 1rem;
+}
+
+.page--section-content {
+  padding: 0;
+  background-color: var(--screen-title-color);
+}
+
+.navbar--item {
+  height: 3rem;
+}
+
+@media (min-width: 900px) {
+  .logged-out-bar {
+    flex-direction: row;
+  }
+
+  .page--section-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
 }
