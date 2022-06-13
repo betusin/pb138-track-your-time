@@ -39,6 +39,8 @@ export interface SessionFormElemsProps {
   prefill?: GetSessionDto;
   fallbackHourlyRate: number;
   onSubmit: (data: IFormSessionInput) => void;
+  isCancelEdit: boolean;
+  cancelEdit: () => void;
 }
 
 function parseOrNull(date?: string): Date | undefined {
@@ -59,6 +61,8 @@ export const SessionForm = ({
   prefill,
   fallbackHourlyRate,
   onSubmit,
+  isCancelEdit,
+  cancelEdit,
 }: SessionFormElemsProps) => {
   const { register, handleSubmit, formState, control } =
     useForm<IFormSessionInput>({
@@ -163,7 +167,15 @@ export const SessionForm = ({
           />
         </div>
 
-        <div className="btn-wrapper">
+        <div className={`btn-wrapper ${isCancelEdit && "btn-wrapper--even"}`}>
+          {isCancelEdit && (
+            <button
+              className="btn--secondary btn"
+              onClick={handleSubmit(cancelEdit)}
+            >
+              <Trans i18nKey="form.cancel_edit" />
+            </button>
+          )}
           <input
             className="btn btn--primary"
             type="submit"

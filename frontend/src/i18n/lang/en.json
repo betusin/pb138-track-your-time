@@ -20,7 +20,8 @@
     "download": "Download"
   },
   "confirm": {
-    "delete": "Click again to delete."
+    "delete": "Click again to delete.",
+    "cancelled_edit": "Editing was cancelled."
   },
   "status": {
     "no_data": "Nothing to show",
@@ -110,5 +111,8 @@
     "edit_profile": "Editing profile",
     "edit": "Update profile",
     "updated": "Profile updated."
+  },
+  "form": {
+    "cancel_edit": "Cancel edit"
   }
 }

@@ -56,6 +56,11 @@ export const EditSession = () => {
     return false;
   }
 
+  function cancelEdit() {
+    toast(i18n.t("confirm.cancelled_edit"));
+    navigate(`/project/${session.projectId}`);
+  }
+
   return (
     <Page title={i18n.t("screen.session_edit")} secondaryTitle={project.name}>
       <PageSection title={""}>
@@ -64,6 +69,8 @@ export const EditSession = () => {
           prefill={session}
           fallbackHourlyRate={project.hourlyRate}
           onSubmit={updateSession}
+          isCancelEdit={true}
+          cancelEdit={cancelEdit}
         />
       </PageSection>
     </Page>

@@ -20,7 +20,8 @@
     "download": "Stiahnuť"
   },
   "confirm": {
-    "delete": "Stlač znova pre potvrdenie zmazania."
+    "delete": "Stlač znova pre potvrdenie zmazania.",
+    "cancelled_edit": "Úprava bola zrušená."
   },
   "status": {
     "no_data": "Žiadne dáta",
@@ -110,5 +111,8 @@
     "edit_profile": "Úprava profilu",
     "edit": "Uložiť zmeny profilu",
     "updated": "Profil bol upravený"
+  },
+  "form": {
+    "cancel_edit": "Zrušiť úpravu"
   }
 }
