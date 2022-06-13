@@ -23,7 +23,8 @@
     "delete": "Click again to delete."
   },
   "status": {
-    "no_data": "Nothing to show"
+    "no_data": "Nothing to show",
+    "loading": "Loading..."
   },
   "auth": {
     "register": {
@@ -59,6 +60,7 @@
     "is_active": "Is active?",
     "create": "Create project",
     "edit": "Update project",
+    "add": "Add project",
     "created": "Project created.",
     "deleted": "Project deleted.",
     "updated": "Project updated.",
@@ -103,6 +105,7 @@
     "company_name": "Company name",
     "email": "Email",
     "sign_out": "Sign out",
-    "not_found": "The profile was not found."
+    "not_found": "The profile was not found.",
+    "signed_out": "You were signed out."
   }
 }

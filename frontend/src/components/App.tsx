@@ -21,6 +21,8 @@ import { axiosForRefresh } from "../main";
 import { useTranslation } from "react-i18next";
 import { Profile } from "./profile/Profile";
 import { EditProfile } from "./profile/EditProfile";
+import { LoggedOutBar } from "./LoggedOutBar";
+import { LoadingPlaceholder } from "./common/LoadingPlaceholder";
 
 export const App = () => {
   useTranslation();
@@ -43,7 +45,7 @@ export const App = () => {
   }, []);
 
   if (loading) {
-    return <></>;
+    return <LoadingPlaceholder />;
   }
 
   return (
@@ -52,7 +54,7 @@ export const App = () => {
         <Toaster position="bottom-center" />
         <BrowserRouter>
           <AxiosInterceptorsSetup />
-          {accessToken && <Navbar />}
+          {accessToken ? <Navbar /> : <LoggedOutBar />}
           <Routes>
             {!accessToken ? (
               <>

@@ -8,6 +8,8 @@ import { useLoadProjects } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
 import { ScreenTitle } from "../common/ScreenTitle";
+import { refreshFailedErrorToast } from "../../util/common-toasts";
+import { PlusButton } from "../common/PlusButton";
 
 export const ProjectList = () => {
   const doApiCall = useApiCall();
@@ -24,7 +26,7 @@ export const ProjectList = () => {
 
   function onSuccess() {
     toast.success(i18n.t("project.deleted"));
-    mutate().catch(() => toast.error(i18n.t("error.refresh_failed")));
+    mutate().catch(refreshFailedErrorToast);
   }
 
   function onError(code: number) {
@@ -50,9 +52,11 @@ export const ProjectList = () => {
           />
         ))}
         <div className="btn-wrapper project-button">
-          <Link to="/project/add" className="btn btn-add-circle">
-            +
-          </Link>
+          <PlusButton
+            to="project/add"
+            title={i18n.t("project.add")}
+            size="large"
+          ></PlusButton>
         </div>
       </div>
     </>

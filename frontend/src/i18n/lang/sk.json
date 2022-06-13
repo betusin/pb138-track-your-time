@@ -23,7 +23,8 @@
     "delete": "Stlač znova pre potvrdenie zmazania."
   },
   "status": {
-    "no_data": "Žiadne dáta"
+    "no_data": "Žiadne dáta",
+    "loading": "Načítava sa..."
   },
   "auth": {
     "register": {
@@ -59,6 +60,7 @@
     "is_active": "Je aktívny?",
     "create": "Vytvoriť projekt",
     "edit": "Uložiť zmeny projektu",
+    "add": "Pridať projekt",
     "created": "Projekt bol vytvorený.",
     "deleted": "Projekt bol odstránený.",
     "updated": "Projekt bol upravený.",
@@ -103,6 +105,7 @@
     "company_name": "Názov firmy",
     "email": "E-mail",
     "sign_out": "Odhlásiť sa",
-    "not_found": "Profil nie je možné nájsť"
+    "not_found": "Profil nie je možné nájsť",
+    "signed_out": "Boli ste odhlásený."
   }
 }

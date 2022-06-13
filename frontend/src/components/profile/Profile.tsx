@@ -10,6 +10,9 @@ import "../../styles/Profile.css";
 import { ScreenTitle } from "../common/ScreenTitle";
 import i18n from "../../i18n/i18n";
 import { Stack } from "@mui/material";
+import { Edit } from "@mui/icons-material";
+import { styleLargeIcon } from "../../styles/theme";
+import { toast } from "react-hot-toast";
 
 export const Profile = () => {
   const doApiCall = useApiCall();
@@ -25,6 +28,7 @@ export const Profile = () => {
 
   const onLougoutSuccess = () => {
     setToken("");
+    toast.success(i18n.t("profile.signed_out"));
     navigate("/login");
   };
 
@@ -40,11 +44,7 @@ export const Profile = () => {
     <>
       <ScreenTitle title={i18n.t("app.profile")}>
         <Link to="/me/edit">
-          <img
-            className="icon profile-header__icon"
-            src="/assets/edit-lime.svg"
-            alt="edit"
-          />
+          <Edit style={styleLargeIcon} color="primary" />
         </Link>
       </ScreenTitle>
       <div className="profile-wrapper">
@@ -72,7 +72,7 @@ export const Profile = () => {
             </p>
             <p className="profile-field__value">{profile.email}</p>
           </div>
-          <div className="btn-wrapper">
+          <div className="btn-wrapper btn-profile-wrapper">
             <button className="btn btn--primary" onClick={signOut}>
               <Trans i18nKey="profile.sign_out" />
             </button>
