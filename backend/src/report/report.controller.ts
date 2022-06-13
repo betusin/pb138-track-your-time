@@ -40,8 +40,8 @@ export class ReportController {
     const array = await this.reportService.generatePDFToBuffer(
       id,
       'report.ejs',
-      new Date(from),
-      new Date(to),
+      from,
+      to,
     );
     return new StreamableFile(array);
   }
