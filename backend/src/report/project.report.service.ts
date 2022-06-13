@@ -7,8 +7,10 @@ import { ServiceException } from '../exception/service-exception';
 import {
   calculateCashForSessions,
   calculateHoursForSessions,
+  getHoursForSession,
   getSessionsBetween,
 } from './session-analysis';
+import * as moment from 'moment';
 
 @Injectable()
 export class ProjectReportService {
@@ -44,6 +46,8 @@ export class ProjectReportService {
         total: cash,
         currency: currency,
         formatter: ProjectReportService.formatDate,
+        hourFormatter: ProjectReportService.formatDuration,
+        hourCalc: getHoursForSession,
       },
     };
     return this.pdfService.toBuffer(template, options).toPromise();
@@ -57,5 +61,9 @@ export class ProjectReportService {
       hour: 'numeric',
       minute: 'numeric',
     });
+  }
+
+  private static formatDuration(durationHours: number): string {
+    return moment.utc(durationHours * 60 * 60 * 1000).format('HH:mm');
   }
 }
