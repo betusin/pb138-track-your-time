@@ -72,7 +72,7 @@ export const Profile = () => {
             </p>
             <p className="profile-field__value">{profile.email}</p>
           </div>
-          <div className="btn-wrapper">
+          <div className="btn-wrapper btn-profile-wrapper">
             <button className="btn btn--primary" onClick={signOut}>
               <Trans i18nKey="profile.sign_out" />
             </button>
