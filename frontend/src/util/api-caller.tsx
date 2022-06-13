@@ -1,10 +1,9 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import toast from "react-hot-toast";
 import { useRecoilValue } from "recoil";
 import { accessTokenAtom } from "../state/atom";
 import { SWRResponse } from "swr";
 import { useEffect } from "react";
-import i18n from "../i18n/i18n";
+import { unauthorizedErrorToast, unexpectedErrorToast } from "./common-toasts";
 
 /**
  * A custom hook to perform an SWR call, where the Bearer
@@ -26,7 +25,7 @@ export function useApiSwrCall<
   const { error, data } = result;
   useEffect(() => {
     if (error?.isAxiosError) {
-      toast.error(i18n.t("error.unexpected"));
+      unexpectedErrorToast();
     } else if (data?.status) {
       if (!isSuccessfulStatus(data.status)) {
         onUnhandledNetworkCode(data.status);
@@ -125,16 +124,16 @@ function onNetworkCallResult<A>(
 function onUnhandledNetworkCode(code: number) {
   switch (code) {
     case 401:
-      toast.error(i18n.t("error.unauthorized"));
+      unauthorizedErrorToast();
       break;
     default:
-      toast.error(i18n.t("error.unexpected"));
+      unexpectedErrorToast();
       break;
   }
 }
 
 function onUnhandledNetworkException(e: Error) {
-  toast.error(i18n.t("error.unexpected"));
+  unexpectedErrorToast();
   console.error(e);
 }
 

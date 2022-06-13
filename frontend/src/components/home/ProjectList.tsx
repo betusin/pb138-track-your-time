@@ -8,6 +8,7 @@ import { useLoadProjects } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
 import { ScreenTitle } from "../common/ScreenTitle";
+import { refreshFailedErrorToast } from "../../util/common-toasts";
 import { PlusButton } from "../common/PlusButton";
 
 export const ProjectList = () => {
@@ -25,7 +26,7 @@ export const ProjectList = () => {
 
   function onSuccess() {
     toast.success(i18n.t("project.deleted"));
-    mutate().catch(() => toast.error(i18n.t("error.refresh_failed")));
+    mutate().catch(refreshFailedErrorToast);
   }
 
   function onError(code: number) {

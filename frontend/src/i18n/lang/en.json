@@ -22,7 +22,8 @@
     "delete": "Click again to delete."
   },
   "status": {
-    "no_data": "Nothing to show"
+    "no_data": "Nothing to show",
+    "loading": "Loading..."
   },
   "auth": {
     "register": {
