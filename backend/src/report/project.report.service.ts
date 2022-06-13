@@ -10,7 +10,6 @@ import {
   getHoursForSession,
   getSessionsBetween,
 } from './session-analysis';
-import * as moment from 'moment';
 
 @Injectable()
 export class ProjectReportService {
@@ -64,6 +63,10 @@ export class ProjectReportService {
   }
 
   private static formatDuration(durationHours: number): string {
-    return moment.utc(durationHours * 60 * 60 * 1000).format('HH:mm');
+    const hours = Math.floor(durationHours);
+    const minutes = ((durationHours - hours) * 60).toFixed(0);
+    const minutesFormat = ('0' + minutes).slice(-2);
+    // I am feeling so dirty right now.
+    return `${hours}:${minutesFormat}`;
   }
 }
