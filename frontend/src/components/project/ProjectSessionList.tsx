@@ -6,6 +6,7 @@ import { useSWRConfig } from "swr";
 import { getProjectControllerFindAllSessionsKey } from "../../api/projects/projects";
 import { ProjectSessionListView } from "./ProjectSessionListView";
 import { GetSessionDto } from "../../api/model";
+import { refreshFailedErrorToast } from "../../util/common-toasts";
 
 export interface ProjectSessionListProps {
   sessions: GetSessionDto[];
@@ -28,8 +29,8 @@ export function ProjectSessionList({
 
   function onSuccess() {
     toast.success(i18n.t("session.deleted"));
-    mutate(getProjectControllerFindAllSessionsKey(projectId)).catch(() =>
-      toast.error(i18n.t("error.refresh_failed"))
+    mutate(getProjectControllerFindAllSessionsKey(projectId)).catch(
+      refreshFailedErrorToast
     );
   }
 

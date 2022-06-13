@@ -16,6 +16,7 @@ import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
 import { Page } from "../common/PageContent";
 import { PageSection } from "../common/PageSection";
+import { refreshFailedErrorToast } from "../../util/common-toasts";
 
 export const EditSession = () => {
   const navigate = useNavigate();
@@ -43,9 +44,7 @@ export const EditSession = () => {
 
   function onSuccess() {
     toast.success(i18n.t("session.updated"));
-    mutate(getSessionControllerFindOneKey(id)).catch(() =>
-      toast.error(i18n.t("error.refresh_failed"))
-    );
+    mutate(getSessionControllerFindOneKey(id)).catch(refreshFailedErrorToast);
     navigate(`/project/${session.projectId}`);
   }
 
