@@ -3,7 +3,6 @@ import { StyledTextField } from "../common/StyledTextField";
 import { Trans } from "react-i18next";
 import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import { Button } from "@mui/material";
 import toast from "react-hot-toast";
 import i18n from "../../i18n/i18n";
 import {
@@ -71,34 +70,46 @@ export function GenerateReportSection({
   }
 
   return (
-    <div>
+    <div className="form">
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          {...datePickerOptions}
-          renderInput={StyledTextField}
-          label={<Trans i18nKey="session.date_from" />}
-          value={from}
-          onChange={(e) => {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            setFrom(e!);
-          }}
-        />
-        <DatePicker
-          {...datePickerOptions}
-          renderInput={StyledTextField}
-          label={<Trans i18nKey="session.date_to" />}
-          value={to}
-          onChange={(e) => {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            setTo(e!);
-          }}
-        />
+        <div className="form--inner-container">
+          <div className="form--adjacent-group">
+            <div className="form--field">
+              <DatePicker
+                {...datePickerOptions}
+                renderInput={StyledTextField}
+                label={<Trans i18nKey="session.date_from" />}
+                value={from}
+                onChange={(e) => {
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  setFrom(e!);
+                }}
+              />
+            </div>
+            <div className="form--field">
+              <DatePicker
+                {...datePickerOptions}
+                renderInput={StyledTextField}
+                label={<Trans i18nKey="session.date_to" />}
+                value={to}
+                onChange={(e) => {
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  setTo(e!);
+                }}
+              />
+            </div>
+          </div>
+          <div className="btn-wrapper">
+            <button
+              className="btn btn--primary"
+              type="button"
+              onClick={onGenerateClicked}
+            >
+              <Trans i18nKey="operation.download" />
+            </button>
+          </div>
+        </div>
       </LocalizationProvider>
-      <div>
-        <Button type="button" variant="contained" onClick={onGenerateClicked}>
-          <Trans i18nKey="operation.download" />
-        </Button>
-      </div>
     </div>
   );
 }
