@@ -104,6 +104,8 @@
     "sign_out": "Odhlásiť sa",
     "not_found": "Profil nie je možné nájsť",
     "signed_out": "Boli ste odhlásený.",
-    "edit_profile": "Úprava profilu"
+    "edit_profile": "Úprava profilu",
+    "edit": "Uložiť zmeny profilu",
+    "updated": "Profil bol upravený"
   }
 }

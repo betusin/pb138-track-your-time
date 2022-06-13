@@ -6,13 +6,14 @@ import { useApiCall } from "../../util/api-caller";
 import { useLoadProfile } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import { ScreenTitle } from "../common/ScreenTitle";
+import { EditProfileForm, IFormEditProfileInput } from "./EditProfileForm";
 
 export const EditProfile = () => {
   const [profile] = useLoadProfile();
   const doApiCall = useApiCall();
   const navigate = useNavigate();
 
-  const updateUser = (data: any) => {
+  const updateUser = (data: IFormEditProfileInput) => {
     if (!data.logo) data.logo = "";
     doApiCall(meControllerUpdate, data, onUpdateSuccess, onUpdateFailure);
   };
@@ -40,6 +41,7 @@ export const EditProfile = () => {
         title={i18n.t("profile.edit_profile")}
         secondaryTitle={`${profile.name} ${profile.surname}`}
       />
+      <EditProfileForm profile={profile} onSubmit={updateUser} />
     </>
   );
 };

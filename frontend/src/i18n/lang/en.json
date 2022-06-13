@@ -104,6 +104,8 @@
     "sign_out": "Sign out",
     "not_found": "The profile was not found.",
     "signed_out": "You were signed out.",
-    "edit_profile": "Editing profile"
+    "edit_profile": "Editing profile",
+    "edit": "Update profile",
+    "updated": "Profile updated."
   }
 }
