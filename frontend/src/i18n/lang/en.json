@@ -58,6 +58,7 @@
     "is_active": "Is active?",
     "create": "Create project",
     "edit": "Update project",
+    "add": "Add project",
     "created": "Project created.",
     "deleted": "Project deleted.",
     "updated": "Project updated.",

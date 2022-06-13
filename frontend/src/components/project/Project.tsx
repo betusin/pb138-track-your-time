@@ -34,6 +34,7 @@ export const Project = () => {
           <PlusButton
             to={`/project/${project.id}/session/add`}
             title={i18n.t("session.add")}
+            size="small"
           />
         }
       >
