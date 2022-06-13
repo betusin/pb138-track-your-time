@@ -15,7 +15,7 @@ export function EditCellContents({
 }: EditCellContentsProps) {
   return (
     <>
-      <Link to={`/session/${session.id}/edit`}>
+      <Link to={`/session/${session.id}/edit`} className="btn">
         <Edit
           style={styleLargeIcon}
           color={session.isInvoiced ? "disabled" : "primary"}

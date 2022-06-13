@@ -55,7 +55,7 @@
   border-top: solid 1px var(--primary-color);
 }
 
-.btn-delete {
+.btn {
   display: flex;
   border: none;
   background-color: inherit;
