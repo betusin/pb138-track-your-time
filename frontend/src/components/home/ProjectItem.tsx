@@ -34,7 +34,7 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
         </Link>
       </div>
       <div className="project-item__settings">
-        <Link to={`/project/${id}/edit`} className="btn">
+        <Link to={`/project/${id}/edit`} className="btn btn__icon">
           <Edit style={styleLargeIcon} color="primary" />
         </Link>
         <DeleteButton onDelete={onDelete} id={id} />
