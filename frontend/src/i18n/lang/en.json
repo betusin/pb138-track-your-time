@@ -11,7 +11,8 @@
     "validation_failed": "One of the fields is invalid.",
     "refresh_failed": "Failed to refresh data! Are you connected to the internet?",
     "not_found": "Trying to find something? Try links on the navigation bar.",
-    "bad_date_range": "The start date must come before the end date."
+    "bad_date_range": "The start date must come before the end date.",
+    "already_exists": "A user with this email already exists."
   },
   "operation": {
     "delete": "Delete",
@@ -33,7 +34,6 @@
         "no_account": "Don't have an account yet? Register ",
         "here": "here"
       },
-      "already_exists": "A user with this email already exists.",
       "name": "First name",
       "surname": "Last name",
       "email": "Email address",
