@@ -55,6 +55,11 @@ export const EditProject = () => {
     return false;
   }
 
+  function cancelEdit() {
+    toast(i18n.t("confirm.cancelled_edit"));
+    navigate("/");
+  }
+
   return (
     <>
       <ScreenTitle title={i18n.t("screen.project_edit")} />
@@ -63,6 +68,8 @@ export const EditProject = () => {
           formState={formState}
           register={register}
           buttonText={i18n.t("project.edit")}
+          isCancelEdit={true}
+          cancelEdit={handleSubmit(cancelEdit)}
         />
       </form>
     </>

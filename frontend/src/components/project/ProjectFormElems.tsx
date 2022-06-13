@@ -8,12 +8,16 @@ export interface IProjectFormElemsProps {
   formState: FormState<IFormProjectInput>;
   register: UseFormRegister<IFormProjectInput>;
   buttonText: string;
+  isCancelEdit: boolean;
+  cancelEdit: () => void;
 }
 
 export const ProjectFormElems = ({
   formState,
   register,
   buttonText,
+  isCancelEdit,
+  cancelEdit,
 }: IProjectFormElemsProps) => {
   return (
     <div>
@@ -59,7 +63,12 @@ export const ProjectFormElems = ({
         {...register("hourlyRate", { valueAsNumber: true })}
       />
 
-      <div className="btn-wrapper">
+      <div className={`btn-wrapper ${isCancelEdit && "btn-wrapper--even"}`}>
+        {isCancelEdit && (
+          <button className="btn--secondary btn" onClick={cancelEdit}>
+            <Trans i18nKey="form.cancel_edit" />
+          </button>
+        )}
         <input className="btn btn--primary" type="submit" value={buttonText} />
       </div>
     </div>
