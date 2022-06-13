@@ -93,6 +93,7 @@
     "date_to": "End",
     "not_found": "The session was not found.",
     "add": "Add session",
+    "edit": "Edit session",
     "details": "Details",
     "photos": "Photos",
     "photo": {
