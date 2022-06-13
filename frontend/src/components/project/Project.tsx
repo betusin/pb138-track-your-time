@@ -16,6 +16,7 @@ import { ProjectSummaryMonthChart } from "./ProjectSummaryMonthChart";
 import { getHoursForSession } from "../../util/session-analysis";
 import { ProjectSummaryWeekDayChart } from "./ProjectSummaryWeekDayChart";
 import { ProjectSummaryDateChart } from "./ProjectSummaryDateChart";
+import { GenerateReportSection } from "./GenerateReportSection";
 
 export const Project = () => {
   const id = useParamOrEmpty("id");
@@ -64,6 +65,9 @@ export const Project = () => {
             stat={getHoursForSession}
           />
         </div>
+      </PageSection>
+      <PageSection title={i18n.t("project.generate_report")}>
+        <GenerateReportSection projectId={id} />
       </PageSection>
     </Page>
   );

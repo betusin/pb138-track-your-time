@@ -16,7 +16,8 @@
   "operation": {
     "delete": "Delete",
     "delete_confirm": "Confirm deletion",
-    "actions": "Actions"
+    "actions": "Actions",
+    "download": "Download"
   },
   "confirm": {
     "delete": "Click again to delete."
@@ -65,6 +66,7 @@
     "hour": "hour",
     "sessions": "Sessions",
     "summary_title": "Summary",
+    "generate_report": "Generate a report",
     "summary": {
       "hours": "Hours",
       "amount": "Amount",
