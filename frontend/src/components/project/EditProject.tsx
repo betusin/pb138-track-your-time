@@ -15,7 +15,7 @@ import { ScreenTitle } from "../common/ScreenTitle";
 export const EditProject = () => {
   const apiCall = useApiCall();
   const navigate = useNavigate();
-  const { register, handleSubmit, formState, setValue } =
+  const { register, handleSubmit, formState, setValue, control } =
     useForm<IFormProjectInput>();
   const projectID = useParamOrEmpty("id");
   const project = useLoadProject(projectID);
@@ -62,6 +62,7 @@ export const EditProject = () => {
         <ProjectFormElems
           formState={formState}
           register={register}
+          control={control}
           buttonText={i18n.t("project.edit")}
         />
       </form>

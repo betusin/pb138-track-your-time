@@ -18,7 +18,8 @@ export const CreateProject = () => {
   const navigate = useNavigate();
   const doApiCall = useApiCall();
 
-  const { register, handleSubmit, formState } = useForm<IFormProjectInput>();
+  const { register, handleSubmit, formState, control } =
+    useForm<IFormProjectInput>();
 
   function createProject(data: IFormProjectInput) {
     const body = {
@@ -50,6 +51,7 @@ export const CreateProject = () => {
         <ProjectFormElems
           formState={formState}
           register={register}
+          control={control}
           buttonText={i18n.t("project.create")}
         />
       </form>
