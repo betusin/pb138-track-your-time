@@ -70,7 +70,6 @@ export const EditProject = () => {
               formState={formState}
               register={register}
               buttonText={i18n.t("project.edit")}
-              isCancelEdit={true}
               cancelEdit={handleSubmit(cancelEdit)}
             />
           </form>

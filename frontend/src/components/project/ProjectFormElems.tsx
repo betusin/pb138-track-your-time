@@ -8,15 +8,13 @@ export interface IProjectFormElemsProps {
   formState: FormState<IFormProjectInput>;
   register: UseFormRegister<IFormProjectInput>;
   buttonText: string;
-  isCancelEdit: boolean;
-  cancelEdit: () => void;
+  cancelEdit: (() => void) | undefined;
 }
 
 export const ProjectFormElems = ({
   formState,
   register,
   buttonText,
-  isCancelEdit,
   cancelEdit,
 }: IProjectFormElemsProps) => {
   return (
@@ -73,8 +71,12 @@ export const ProjectFormElems = ({
         />
       </div>
 
-      <div className={`btn-wrapper ${isCancelEdit && "btn-wrapper--even"}`}>
-        {isCancelEdit && (
+      <div
+        className={`btn-wrapper ${
+          cancelEdit !== undefined && "btn-wrapper--even"
+        }`}
+      >
+        {cancelEdit !== undefined && (
           <button className="btn--secondary btn m05" onClick={cancelEdit}>
             <Trans i18nKey="form.cancel_edit" />
           </button>

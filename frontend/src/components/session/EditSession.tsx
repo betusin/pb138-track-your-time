@@ -69,7 +69,6 @@ export const EditSession = () => {
           prefill={session}
           fallbackHourlyRate={project.hourlyRate}
           onSubmit={updateSession}
-          isCancelEdit={true}
           cancelEdit={cancelEdit}
         />
       </PageSection>
