@@ -15,7 +15,9 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
 
   return (
     <div
-      className={`project-item ${!isActive && "project-item--not-active"}  m1`}
+      className={`project-item${
+        isActive ? "" : " project-item--not-active "
+      } m1`}
     >
       <div
         className={`project-item__info-wrapper p1 ${
@@ -26,7 +28,11 @@ export const ProjectItem = ({ project, onDelete }: IProjectItemProps) => {
           <div className="project-info__name">
             <strong>{name}</strong>
           </div>
-          <div className="project-info__customer">{customer}</div>
+          {customer ? (
+            <div className="project-info__customer">{customer}</div>
+          ) : (
+            <div className="hidden">.</div>
+          )}
           <div className="project-info__hourlyRate">
             {hourlyRate}$/
             <Trans i18nKey="project.hour" />{" "}
