@@ -5,6 +5,7 @@ import {
   Get,
   InternalServerErrorException,
   Patch,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -27,6 +28,7 @@ import {
   api_desc_field_invalid,
 } from '../common-api-messages';
 import { CurrentUser } from 'src/current-user/current-user.decorator';
+import { UpdateUserPasswordDto } from 'src/user/dto/update-user-password.dto';
 
 @ApiTags('Me')
 @ApiBearerAuth('access-token')
@@ -91,5 +93,21 @@ export class MeController {
   @Delete()
   async remove(@CurrentUser() userId: string): Promise<void> {
     await this.userService.remove(userId);
+  }
+
+  @ApiTags('Users')
+  @ApiOperation({ summary: 'Changes the password of the current user' })
+  @ApiOkResponse({ description: "The user's password was changed" })
+  @ApiBadRequestResponse({ description: api_desc_field_invalid })
+  @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
+  @ApiNotFoundResponse({ description: 'The user was not found' })
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAccessAuthGuard)
+  @Put('/password')
+  async password(
+    @CurrentUser() userId: string,
+    @Body() updateUserPasswordDto: UpdateUserPasswordDto,
+  ): Promise<void> {
+    await this.userService.updatePassword(userId, updateUserPasswordDto);
   }
 }
