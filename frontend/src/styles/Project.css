@@ -69,6 +69,12 @@
   background-color: inherit;
 }
 
+.btn__border {
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  margin: 0.2rem;
+}
+
 .project-container {
   display: flex;
   justify-content: center;

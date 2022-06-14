@@ -17,6 +17,7 @@
     "delete": "Delete",
     "delete_confirm": "Confirm deletion",
     "actions": "Actions",
+    "upload": "Add",
     "download": "Download"
   },
   "confirm": {
@@ -91,10 +92,17 @@
     "date_from": "Start",
     "date_to": "End",
     "not_found": "The session was not found.",
-    "add": "Add session"
+    "add": "Add session",
+    "details": "Details",
+    "photos": "Photos",
+    "photo": {
+      "deleted": "Session photo deleted.",
+      "not_found": "The session photo was not found."
+    }
   },
   "screen": {
     "home": "My projects",
+    "session": "Session",
     "project_add": "Add a new project",
     "project_edit": "Edit a project",
     "session_add": "Add a new session",

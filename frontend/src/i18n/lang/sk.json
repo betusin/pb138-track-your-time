@@ -17,6 +17,7 @@
     "delete": "Odstrániť",
     "delete_confirm": "Potvrdiť odstránenie",
     "actions": "Akcie",
+    "upload": "Pridať",
     "download": "Stiahnuť"
   },
   "confirm": {
@@ -91,10 +92,17 @@
     "date_from": "Začiatok",
     "date_to": "Koniec",
     "not_found": "Záznam neexistuje.",
-    "add": "Pridať záznam"
+    "add": "Pridať záznam",
+    "details": "Detaily",
+    "photos": "Fotografie",
+    "photo": {
+      "deleted": "Fotografia zo záznamu bola odstránená.",
+      "not_found": "Fotografia zo záznamu neexistuje."
+    }
   },
   "screen": {
     "home": "Moje projekty",
+    "session": "Záznam",
     "project_add": "Pridať projekt",
     "project_edit": "Upraviť projekt",
     "session_add": "Pridať záznam",

@@ -13,6 +13,7 @@ import {
   sessionControllerRemove,
   sessionControllerUpdate,
 } from "../api/sessions/sessions";
+import { sessionPhotoControllerRemove } from "../api/session-photos/session-photos";
 
 export function projectControllerRemoveWrap(
   projectID: string
@@ -51,5 +52,13 @@ export function sessionControllerUpdateWrap(
 ): ApiCall<UpdateSessionDto, UpdateSessionDto> {
   return (body, cfg) => {
     return sessionControllerUpdate(sessionID, body, cfg);
+  };
+}
+
+export function sessionPhotoControllerRemoveWrap(
+  sessionPhotoID: string
+): ApiCall<void, void> {
+  return (body, cfg) => {
+    return sessionPhotoControllerRemove(sessionPhotoID, cfg);
   };
 }
