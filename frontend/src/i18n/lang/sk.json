@@ -11,7 +11,8 @@
     "validation_failed": "Niektoré z polí je neplatné.",
     "refresh_failed": "Nepodarilo sa obnoviť údaje! Si pripojený k internetu?",
     "not_found": "Snažíš sa niečo nájsť? Skús odkazy na navigačnej lište.",
-    "bad_date_range": "Dátum konca musí byť neskôr ako dátum začiatku."
+    "bad_date_range": "Dátum konca musí byť neskôr ako dátum začiatku.",
+    "already_exists": "Tento email sa už používa."
   },
   "operation": {
     "delete": "Odstrániť",
@@ -33,7 +34,6 @@
         "no_account": "Ešte nemáš konto? Zaregistruj sa ",
         "here": "tu"
       },
-      "already_exists": "Tento email sa už požíva.",
       "name": "Meno",
       "surname": "Priezvisko",
       "email": "Emailová adresa",
@@ -93,6 +93,7 @@
     "date_to": "Koniec",
     "not_found": "Záznam neexistuje.",
     "add": "Pridať záznam",
+    "edit": "Upraviť záznam",
     "details": "Detaily",
     "photos": "Fotografie",
     "photo": {
