@@ -11,4 +11,5 @@ export interface GetProjectDto {
   hourlyRate: number;
   customer?: string;
   isActive?: boolean;
+  updatedAt: string;
 }
