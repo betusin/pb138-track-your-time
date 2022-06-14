@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { meControllerUpdate } from "../../api/users/users";
+import { meControllerUpdate } from "../../api/me/me";
 import i18n from "../../i18n/i18n";
 import { useApiCall } from "../../util/api-caller";
 import { useLoadProfile } from "../../util/load-entity-wrappers";
@@ -23,13 +23,13 @@ export const EditProfile = () => {
     navigate("/me");
   };
 
-  function onUpdateFailure(code: number) {
+  const onUpdateFailure = (code: number) => {
     if (code == 400) {
-      toast(i18n.t("error.validation_failed"));
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     }
     return false;
-  }
+  };
 
   if (profile === undefined) {
     return <LoadingPlaceholder />;

@@ -24,6 +24,7 @@ import { EditProfile } from "./profile/EditProfile";
 import { Session } from "./session/Session";
 import { LoggedOutBar } from "./LoggedOutBar";
 import { LoadingPlaceholder } from "./common/LoadingPlaceholder";
+import { ChangePassword } from "./profile/ChangePassword";
 
 export const App = () => {
   useTranslation();
@@ -80,6 +81,7 @@ export const App = () => {
                 <Route path="/session/add" element={<CreateSession />} />
                 <Route path="/me" element={<Profile />} />
                 <Route path="/me/edit" element={<EditProfile />} />
+                <Route path="/me/password" element={<ChangePassword />} />
                 <Route path="*" element={<NoPath />} />
               </>
             )}

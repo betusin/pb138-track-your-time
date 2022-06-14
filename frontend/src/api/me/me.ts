@@ -6,7 +6,12 @@
  */
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import useSwr, { SWRConfiguration, Key } from "swr";
-import type { GetUserDto, GetProjectDto, UpdateUserDto } from ".././model";
+import type {
+  GetUserDto,
+  GetProjectDto,
+  UpdateUserDto,
+  UpdateUserPasswordDto,
+} from ".././model";
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -109,4 +114,14 @@ export const meControllerRemove = (
   options?: AxiosRequestConfig
 ): Promise<AxiosResponse<void>> => {
   return axios.delete(`/me`, options);
+};
+
+/**
+ * @summary Changes the password of the current user
+ */
+export const meControllerPassword = (
+  updateUserPasswordDto: UpdateUserPasswordDto,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.put(`/me/password`, updateUserPasswordDto, options);
 };
