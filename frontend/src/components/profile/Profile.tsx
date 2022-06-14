@@ -66,10 +66,11 @@ export const Profile = () => {
           <div className="profile__logo-wrapper">
             <img
               className="profile__logo-img"
-              src={profile.logo}
+              src={profile.logo ?? backupImageURL}
               onError={({ currentTarget }) => {
-                currentTarget.onerror = null;
-                currentTarget.src = backupImageURL;
+                if (currentTarget.src != backupImageURL) {
+                  currentTarget.src = backupImageURL;
+                }
               }}
               alt="logo"
             />
