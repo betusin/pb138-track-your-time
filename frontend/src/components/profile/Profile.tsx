@@ -43,7 +43,7 @@ export const Profile = () => {
   return (
     <>
       <ScreenTitle title={i18n.t("app.profile")}>
-        <Link to="/me/edit">
+        <Link to="/me/edit" className="btn btn__icon">
           <Edit style={styleLargeIcon} color="primary" />
         </Link>
       </ScreenTitle>

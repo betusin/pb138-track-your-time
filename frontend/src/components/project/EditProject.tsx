@@ -15,7 +15,7 @@ import { ScreenTitle } from "../common/ScreenTitle";
 export const EditProject = () => {
   const apiCall = useApiCall();
   const navigate = useNavigate();
-  const { register, handleSubmit, formState, setValue } =
+  const { register, handleSubmit, formState, setValue, control } =
     useForm<IFormProjectInput>();
   const projectID = useParamOrEmpty("id");
   const project = useLoadProject(projectID);
@@ -33,13 +33,7 @@ export const EditProject = () => {
   }
 
   function updateProject(data: IFormProjectInput) {
-    const body = {
-      name: data.name,
-      hourlyRate: data.hourlyRate,
-      customer: data.customer,
-      isActive: data.isActive,
-    };
-    apiCall(projectControllerUpdateWrap(projectID), body, onSuccess, onError);
+    apiCall(projectControllerUpdateWrap(projectID), data, onSuccess, onError);
   }
 
   function onSuccess() {
@@ -62,6 +56,7 @@ export const EditProject = () => {
         <ProjectFormElems
           formState={formState}
           register={register}
+          control={control}
           buttonText={i18n.t("project.edit")}
         />
       </form>

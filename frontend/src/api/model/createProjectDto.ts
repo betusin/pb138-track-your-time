@@ -9,4 +9,5 @@ export interface CreateProjectDto {
   name: string;
   hourlyRate: number;
   customer?: string;
+  isActive?: boolean;
 }

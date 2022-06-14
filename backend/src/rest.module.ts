@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { MeModule } from './me/me.module';
 import { SessionPhotoModule } from './session_photo/session_photo.module';
 import { CurrentUserModule } from './current-user/current-user.module';
+import { ReportModule } from './report/report.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CurrentUserModule } from './current-user/current-user.module';
     SessionModule,
     SessionPhotoModule,
     MeModule,
+    ReportModule,
   ],
 })
 export class RestModule {}

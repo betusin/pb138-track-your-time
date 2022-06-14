@@ -11,12 +11,15 @@
     "validation_failed": "One of the fields is invalid.",
     "refresh_failed": "Failed to refresh data! Are you connected to the internet?",
     "not_found": "Trying to find something? Try links on the navigation bar.",
-    "bad_date_range": "The start date must come before the end date."
+    "bad_date_range": "The start date must come before the end date.",
+    "already_exists": "A user with this email already exists."
   },
   "operation": {
     "delete": "Delete",
     "delete_confirm": "Confirm deletion",
-    "actions": "Actions"
+    "actions": "Actions",
+    "upload": "Add",
+    "download": "Download"
   },
   "confirm": {
     "delete": "Click again to delete."
@@ -31,7 +34,6 @@
         "no_account": "Don't have an account yet? Register ",
         "here": "here"
       },
-      "already_exists": "A user with this email already exists.",
       "name": "First name",
       "surname": "Last name",
       "email": "Email address",
@@ -67,6 +69,7 @@
     "hour": "hour",
     "sessions": "Sessions",
     "summary_title": "Summary",
+    "generate_report": "Generate a report",
     "summary": {
       "hours": "Hours",
       "amount": "Amount",
@@ -89,10 +92,18 @@
     "date_from": "Start",
     "date_to": "End",
     "not_found": "The session was not found.",
-    "add": "Add session"
+    "add": "Add session",
+    "edit": "Edit session",
+    "details": "Details",
+    "photos": "Photos",
+    "photo": {
+      "deleted": "Session photo deleted.",
+      "not_found": "The session photo was not found."
+    }
   },
   "screen": {
     "home": "My projects",
+    "session": "Session",
     "project_add": "Add a new project",
     "project_edit": "Edit a project",
     "session_add": "Add a new session",

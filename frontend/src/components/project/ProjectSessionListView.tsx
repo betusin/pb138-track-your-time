@@ -79,7 +79,7 @@ function getGridColumns(onDelete: (id: string) => void): GridColDef[] {
       field: "id",
       headerName: i18n.t("operation.actions"),
       type: "string",
-      width: 85,
+      width: 120,
       editable: false,
       renderCell: (params) => {
         return (

@@ -60,7 +60,7 @@ export const EditSession = () => {
     <Page title={i18n.t("screen.session_edit")} secondaryTitle={project.name}>
       <PageSection title={""}>
         <SessionForm
-          buttonText="Edit session"
+          buttonText={i18n.t("session.edit")}
           prefill={session}
           fallbackHourlyRate={project.hourlyRate}
           onSubmit={updateSession}
