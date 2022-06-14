@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Project } from '@prisma/client';
+import { Prisma, Project } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
@@ -36,11 +36,18 @@ export class ProjectService {
     });
   }
 
-  async findAllForUser(id: string): Promise<Project[]> {
+  async findAllForUser(
+    id: string,
+    orderBy?: Prisma.XOR<
+      Prisma.Enumerable<Prisma.ProjectOrderByWithRelationInput>,
+      Prisma.ProjectOrderByWithRelationInput
+    >,
+  ): Promise<Project[]> {
     return this.prisma.project.findMany({
       where: {
         userId: id,
       },
+      orderBy,
     });
   }
 
