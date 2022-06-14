@@ -10,9 +10,10 @@ import "../../styles/Profile.css";
 import { ScreenTitle } from "../common/ScreenTitle";
 import i18n from "../../i18n/i18n";
 import { Stack } from "@mui/material";
-import { Edit } from "@mui/icons-material";
+import { Edit, Key } from "@mui/icons-material";
 import { styleLargeIcon } from "../../styles/theme";
 import { toast } from "react-hot-toast";
+import { DeleteButton } from "../common/DeleteButton";
 
 export const Profile = () => {
   const doApiCall = useApiCall();
@@ -40,12 +41,22 @@ export const Profile = () => {
     );
   };
 
+  const deleteProfile = () => {
+    return;
+  };
+
   return (
     <>
       <ScreenTitle title={i18n.t("app.profile")}>
-        <Link to="/me/edit" className="btn btn__icon">
-          <Edit style={styleLargeIcon} color="primary" />
-        </Link>
+        <div className="profile__edit-buttons">
+          <Link to="/me/edit" className="btn btn__icon">
+            <Edit style={styleLargeIcon} color="primary" />
+          </Link>
+          <Link to="/me/password" className="btn btn__icon">
+            <Key style={styleLargeIcon} color="primary" />
+          </Link>
+          <DeleteButton onDelete={deleteProfile} id="" />
+        </div>
       </ScreenTitle>
       <div className="profile-wrapper">
         <Stack>

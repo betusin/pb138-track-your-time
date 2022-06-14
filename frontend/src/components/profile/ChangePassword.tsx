@@ -35,7 +35,7 @@ export const ChangePassword = () => {
 
   const onChangePasswordSuccess = () => {
     toast.success(i18n.t("profile.password_changed"));
-    navigate("/me/edit");
+    navigate("/me");
   };
 
   const onChangePasswordFailure = (code: number) => {

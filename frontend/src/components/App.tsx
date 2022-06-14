@@ -81,7 +81,7 @@ export const App = () => {
                 <Route path="/session/add" element={<CreateSession />} />
                 <Route path="/me" element={<Profile />} />
                 <Route path="/me/edit" element={<EditProfile />} />
-                <Route path="/me/edit/password" element={<ChangePassword />} />
+                <Route path="/me/password" element={<ChangePassword />} />
                 <Route path="*" element={<NoPath />} />
               </>
             )}

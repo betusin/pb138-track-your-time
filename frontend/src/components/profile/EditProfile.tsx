@@ -1,5 +1,4 @@
 import toast from "react-hot-toast";
-import { Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { meControllerUpdate } from "../../api/me/me";
 import i18n from "../../i18n/i18n";
@@ -43,14 +42,6 @@ export const EditProfile = () => {
         secondaryTitle={`${profile.name} ${profile.surname}`}
       />
       <EditProfileForm profile={profile} onSubmit={updateUser} />
-      <div className="btn-wrapper btn-profile-wrapper">
-        <button
-          className="btn btn--primary"
-          onClick={() => navigate("/me/edit/password")}
-        >
-          <Trans i18nKey="profile.change_password" />
-        </button>
-      </div>
     </>
   );
 };
