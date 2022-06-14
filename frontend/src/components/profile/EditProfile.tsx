@@ -1,17 +1,13 @@
 import toast from "react-hot-toast";
+import { Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { meControllerPassword, meControllerUpdate } from "../../api/me/me";
+import { meControllerUpdate } from "../../api/me/me";
 import i18n from "../../i18n/i18n";
 import { useApiCall } from "../../util/api-caller";
 import { useLoadProfile } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import { ScreenTitle } from "../common/ScreenTitle";
-import {
-  ChangePasswordForm,
-  EditProfileForm,
-  IFormChangePasswordInput,
-  IFormEditProfileInput,
-} from "./EditProfileForms";
+import { EditProfileForm, IFormEditProfileInput } from "./EditProfileForm";
 
 export const EditProfile = () => {
   const [profile] = useLoadProfile();
@@ -30,31 +26,7 @@ export const EditProfile = () => {
 
   const onUpdateFailure = (code: number) => {
     if (code == 400) {
-      toast(i18n.t("error.validation_failed"));
-      return true;
-    }
-    return false;
-  };
-
-  const changePassword = (data: IFormChangePasswordInput) => {
-    doApiCall(
-      meControllerPassword,
-      data,
-      onChangePasswordSuccess,
-      onChangePasswordFailure
-    );
-  };
-
-  const onChangePasswordSuccess = () => {
-    toast.success(i18n.t("profile.password_changed"));
-  };
-
-  const onChangePasswordFailure = (code: number) => {
-    if (code === 400) {
-      toast(i18n.t("error.validation_failed"));
-      return true;
-    } else if (code === 403) {
-      toast(i18n.t("auth.login.password_incorrect"));
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     }
     return false;
@@ -71,7 +43,14 @@ export const EditProfile = () => {
         secondaryTitle={`${profile.name} ${profile.surname}`}
       />
       <EditProfileForm profile={profile} onSubmit={updateUser} />
-      <ChangePasswordForm onSubmit={changePassword} />
+      <div className="btn-wrapper btn-profile-wrapper">
+        <button
+          className="btn btn--primary"
+          onClick={() => navigate("/me/edit/password")}
+        >
+          <Trans i18nKey="profile.change_password" />
+        </button>
+      </div>
     </>
   );
 };
