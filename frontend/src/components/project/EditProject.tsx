@@ -16,7 +16,7 @@ import { PageSection } from "../common/PageSection";
 export const EditProject = () => {
   const apiCall = useApiCall();
   const navigate = useNavigate();
-  const { register, handleSubmit, formState, setValue, control } =
+  const { register, handleSubmit, formState, setValue, control, reset } =
     useForm<IFormProjectInput>();
   const projectID = useParamOrEmpty("id");
   const project = useLoadProject(projectID);
@@ -66,6 +66,7 @@ export const EditProject = () => {
               buttonText={i18n.t("project.edit")}
               control={control}
               cancelEdit={handleSubmit(cancelEdit)}
+              reset={reset}
             />
           </form>
         </PageSection>

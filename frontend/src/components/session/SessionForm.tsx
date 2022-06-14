@@ -63,7 +63,7 @@ export const SessionForm = ({
   onSubmit,
   cancelEdit,
 }: SessionFormElemsProps) => {
-  const { register, handleSubmit, formState, control } =
+  const { register, handleSubmit, formState, control, reset } =
     useForm<IFormSessionInput>({
       defaultValues: {
         fromDate: parseOrNull(prefill?.fromDate) ?? new Date(),
@@ -172,7 +172,10 @@ export const SessionForm = ({
           }`}
         >
           {cancelEdit !== undefined && (
-            <CancelEditButton cancelEdit={handleSubmit(cancelEdit)} />
+            <CancelEditButton
+              cancelEdit={handleSubmit(cancelEdit)}
+              reset={reset}
+            />
           )}
           <input
             className="btn btn--primary m05"

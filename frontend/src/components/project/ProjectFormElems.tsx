@@ -18,6 +18,7 @@ export interface IProjectFormElemsProps {
   control: Control<IFormProjectInput>;
   buttonText: string;
   cancelEdit: (() => void) | undefined;
+  reset: () => void;
 }
 
 export const ProjectFormElems = ({
@@ -26,6 +27,7 @@ export const ProjectFormElems = ({
   control,
   buttonText,
   cancelEdit,
+  reset,
 }: IProjectFormElemsProps) => {
   return (
     <div className="form--inner-container">
@@ -109,7 +111,7 @@ export const ProjectFormElems = ({
         }`}
       >
         {cancelEdit !== undefined && (
-          <CancelEditButton cancelEdit={cancelEdit} />
+          <CancelEditButton cancelEdit={cancelEdit} reset={reset} />
         )}
         <input
           className="btn btn--primary m05"
