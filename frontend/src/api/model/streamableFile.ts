@@ -5,9 +5,6 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface CreateProjectDto {
-  name: string;
-  hourlyRate: number;
-  customer?: string;
-  isActive?: boolean;
+export interface StreamableFile {
+  [key: string]: any;
 }

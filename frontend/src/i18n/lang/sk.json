@@ -11,12 +11,14 @@
     "validation_failed": "Niektoré z polí je neplatné.",
     "refresh_failed": "Nepodarilo sa obnoviť údaje! Si pripojený k internetu?",
     "not_found": "Snažíš sa niečo nájsť? Skús odkazy na navigačnej lište.",
-    "bad_date_range": "Dátum konca musí byť neskôr ako dátum začiatku."
+    "bad_date_range": "Dátum konca musí byť neskôr ako dátum začiatku.",
+    "already_exists": "Tento email sa už používa."
   },
   "operation": {
     "delete": "Odstrániť",
     "delete_confirm": "Potvrdiť odstránenie",
     "actions": "Akcie",
+    "upload": "Pridať",
     "download": "Stiahnuť"
   },
   "confirm": {
@@ -33,7 +35,6 @@
         "no_account": "Ešte nemáš konto? Zaregistruj sa ",
         "here": "tu"
       },
-      "already_exists": "Tento email sa už požíva.",
       "name": "Meno",
       "surname": "Priezvisko",
       "email": "Emailová adresa",
@@ -92,10 +93,18 @@
     "date_from": "Začiatok",
     "date_to": "Koniec",
     "not_found": "Záznam neexistuje.",
-    "add": "Pridať záznam"
+    "add": "Pridať záznam",
+    "edit": "Upraviť záznam",
+    "details": "Detaily",
+    "photos": "Fotografie",
+    "photo": {
+      "deleted": "Fotografia zo záznamu bola odstránená.",
+      "not_found": "Fotografia zo záznamu neexistuje."
+    }
   },
   "screen": {
     "home": "Moje projekty",
+    "session": "Záznam",
     "project_add": "Pridať projekt",
     "project_edit": "Upraviť projekt",
     "session_add": "Pridať záznam",
@@ -113,6 +122,19 @@
     "updated": "Profil bol upravený"
   },
   "form": {
-    "cancel_edit": "Zrušiť úpravu"
+    "cancel_edit": "Zrušiť úpravu",
+    "validation": {
+      "project": {
+        "name": "Zadajte názov projektu",
+        "hourly_rate": "Zadajte hodinovú sadzbu"
+      },
+      "auth": {
+        "email": "Zadajte e-mailovú adresu",
+        "password": "Zadajte heslo",
+        "name": "Zadajte Vaše meno",
+        "surname": "Zadajte Vaše priezvisko",
+        "company": "Zadajte názov firmy"
+      }
+    }
   }
 }

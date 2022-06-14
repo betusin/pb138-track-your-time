@@ -58,7 +58,10 @@ export class MeController {
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Get('/projects')
   async findAll(@CurrentUser() userId: string): Promise<GetProjectDto[]> {
-    return this.projectService.findAllForUser(userId);
+    return this.projectService.findAllForUser(userId, [
+      { isActive: 'desc' },
+      { updatedAt: 'desc' },
+    ]);
   }
 
   @ApiTags('Users')

@@ -7,9 +7,14 @@ import i18n from "i18next";
 export interface DeleteDoubleClickButtonProps {
   onDelete: (id: string) => void;
   id: string;
+  border?: boolean;
 }
 
-export function DeleteButton({ onDelete, id }: DeleteDoubleClickButtonProps) {
+export function DeleteButton({
+  onDelete,
+  id,
+  border,
+}: DeleteDoubleClickButtonProps) {
   const [wantToRemove, setWantToRemove] = useState(false);
 
   function onPressed() {
@@ -29,7 +34,11 @@ export function DeleteButton({ onDelete, id }: DeleteDoubleClickButtonProps) {
     ? i18n.t("operation.delete_confirm")
     : i18n.t("operation.delete");
   return (
-    <button onClick={() => onPressed()} className="btn btn__icon" title={title}>
+    <button
+      onClick={() => onPressed()}
+      className={"btn btn__icon" + (border ? " btn__border" : "")}
+      title={title}
+    >
       {wantToRemove ? (
         <DeleteForever style={styleLargeIcon} color="primary" />
       ) : (

@@ -1,5 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
+import i18n from "../../i18n/i18n";
+import { ErrorFieldMessage } from "../common/ErrorFieldMessage";
 
 export interface IFormLoginInput {
   email: string;
@@ -35,9 +37,15 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
         className={`text-field ${
           formState.errors.email && "text-field--error"
         }`}
-        type="text"
-        {...register("email", { required: true })}
+        type="email"
+        {...register("email", {
+          required: {
+            message: i18n.t("form.validation.auth.email"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="email" />
       <div>
         <label>
           <Trans i18nKey="auth.password" />
@@ -48,8 +56,14 @@ export const LoginForm = ({ onSubmit }: ILoginFormProps) => {
           formState.errors.password && "text-field--error"
         }`}
         type="password"
-        {...register("password", { required: true })}
+        {...register("password", {
+          required: {
+            message: i18n.t("form.validation.auth.password"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="password" />
 
       <div className="btn-wrapper">
         <button className="auth-form--button btn btn--primary" type="submit">
@@ -73,8 +87,14 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
         type="text"
-        {...register("name", { required: true })}
+        {...register("name", {
+          required: {
+            message: i18n.t("form.validation.auth.name"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="name" />
       <div>
         <label>
           <Trans i18nKey="auth.register.surname" />
@@ -85,8 +105,14 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.surname && "text-field--error"
         }`}
         type="text"
-        {...register("surname", { required: true })}
+        {...register("surname", {
+          required: {
+            message: i18n.t("form.validation.auth.surname"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="surname" />
       <div>
         <label>
           <Trans i18nKey="auth.register.email" />
@@ -97,8 +123,14 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.email && "text-field--error"
         }`}
         type="email"
-        {...register("email", { required: true })}
+        {...register("email", {
+          required: {
+            message: i18n.t("form.validation.auth.email"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="email" />
       <div>
         <label>
           <Trans i18nKey="auth.register.password" />
@@ -109,8 +141,14 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.password && "text-field--error"
         }`}
         type="password"
-        {...register("password", { required: true })}
+        {...register("password", {
+          required: {
+            message: i18n.t("form.validation.auth.password"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="password" />
       <div>
         <label>
           <Trans i18nKey="auth.register.company" />
@@ -121,8 +159,14 @@ export const RegisterForm = ({ onSubmit }: IRegisterProps) => {
           formState.errors.company && "text-field--error"
         }`}
         type="text"
-        {...register("company", { required: true })}
+        {...register("company", {
+          required: {
+            message: i18n.t("form.validation.auth.company"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="company" />
       <div>
         <label>
           <Trans i18nKey="auth.register.company_logo" />
