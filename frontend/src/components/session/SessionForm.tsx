@@ -170,14 +170,14 @@ export const SessionForm = ({
         <div className={`btn-wrapper ${isCancelEdit && "btn-wrapper--even"}`}>
           {isCancelEdit && (
             <button
-              className="btn--secondary btn"
+              className="btn--secondary btn m05"
               onClick={handleSubmit(cancelEdit)}
             >
               <Trans i18nKey="form.cancel_edit" />
             </button>
           )}
           <input
-            className="btn btn--primary"
+            className="btn btn--primary m05"
             type="submit"
             value={buttonText}
           />

@@ -10,7 +10,8 @@ import { useLoadProject } from "../../util/load-entity-wrappers";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
-import { ScreenTitle } from "../common/ScreenTitle";
+import { Page } from "../common/PageContent";
+import { PageSection } from "../common/PageSection";
 
 export const EditProject = () => {
   const apiCall = useApiCall();
@@ -62,16 +63,19 @@ export const EditProject = () => {
 
   return (
     <>
-      <ScreenTitle title={i18n.t("screen.project_edit")} />
-      <form className="m1" onSubmit={handleSubmit(updateProject)}>
-        <ProjectFormElems
-          formState={formState}
-          register={register}
-          buttonText={i18n.t("project.edit")}
-          isCancelEdit={true}
-          cancelEdit={handleSubmit(cancelEdit)}
-        />
-      </form>
+      <Page title={i18n.t("screen.project_edit")} secondaryTitle={project.name}>
+        <PageSection title={""}>
+          <form className="form" onSubmit={handleSubmit(updateProject)}>
+            <ProjectFormElems
+              formState={formState}
+              register={register}
+              buttonText={i18n.t("project.edit")}
+              isCancelEdit={true}
+              cancelEdit={handleSubmit(cancelEdit)}
+            />
+          </form>
+        </PageSection>
+      </Page>
     </>
   );
 };

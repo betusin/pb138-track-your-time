@@ -20,56 +20,70 @@ export const ProjectFormElems = ({
   cancelEdit,
 }: IProjectFormElemsProps) => {
   return (
-    <div>
-      <div>
-        <label>
-          <Trans i18nKey="project.name" />
-        </label>
-      </div>
-      <input
-        className={`text-field ${formState.errors.name && "text-field--error"}`}
-        type="text"
-        {...register("name", { required: true })}
-      />
-
-      <div>
-        <label>
-          <Trans i18nKey="project.customer" />
-        </label>
-      </div>
-      <input className={`text-field`} type="text" {...register("customer")} />
-
-      <div>
-        <Checkbox
-          id="isActive"
-          {...register("isActive")}
-          style={{ color: theme.palette.secondary.light }}
-          defaultChecked={true}
+    <div className="form--inner-container">
+      <div className="form--field">
+        <div>
+          <label>
+            <Trans i18nKey="project.name" />
+          </label>
+        </div>
+        <input
+          className={`text-field ${
+            formState.errors.name && "text-field--error"
+          }`}
+          type="text"
+          {...register("name", { required: true })}
         />
+      </div>
+
+      <div className="form--field">
+        <div>
+          <label>
+            <Trans i18nKey="project.customer" />
+          </label>
+        </div>
+        <input className={`text-field`} type="text" {...register("customer")} />
+      </div>
+
+      <div className="form--field">
         <label htmlFor="isActive">
           <Trans i18nKey="project.is_active" />
         </label>
+        <div>
+          <Checkbox
+            id="isActive"
+            {...register("isActive")}
+            style={{ color: theme.palette.secondary.light }}
+            defaultChecked={true}
+          />
+        </div>
       </div>
 
-      <div>
-        <label>
-          <Trans i18nKey="project.hourly_rate" />
-        </label>
+      <div className="form--field">
+        <div>
+          <label>
+            <Trans i18nKey="project.hourly_rate" />
+          </label>
+        </div>
+        <input
+          className={`number-field`}
+          type="number"
+          min={0}
+          {...register("hourlyRate", { valueAsNumber: true })}
+        />
       </div>
-      <input
-        className={`number-field`}
-        type="number"
-        min={0}
-        {...register("hourlyRate", { valueAsNumber: true })}
-      />
 
       <div className={`btn-wrapper ${isCancelEdit && "btn-wrapper--even"}`}>
         {isCancelEdit && (
-          <button className="btn--secondary btn" onClick={cancelEdit}>
+          <button className="btn--secondary btn m05" onClick={cancelEdit}>
             <Trans i18nKey="form.cancel_edit" />
           </button>
         )}
-        <input className="btn btn--primary" type="submit" value={buttonText} />
+        <input
+          className="btn btn--primary m05"
+          type="submit"
+          value={buttonText}
+        />
       </div>
     </div>
   );

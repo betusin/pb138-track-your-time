@@ -37,6 +37,10 @@ a {
   margin: 1rem;
 }
 
+.m05 {
+  margin: 0.5rem;
+}
+
 .p1 {
   padding: 1rem;
 }
@@ -104,7 +108,7 @@ a {
 }
 
 .btn-wrapper {
-  margin-top: 1rem;
+  margin: 1rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,6 +116,7 @@ a {
 
 .btn-wrapper--even {
   justify-content: space-evenly;
+  flex-direction: column;
 }
 
 input,
@@ -251,5 +256,9 @@ textarea {
 
   .page--section-content {
     padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+
+  .btn-wrapper--even {
+    flex-direction: row;
   }
 }
