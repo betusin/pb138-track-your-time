@@ -44,7 +44,9 @@ export class MeController {
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Get('/profile')
   async profile(@CurrentUser() userId: string): Promise<GetUserDto> {
-    return this.userService.findOne(userId);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { passwordHash, ...user } = await this.userService.findOne(userId);
+    return user;
   }
 
   @ApiTags('Projects')
