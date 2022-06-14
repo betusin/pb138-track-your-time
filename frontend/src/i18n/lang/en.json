@@ -133,7 +133,7 @@
         "hourly_rate": "Enter hourly rate"
       },
       "session": {
-        "hourly_rate": "Enter hourly rate greater than zero"
+        "hourly_rate": "Enter hourly rate"
       },
       "auth": {
         "email": "Enter an email address",
