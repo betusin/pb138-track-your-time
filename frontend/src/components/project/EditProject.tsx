@@ -10,12 +10,13 @@ import { useLoadProject } from "../../util/load-entity-wrappers";
 import { useParamOrEmpty } from "../../util/params";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import i18n from "../../i18n/i18n";
-import { ScreenTitle } from "../common/ScreenTitle";
+import { Page } from "../common/PageContent";
+import { PageSection } from "../common/PageSection";
 
 export const EditProject = () => {
   const apiCall = useApiCall();
   const navigate = useNavigate();
-  const { register, handleSubmit, formState, setValue, control } =
+  const { register, handleSubmit, formState, setValue, control, reset } =
     useForm<IFormProjectInput>();
   const projectID = useParamOrEmpty("id");
   const project = useLoadProject(projectID);
@@ -49,17 +50,27 @@ export const EditProject = () => {
     return false;
   }
 
+  function cancelEdit() {
+    toast(i18n.t("confirm.cancelled_edit"));
+    navigate("/");
+  }
+
   return (
     <>
-      <ScreenTitle title={i18n.t("screen.project_edit")} />
-      <form className="m1" onSubmit={handleSubmit(updateProject)}>
-        <ProjectFormElems
-          formState={formState}
-          register={register}
-          control={control}
-          buttonText={i18n.t("project.edit")}
-        />
-      </form>
+      <Page title={i18n.t("screen.project_edit")} secondaryTitle={project.name}>
+        <PageSection title={""}>
+          <form className="form" onSubmit={handleSubmit(updateProject)}>
+            <ProjectFormElems
+              formState={formState}
+              register={register}
+              buttonText={i18n.t("project.edit")}
+              control={control}
+              cancelEdit={handleSubmit(cancelEdit)}
+              reset={reset}
+            />
+          </form>
+        </PageSection>
+      </Page>
     </>
   );
 };

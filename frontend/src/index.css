@@ -1,5 +1,6 @@
 :root {
   --bg-color: #2f2e2e;
+  --bg-color-light: #3a3939;
   --bg-color-back: #383737;
   --nav-color: #252424;
   --screen-title-color: #2b2a2a;
@@ -34,6 +35,10 @@ a {
 
 .m1 {
   margin: 1rem;
+}
+
+.m05 {
+  margin: 0.5rem;
 }
 
 .p1 {
@@ -93,11 +98,25 @@ a {
   border-radius: 0.5rem;
 }
 
+.btn--secondary {
+  padding: 0.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  background-color: var(--bg-color-light);
+  color: var(--primary-color);
+}
+
 .btn-wrapper {
-  margin-top: 1rem;
+  margin: 1rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn-wrapper--even {
+  justify-content: space-evenly;
+  flex-direction: column;
 }
 
 input,
@@ -225,6 +244,10 @@ textarea {
 
   .page--section-content {
     padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+
+  .btn-wrapper--even {
+    flex-direction: row;
   }
 }
 .session-photo {

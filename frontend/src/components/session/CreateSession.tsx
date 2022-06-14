@@ -60,6 +60,7 @@ export const CreateSession = () => {
           buttonText={i18n.t("screen.session_add")}
           fallbackHourlyRate={project.hourlyRate}
           onSubmit={createSession}
+          cancelEdit={undefined}
         />
       </PageSection>
     </Page>

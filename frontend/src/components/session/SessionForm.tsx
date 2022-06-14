@@ -13,7 +13,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import i18n from "../../i18n/i18n";
+import i18n from "i18next";
+import { CancelEditButton } from "../common/CancelEditButton";
 import { ErrorFieldMessage } from "../common/ErrorFieldMessage";
 
 const schema = yup.object().shape({
@@ -44,6 +45,7 @@ export interface SessionFormElemsProps {
   prefill?: GetSessionDto;
   fallbackHourlyRate: number;
   onSubmit: (data: IFormSessionInput) => void;
+  cancelEdit: (() => void) | undefined;
 }
 
 function parseOrNull(date?: string): Date | undefined {
@@ -64,8 +66,9 @@ export const SessionForm = ({
   prefill,
   fallbackHourlyRate,
   onSubmit,
+  cancelEdit,
 }: SessionFormElemsProps) => {
-  const { register, handleSubmit, formState, control } =
+  const { register, handleSubmit, formState, control, reset } =
     useForm<IFormSessionInput>({
       defaultValues: {
         fromDate: parseOrNull(prefill?.fromDate) ?? new Date(),
@@ -171,9 +174,19 @@ export const SessionForm = ({
           />
         </div>
 
-        <div className="btn-wrapper">
+        <div
+          className={`btn-wrapper ${
+            cancelEdit !== undefined && "btn-wrapper--even"
+          }`}
+        >
+          {cancelEdit !== undefined && (
+            <CancelEditButton
+              cancelEdit={handleSubmit(cancelEdit)}
+              reset={reset}
+            />
+          )}
           <input
-            className="btn btn--primary"
+            className="btn btn--primary m05"
             type="submit"
             value={buttonText}
           />

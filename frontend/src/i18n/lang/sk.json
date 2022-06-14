@@ -22,7 +22,8 @@
     "download": "Stiahnuť"
   },
   "confirm": {
-    "delete": "Stlač znova pre potvrdenie zmazania."
+    "delete": "Stlač znova pre potvrdenie zmazania.",
+    "cancelled_edit": "Úprava bola zrušená."
   },
   "status": {
     "no_data": "Žiadne dáta",
@@ -127,6 +128,7 @@
     "password_changed": "Heslo bolo zmenené."
   },
   "form": {
+    "cancel_edit": "Zrušiť úpravu",
     "validation": {
       "project": {
         "name": "Zadajte názov projektu",

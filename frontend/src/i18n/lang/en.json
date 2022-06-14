@@ -22,7 +22,8 @@
     "download": "Download"
   },
   "confirm": {
-    "delete": "Click again to delete."
+    "delete": "Click again to delete.",
+    "cancelled_edit": "Editing was cancelled."
   },
   "status": {
     "no_data": "Nothing to show",
@@ -127,6 +128,7 @@
     "password_changed": "The password was changed."
   },
   "form": {
+    "cancel_edit": "Cancel edit",
     "validation": {
       "project": {
         "name": "Enter project name",
