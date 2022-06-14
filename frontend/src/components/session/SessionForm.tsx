@@ -13,7 +13,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import i18n from "i18next";
+import i18n from "../../i18n/i18n";
+import { ErrorFieldMessage } from "../common/ErrorFieldMessage";
 
 const schema = yup.object().shape({
   fromDate: yup
@@ -30,7 +31,11 @@ const schema = yup.object().shape({
     }),
   toDate: yup.date().required(),
   isInvoiced: yup.boolean().required(),
-  hourlyRate: yup.number().required().min(0),
+  hourlyRate: yup
+    .number()
+    .required()
+    .min(0)
+    .typeError(i18n.t("form.validation.session.hourly_rate")),
   note: yup.string().optional(),
 });
 
@@ -141,11 +146,14 @@ export const SessionForm = ({
               <Trans i18nKey="session.hourly_rate" />
             </label>
             <input
-              className={`number-field`}
+              className={`number-field ${
+                formState.errors.hourlyRate && "number-field--error"
+              }`}
               type="number"
               min={0}
               {...register("hourlyRate", { valueAsNumber: true })}
             />
+            <ErrorFieldMessage formState={formState} name="hourlyRate" />
           </div>
         </div>
 
