@@ -18,16 +18,11 @@ export const CreateProject = () => {
   const navigate = useNavigate();
   const doApiCall = useApiCall();
 
-  const { register, handleSubmit, formState } = useForm<IFormProjectInput>();
+  const { register, handleSubmit, formState, control } =
+    useForm<IFormProjectInput>();
 
   function createProject(data: IFormProjectInput) {
-    const body = {
-      name: data.name,
-      hourlyRate: data.hourlyRate,
-      customer: data.customer,
-    };
-
-    doApiCall(projectControllerCreate, body, onSuccess, onError);
+    doApiCall(projectControllerCreate, data, onSuccess, onError);
   }
 
   function onSuccess() {
@@ -50,6 +45,7 @@ export const CreateProject = () => {
         <ProjectFormElems
           formState={formState}
           register={register}
+          control={control}
           buttonText={i18n.t("project.create")}
         />
       </form>
