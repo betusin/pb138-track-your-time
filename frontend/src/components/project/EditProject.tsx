@@ -33,13 +33,7 @@ export const EditProject = () => {
   }
 
   function updateProject(data: IFormProjectInput) {
-    const body = {
-      name: data.name,
-      hourlyRate: data.hourlyRate,
-      customer: data.customer,
-      isActive: data.isActive,
-    };
-    apiCall(projectControllerUpdateWrap(projectID), body, onSuccess, onError);
+    apiCall(projectControllerUpdateWrap(projectID), data, onSuccess, onError);
   }
 
   function onSuccess() {

@@ -22,13 +22,7 @@ export const CreateProject = () => {
     useForm<IFormProjectInput>();
 
   function createProject(data: IFormProjectInput) {
-    const body = {
-      name: data.name,
-      hourlyRate: data.hourlyRate,
-      customer: data.customer,
-      isActive: data.isActive,
-    };
-    doApiCall(projectControllerCreate, body, onSuccess, onError);
+    doApiCall(projectControllerCreate, data, onSuccess, onError);
   }
 
   function onSuccess() {
