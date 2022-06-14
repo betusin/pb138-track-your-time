@@ -40,10 +40,10 @@ export const ChangePassword = () => {
 
   const onChangePasswordFailure = (code: number) => {
     if (code === 400) {
-      toast(i18n.t("error.validation_failed"));
+      toast.error(i18n.t("error.validation_failed"));
       return true;
     } else if (code === 403) {
-      toast(i18n.t("auth.login.password_incorrect"));
+      toast.error(i18n.t("auth.login.password_incorrect"));
       return true;
     }
     return false;
