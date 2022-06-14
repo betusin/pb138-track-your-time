@@ -6,7 +6,7 @@ import { useApiCall } from "../../util/api-caller";
 import { useLoadProfile } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import { ScreenTitle } from "../common/ScreenTitle";
-import { EditProfileForm, IFormEditProfileInput } from "./EditProfileForm";
+import { EditProfileForm, IFormEditProfileInput } from "./EditProfileForms";
 
 export const EditProfile = () => {
   const [profile] = useLoadProfile();

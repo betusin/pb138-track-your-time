@@ -118,7 +118,10 @@
     "signed_out": "Boli ste odhlásený.",
     "edit_profile": "Úprava profilu",
     "edit": "Uložiť zmeny profilu",
-    "updated": "Profil bol upravený"
+    "updated": "Profil bol upravený",
+    "old_password": "Staré heslo",
+    "new_password": "Nové heslo",
+    "change_password": "Zmeniť heslo"
   },
   "form": {
     "validation": {

@@ -9,9 +9,18 @@ export interface IFormEditProfileInput {
   logo: string;
 }
 
+export interface IFormChangePasswordInput {
+  oldPassword: string;
+  newPassword: string;
+}
+
 export interface IEditProfileProps {
   profile: IFormEditProfileInput;
   onSubmit: SubmitHandler<IFormEditProfileInput>;
+}
+
+export interface IChangePasswordProps {
+  onSubmit: SubmitHandler<IFormChangePasswordInput>;
 }
 
 export const EditProfileForm = ({ profile, onSubmit }: IEditProfileProps) => {
@@ -87,6 +96,45 @@ export const EditProfileForm = ({ profile, onSubmit }: IEditProfileProps) => {
       <div className="btn-wrapper">
         <button className="auth-form--button btn btn--primary" type="submit">
           <Trans i18nKey="profile.edit" />
+        </button>
+      </div>
+    </form>
+  );
+};
+
+export const ChangePasswordForm = ({ onSubmit }: IChangePasswordProps) => {
+  const { register, handleSubmit, formState } =
+    useForm<IFormChangePasswordInput>();
+  return (
+    <form className="m1" onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label>
+          <Trans i18nKey="profile.old_password" />
+        </label>
+      </div>
+      <input
+        className={`text-field ${
+          formState.errors.oldPassword && "text-field--error"
+        }`}
+        type="password"
+        {...register("oldPassword", { required: true })}
+      />
+      <div>
+        <label>
+          <Trans i18nKey="profile.new_password" />
+        </label>
+      </div>
+      <input
+        className={`text-field ${
+          formState.errors.newPassword && "text-field--error"
+        }`}
+        type="password"
+        {...register("newPassword", { required: true })}
+      />
+
+      <div className="btn-wrapper">
+        <button className="auth-form--button btn btn--primary" type="submit">
+          <Trans i18nKey="profile.change_password" />
         </button>
       </div>
     </form>
