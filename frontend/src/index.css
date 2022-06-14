@@ -196,6 +196,8 @@ textarea {
 }
 
 .page--title-main {
+  text-overflow: ellipsis;
+  overflow: hidden;
   text-align: left;
   margin: 0;
 }

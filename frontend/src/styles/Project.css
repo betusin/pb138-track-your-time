@@ -3,6 +3,7 @@
 }
 
 .project-item {
+  min-width: 0;
   border: solid 2px var(--primary-color);
 }
 
@@ -36,6 +37,8 @@
 .project-info__name,
 .project-info__customer,
 .project-info__hourlyRate {
+  text-overflow: ellipsis;
+  overflow: hidden;
   padding: 0.1rem;
   color: var(--bg-color);
 }
