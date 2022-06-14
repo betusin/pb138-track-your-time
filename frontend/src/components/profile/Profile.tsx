@@ -20,6 +20,9 @@ export const Profile = () => {
 
   const [profile] = useLoadProfile();
 
+  const backupImageURL =
+    "https://uxwing.com/wp-content/themes/uxwing/download/42-business-professional-services/company-enterprise.svg";
+
   const navigate = useNavigate();
   const setToken = useSetRecoilState(accessTokenAtom);
 
@@ -61,7 +64,15 @@ export const Profile = () => {
       <div className="profile-wrapper">
         <Stack>
           <div className="profile__logo-wrapper">
-            <img className="profile__logo-img" src={profile.logo} alt="logo" />
+            <img
+              className="profile__logo-img"
+              src={profile.logo}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src = backupImageURL;
+              }}
+              alt="logo"
+            />
           </div>
           <div className="profile-field profile__name">
             <p className="profile-field__label">
