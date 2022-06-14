@@ -103,10 +103,16 @@ export const EditProfileForm = ({ profile, onSubmit }: IEditProfileProps) => {
 };
 
 export const ChangePasswordForm = ({ onSubmit }: IChangePasswordProps) => {
-  const { register, handleSubmit, formState } =
+  const { register, handleSubmit, reset, formState } =
     useForm<IFormChangePasswordInput>();
   return (
-    <form className="m1" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="m1"
+      onSubmit={handleSubmit((data) => {
+        reset();
+        onSubmit(data);
+      })}
+    >
       <div>
         <label>
           <Trans i18nKey="profile.old_password" />
