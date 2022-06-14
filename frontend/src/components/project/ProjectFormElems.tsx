@@ -63,18 +63,20 @@ export const ProjectFormElems = ({
         <label htmlFor="isActive">
           <Trans i18nKey="project.is_active" />
         </label>
-        <Controller
-          name="isActive"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <Checkbox
-              id="isActive"
-              checked={value === undefined ? true : value}
-              style={{ color: theme.palette.secondary.light }}
-              onChange={onChange}
-            />
-          )}
-        ></Controller>
+        <div>
+          <Controller
+            name="isActive"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Checkbox
+                id="isActive"
+                checked={value === undefined ? true : value}
+                style={{ color: theme.palette.secondary.light }}
+                onChange={onChange}
+              />
+            )}
+          />
+        </div>
       </div>
 
       <div className="form--field">
