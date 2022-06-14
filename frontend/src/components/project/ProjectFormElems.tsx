@@ -7,7 +7,9 @@ import {
 } from "react-hook-form";
 import { theme } from "../../styles/theme";
 import { IFormProjectInput } from "./CreateProject";
+import { ErrorFieldMessage } from "../common/ErrorFieldMessage";
 import { Trans } from "react-i18next";
+import i18n from "../../i18n/i18n";
 
 export interface IProjectFormElemsProps {
   formState: FormState<IFormProjectInput>;
@@ -32,8 +34,14 @@ export const ProjectFormElems = ({
       <input
         className={`text-field ${formState.errors.name && "text-field--error"}`}
         type="text"
-        {...register("name", { required: true })}
+        {...register("name", {
+          required: {
+            message: i18n.t("form.validation.project.name"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="name" />
 
       <div>
         <label>
@@ -66,11 +74,21 @@ export const ProjectFormElems = ({
         </label>
       </div>
       <input
-        className={`number-field`}
+        className={`number-field ${
+          formState.errors.hourlyRate && "number-field--error"
+        }`}
         type="number"
         min={0}
-        {...register("hourlyRate", { valueAsNumber: true })}
+        defaultValue={0}
+        {...register("hourlyRate", {
+          valueAsNumber: true,
+          required: {
+            message: i18n.t("form.validation.project.hourly_rate"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="hourlyRate" />
 
       <div className="btn-wrapper">
         <input className="btn btn--primary" type="submit" value={buttonText} />

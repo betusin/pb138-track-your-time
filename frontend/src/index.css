@@ -5,7 +5,7 @@
   --screen-title-color: #2b2a2a;
   --primary-color: #ccd921;
   --primary_light-color: #f7f9d2;
-  --error-color: #d32f2f;
+  --error-color: #faab00;
   --success-color: #2e7d32;
   --secondary: #9edf36;
   --secondary-color: #97a800;
@@ -134,21 +134,9 @@ textarea {
   align-items: center;
 }
 
-.message {
-  font-size: 1.5rem;
-  width: fit-content;
-  padding: 0.25rem;
-  border-radius: 0.75rem;
-}
-
-.message--error {
+.text-error {
   color: var(--error-color);
-  border: var(--error-color) 2px solid;
-}
-
-.message--success {
-  color: var(--success-color);
-  border: var(--success-color) 2px solid;
+  margin-bottom: 0.5rem;
 }
 
 .navbar {

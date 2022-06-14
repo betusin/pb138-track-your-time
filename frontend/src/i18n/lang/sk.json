@@ -119,5 +119,20 @@
     "edit_profile": "Úprava profilu",
     "edit": "Uložiť zmeny profilu",
     "updated": "Profil bol upravený"
+  },
+  "form": {
+    "validation": {
+      "project": {
+        "name": "Zadajte názov projektu",
+        "hourly_rate": "Zadajte hodinovú sadzbu"
+      },
+      "auth": {
+        "email": "Zadajte e-mailovú adresu",
+        "password": "Zadajte heslo",
+        "name": "Zadajte Vaše meno",
+        "surname": "Zadajte Vaše priezvisko",
+        "company": "Zadajte názov firmy"
+      }
+    }
   }
 }
