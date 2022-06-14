@@ -61,11 +61,21 @@ export const ProjectFormElems = ({
         </label>
       </div>
       <input
-        className={`number-field`}
+        className={`number-field ${
+          formState.errors.hourlyRate && "number-field--error"
+        }`}
         type="number"
         min={0}
-        {...register("hourlyRate", { valueAsNumber: true })}
+        defaultValue={0}
+        {...register("hourlyRate", {
+          valueAsNumber: true,
+          required: {
+            message: i18n.t("form.validation.project.hourly_rate"),
+            value: true,
+          },
+        })}
       />
+      <ErrorFieldMessage formState={formState} name="hourlyRate" />
 
       <div className="btn-wrapper">
         <input className="btn btn--primary" type="submit" value={buttonText} />

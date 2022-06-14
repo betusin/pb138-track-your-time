@@ -112,7 +112,8 @@
   "form": {
     "validation": {
       "project": {
-        "name": "Zadajte názov projektu"
+        "name": "Zadajte názov projektu",
+        "hourly_rate": "Zadajte hodinovú sadzbu"
       },
       "auth": {
         "email": "Zadajte e-mailovú adresu",
