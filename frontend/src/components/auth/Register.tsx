@@ -26,7 +26,9 @@ export const Register = () => {
   }
 
   function onRegisterSuccess(data: IFormRegisterInput) {
-    doApiCall(authControllerLogin, data, onLoginSuccess);
+    doApiCall(authControllerLogin, data, onLoginSuccess, undefined, {
+      withCredentials: true,
+    });
   }
 
   function onRegisterFailure(code: number) {
