@@ -118,7 +118,13 @@
     "signed_out": "You were signed out.",
     "edit_profile": "Editing profile",
     "edit": "Update profile",
-    "updated": "Profile updated."
+    "updated": "Profile updated.",
+    "old_password": "Old password",
+    "new_password": "New password",
+    "confirm_new_password": "Confirm new password",
+    "passwords_no_match": "Passwords don't match",
+    "change_password": "Change password",
+    "password_changed": "The password was changed."
   },
   "form": {
     "validation": {

@@ -5,7 +5,11 @@
  * OpenAPI spec version: 1.0.0
  */
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { CreateUserDto, UpdateUserDto } from ".././model";
+import type {
+  CreateUserDto,
+  UpdateUserDto,
+  UpdateUserPasswordDto,
+} from ".././model";
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -38,4 +42,14 @@ export const meControllerRemove = (
   options?: AxiosRequestConfig
 ): Promise<AxiosResponse<void>> => {
   return axios.delete(`/me`, options);
+};
+
+/**
+ * @summary Changes the password of the current user
+ */
+export const meControllerPassword = (
+  updateUserPasswordDto: UpdateUserPasswordDto,
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<void>> => {
+  return axios.put(`/me/password`, updateUserPasswordDto, options);
 };

@@ -14,5 +14,6 @@ export * from "./sessionControllerCreateSessionBody";
 export * from "./authControllerLoginParams";
 export * from "./accessTokenDto";
 export * from "./getSessionWithPhotosDto";
+export * from "./updateUserPasswordDto";
 export * from "./streamableFile";
 export * from "./reportControllerGenerateReportParams";

@@ -39,3 +39,9 @@
 .btn-profile-wrapper {
   margin: 4rem 2rem 2rem 2rem;
 }
+
+.profile__edit-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

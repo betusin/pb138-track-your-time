@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { hashPassword } from '../auth/password-hashing';
+import { checkPassword, hashPassword } from '../auth/password-hashing';
 import { User } from '@prisma/client';
 import { GetUserDto } from './dto/get-user-dto.dto';
 import { CurrentUserProvider } from 'src/current-user/current-user.provider';
@@ -10,6 +10,7 @@ import {
   ForbiddenException,
   NotFoundException,
 } from 'src/exception/service-exception';
+import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 
 @Injectable()
 export class UserService {
@@ -80,6 +81,39 @@ export class UserService {
   async remove(id: string): Promise<void> {
     await this.prisma.user.delete({
       where: { id: id },
+    });
+  }
+
+  async updatePassword(
+    id: string,
+    updateUserPasswordDto: UpdateUserPasswordDto,
+  ): Promise<void> {
+    const user: User = await this.authorize(id);
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (
+      !(await checkPassword(
+        updateUserPasswordDto.oldPassword,
+        user.passwordHash,
+      ))
+    ) {
+      throw new ForbiddenException('Incorrect existing password');
+    }
+
+    const newPasswordHash = await hashPassword(
+      updateUserPasswordDto.newPassword,
+    );
+
+    await this.prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        passwordHash: newPasswordHash,
+      },
     });
   }
 }
