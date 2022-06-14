@@ -14,6 +14,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import i18n from "i18next";
+import { CancelEditButton } from "../common/CancelEditButton";
 
 const schema = yup.object().shape({
   fromDate: yup
@@ -171,12 +172,7 @@ export const SessionForm = ({
           }`}
         >
           {cancelEdit !== undefined && (
-            <button
-              className="btn--secondary btn m05"
-              onClick={handleSubmit(cancelEdit)}
-            >
-              <Trans i18nKey="form.cancel_edit" />
-            </button>
+            <CancelEditButton cancelEdit={handleSubmit(cancelEdit)} />
           )}
           <input
             className="btn btn--primary m05"
