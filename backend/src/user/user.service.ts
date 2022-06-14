@@ -94,12 +94,13 @@ export class UserService {
       throw new NotFoundException('User not found');
     }
 
-    const oldPasswordHash = await hashPassword(
-      updateUserPasswordDto.oldPassword,
-    );
-
-    if (!(await checkPassword(oldPasswordHash, user.passwordHash))) {
-      throw new ForbiddenException();
+    if (
+      !(await checkPassword(
+        updateUserPasswordDto.oldPassword,
+        user.passwordHash,
+      ))
+    ) {
+      throw new ForbiddenException('Incorrect existing password');
     }
 
     const newPasswordHash = await hashPassword(
