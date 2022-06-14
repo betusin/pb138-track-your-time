@@ -35,7 +35,7 @@ const schema = yup.object().shape({
     .number()
     .required()
     .min(0)
-    .typeError(i18n.t("form.validation.project.hourly_rate")),
+    .typeError(i18n.t("form.validation.session.hourly_rate")),
   note: yup.string().optional(),
 });
 

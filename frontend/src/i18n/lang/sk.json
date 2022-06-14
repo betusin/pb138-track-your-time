@@ -132,6 +132,9 @@
         "name": "Zadajte názov projektu",
         "hourly_rate": "Zadajte hodinovú sadzbu"
       },
+      "session": {
+        "hourly_rate": "Zadajte nezápornú hodinovú sadzbu"
+      },
       "auth": {
         "email": "Zadajte e-mailovú adresu",
         "password": "Zadajte heslo",

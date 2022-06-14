@@ -132,6 +132,9 @@
         "name": "Enter project name",
         "hourly_rate": "Enter hourly rate"
       },
+      "session": {
+        "hourly_rate": "Enter hourly rate greater than zero"
+      },
       "auth": {
         "email": "Enter an email address",
         "password": "Enter password",
