@@ -20,8 +20,8 @@ export const EditProject = () => {
   const projectID = useParamOrEmpty("id");
   const project = useLoadProject(projectID);
   useEffect(() => {
-    if (project?.customer) {
-      setValue("customer", project.customer);
+    if (project) {
+      setValue("customer", project.customer ?? "");
       setValue("hourlyRate", project.hourlyRate);
       setValue("isActive", project.isActive);
       setValue("name", project.name);
