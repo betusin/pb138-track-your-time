@@ -28,6 +28,7 @@ export const Register = () => {
   function onRegisterSuccess(data: IFormRegisterInput) {
     doApiCall(authControllerLogin, data, onLoginSuccess, undefined, {
       withCredentials: true,
+      validateStatus: () => true,
     });
   }
 
