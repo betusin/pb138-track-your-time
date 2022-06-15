@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  InternalServerErrorException,
   Patch,
   Put,
   UseGuards,
@@ -45,13 +44,9 @@ export class MeController {
   @ApiUnauthorizedResponse({ description: api_desc_auth_invalid })
   @Get('/profile')
   async profile(@CurrentUser() userId: string): Promise<GetUserDto> {
-    const profile = this.userService.findOne(userId);
-    if (!profile) {
-      throw new InternalServerErrorException(
-        'The profile of the current user was not found',
-      );
-    }
-    return profile;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { passwordHash, ...user } = await this.userService.findOne(userId);
+    return user;
   }
 
   @ApiTags('Projects')
