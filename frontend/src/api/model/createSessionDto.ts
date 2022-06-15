@@ -10,4 +10,5 @@ export interface CreateSessionDto {
   toDate: string;
   hourlyRate?: number;
   note?: string;
+  isInvoiced?: boolean;
 }

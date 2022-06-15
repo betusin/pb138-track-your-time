@@ -11,6 +11,6 @@ export interface GetSessionDto {
   toDate: string;
   hourlyRate?: number;
   note?: string;
-  isInvoiced: boolean;
+  isInvoiced?: boolean;
   projectId: string;
 }

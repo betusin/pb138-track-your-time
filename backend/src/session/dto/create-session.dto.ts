@@ -4,6 +4,7 @@ import {
   IsOptional,
   IsString,
   Min,
+  IsBoolean,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -26,4 +27,9 @@ export class CreateSessionDto {
   @IsOptional()
   @IsString()
   note: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsBoolean()
+  isInvoiced: boolean;
 }

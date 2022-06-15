@@ -136,10 +136,17 @@ export const SessionForm = ({
               <Trans i18nKey="session.is_invoiced" />
             </label>
             <div>
-              <Checkbox
-                id="isInvoiced"
-                {...register("isInvoiced")}
-                style={{ color: theme.palette.secondary.light }}
+              <Controller
+                name="isInvoiced"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <Checkbox
+                    id="isActive"
+                    checked={value}
+                    style={{ color: theme.palette.secondary.light }}
+                    onChange={onChange}
+                  />
+                )}
               />
             </div>
           </div>

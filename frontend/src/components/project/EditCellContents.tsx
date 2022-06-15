@@ -19,10 +19,7 @@ export function EditCellContents({
         <Image style={styleLargeIcon} color="primary" />
       </Link>
       <Link to={`/session/${session.id}/edit`} className="btn btn__icon">
-        <Edit
-          style={styleLargeIcon}
-          color={session.isInvoiced ? "disabled" : "primary"}
-        />
+        <Edit style={styleLargeIcon} color="primary" />
       </Link>
       <DeleteButton onDelete={onDeleteClick} id={session.id} />
     </>

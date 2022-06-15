@@ -35,6 +35,7 @@ export const CreateSession = () => {
       toDate: data.toDate.toISOString(),
       hourlyRate: data.hourlyRate,
       note: data.note,
+      isInvoiced: data.isInvoiced,
     };
     const call = sessionControllerCreateWrap(project.id);
     doApiCall(call, body, onSuccess, onError);
