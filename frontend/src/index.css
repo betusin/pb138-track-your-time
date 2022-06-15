@@ -28,6 +28,10 @@ code {
     monospace;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 a {
   color: var(--primary_light-color);
   text-decoration: dotted;
