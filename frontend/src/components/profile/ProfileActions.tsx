@@ -1,7 +1,10 @@
 import { Edit, Key } from "@mui/icons-material";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
+import { authControllerLogout } from "../../api/authentication/authentication";
 import { meControllerRemove } from "../../api/users/users";
+import i18n from "../../i18n/i18n";
 import { accessTokenAtom } from "../../state/atom";
 import { styleLargeIcon } from "../../styles/theme";
 import { useApiCall } from "../../util/api-caller";
@@ -14,21 +17,33 @@ export const ProfileActions = () => {
 
   const deleteProfile = () => {
     doApiCall(
+      authControllerLogout,
+      { withCredentials: true },
+      onLougoutSuccess
+    );
+  };
+
+  const onLougoutSuccess = () => {
+    doApiCall(
       meControllerRemove,
       { withCredentials: true },
       onDeleteSuccess,
       onDeleteFailure
     );
-    return;
   };
 
   const onDeleteSuccess = () => {
     setToken("");
+    toast.success(i18n.t("profile.delete"));
     navigate("/login");
   };
 
   const onDeleteFailure = (code: number) => {
-    return true;
+    if (code === 401) {
+      toast.error(i18n.t("error.unauthorized"));
+      return true;
+    }
+    return false;
   };
 
   return (

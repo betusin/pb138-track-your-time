@@ -120,6 +120,7 @@
     "edit_profile": "Editing profile",
     "edit": "Update profile",
     "updated": "Profile updated.",
+    "deleted": "Profile was deleted.",
     "old_password": "Old password",
     "new_password": "New password",
     "confirm_new_password": "Confirm new password",
