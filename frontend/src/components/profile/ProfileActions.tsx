@@ -17,14 +17,6 @@ export const ProfileActions = () => {
 
   const deleteProfile = () => {
     doApiCall(
-      authControllerLogout,
-      { withCredentials: true },
-      onLougoutSuccess
-    );
-  };
-
-  const onLougoutSuccess = () => {
-    doApiCall(
       meControllerRemove,
       { withCredentials: true },
       onDeleteSuccess,
@@ -33,9 +25,11 @@ export const ProfileActions = () => {
   };
 
   const onDeleteSuccess = () => {
-    setToken("");
-    toast.success(i18n.t("profile.delete"));
-    navigate("/login");
+    doApiCall(
+      authControllerLogout,
+      { withCredentials: true },
+      onLougoutSuccess
+    );
   };
 
   const onDeleteFailure = (code: number) => {
@@ -44,6 +38,12 @@ export const ProfileActions = () => {
       return true;
     }
     return false;
+  };
+
+  const onLougoutSuccess = () => {
+    setToken("");
+    toast.success(i18n.t("profile.deleted"));
+    navigate("/login");
   };
 
   return (
