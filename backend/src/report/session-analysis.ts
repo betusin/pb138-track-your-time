@@ -9,13 +9,17 @@ export function getHoursForSession(session: GetSessionDto): number {
   return b.diff(a, 'hours', true);
 }
 
-export function getSessionsBetween(
+export function getUninvoicedSessionsBetween(
   sessions: Session[],
   start: Date,
   end: Date,
 ) {
   return sessions.filter((session) => {
-    return session.fromDate >= start && session.fromDate <= end;
+    return (
+      session.fromDate >= start &&
+      session.fromDate <= end &&
+      !session.isInvoiced
+    );
   });
 }
 

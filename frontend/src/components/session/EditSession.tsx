@@ -37,6 +37,7 @@ export const EditSession = () => {
       toDate: data.toDate.toISOString(),
       hourlyRate: data.hourlyRate,
       note: data.note,
+      isInvoiced: data.isInvoiced,
     };
     const call = sessionControllerUpdateWrap(id);
     apiCall(call, body, onSuccess, onError);

@@ -8,7 +8,7 @@ import {
   calculateCashForSessions,
   calculateHoursForSessions,
   getHoursForSession,
-  getSessionsBetween,
+  getUninvoicedSessionsBetween,
 } from './session-analysis';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class ProjectReportService {
     }
     const project = await this.projectService.findOne(projectId);
     const allSessions = await this.sessionService.findAll(projectId);
-    const sessions = getSessionsBetween(allSessions, from, to);
+    const sessions = getUninvoicedSessionsBetween(allSessions, from, to);
     const items = sessions;
     const hours = calculateHoursForSessions(items);
     const cash = calculateCashForSessions(items, project);

@@ -12,7 +12,7 @@ export interface GetSessionWithPhotosDto {
   toDate: string;
   hourlyRate?: number;
   note?: string;
-  isInvoiced: boolean;
+  isInvoiced?: boolean;
   projectId: string;
   photos: GetSessionPhotoDto[];
 }
