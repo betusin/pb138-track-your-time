@@ -131,7 +131,7 @@ textarea {
 
 .number-field,
 .text-field {
-  border: none;
+  border: 0.15rem solid transparent;
   margin: 0.25rem;
 }
 
