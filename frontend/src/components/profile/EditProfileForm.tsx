@@ -26,68 +26,84 @@ export const EditProfileForm = ({ profile, onSubmit }: IEditProfileProps) => {
   });
 
   return (
-    <form className="m1" onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>
-          <Trans i18nKey="auth.register.email" />
-        </label>
-      </div>
-      <input
-        className={`text-field ${
-          formState.errors.email && "text-field--error"
-        }`}
-        type="email"
-        {...register("email", { required: true })}
-      />
-      <div>
-        <label>
-          <Trans i18nKey="auth.register.name" />
-        </label>
-      </div>
-      <input
-        className={`text-field ${formState.errors.name && "text-field--error"}`}
-        type="text"
-        {...register("name", { required: true })}
-      />
-      <div>
-        <label>
-          <Trans i18nKey="auth.register.surname" />
-        </label>
-      </div>
-      <input
-        className={`text-field ${
-          formState.errors.surname && "text-field--error"
-        }`}
-        type="text"
-        {...register("surname", { required: true })}
-      />
-      <div>
-        <label>
-          <Trans i18nKey="auth.register.company" />
-        </label>
-      </div>
-      <input
-        className={`text-field ${
-          formState.errors.company && "text-field--error"
-        }`}
-        type="text"
-        {...register("company", { required: true })}
-      />
-      <div>
-        <label>
-          <Trans i18nKey="auth.register.company_logo" />
-        </label>
-      </div>
-      <input
-        className={`text-field ${formState.errors.logo && "text-field--error"}`}
-        type="text"
-        {...register("logo")}
-      />
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="form--inner-container">
+        <div className="form--field">
+          <div>
+            <label>
+              <Trans i18nKey="auth.register.email" />
+            </label>
+          </div>
+          <input
+            className={`text-field ${
+              formState.errors.email && "text-field--error"
+            }`}
+            type="email"
+            {...register("email", { required: true })}
+          />
+        </div>
+        <div className="form--field">
+          <div>
+            <label>
+              <Trans i18nKey="auth.register.name" />
+            </label>
+          </div>
+          <input
+            className={`text-field ${
+              formState.errors.name && "text-field--error"
+            }`}
+            type="text"
+            {...register("name", { required: true })}
+          />
+        </div>
+        <div className="form--field">
+          <div>
+            <label>
+              <Trans i18nKey="auth.register.surname" />
+            </label>
+          </div>
+          <input
+            className={`text-field ${
+              formState.errors.surname && "text-field--error"
+            }`}
+            type="text"
+            {...register("surname", { required: true })}
+          />
+        </div>
+        <div className="form--field">
+          <div>
+            <label>
+              <Trans i18nKey="auth.register.company" />
+            </label>
+          </div>
+          <input
+            className={`text-field ${
+              formState.errors.company && "text-field--error"
+            }`}
+            type="text"
+            {...register("company", { required: true })}
+          />
+        </div>
+        <div className="form--field">
+          <div>
+            <label>
+              <Trans i18nKey="auth.register.company_logo" />
+            </label>
+          </div>
+          <input
+            className={`text-field ${
+              formState.errors.logo && "text-field--error"
+            }`}
+            type="text"
+            {...register("logo")}
+          />
+        </div>
 
-      <div className="btn-wrapper">
-        <button className="auth-form--button btn btn--primary" type="submit">
-          <Trans i18nKey="profile.edit" />
-        </button>
+        <div className="btn-wrapper">
+          <button className="auth-form--button btn btn--primary" type="submit">
+            <Trans i18nKey="profile.edit" />
+          </button>
+        </div>
       </div>
     </form>
   );
