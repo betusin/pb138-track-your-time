@@ -12,6 +12,7 @@ export interface IFormEditProfileInput {
 export interface IEditProfileProps {
   profile: IFormEditProfileInput;
   onSubmit: SubmitHandler<IFormEditProfileInput>;
+  onCancelEdit: () => void;
 }
 
 export const EditProfileForm = ({ profile, onSubmit }: IEditProfileProps) => {

@@ -7,7 +7,6 @@ import { useLoadProfile } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
 import { Page } from "../common/PageContent";
 import { PageSection } from "../common/PageSection";
-import { ScreenTitle } from "../common/ScreenTitle";
 import { EditProfileForm, IFormEditProfileInput } from "./EditProfileForm";
 
 export const EditProfile = () => {
@@ -33,6 +32,10 @@ export const EditProfile = () => {
     return false;
   };
 
+  const onCancelEdit = () => {
+    return;
+  };
+
   if (profile === undefined) {
     return <LoadingPlaceholder />;
   }
@@ -43,7 +46,11 @@ export const EditProfile = () => {
       secondaryTitle={`${profile.name} ${profile.surname}`}
     >
       <PageSection title="">
-        <EditProfileForm profile={profile} onSubmit={updateUser} />
+        <EditProfileForm
+          profile={profile}
+          onSubmit={updateUser}
+          onCancelEdit={onCancelEdit}
+        />
       </PageSection>
     </Page>
   );
