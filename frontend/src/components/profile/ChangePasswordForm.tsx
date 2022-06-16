@@ -1,6 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
+import i18n from "../../i18n/i18n";
 import { CancelEditButton } from "../common/CancelEditButton";
+import { ErrorFieldMessage } from "../common/ErrorFieldMessage";
 
 export interface IFormChangePasswordInput {
   oldPassword: string;
@@ -33,8 +35,14 @@ export const ChangePasswordForm = ({
               formState.errors.oldPassword && "text-field--error"
             }`}
             type="password"
-            {...register("oldPassword", { required: true })}
+            {...register("oldPassword", {
+              required: {
+                message: i18n.t("form.validation.password.old_password"),
+                value: true,
+              },
+            })}
           />
+          <ErrorFieldMessage formState={formState} name="oldPassword" />
         </div>
         <div className="form--field">
           <div>
@@ -47,8 +55,14 @@ export const ChangePasswordForm = ({
               formState.errors.newPassword && "text-field--error"
             }`}
             type="password"
-            {...register("newPassword", { required: true })}
+            {...register("newPassword", {
+              required: {
+                message: i18n.t("form.validation.password.new_password"),
+                value: true,
+              },
+            })}
           />
+          <ErrorFieldMessage formState={formState} name="newPassword" />
         </div>
         <div className="form--field">
           <div>
@@ -61,8 +75,16 @@ export const ChangePasswordForm = ({
               formState.errors.confirmNewPassword && "text-field--error"
             }`}
             type="password"
-            {...register("confirmNewPassword", { required: true })}
+            {...register("confirmNewPassword", {
+              required: {
+                message: i18n.t(
+                  "form.validation.password.confirm_new_password"
+                ),
+                value: true,
+              },
+            })}
           />
+          <ErrorFieldMessage formState={formState} name="confirmNewPassword" />
         </div>
 
         <div className="btn-wrapper btn-wrapper--even">

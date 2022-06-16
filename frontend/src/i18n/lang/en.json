@@ -144,6 +144,17 @@
         "name": "Enter your name",
         "surname": "Enter your surname",
         "company": "Enter company name"
+      },
+      "profile": {
+        "email": "Enter an email address",
+        "name": "Enter your name",
+        "surname": "Enter your surname",
+        "company": "Enter company name"
+      },
+      "password": {
+        "old_password": "Enter old password",
+        "new_password": "Enter new password",
+        "confirm_new_password": "Confirm new password"
       }
     }
   }

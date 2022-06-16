@@ -1,6 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
+import i18n from "../../i18n/i18n";
 import { CancelEditButton } from "../common/CancelEditButton";
+import { ErrorFieldMessage } from "../common/ErrorFieldMessage";
 
 export interface IFormEditProfileInput {
   email: string;
@@ -46,8 +48,14 @@ export const EditProfileForm = ({
               formState.errors.email && "text-field--error"
             }`}
             type="email"
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: {
+                message: i18n.t("form.validation.profile.email"),
+                value: true,
+              },
+            })}
           />
+          <ErrorFieldMessage formState={formState} name="email" />
         </div>
         <div className="form--field">
           <div>
@@ -60,8 +68,14 @@ export const EditProfileForm = ({
               formState.errors.name && "text-field--error"
             }`}
             type="text"
-            {...register("name", { required: true })}
+            {...register("name", {
+              required: {
+                message: i18n.t("form.validation.profile.name"),
+                value: true,
+              },
+            })}
           />
+          <ErrorFieldMessage formState={formState} name="name" />
         </div>
         <div className="form--field">
           <div>
@@ -74,8 +88,14 @@ export const EditProfileForm = ({
               formState.errors.surname && "text-field--error"
             }`}
             type="text"
-            {...register("surname", { required: true })}
+            {...register("surname", {
+              required: {
+                message: i18n.t("form.validation.profile.surname"),
+                value: true,
+              },
+            })}
           />
+          <ErrorFieldMessage formState={formState} name="surname" />
         </div>
         <div className="form--field">
           <div>
@@ -88,8 +108,14 @@ export const EditProfileForm = ({
               formState.errors.company && "text-field--error"
             }`}
             type="text"
-            {...register("company", { required: true })}
+            {...register("company", {
+              required: {
+                message: i18n.t("form.validation.profile.company"),
+                value: true,
+              },
+            })}
           />
+          <ErrorFieldMessage formState={formState} name="company" />
         </div>
         <div className="form--field">
           <div>
