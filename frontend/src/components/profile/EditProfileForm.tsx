@@ -25,13 +25,7 @@ export const EditProfileForm = ({
 }: IEditProfileProps) => {
   const { register, handleSubmit, formState, reset } =
     useForm<IFormEditProfileInput>({
-      defaultValues: {
-        email: profile.email,
-        name: profile.name,
-        surname: profile.surname,
-        company: profile.company,
-        logo: profile.logo,
-      },
+      defaultValues: { ...profile },
     });
 
   return (
