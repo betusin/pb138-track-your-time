@@ -8,6 +8,7 @@ import { AccessTokenDto } from "../../api/model";
 import { useApiCall } from "../../util/api-caller";
 import { Trans } from "react-i18next";
 import i18n from "i18next";
+import { PageSection } from "../common/PageSection";
 
 export const Login = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
@@ -40,15 +41,19 @@ export const Login = () => {
   }
 
   return (
-    <>
-      <div className="auth-form--container">
-        <LoginForm onSubmit={login} />
-        <Trans i18nKey="auth.register.hint.no_account" />
-        <Link to="/register">
-          <Trans i18nKey="auth.register.hint.here" />
-        </Link>
-        .
-      </div>
-    </>
+    <div className="page">
+      <PageSection title="">
+        <div className="auth-form--container">
+          <LoginForm onSubmit={login} />
+          <span>
+            <Trans i18nKey="auth.register.hint.no_account" />
+            <Link to="/register">
+              <Trans i18nKey="auth.register.hint.here" />
+            </Link>
+            .
+          </span>
+        </div>
+      </PageSection>
+    </div>
   );
 };

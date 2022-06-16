@@ -268,3 +268,8 @@ textarea {
   display: flex;
   justify-content: right;
 }
+
+.auth-form--container {
+  display: flex;
+  flex-direction: column;
+}
