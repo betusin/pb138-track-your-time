@@ -50,10 +50,18 @@ export const ChangePassword = () => {
     return false;
   };
 
+  const onCancelEdit = () => {
+    toast(i18n.t("confirm.cancelled_edit"));
+    navigate("/me");
+  };
+
   return (
     <Page title={i18n.t("profile.change_password")}>
       <PageSection title="">
-        <ChangePasswordForm onSubmit={changePassword} />
+        <ChangePasswordForm
+          onSubmit={changePassword}
+          onCancelEdit={onCancelEdit}
+        />
       </PageSection>
     </Page>
   );

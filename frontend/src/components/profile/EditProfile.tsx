@@ -33,7 +33,8 @@ export const EditProfile = () => {
   };
 
   const onCancelEdit = () => {
-    return;
+    toast(i18n.t("confirm.cancelled_edit"));
+    navigate("/me");
   };
 
   if (profile === undefined) {

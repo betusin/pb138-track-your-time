@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
+import { CancelEditButton } from "../common/CancelEditButton";
 
 export interface IFormChangePasswordInput {
   oldPassword: string;
@@ -9,10 +10,14 @@ export interface IFormChangePasswordInput {
 
 export interface IChangePasswordProps {
   onSubmit: SubmitHandler<IFormChangePasswordInput>;
+  onCancelEdit: () => void;
 }
 
-export const ChangePasswordForm = ({ onSubmit }: IChangePasswordProps) => {
-  const { register, handleSubmit, formState } =
+export const ChangePasswordForm = ({
+  onSubmit,
+  onCancelEdit,
+}: IChangePasswordProps) => {
+  const { register, handleSubmit, formState, reset } =
     useForm<IFormChangePasswordInput>();
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -60,8 +65,12 @@ export const ChangePasswordForm = ({ onSubmit }: IChangePasswordProps) => {
           />
         </div>
 
-        <div className="btn-wrapper">
-          <button className="auth-form--button btn btn--primary" type="submit">
+        <div className="btn-wrapper btn-wrapper--even">
+          <CancelEditButton
+            cancelEdit={handleSubmit(onCancelEdit)}
+            reset={reset}
+          />
+          <button className="btn btn--primary m05" type="submit">
             <Trans i18nKey="profile.change_password" />
           </button>
         </div>

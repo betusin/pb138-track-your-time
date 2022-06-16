@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
+import { CancelEditButton } from "../common/CancelEditButton";
 
 export interface IFormEditProfileInput {
   email: string;
@@ -15,16 +16,21 @@ export interface IEditProfileProps {
   onCancelEdit: () => void;
 }
 
-export const EditProfileForm = ({ profile, onSubmit }: IEditProfileProps) => {
-  const { register, handleSubmit, formState } = useForm<IFormEditProfileInput>({
-    defaultValues: {
-      email: profile.email,
-      name: profile.name,
-      surname: profile.surname,
-      company: profile.company,
-      logo: profile.logo,
-    },
-  });
+export const EditProfileForm = ({
+  profile,
+  onSubmit,
+  onCancelEdit,
+}: IEditProfileProps) => {
+  const { register, handleSubmit, formState, reset } =
+    useForm<IFormEditProfileInput>({
+      defaultValues: {
+        email: profile.email,
+        name: profile.name,
+        surname: profile.surname,
+        company: profile.company,
+        logo: profile.logo,
+      },
+    });
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -100,8 +106,12 @@ export const EditProfileForm = ({ profile, onSubmit }: IEditProfileProps) => {
           />
         </div>
 
-        <div className="btn-wrapper">
-          <button className="auth-form--button btn btn--primary" type="submit">
+        <div className="btn-wrapper btn-wrapper--even">
+          <CancelEditButton
+            cancelEdit={handleSubmit(onCancelEdit)}
+            reset={reset}
+          />
+          <button className="btn btn--primary m05" type="submit">
             <Trans i18nKey="profile.edit" />
           </button>
         </div>
