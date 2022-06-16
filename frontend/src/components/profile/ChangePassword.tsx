@@ -4,6 +4,8 @@ import { UpdateUserPasswordDto } from "../../api/model";
 import { meControllerPassword } from "../../api/users/users";
 import i18n from "../../i18n/i18n";
 import { useApiCall } from "../../util/api-caller";
+import { Page } from "../common/PageContent";
+import { PageSection } from "../common/PageSection";
 import { ScreenTitle } from "../common/ScreenTitle";
 import {
   ChangePasswordForm,
@@ -50,9 +52,10 @@ export const ChangePassword = () => {
   };
 
   return (
-    <>
-      <ScreenTitle title={i18n.t("profile.change_password")} />
-      <ChangePasswordForm onSubmit={changePassword} />
-    </>
+    <Page title={i18n.t("profile.change_password")}>
+      <PageSection title="">
+        <ChangePasswordForm onSubmit={changePassword} />
+      </PageSection>
+    </Page>
   );
 };

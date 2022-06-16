@@ -5,6 +5,8 @@ import i18n from "../../i18n/i18n";
 import { useApiCall } from "../../util/api-caller";
 import { useLoadProfile } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
+import { Page } from "../common/PageContent";
+import { PageSection } from "../common/PageSection";
 import { ScreenTitle } from "../common/ScreenTitle";
 import { EditProfileForm, IFormEditProfileInput } from "./EditProfileForm";
 
@@ -36,12 +38,13 @@ export const EditProfile = () => {
   }
 
   return (
-    <>
-      <ScreenTitle
-        title={i18n.t("profile.edit_profile")}
-        secondaryTitle={`${profile.name} ${profile.surname}`}
-      />
-      <EditProfileForm profile={profile} onSubmit={updateUser} />
-    </>
+    <Page
+      title={i18n.t("profile.edit_profile")}
+      secondaryTitle={`${profile.name} ${profile.surname}`}
+    >
+      <PageSection title="">
+        <EditProfileForm profile={profile} onSubmit={updateUser} />
+      </PageSection>
+    </Page>
   );
 };

@@ -12,6 +12,7 @@ import i18n from "../../i18n/i18n";
 import { Stack } from "@mui/material";
 import { toast } from "react-hot-toast";
 import { ProfileActions } from "./ProfileActions";
+import { PageSection } from "../common/PageSection";
 
 export const Profile = () => {
   const doApiCall = useApiCall();
@@ -43,51 +44,53 @@ export const Profile = () => {
   };
 
   return (
-    <>
+    <div className="page">
       <ScreenTitle title={i18n.t("app.profile")}>
         <ProfileActions />
       </ScreenTitle>
-      <div className="profile-wrapper">
-        <Stack>
-          <div className="profile__logo-wrapper">
-            <img
-              className="profile__logo-img"
-              src={profile.logo ?? backupImageURL}
-              onError={({ currentTarget }) => {
-                if (currentTarget.src != backupImageURL) {
-                  currentTarget.src = backupImageURL;
-                }
-              }}
-              alt="logo"
-            />
-          </div>
-          <div className="profile-field profile__name">
-            <p className="profile-field__label">
-              <Trans i18nKey="profile.name" />
-            </p>
-            <p className="profile-field__value">
-              {profile.name} {profile.surname}
-            </p>
-          </div>
-          <div className="profile-field profile__company">
-            <p className="profile-field__label">
-              <Trans i18nKey="profile.company_name" />
-            </p>
-            <p className="profile-field__value">{profile.company}</p>
-          </div>
-          <div className="profile-field profile__email">
-            <p className="profile-field__label">
-              <Trans i18nKey="profile.email" />
-            </p>
-            <p className="profile-field__value">{profile.email}</p>
-          </div>
-          <div className="btn-wrapper btn-profile-wrapper">
-            <button className="btn btn--primary" onClick={signOut}>
-              <Trans i18nKey="profile.sign_out" />
-            </button>
-          </div>
-        </Stack>
-      </div>
-    </>
+      <PageSection title="">
+        <div className="profile-wrapper">
+          <Stack>
+            <div className="profile__logo-wrapper">
+              <img
+                className="profile__logo-img"
+                src={profile.logo ?? backupImageURL}
+                onError={({ currentTarget }) => {
+                  if (currentTarget.src != backupImageURL) {
+                    currentTarget.src = backupImageURL;
+                  }
+                }}
+                alt="logo"
+              />
+            </div>
+            <div className="profile-field profile__name">
+              <p className="profile-field__label">
+                <Trans i18nKey="profile.name" />
+              </p>
+              <p className="profile-field__value">
+                {profile.name} {profile.surname}
+              </p>
+            </div>
+            <div className="profile-field profile__company">
+              <p className="profile-field__label">
+                <Trans i18nKey="profile.company_name" />
+              </p>
+              <p className="profile-field__value">{profile.company}</p>
+            </div>
+            <div className="profile-field profile__email">
+              <p className="profile-field__label">
+                <Trans i18nKey="profile.email" />
+              </p>
+              <p className="profile-field__value">{profile.email}</p>
+            </div>
+            <div className="btn-wrapper btn-profile-wrapper">
+              <button className="btn btn--primary" onClick={signOut}>
+                <Trans i18nKey="profile.sign_out" />
+              </button>
+            </div>
+          </Stack>
+        </div>
+      </PageSection>
+    </div>
   );
 };
