@@ -144,6 +144,17 @@
         "name": "Zadajte Vaše meno",
         "surname": "Zadajte Vaše priezvisko",
         "company": "Zadajte názov firmy"
+      },
+      "profile": {
+        "email": "Zadajte e-mailovú adresu",
+        "name": "Zadajte Vaše meno",
+        "surname": "Zadajte Vaše priezvisko",
+        "company": "Zadajte názov firmy"
+      },
+      "password": {
+        "old_password": "Zadajte staré heslo",
+        "new_password": "Zadajte nové heslo",
+        "confirm_new_password": "Potvrďte nové heslo"
       }
     }
   }

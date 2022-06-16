@@ -5,7 +5,8 @@ import i18n from "../../i18n/i18n";
 import { useApiCall } from "../../util/api-caller";
 import { useLoadProfile } from "../../util/load-entity-wrappers";
 import { LoadingPlaceholder } from "../common/LoadingPlaceholder";
-import { ScreenTitle } from "../common/ScreenTitle";
+import { Page } from "../common/PageContent";
+import { PageSection } from "../common/PageSection";
 import { EditProfileForm, IFormEditProfileInput } from "./EditProfileForm";
 
 export const EditProfile = () => {
@@ -31,17 +32,27 @@ export const EditProfile = () => {
     return false;
   };
 
+  const onCancelEdit = () => {
+    toast(i18n.t("confirm.cancelled_edit"));
+    navigate("/me");
+  };
+
   if (profile === undefined) {
     return <LoadingPlaceholder />;
   }
 
   return (
-    <>
-      <ScreenTitle
-        title={i18n.t("profile.edit_profile")}
-        secondaryTitle={`${profile.name} ${profile.surname}`}
-      />
-      <EditProfileForm profile={profile} onSubmit={updateUser} />
-    </>
+    <Page
+      title={i18n.t("profile.edit_profile")}
+      secondaryTitle={`${profile.name} ${profile.surname}`}
+    >
+      <PageSection title="">
+        <EditProfileForm
+          profile={profile}
+          onSubmit={updateUser}
+          onCancelEdit={onCancelEdit}
+        />
+      </PageSection>
+    </Page>
   );
 };

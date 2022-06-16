@@ -4,7 +4,8 @@ import { UpdateUserPasswordDto } from "../../api/model";
 import { meControllerPassword } from "../../api/users/users";
 import i18n from "../../i18n/i18n";
 import { useApiCall } from "../../util/api-caller";
-import { ScreenTitle } from "../common/ScreenTitle";
+import { Page } from "../common/PageContent";
+import { PageSection } from "../common/PageSection";
 import {
   ChangePasswordForm,
   IFormChangePasswordInput,
@@ -49,10 +50,19 @@ export const ChangePassword = () => {
     return false;
   };
 
+  const onCancelEdit = () => {
+    toast(i18n.t("confirm.cancelled_edit"));
+    navigate("/me");
+  };
+
   return (
-    <>
-      <ScreenTitle title={i18n.t("profile.change_password")} />
-      <ChangePasswordForm onSubmit={changePassword} />
-    </>
+    <Page title={i18n.t("profile.change_password")}>
+      <PageSection title="">
+        <ChangePasswordForm
+          onSubmit={changePassword}
+          onCancelEdit={onCancelEdit}
+        />
+      </PageSection>
+    </Page>
   );
 };
