@@ -9,6 +9,7 @@ import { AccessTokenDto } from "../../api/model";
 import toast from "react-hot-toast";
 import { Trans } from "react-i18next";
 import i18n from "i18next";
+import { PageSection } from "../common/PageSection";
 
 export const Register = () => {
   const setToken = useSetRecoilState(accessTokenAtom);
@@ -49,15 +50,19 @@ export const Register = () => {
   }
 
   return (
-    <>
-      <div className="auth-form--container">
-        <RegisterForm onSubmit={register} />
-        <Trans i18nKey="auth.login.hint.existing_account" />
-        <Link to="/login">
-          <Trans i18nKey="auth.login.hint.here" />
-        </Link>
-        .
-      </div>
-    </>
+    <div className="page">
+      <PageSection title="">
+        <div className="auth-form--container">
+          <RegisterForm onSubmit={register} />
+          <span>
+            <Trans i18nKey="auth.login.hint.existing_account" />
+            <Link to="/login">
+              <Trans i18nKey="auth.login.hint.here" />
+            </Link>
+            .
+          </span>
+        </div>
+      </PageSection>
+    </div>
   );
 };
