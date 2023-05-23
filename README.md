@@ -1,5 +1,9 @@
 # PB138 - TrackYourTime
 
+## Demo
+
+You can preview the demo of this application on the page [here](https://hacknito.sk/login). This version is implemented in Vue.js, using Firebase storage, and has much less functionality than the solution in this repository.
+
 ## Design and Analysis
 
 [ScreenModel](https://miro.com/app/board/o9J_lP_jhDs=/?share_link_id=309861064621)
